@@ -12,8 +12,7 @@ import Mapbox
 
 private let styleURL = URL(string: "mapbox://styles/willwhite/cjkmusatv0rox2roea7dz7r1p")
 
-final class MapViewController: UIViewController {
-    var center: CLLocation?
+final class MapViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         view.addSubview(mapView)
@@ -24,13 +23,12 @@ final class MapViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        if let center = center {
-            mapView.setCenter(center.coordinate, zoomLevel: 15, animated: false)
-        }
+        mapView.delegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
+        guard let center = userLocation?.location else { return }
+        mapView.setCenter(center.coordinate, zoomLevel: 15, animated: false)
     }
     
     private let mapView: MGLMapView = {

@@ -65,24 +65,23 @@ final class ContainerViewController: UIViewController {
 
 extension ContainerViewController: ContainerPresenter {
     
-    func presentSegmentation() {
-        visionViewController?.frameVisualizationMode = .segmentation
-    }
-    
-    func presentObjectDetection() {
-        visionViewController?.frameVisualizationMode = .detection
-    }
-    
-    func presentDistanceToObject() {
-        visionViewController?.frameVisualizationMode = .clear
-    }
-    
-    func presentSignDetection() {
-        visionViewController?.frameVisualizationMode = .clear
-    }
-    
-    func presentLaneDetection() {
-        visionViewController?.frameVisualizationMode = .clear
+    func present(_ screen: Screen) {
+        presentVision()
+        
+        switch screen {
+        case .signsDetection:
+            visionViewController?.frameVisualizationMode = .clear
+        case .segmentation:
+            visionViewController?.frameVisualizationMode = .segmentation
+        case .objectDetector:
+            visionViewController?.frameVisualizationMode = .detection
+        case .distanceToObject:
+            visionViewController?.frameVisualizationMode = .clear
+        case .map:
+            presentMap()
+        case .laneDetection:
+            visionViewController?.frameVisualizationMode = .clear
+        }
     }
     
     func presentMenu() {
@@ -91,6 +90,7 @@ extension ContainerViewController: ContainerPresenter {
             return
         }
         present(viewController: viewController)
+        visionViewController?.frameVisualizationMode = .clear
     }
     
     func presentVision() {
@@ -98,13 +98,13 @@ extension ContainerViewController: ContainerPresenter {
             assertionFailure("Vision should be initialized before presenting")
             return
         }
+        
         present(viewController: viewController)
         viewController.frameVisualizationMode = .clear
     }
     
-    func presentMap(center: CLLocation) {
+    private func presentMap() {
         let viewController = MapViewController()
-        viewController.center = center
         present(viewController: viewController)
         currentViewController = viewController
     }
@@ -119,12 +119,12 @@ extension ContainerViewController: ContainerPresenter {
             return
         }
         dismiss(viewController: viewController)
-        currentViewController = nil
     }
     
     func dismissCurrent() {
         guard let viewController = currentViewController else { return }
         dismiss(viewController: viewController)
+        currentViewController = nil
     }
 }
 

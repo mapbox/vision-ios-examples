@@ -8,7 +8,6 @@
 
 import Foundation
 import VisionSDK
-import CoreLocation
 
 enum Screen {
     case signsDetection
@@ -22,12 +21,7 @@ enum Screen {
 protocol ContainerPresenter: class {
     func presentMenu()
     func presentVision()
-    func presentSegmentation()
-    func presentObjectDetection()
-    func presentDistanceToObject()
-    func presentSignDetection()
-    func presentLaneDetection()
-    func presentMap(center: CLLocation)
+    func present(_ screen: Screen)
     func presentBackButton(isVisible: Bool)
     func dismissMenu()
     func dismissCurrent()
@@ -64,29 +58,13 @@ final class ContainerInteractor: ContainerDelegate, MenuDelegate {
     }
     
     func selected(screen: Screen) {
-        
-        switch screen {
-        case .segmentation:
-            presenter.presentSegmentation()
-        case .laneDetection:
-            presenter.presentLaneDetection()
-        case .distanceToObject:
-            presenter.presentDistanceToObject()
-        case .signsDetection:
-            presenter.presentSignDetection()
-        case .objectDetector:
-            presenter.presentObjectDetection()
-        case .map:
-            presenter.presentMap(center: lastLocation)
-        }
-
-        presenter.presentBackButton(isVisible: true)
+        presenter.dismissCurrent()
         presenter.dismissMenu()
+        presenter.present(screen)
+        presenter.presentBackButton(isVisible: true)
     }
     
     deinit {
         visionManager.stop()
     }
-    
-    private var lastLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
 }
