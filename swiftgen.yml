@@ -1,0 +1,6 @@
+xcassets:
+    paths:
+        - Resources/Signs.xcassets
+        - Resources/Assets.xcassets
+    templateName: swift4
+    output: Generated/Images.swift
