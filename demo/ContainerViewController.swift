@@ -12,6 +12,7 @@ import VisionCore
 
 private let roadLanesTopInset: CGFloat = 18
 private let roadLanesHeight: CGFloat = 64
+private let smallRelativeInset: CGFloat = 16
 
 final class ContainerViewController: UIViewController {
     
@@ -42,6 +43,12 @@ final class ContainerViewController: UIViewController {
             roadLanesView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             roadLanesView.topAnchor.constraint(equalTo: view.topAnchor, constant: roadLanesTopInset),
             roadLanesView.heightAnchor.constraint(equalToConstant: roadLanesHeight)
+        ])
+        
+        view.addSubview(signsStack)
+        NSLayoutConstraint.activate([
+            signsStack.topAnchor.constraint(equalTo: view.topAnchor),
+            signsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
@@ -77,16 +84,28 @@ final class ContainerViewController: UIViewController {
         return view
     }()
     
+    private let signsStack: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.spacing = smallRelativeInset
+        view.alignment = .center
+        view.axis = .horizontal
+        view.isHidden = true
+        return view
+    }()
+    
     private weak var currentViewController: UIViewController?
 }
 
 extension ContainerViewController: ContainerPresenter {
     
-    func present(worldDescription: WorldDescription?) {
-        
+    func present(signs: [ImageAsset]) {
+        signsStack.subviews.forEach { $0.removeFromSuperview() }
+        signsStack.isHidden = false
+        signs.map { UIImageView(image: $0.image) }.forEach(signsStack.addArrangedSubview)
     }
     
-    func present(signClassifications: SignClassifications?) {
+    func present(worldDescription: WorldDescription?) {
         
     }
     
@@ -148,10 +167,13 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     func dismissCurrent() {
+        
+        roadLanesView.isHidden = true
+        signsStack.isHidden = true
+        
         guard let viewController = currentViewController else { return }
         dismiss(viewController: viewController)
         currentViewController = nil
-        roadLanesView.isHidden = true
     }
 }
 

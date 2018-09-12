@@ -27,6 +27,7 @@
 		B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */; };
 		B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */; };
 		B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F4A3B213FE7F700DC4313 /* RoadLanesView.swift */; };
+		B544200021493C20007CB69E /* Signs.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E6033602142962C0050EDB3 /* Signs.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -237,6 +238,7 @@
 			files = (
 				B52787E020F0B46B007D1EA7 /* LaunchScreen.storyboard in Resources */,
 				B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */,
+				B544200021493C20007CB69E /* Signs.xcassets in Resources */,
 				B52787DB20F0B46A007D1EA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

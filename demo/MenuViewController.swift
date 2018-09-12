@@ -151,7 +151,7 @@ final class MenuViewController: UIViewController {
         case laneDetectionButton: delegate?.selected(screen: .laneDetection)
         case distanceToObjectButton: delegate?.selected(screen: .distanceToObject)
         case signsDetectionButton: delegate?.selected(screen: .signsDetection)
-        case objectDetectorButton: delegate?.selected(screen: .objectDetector)
+        case objectDetectorButton: delegate?.selected(screen: .objectDetection)
         case objectMappingButton: delegate?.selected(screen: .map)
         default: assertionFailure("Couldn't support this kind of button")
         }
@@ -161,7 +161,7 @@ final class MenuViewController: UIViewController {
     private let laneDetectionButton = UIButton.createMenuButton(for: .laneDetection)
     private let distanceToObjectButton = UIButton.createMenuButton(for: .distanceToObject)
     private let signsDetectionButton = UIButton.createMenuButton(for: .signsDetection)
-    private let objectDetectorButton = UIButton.createMenuButton(for: .objectDetector)
+    private let objectDetectorButton = UIButton.createMenuButton(for: .objectDetection)
     private let objectMappingButton = UIButton.createMenuButton(for: .map)
 
     private static let buttonPadding: CGFloat = 14.0
@@ -180,7 +180,7 @@ extension Screen {
             return "Distance to Object"
         case .signsDetection:
             return "Sign Detection"
-        case .objectDetector:
+        case .objectDetection:
             return "Object Detection"
         case .map:
             return "Object Mapping"
@@ -197,7 +197,7 @@ extension Screen {
             return "icon3"
         case .signsDetection:
             return "icon4"
-        case .objectDetector:
+        case .objectDetection:
             return "icon6"
         case .map:
             return "icon5"

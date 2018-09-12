@@ -23,7 +23,7 @@ protocol ContainerPresenter: class {
     func presentMenu()
     func presentVision()
     func present(screen: Screen)
-    func present(signClassifications: SignClassifications?)
+    func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(worldDescription: WorldDescription?)
     func presentBackButton(isVisible: Bool)
@@ -39,11 +39,16 @@ protocol MenuDelegate: class {
     func backButtonPressed()
 }
 
+private let signTrackerMaxCapacity = 5
+
 final class ContainerInteractor {
     
     private var currentScreen: Screen?
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
+    
+    private let signTracker = Tracker<SignClassification>(maxCapacity: signTrackerMaxCapacity)
+    private var signTrackerUpdateTimer: Timer?
     
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
@@ -57,6 +62,18 @@ final class ContainerInteractor {
         presenter.presentMenu()
     }
     
+    private func scheduleSignTrackerUpdates() {
+        signTrackerUpdateTimer?.invalidate()
+        
+        signTrackerUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let `self` = self else { return }
+            let signs = self.signTracker.getCurrent().compactMap { sign in
+                return sign.icon(over: false, market: .us)
+            }
+            self.presenter.present(signs: signs)
+        }
+    }
+    
     deinit {
         visionManager.stop()
     }
@@ -68,6 +85,11 @@ extension ContainerInteractor: ContainerDelegate {
         presenter.dismissCurrent()
         presenter.presentBackButton(isVisible: false)
         presenter.presentMenu()
+        
+        if case .some(.signsDetection) = currentScreen {
+            signTrackerUpdateTimer?.invalidate()
+        }
+        
         currentScreen = nil
     }
 }
@@ -77,6 +99,11 @@ extension ContainerInteractor: MenuDelegate {
     func selected(screen: Screen) {
         presenter.dismissCurrent()
         presenter.dismissMenu()
+        
+        if case .signsDetection = screen {
+            scheduleSignTrackerUpdates()
+        }
+        
         presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: true)
         currentScreen = screen
@@ -94,8 +121,8 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSignClassifications classifications: SignClassifications?) {
-        guard case .some(.signsDetection) = currentScreen else { return }
-        presenter.present(signClassifications: classifications)
+        guard case .some(.signsDetection) = currentScreen, let items = classifications?.items else { return }
+        signTracker.update(items)
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription?) {
