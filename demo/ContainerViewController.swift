@@ -7,8 +7,11 @@
 //
 
 import UIKit
-import CoreLocation
 import VisionSDK
+import VisionCore
+
+private let roadLanesTopInset: CGFloat = 18
+private let roadLanesHeight: CGFloat = 64
 
 final class ContainerViewController: UIViewController {
     
@@ -32,6 +35,13 @@ final class ContainerViewController: UIViewController {
             backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
             backButton.widthAnchor.constraint(lessThanOrEqualToConstant: 44),
             backButton.heightAnchor.constraint(lessThanOrEqualToConstant: 44)
+        ])
+        
+        view.addSubview(roadLanesView)
+        NSLayoutConstraint.activate([
+            roadLanesView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            roadLanesView.topAnchor.constraint(equalTo: view.topAnchor, constant: roadLanesTopInset),
+            roadLanesView.heightAnchor.constraint(equalToConstant: roadLanesHeight)
         ])
     }
     
@@ -60,27 +70,43 @@ final class ContainerViewController: UIViewController {
         return button
     }()
     
+    private let roadLanesView: RoadLanesView = {
+        let view = RoadLanesView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     private weak var currentViewController: UIViewController?
 }
 
 extension ContainerViewController: ContainerPresenter {
     
-    func present(_ screen: Screen) {
-        presentVision()
+    func present(worldDescription: WorldDescription?) {
         
+    }
+    
+    func present(signClassifications: SignClassifications?) {
+        
+    }
+    
+    func present(roadDescription: RoadDescription?) {
+        guard let roadDescription = roadDescription else {
+            roadLanesView.isHidden = true
+            return
+        }
+        roadLanesView.isHidden = false
+        roadLanesView.update(roadDescription)
+    }
+    
+    func present(screen: Screen) {
         switch screen {
-        case .signsDetection:
-            visionViewController?.frameVisualizationMode = .clear
-        case .segmentation:
-            visionViewController?.frameVisualizationMode = .segmentation
-        case .objectDetector:
-            visionViewController?.frameVisualizationMode = .detection
-        case .distanceToObject:
-            visionViewController?.frameVisualizationMode = .clear
-        case .map:
-            presentMap()
-        case .laneDetection:
-            visionViewController?.frameVisualizationMode = .clear
+        case .signsDetection: visionViewController?.frameVisualizationMode = .clear
+        case .segmentation: visionViewController?.frameVisualizationMode = .segmentation
+        case .objectDetection: visionViewController?.frameVisualizationMode = .detection
+        case .distanceToObject: visionViewController?.frameVisualizationMode = .clear
+        case .map: presentMap()
+        case .laneDetection: visionViewController?.frameVisualizationMode = .clear
         }
     }
     
@@ -125,6 +151,7 @@ extension ContainerViewController: ContainerPresenter {
         guard let viewController = currentViewController else { return }
         dismiss(viewController: viewController)
         currentViewController = nil
+        roadLanesView.isHidden = true
     }
 }
 

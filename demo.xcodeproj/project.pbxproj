@@ -26,6 +26,7 @@
 		B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E720F0B625007D1EA7 /* ContainerViewController.swift */; };
 		B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */; };
 		B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */; };
+		B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F4A3B213FE7F700DC4313 /* RoadLanesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -339,6 +340,7 @@
 			files = (
 				B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */,
 				2E60335E214295F80050EDB3 /* Locale.swift in Sources */,
+				B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */,
 				B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */,
 				2E60335A214295B30050EDB3 /* Signs.swift in Sources */,
 				2E603356214294A00050EDB3 /* Tracker.swift in Sources */,

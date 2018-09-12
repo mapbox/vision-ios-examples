@@ -50,7 +50,7 @@ final class RoadLanesView: UIStackView {
         
         for (index, lane) in description.lanes.enumerated() {
             
-            if let leftMarking = lane.leftMarking.view {
+            if let leftMarking = lane.leftMarking.type.view {
                 addArrangedSubview(leftMarking)
             }
             
@@ -63,7 +63,7 @@ final class RoadLanesView: UIStackView {
             }
             
             if let last = description.lanes.last, last == lane,
-               let rightMarking = lane.rightMarking.view {
+               let rightMarking = lane.rightMarking.type.view {
                 addArrangedSubview(rightMarking)
             }
         }
@@ -95,7 +95,7 @@ final class RoadLanesView: UIStackView {
     }
 }
 
-private extension LaneMarking {
+private extension LaneMarkingType {
     var view: UIImageView? {
         let view: UIImageView
         switch self {

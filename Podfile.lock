@@ -3,9 +3,9 @@ PODS:
     - Fabric (~> 1.7.11)
   - Fabric (1.7.11)
   - Mapbox-iOS-SDK (4.3.0)
-  - MapboxCoreNavigation (0.20.0):
+  - MapboxCoreNavigation (0.20.1):
     - MapboxDirections.swift (~> 0.22.0)
-    - MapboxMobileEvents (~> 0.4)
+    - MapboxMobileEvents (~> 0.5)
     - Turf (~> 0.2)
   - MapboxDirections.swift (0.22.0):
     - Polyline (~> 4.2)
@@ -13,14 +13,14 @@ PODS:
   - OpenCV (2.4.13.6)
   - Polyline (4.2.0)
   - Turf (0.2.0)
-  - VisionAR (0.0.1-alpha-1):
+  - VisionAR (0.0.1-alpha.1):
     - MapboxCoreNavigation (~> 0.20.0)
-    - VisionSDK (~> 0.0.1-alpha-1)
-  - VisionCore (0.0.1-alpha-1):
+    - VisionSDK (~> 0.0.1-alpha.1)
+  - VisionCore (0.0.1-alpha.1):
     - OpenCV (~> 2.4.13.6)
-  - VisionSDK (0.0.1-alpha-1):
+  - VisionSDK (0.0.1-alpha.1):
     - MapboxMobileEvents (~> 0.5.0)
-    - VisionCore (~> 0.0.1-alpha-1)
+    - VisionCore (~> 0.0.1-alpha.1)
     - Zip (~> 1.1.0)
   - Zip (1.1.0)
 
@@ -52,15 +52,15 @@ SPEC CHECKSUMS:
   Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
   Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
   Mapbox-iOS-SDK: 7d8d510088ba7900d11aa3ceb98f563b040efca1
-  MapboxCoreNavigation: 5e742d0081da3ae51f2489ff98bfa1f28d2593b1
+  MapboxCoreNavigation: a6565187afd3c9b25294b3e35602d5e4800ee375
   MapboxDirections.swift: 67da008c3bff72ab68b0fc166185eebda23303be
   MapboxMobileEvents: e4aa629e4e2e3c250b5dadc15b63d67b91469a79
   OpenCV: cd36a3467c21572d658c2640488fe0d5a93ca192
   Polyline: 3d69f75bb136357e27291d439d0436c6ebda57a4
   Turf: 65817136031583da7ea2b43e6611dd10ddbdab2f
-  VisionAR: 089fa91720d3aa3694470504f292f2818b9d0ec4
-  VisionCore: 075535c1d2aca092fdcf5d5a0b177ca682c608ff
-  VisionSDK: be3aec12d448eaaa9309991bcb36568587c4010f
+  VisionAR: 081db8891ad25f4578acf0cdbe8a1e56e8fe59e4
+  VisionCore: c5be35259fd337884688ff74ac8404624ce6926e
+  VisionSDK: 71321f8693d300dcb3ca823d0a59a9d6ca6d1506
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
 PODFILE CHECKSUM: a3c8443d41ed631bedba3b817f4ad09bf0056d32

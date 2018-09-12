@@ -66,13 +66,22 @@ final class MenuViewController: UIViewController {
             topSecondLine.trailingAnchor.constraint(equalTo: centerLine.trailingAnchor)
         ])
         
-        let bottomLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
-        bottomLine.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-        bottomLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(bottomLine)
+        let bottomFirstLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
+        bottomFirstLine.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        bottomFirstLine.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(bottomFirstLine)
         NSLayoutConstraint.activate([
-            bottomLine.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
-            bottomLine.centerXAnchor.constraint(equalTo: centerLine.centerXAnchor)
+            bottomFirstLine.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
+            bottomFirstLine.leadingAnchor.constraint(equalTo: centerLine.leadingAnchor)
+        ])
+        
+        let bottomSecondLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
+        bottomSecondLine.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        bottomSecondLine.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(bottomSecondLine)
+        NSLayoutConstraint.activate([
+            bottomSecondLine.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
+            bottomSecondLine.trailingAnchor.constraint(equalTo: centerLine.trailingAnchor)
         ])
         
         signsDetectionButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
@@ -99,7 +108,7 @@ final class MenuViewController: UIViewController {
         self.view.addSubview(distanceToObjectButton)
         NSLayoutConstraint.activate([
             distanceToObjectButton.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
-            distanceToObjectButton.trailingAnchor.constraint(equalTo: bottomLine.leadingAnchor),
+            distanceToObjectButton.trailingAnchor.constraint(equalTo: bottomFirstLine.leadingAnchor),
             distanceToObjectButton.widthAnchor.constraint(equalTo: leftLine.widthAnchor),
             distanceToObjectButton.heightAnchor.constraint(equalToConstant: MenuViewController.buttonHeight)
         ])
@@ -119,11 +128,21 @@ final class MenuViewController: UIViewController {
         self.view.addSubview(objectMappingButton)
         NSLayoutConstraint.activate([
             objectMappingButton.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
-            objectMappingButton.leadingAnchor.constraint(equalTo: bottomLine.trailingAnchor),
+            objectMappingButton.leadingAnchor.constraint(equalTo: bottomFirstLine.leadingAnchor),
             objectMappingButton.widthAnchor.constraint(equalTo: leftLine.widthAnchor),
             objectMappingButton.heightAnchor.constraint(equalToConstant: MenuViewController.buttonHeight)
         ])
         objectMappingButton.centerVertically(padding: MenuViewController.buttonPadding)
+        
+        laneDetectionButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
+        self.view.addSubview(laneDetectionButton)
+        NSLayoutConstraint.activate([
+            laneDetectionButton.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
+            laneDetectionButton.leadingAnchor.constraint(equalTo: bottomSecondLine.leadingAnchor),
+            laneDetectionButton.widthAnchor.constraint(equalTo: leftLine.widthAnchor),
+            laneDetectionButton.heightAnchor.constraint(equalToConstant: MenuViewController.buttonHeight)
+        ])
+        laneDetectionButton.centerVertically(padding: MenuViewController.buttonPadding)
     }
     
     @objc private func selected(_ sender: UIButton) {
