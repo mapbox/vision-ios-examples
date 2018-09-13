@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import VisionSDK
-import VisionCore
+import MapboxVision
 
 private let roadLanesTopInset: CGFloat = 18
 private let roadLanesHeight: CGFloat = 64
 private let smallRelativeInset: CGFloat = 16
+private let buttonHeight: CGFloat = 36
 
 final class ContainerViewController: UIViewController {
     
@@ -49,6 +49,15 @@ final class ContainerViewController: UIViewController {
         NSLayoutConstraint.activate([
             signsStack.topAnchor.constraint(equalTo: view.topAnchor),
             signsStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+        
+        view.addSubview(distanceView)
+        
+        view.addSubview(distanceLabel)
+        NSLayoutConstraint.activate([
+            distanceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -smallRelativeInset),
+            distanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            distanceLabel.heightAnchor.constraint(equalToConstant: buttonHeight),
         ])
     }
     
@@ -94,6 +103,24 @@ final class ContainerViewController: UIViewController {
         return view
     }()
     
+    private let distanceView: DistanceView = {
+        let view = DistanceView(frame: .zero)
+        view.backgroundColor = .clear
+        view.isHidden = true
+        return view
+    }()
+    
+    private let distanceLabel: PaddedLabel = {
+        let view = PaddedLabel.createDarkRounded()
+        view.textColor = UIColor(red: 0.29, green: 1, blue: 0.14 , alpha: 1)
+        view.textColor = .white
+        return view
+    }()
+    
+    private lazy var distanceFormatter: DistanceFormatter = {
+        return DistanceFormatter(approximate: false)
+    }()
+    
     private weak var currentViewController: UIViewController?
 }
 
@@ -105,8 +132,21 @@ extension ContainerViewController: ContainerPresenter {
         signs.map { UIImageView(image: $0.image) }.forEach(signsStack.addArrangedSubview)
     }
     
-    func present(worldDescription: WorldDescription?) {
+    func present(distanceToCar: DistanceToCar?, canvasSize: CGSize) {
+        guard let distanceToCar = distanceToCar else {
+            distanceView.isHidden = true
+            distanceLabel.isHidden = true
+            return
+        }
         
+        distanceView.isHidden = false
+        distanceLabel.isHidden = false
+        
+        let left = distanceToCar.leftPosition.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        let right = distanceToCar.rightPosition.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        
+        distanceView.update(left, right)
+        distanceLabel.text = distanceFormatter.string(fromMeters: distanceToCar.distance)
     }
     
     func present(roadDescription: RoadDescription?) {
@@ -176,4 +216,20 @@ extension ContainerViewController: ContainerPresenter {
         currentViewController = nil
     }
 }
+
+private extension PaddedLabel {
+    private static let insets = UIEdgeInsets(top: 5, left: 10, bottom: 4, right: 10)
+    
+    static func createDarkRounded() -> PaddedLabel {
+        let label = PaddedLabel(insets: insets)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        label.layer.cornerRadius = 14
+        label.layer.masksToBounds = true
+        label.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        label.isHidden = true
+        return label
+    }
+}
+
 

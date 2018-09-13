@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import VisionSDK
-import VisionCore
+import MapboxVision
 
 enum Screen {
     case signsDetection
@@ -19,13 +18,19 @@ enum Screen {
     case laneDetection
 }
 
+struct DistanceToCar {
+    let leftPosition: CGPoint
+    let rightPosition: CGPoint
+    let distance: Double
+}
+
 protocol ContainerPresenter: class {
     func presentMenu()
     func presentVision()
     func present(screen: Screen)
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
-    func present(worldDescription: WorldDescription?)
+    func present(distanceToCar: DistanceToCar?, canvasSize: CGSize)
     func presentBackButton(isVisible: Bool)
     func dismissMenu()
     func dismissCurrent()
@@ -136,7 +141,29 @@ extension ContainerInteractor: VisionManagerDelegate {
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
         guard case .some(.distanceToObject) = currentScreen else { return }
-        presenter.present(worldDescription: worldDescription)
+        
+        guard
+            let roadDescription = visionManager.roadDescription,
+            let car = worldDescription?.objects.first,
+            roadDescription.currentLane < roadDescription.lanes.count,
+            car.objectType == .car
+        else {
+            presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+            return
+        }
+        
+        let width = roadDescription.lanes[roadDescription.currentLane].width
+
+        let carLeftPosition = visionManager.worldToPixel(worldCoordinate: WorldCoordinate(x: car.worldCoordinate.x - (width / 2), y: car.worldCoordinate.y, z: car.worldCoordinate.z))
+        let carRightPosition = visionManager.worldToPixel(worldCoordinate: WorldCoordinate(x: car.worldCoordinate.x + (width / 2), y: car.worldCoordinate.y, z: car.worldCoordinate.z))
+        
+        let distanceToCar = DistanceToCar(
+            leftPosition: carLeftPosition,
+            rightPosition: carRightPosition,
+            distance: car.distance
+        )
+        
+        presenter.present(distanceToCar: distanceToCar, canvasSize: visionManager.frameSize)
     }
     
     

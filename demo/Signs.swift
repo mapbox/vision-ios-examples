@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VisionCore
+import MapboxVision
 
 extension SignClassification {
     func icon(over: Bool, market: Market) -> ImageAsset? {

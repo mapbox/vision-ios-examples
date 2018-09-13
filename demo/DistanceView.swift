@@ -8,25 +8,14 @@
 
 import Foundation
 import UIKit
-import VisionCore
+import MapboxVision
 
 final class DistanceView: UIView {
     
     private static let height: CGFloat = 15
-    private var colors: [CGFloat] = CollisionAlertState.notTriggered.colors
     
-    func update(with objectDescription: ObjectDescription) {
-        let isDistanceValid = distance.worldPos.y != -1
-        isHidden = !isDistanceValid
-
-        guard isDistanceValid, let superview = superview else { return }
-
-        let right = CGPoint(x: distance.rightRelPos.x * superview.bounds.width, y: distance.rightRelPos.y * superview.bounds.height)
-        let left = CGPoint(x: distance.leftRelPos.x * superview.bounds.width, y: distance.leftRelPos.y * superview.bounds.height)
-
+    func update(_ left: CGPoint, _ right: CGPoint) {
         frame = CGRect(x: left.x, y: left.y, width: right.x - left.x, height: DistanceView.height)
-        colors = distance.collisionAlertState.colors
-
         setNeedsDisplay()
     }
 
@@ -40,11 +29,10 @@ final class DistanceView: UIView {
         context.saveGState()
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-
-        let colorComponents = colors
+        let colorComponents = UIColor.green.cgColor.components! + UIColor.clear.cgColor.components!
         let locations: [CGFloat] = [0.0, 1.0]
 
-        guard let gradient = CGGradient(colorSpace: colorSpace,colorComponents: colorComponents, locations: locations, count: 2) else {
+        guard let gradient = CGGradient(colorSpace: colorSpace, colorComponents: colorComponents, locations: locations, count: 2) else {
             return
         }
 

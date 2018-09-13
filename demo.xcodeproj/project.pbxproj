@@ -28,6 +28,8 @@
 		B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */; };
 		B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F4A3B213FE7F700DC4313 /* RoadLanesView.swift */; };
 		B544200021493C20007CB69E /* Signs.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E6033602142962C0050EDB3 /* Signs.xcassets */; };
+		B544200221496793007CB69E /* DistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F4A3C213FE7F800DC4313 /* DistanceView.swift */; };
+		B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5442003214A615D007CB69E /* PaddedLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +71,7 @@
 		B52787E720F0B625007D1EA7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerInteractor.swift; sourceTree = "<group>"; };
+		B5442003214A615D007CB69E /* PaddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		B56F4A3B213FE7F700DC4313 /* RoadLanesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoadLanesView.swift; sourceTree = "<group>"; };
 		B56F4A3C213FE7F800DC4313 /* DistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceView.swift; sourceTree = "<group>"; };
 		FBB7CAD12CA06D06A9FC18A0 /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		B52787D420F0B46A007D1EA7 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				B5442003214A615D007CB69E /* PaddedLabel.swift */,
 				2E60335D214295F80050EDB3 /* Locale.swift */,
 				2E60335B214295CD0050EDB3 /* DistanceFormatter.swift */,
 				2E603359214295B20050EDB3 /* Signs.swift */,
@@ -302,30 +306,20 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
-				"${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework",
-				"${BUILT_PRODUCTS_DIR}/MapboxDirections.swift/MapboxDirections.framework",
 				"${BUILT_PRODUCTS_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework",
-				"${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework",
-				"${BUILT_PRODUCTS_DIR}/Turf/Turf.framework",
-				"${BUILT_PRODUCTS_DIR}/VisionAR/VisionAR.framework",
-				"${PODS_ROOT}/VisionCore/VisionCore.framework",
-				"${PODS_ROOT}/VisionCore/VisionCore.framework.dSYM",
-				"${BUILT_PRODUCTS_DIR}/VisionSDK/VisionSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/MapboxVision/MapboxVision.framework",
+				"${PODS_ROOT}/MapboxVisionCore/MapboxVisionCore.framework",
+				"${PODS_ROOT}/MapboxVisionCore/MapboxVisionCore.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxCoreNavigation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxDirections.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxMobileEvents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Polyline.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Turf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisionAR.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisionCore.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/VisionCore.framework.dSYM",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisionSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxVision.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxVisionCore.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/MapboxVisionCore.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,11 +340,13 @@
 				B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */,
 				2E60335A214295B30050EDB3 /* Signs.swift in Sources */,
 				2E603356214294A00050EDB3 /* Tracker.swift in Sources */,
+				B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */,
 				B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */,
 				2E6033652142982D0050EDB3 /* Images.swift in Sources */,
 				B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */,
 				2E197730211DF34C00311B95 /* MapViewController.swift in Sources */,
 				2E60335C214295CD0050EDB3 /* DistanceFormatter.swift in Sources */,
+				B544200221496793007CB69E /* DistanceView.swift in Sources */,
 				9D72ACCDB839371EB278051D /* BroadcastService.swift in Sources */,
 				9D72AE5E1B9CAE05049F9253 /* ValidatedInputAlertController.swift in Sources */,
 				2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */,

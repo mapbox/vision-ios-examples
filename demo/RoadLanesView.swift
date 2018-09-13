@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VisionCore
+import MapboxVision
 
 final class RoadLanesView: UIStackView {
     

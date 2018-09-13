@@ -4,7 +4,7 @@
 //
 
 import Foundation
-import VisionCore
+import MapboxVision
 
 protocol BroadcastingDelegate: class {
     func startReceived(timestamp: String)

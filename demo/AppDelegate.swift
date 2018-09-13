@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VisionSDK
+import MapboxVision
 import Fabric
 import Crashlytics
 
