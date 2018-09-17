@@ -15,10 +15,6 @@
 		2E6033652142982D0050EDB3 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6033642142982D0050EDB3 /* Images.swift */; };
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
 		45A4D92A41167A8820A32A4F /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */; };
-		9D72A5D44131BEE10A02F6BD /* ARRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72A9C14A3BFC0E2405C71D /* ARRouteViewController.swift */; };
-		9D72ACCDB839371EB278051D /* BroadcastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72A013E468B555AA652278 /* BroadcastService.swift */; };
-		9D72ADAD786590CE49F66D36 /* ARRouteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72A924DE3FBCFE442C4368 /* ARRouteInteractor.swift */; };
-		9D72AE5E1B9CAE05049F9253 /* ValidatedInputAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72AB2420D4C1B6510AAE9E /* ValidatedInputAlertController.swift */; };
 		B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787D520F0B46A007D1EA7 /* AppDelegate.swift */; };
 		B52787DB20F0B46A007D1EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52787D920F0B46A007D1EA7 /* Main.storyboard */; };
 		B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52787DC20F0B46B007D1EA7 /* Assets.xcassets */; };
@@ -52,16 +48,11 @@
 		2E603359214295B20050EDB3 /* Signs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signs.swift; sourceTree = "<group>"; };
 		2E60335B214295CD0050EDB3 /* DistanceFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceFormatter.swift; sourceTree = "<group>"; };
 		2E60335D214295F80050EDB3 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
-		2E60335F214296290050EDB3 /* critical_collision_alert.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = critical_collision_alert.wav; sourceTree = "<group>"; };
 		2E6033602142962C0050EDB3 /* Signs.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Signs.xcassets; sourceTree = "<group>"; };
 		2E6033642142982D0050EDB3 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2E603366214299110050EDB3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		4F7D5F50FBAB4F97882AF991 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		8DCA3B59D9AED45E334B9F48 /* Pods-demo.adhocrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.adhocrelease.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.adhocrelease.xcconfig"; sourceTree = "<group>"; };
-		9D72A013E468B555AA652278 /* BroadcastService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastService.swift; sourceTree = "<group>"; };
-		9D72A924DE3FBCFE442C4368 /* ARRouteInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARRouteInteractor.swift; sourceTree = "<group>"; };
-		9D72A9C14A3BFC0E2405C71D /* ARRouteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARRouteViewController.swift; sourceTree = "<group>"; };
-		9D72AB2420D4C1B6510AAE9E /* ValidatedInputAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatedInputAlertController.swift; sourceTree = "<group>"; };
 		B52787D220F0B46A007D1EA7 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52787D520F0B46A007D1EA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B52787DA20F0B46A007D1EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,7 +85,6 @@
 			children = (
 				B52787E120F0B46B007D1EA7 /* Info.plist */,
 				B52787DC20F0B46B007D1EA7 /* Assets.xcassets */,
-				2E60335F214296290050EDB3 /* critical_collision_alert.wav */,
 				2E6033602142962C0050EDB3 /* Signs.xcassets */,
 			);
 			path = Resources;
@@ -154,10 +144,6 @@
 				B52787DE20F0B46B007D1EA7 /* LaunchScreen.storyboard */,
 				B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */,
 				B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */,
-				9D72A013E468B555AA652278 /* BroadcastService.swift */,
-				9D72AB2420D4C1B6510AAE9E /* ValidatedInputAlertController.swift */,
-				9D72A9C14A3BFC0E2405C71D /* ARRouteViewController.swift */,
-				9D72A924DE3FBCFE442C4368 /* ARRouteInteractor.swift */,
 				2E19772F211DF34C00311B95 /* MapViewController.swift */,
 				2E603366214299110050EDB3 /* OrderedDictionary.swift */,
 			);
@@ -187,6 +173,7 @@
 				B5963F3620F36E610050C095 /* Embed Frameworks */,
 				2EBD6701211970EA00755F57 /* Fabric */,
 				4990411F516A0A420F868F0B /* [CP] Embed Pods Frameworks */,
+				B55B5C6E214FCE9F0061BE3F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -289,13 +276,14 @@
 			files = (
 			);
 			inputPaths = (
+				"\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"",
 			);
 			name = Fabric;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/Fabric/run 173210996f3630a72e69121fdf15d8131c549d5e d17bb32ef537ad158cce3828f4581691c40514536a011703042ea227936961f3\n";
+			shellScript = "token_file=~/.fabric\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\nplutil -replace Fabric.APIKey -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n${PODS_ROOT}/Fabric/run \"$token\"\nfi";
 		};
 		4990411F516A0A420F868F0B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -327,6 +315,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B55B5C6E214FCE9F0061BE3F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "token_file=~/.mapbox\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\nplutil -replace MGLMapboxAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\necho 'warning: Missing Mapbox access token'\nopen 'https://www.mapbox.com/account/access-tokens/'\necho \"warning: Get an access token from <https://www.mapbox.com/account/access-tokens/>, then create a new file at $token_file that contains the access token.\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -347,11 +349,7 @@
 				2E197730211DF34C00311B95 /* MapViewController.swift in Sources */,
 				2E60335C214295CD0050EDB3 /* DistanceFormatter.swift in Sources */,
 				B544200221496793007CB69E /* DistanceView.swift in Sources */,
-				9D72ACCDB839371EB278051D /* BroadcastService.swift in Sources */,
-				9D72AE5E1B9CAE05049F9253 /* ValidatedInputAlertController.swift in Sources */,
 				2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */,
-				9D72A5D44131BEE10A02F6BD /* ARRouteViewController.swift in Sources */,
-				9D72ADAD786590CE49F66D36 /* ARRouteInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

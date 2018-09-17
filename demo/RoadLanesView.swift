@@ -20,10 +20,10 @@ final class RoadLanesView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.spacing = 10
-        self.alignment = .center
-        self.axis = .horizontal
-        self.distribution = .fillProportionally
+        spacing = 10
+        alignment = .center
+        axis = .horizontal
+        distribution = .fillProportionally
         
         let backgroundImage = Asset.Assets.lanesBg.image.resizableImage(
             withCapInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
@@ -31,13 +31,13 @@ final class RoadLanesView: UIStackView {
         )
         let background = UIImageView(image: backgroundImage)
         background.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(background)
+        addSubview(background)
         
         NSLayoutConstraint.activate([
-            background.topAnchor.constraint(equalTo: self.topAnchor, constant: -verticalInset),
-            background.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: verticalInset),
-            background.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: -horizontalInset),
-            background.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: horizontalInset)
+            background.topAnchor.constraint(equalTo: topAnchor, constant: -verticalInset),
+            background.bottomAnchor.constraint(equalTo: bottomAnchor, constant: verticalInset),
+            background.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -horizontalInset),
+            background.trailingAnchor.constraint(equalTo: trailingAnchor, constant: horizontalInset)
         ])
     }
     
@@ -50,21 +50,18 @@ final class RoadLanesView: UIStackView {
         
         for (index, lane) in description.lanes.enumerated() {
             
-            if let leftMarking = lane.leftMarking.type.view {
-                addArrangedSubview(leftMarking)
-            }
+            addArrangedSubview(UIImageView(image: lane.leftMarking.type.image))
             
             if index == description.currentLane {
                 let view = UIImageView(image: Asset.Assets.yourDirection.image)
                 yourDirectionImageView = view
                 addArrangedSubview(view)
-            } else if let direction = lane.direction.view {
-                addArrangedSubview(direction)
+            } else  {
+                addArrangedSubview(lane.direction.view)
             }
             
-            if let last = description.lanes.last, last == lane,
-               let rightMarking = lane.rightMarking.type.view {
-                addArrangedSubview(rightMarking)
+            if description.lanes.last == lane {
+                addArrangedSubview(UIImageView(image: lane.rightMarking.type.image))
             }
         }
     }
@@ -77,44 +74,34 @@ final class RoadLanesView: UIStackView {
         let centerX = self.bounds.size.width / 2
         let offset = centerX - imageX
         
-        self.transform = CGAffineTransform(translationX: offset, y: 0)
+        transform = CGAffineTransform(translationX: offset, y: 0)
     }
     
     private func removeAllArrangedSubviews() {
-        
-        let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
-            self.removeArrangedSubview(subview)
-            return allSubviews + [subview]
-        }
-        
-        NSLayoutConstraint.deactivate(removedSubviews.flatMap({ $0.constraints }))
-        
-        removedSubviews.forEach({ $0.removeFromSuperview() })
-        
+        arrangedSubviews.forEach { $0.removeFromSuperview() }
         yourDirectionImageView = nil
     }
 }
 
 private extension LaneMarkingType {
-    var view: UIImageView? {
-        let view: UIImageView
+    var image: UIImage {
+        let image: UIImage
         switch self {
         case .solid, .curb:
-            view = UIImageView(image: Asset.Assets.lanesLine.image)
+            image = Asset.Assets.lanesLine.image
         case .doubleSolid:
-            assertionFailure("Could not support double solid lane marking")
-            return nil
+            image = Asset.Assets.separatorDoubleLane.image
         case .dashed:
-            view = UIImageView(image: Asset.Assets.halfLane.image)
+            image = Asset.Assets.halfLane.image
         case .unknown:
-            view = UIImageView(image: Asset.Assets.questionMark.image)
+            image = Asset.Assets.questionMark.image
         }
-        return view
+        return image
     }
 }
 
 private extension LaneDirection {
-    var view: UIImageView? {
+    var view: UIImageView {
         let view: UIImageView
         switch self {
         case .backward:
@@ -123,8 +110,7 @@ private extension LaneDirection {
             view = UIImageView(image: Asset.Assets.direction.image)
             view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         case .reverse:
-            assertionFailure("Could not support reverse lines")
-            return nil
+            view = UIImageView(image: Asset.Assets.arrowReversed.image)
         }
         return view
     }

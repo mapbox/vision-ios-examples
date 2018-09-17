@@ -2,8 +2,8 @@ PODS:
   - Crashlytics (3.10.7):
     - Fabric (~> 1.7.11)
   - Fabric (1.7.11)
-  - Mapbox-iOS-SDK (4.4.0)
-  - MapboxMobileEvents (0.5.0)
+  - Mapbox-iOS-SDK (4.4.1)
+  - MapboxMobileEvents (0.5.1)
   - MapboxVision (0.0.1-alpha.1):
     - MapboxMobileEvents (~> 0.5.0)
     - MapboxVisionCore (~> 0.0.1-alpha.1)
@@ -33,8 +33,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
   Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
-  Mapbox-iOS-SDK: 677d21898749062a5083be78a4d15d245dd7a724
-  MapboxMobileEvents: e4aa629e4e2e3c250b5dadc15b63d67b91469a79
+  Mapbox-iOS-SDK: e6a4f236c77f914ca2e19b929c6cc6b077ba1c4c
+  MapboxMobileEvents: bacf6e176d65b4f3cc5280677183856a81216117
   MapboxVision: e10965a86997b49ec1001bc2564b729c8fe774fd
   MapboxVisionCore: bf6e8bca57bd2ea5f82c62cf21c4abb264eeb7ed
   OpenCV: cd36a3467c21572d658c2640488fe0d5a93ca192

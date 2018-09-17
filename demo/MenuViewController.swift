@@ -15,9 +15,13 @@ final class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         
-        let titleView = UIImageView(image: UIImage(named: "Title"))
+        let lineTopBottomImage = Asset.Assets.lineTopBottom.image
+        let lineLeftRightImage = Asset.Assets.lineLeftRight.image
+        let lineCenterImage = Asset.Assets.lineCenter.image
+        
+        let titleView = UIImageView(image: Asset.Assets.title.image)
         titleView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleView)
         NSLayoutConstraint.activate([
@@ -25,67 +29,67 @@ final class MenuViewController: UIViewController {
             titleView.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
         ])
         
-        let centerLine = UIImageView(image: UIImage(named: "Line-center"))
+        let centerLine = UIImageView(image: lineCenterImage)
         centerLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(centerLine)
+        view.addSubview(centerLine)
         NSLayoutConstraint.activate([
             centerLine.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             centerLine.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 18)
         ])
         
-        let leftLine = UIImageView(image: UIImage(named: "Line-left-right"))
+        let leftLine = UIImageView(image: lineLeftRightImage)
         leftLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(leftLine)
+        view.addSubview(leftLine)
         NSLayoutConstraint.activate([
             leftLine.centerYAnchor.constraint(equalTo: centerLine.centerYAnchor),
             leftLine.trailingAnchor.constraint(equalTo: centerLine.leadingAnchor)
         ])
         
-        let rightLine = UIImageView(image: UIImage(named: "Line-left-right"))
+        let rightLine = UIImageView(image: lineLeftRightImage)
         rightLine.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         rightLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(rightLine)
+        view.addSubview(rightLine)
         NSLayoutConstraint.activate([
             rightLine.centerYAnchor.constraint(equalTo: centerLine.centerYAnchor),
             rightLine.leadingAnchor.constraint(equalTo: centerLine.trailingAnchor)
         ])
         
-        let topFirstLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
+        let topFirstLine = UIImageView(image: lineTopBottomImage)
         topFirstLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(topFirstLine)
+        view.addSubview(topFirstLine)
         NSLayoutConstraint.activate([
             topFirstLine.bottomAnchor.constraint(equalTo: centerLine.topAnchor),
             topFirstLine.leadingAnchor.constraint(equalTo: centerLine.leadingAnchor)
         ])
         
-        let topSecondLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
+        let topSecondLine = UIImageView(image: lineTopBottomImage)
         topSecondLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(topSecondLine)
+        view.addSubview(topSecondLine)
         NSLayoutConstraint.activate([
             topSecondLine.bottomAnchor.constraint(equalTo: centerLine.topAnchor),
             topSecondLine.trailingAnchor.constraint(equalTo: centerLine.trailingAnchor)
         ])
         
-        let bottomFirstLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
+        let bottomFirstLine = UIImageView(image: lineTopBottomImage)
         bottomFirstLine.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         bottomFirstLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(bottomFirstLine)
+        view.addSubview(bottomFirstLine)
         NSLayoutConstraint.activate([
             bottomFirstLine.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
             bottomFirstLine.leadingAnchor.constraint(equalTo: centerLine.leadingAnchor)
         ])
         
-        let bottomSecondLine = UIImageView(image: UIImage(named: "Line-top-bottom"))
+        let bottomSecondLine = UIImageView(image: lineTopBottomImage)
         bottomSecondLine.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         bottomSecondLine.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(bottomSecondLine)
+        view.addSubview(bottomSecondLine)
         NSLayoutConstraint.activate([
             bottomSecondLine.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
             bottomSecondLine.trailingAnchor.constraint(equalTo: centerLine.trailingAnchor)
         ])
         
         signsDetectionButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
-        self.view.addSubview(signsDetectionButton)
+        view.addSubview(signsDetectionButton)
         NSLayoutConstraint.activate([
             signsDetectionButton.bottomAnchor.constraint(equalTo: centerLine.topAnchor),
             signsDetectionButton.trailingAnchor.constraint(equalTo: centerLine.leadingAnchor),
@@ -95,7 +99,7 @@ final class MenuViewController: UIViewController {
         signsDetectionButton.centerVertically(padding: MenuViewController.buttonPadding)
         
         segmentationButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
-        self.view.addSubview(segmentationButton)
+        view.addSubview(segmentationButton)
         NSLayoutConstraint.activate([
             segmentationButton.bottomAnchor.constraint(equalTo: centerLine.topAnchor),
             segmentationButton.centerXAnchor.constraint(equalTo: centerLine.centerXAnchor),
@@ -105,7 +109,7 @@ final class MenuViewController: UIViewController {
         segmentationButton.centerVertically(padding: MenuViewController.buttonPadding)
         
         distanceToObjectButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
-        self.view.addSubview(distanceToObjectButton)
+        view.addSubview(distanceToObjectButton)
         NSLayoutConstraint.activate([
             distanceToObjectButton.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
             distanceToObjectButton.trailingAnchor.constraint(equalTo: bottomFirstLine.leadingAnchor),
@@ -115,7 +119,7 @@ final class MenuViewController: UIViewController {
         distanceToObjectButton.centerVertically(padding: MenuViewController.buttonPadding)
         
         objectDetectorButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
-        self.view.addSubview(objectDetectorButton)
+        view.addSubview(objectDetectorButton)
         NSLayoutConstraint.activate([
             objectDetectorButton.bottomAnchor.constraint(equalTo: centerLine.topAnchor),
             objectDetectorButton.leadingAnchor.constraint(equalTo: centerLine.trailingAnchor),
@@ -125,7 +129,7 @@ final class MenuViewController: UIViewController {
         objectDetectorButton.centerVertically(padding: MenuViewController.buttonPadding)
         
         objectMappingButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
-        self.view.addSubview(objectMappingButton)
+        view.addSubview(objectMappingButton)
         NSLayoutConstraint.activate([
             objectMappingButton.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
             objectMappingButton.leadingAnchor.constraint(equalTo: bottomFirstLine.leadingAnchor),
@@ -135,7 +139,7 @@ final class MenuViewController: UIViewController {
         objectMappingButton.centerVertically(padding: MenuViewController.buttonPadding)
         
         laneDetectionButton.addTarget(self, action: #selector(selected), for: .touchUpInside)
-        self.view.addSubview(laneDetectionButton)
+        view.addSubview(laneDetectionButton)
         NSLayoutConstraint.activate([
             laneDetectionButton.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
             laneDetectionButton.leadingAnchor.constraint(equalTo: bottomSecondLine.leadingAnchor),
@@ -187,20 +191,20 @@ extension Screen {
         }
     }
     
-    var iconName: String {
+    var iconImage: UIImage {
         switch self {
         case .segmentation:
-            return "icon1"
+            return Asset.Assets.icon1.image
         case .laneDetection:
-            return "icon2"
+            return Asset.Assets.icon2.image
         case .distanceToObject:
-            return "icon3"
+            return Asset.Assets.icon3.image
         case .signsDetection:
-            return "icon4"
-        case .objectDetection:
-            return "icon6"
+            return Asset.Assets.icon4.image
         case .map:
-            return "icon5"
+            return Asset.Assets.icon5.image
+        case .objectDetection:
+            return Asset.Assets.icon6.image
         }
     }
 }
@@ -211,7 +215,7 @@ private extension UIButton {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(screen.title, for: .normal)
-        button.setImage(UIImage(named: screen.iconName), for: .normal)
+        button.setImage(screen.iconImage, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
         return button

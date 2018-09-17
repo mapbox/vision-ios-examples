@@ -18,9 +18,7 @@ final class ContainerViewController: UIViewController {
     
     weak var delegate: ContainerDelegate? {
         didSet {
-            self.backButton.addTarget(delegate,
-                                      action: #selector(ContainerDelegate.backButtonPressed),
-                                      for: .touchUpInside)
+            backButton.addTarget(delegate, action: #selector(ContainerDelegate.backButtonPressed), for: .touchUpInside)
         }
     }
     
@@ -32,8 +30,8 @@ final class ContainerViewController: UIViewController {
         
         view.addSubview(backButton)
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 18),
-            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 18),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             backButton.widthAnchor.constraint(lessThanOrEqualToConstant: 44),
             backButton.heightAnchor.constraint(lessThanOrEqualToConstant: 44)
         ])
@@ -62,13 +60,13 @@ final class ContainerViewController: UIViewController {
     }
     
     private func present(viewController: UIViewController) {
-        self.addChildViewController(viewController)
-        self.view.insertSubview(viewController.view, belowSubview: self.backButton)
+        addChildViewController(viewController)
+        view.insertSubview(viewController.view, belowSubview: backButton)
         NSLayoutConstraint.activate([
-            viewController.view.topAnchor.constraint(equalTo: self.view.topAnchor),
-            viewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            viewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            viewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+            viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         viewController.didMove(toParentViewController: self)
     }
@@ -82,7 +80,7 @@ final class ContainerViewController: UIViewController {
     private let backButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "back"), for: .normal)
+        button.setImage(Asset.Assets.back.image, for: .normal)
         return button
     }()
     
