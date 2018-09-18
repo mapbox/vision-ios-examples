@@ -20,10 +20,17 @@
 		2E60335E214295F80050EDB3 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60335D214295F80050EDB3 /* Locale.swift */; };
 		2E6033652142982D0050EDB3 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6033642142982D0050EDB3 /* Images.swift */; };
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
+		2EF52A0F21514DBC00F23CCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */; };
+		2EF52A1021514DBC00F23CCF /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0A21514DBC00F23CCF /* Zip.framework */; };
+		2EF52A1121514DBC00F23CCF /* MapboxVisionCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0B21514DBC00F23CCF /* MapboxVisionCore.framework */; };
+		2EF52A1221514DBC00F23CCF /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0C21514DBC00F23CCF /* Mapbox.framework */; };
+		2EF52A1321514DBC00F23CCF /* MapboxVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0D21514DBC00F23CCF /* MapboxVision.framework */; };
+		2EF52A1421514DBC00F23CCF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0E21514DBC00F23CCF /* opencv2.framework */; };
+		2EF52A18215152F600F23CCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A16215152F600F23CCF /* Crashlytics.framework */; };
+		2EF52A19215152F600F23CCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A17215152F600F23CCF /* Fabric.framework */; };
 		2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */; };
 		2E9BF8FE2166530D000A6A39 /* critical_collision_alert.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FD2166530D000A6A39 /* critical_collision_alert.wav */; };
 		2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */; };
-		45A4D92A41167A8820A32A4F /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */; };
 		B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787D520F0B46A007D1EA7 /* AppDelegate.swift */; };
 		B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52787DC20F0B46B007D1EA7 /* Assets.xcassets */; };
 		B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E720F0B625007D1EA7 /* ContainerViewController.swift */; };
@@ -49,7 +56,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E19772F211DF34C00311B95 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseChecker.swift; sourceTree = "<group>"; };
@@ -64,11 +70,17 @@
 		2E6033602142962C0050EDB3 /* Signs.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Signs.xcassets; sourceTree = "<group>"; };
 		2E6033642142982D0050EDB3 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2E603366214299110050EDB3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
+		2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/MapboxMobileEvents.framework"; sourceTree = "<group>"; };
+		2EF52A0A21514DBC00F23CCF /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/Zip.framework"; sourceTree = "<group>"; };
+		2EF52A0B21514DBC00F23CCF /* MapboxVisionCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxVisionCore.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/MapboxVisionCore.framework"; sourceTree = "<group>"; };
+		2EF52A0C21514DBC00F23CCF /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/Mapbox.framework"; sourceTree = "<group>"; };
+		2EF52A0D21514DBC00F23CCF /* MapboxVision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxVision.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/MapboxVision.framework"; sourceTree = "<group>"; };
+		2EF52A0E21514DBC00F23CCF /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/opencv2.framework"; sourceTree = "<group>"; };
+		2EF52A16215152F600F23CCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/Crashlytics.framework"; sourceTree = "<group>"; };
+		2EF52A17215152F600F23CCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/Fabric.framework"; sourceTree = "<group>"; };
 		2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lane_departure_warning.wav; sourceTree = "<group>"; };
 		2E9BF8FD2166530D000A6A39 /* critical_collision_alert.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = critical_collision_alert.wav; sourceTree = "<group>"; };
 		2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPlayer.swift; sourceTree = "<group>"; };
-		4F7D5F50FBAB4F97882AF991 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
-		8DCA3B59D9AED45E334B9F48 /* Pods-demo.adhocrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.adhocrelease.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.adhocrelease.xcconfig"; sourceTree = "<group>"; };
 		B52787D220F0B46A007D1EA7 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52787D520F0B46A007D1EA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B52787DC20F0B46B007D1EA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,7 +91,6 @@
 		B5442003214A615D007CB69E /* PaddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		B56F4A3B213FE7F700DC4313 /* RoadLanesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoadLanesView.swift; sourceTree = "<group>"; };
 		B56F4A3C213FE7F800DC4313 /* DistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceView.swift; sourceTree = "<group>"; };
-		FBB7CAD12CA06D06A9FC18A0 /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +98,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45A4D92A41167A8820A32A4F /* Pods_demo.framework in Frameworks */,
+				2EF52A0F21514DBC00F23CCF /* MapboxMobileEvents.framework in Frameworks */,
+				2EF52A1021514DBC00F23CCF /* Zip.framework in Frameworks */,
+				2EF52A1121514DBC00F23CCF /* MapboxVisionCore.framework in Frameworks */,
+				2EF52A1221514DBC00F23CCF /* Mapbox.framework in Frameworks */,
+				2EF52A1321514DBC00F23CCF /* MapboxVision.framework in Frameworks */,
+				2EF52A1421514DBC00F23CCF /* opencv2.framework in Frameworks */,
+				2EF52A18215152F600F23CCF /* Crashlytics.framework in Frameworks */,
+				2EF52A19215152F600F23CCF /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,14 +145,19 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
-		6A51CE5C71859C7CC8626CC3 /* Pods */ = {
+		2EF52A0821514DBC00F23CCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4F7D5F50FBAB4F97882AF991 /* Pods-demo.debug.xcconfig */,
-				FBB7CAD12CA06D06A9FC18A0 /* Pods-demo.release.xcconfig */,
-				8DCA3B59D9AED45E334B9F48 /* Pods-demo.adhocrelease.xcconfig */,
+				2EF52A16215152F600F23CCF /* Crashlytics.framework */,
+				2EF52A17215152F600F23CCF /* Fabric.framework */,
+				2EF52A0C21514DBC00F23CCF /* Mapbox.framework */,
+				2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */,
+				2EF52A0D21514DBC00F23CCF /* MapboxVision.framework */,
+				2EF52A0B21514DBC00F23CCF /* MapboxVisionCore.framework */,
+				2EF52A0E21514DBC00F23CCF /* opencv2.framework */,
+				2EF52A0A21514DBC00F23CCF /* Zip.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B52787C920F0B46A007D1EA7 = {
@@ -144,8 +167,7 @@
 				2E6033622142968D0050EDB3 /* Generated */,
 				2E603361214296430050EDB3 /* Resources */,
 				B52787D320F0B46A007D1EA7 /* Products */,
-				B5963F2A20F360BA0050C095 /* Frameworks */,
-				6A51CE5C71859C7CC8626CC3 /* Pods */,
+				2EF52A0821514DBC00F23CCF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -179,14 +201,6 @@
 			path = demo;
 			sourceTree = "<group>";
 		};
-		B5963F2A20F360BA0050C095 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,14 +208,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B52787E420F0B46B007D1EA7 /* Build configuration list for PBXNativeTarget "demo" */;
 			buildPhases = (
-				1E1DA9E3488ACBD22CE7382B /* [CP] Check Pods Manifest.lock */,
 				2E603363214296C40050EDB3 /* SwiftGen */,
 				B52787CE20F0B46A007D1EA7 /* Sources */,
 				B52787CF20F0B46A007D1EA7 /* Frameworks */,
 				B52787D020F0B46A007D1EA7 /* Resources */,
 				B5963F3620F36E610050C095 /* Embed Frameworks */,
+				2EF52A1521514EB700F23CCF /* Carthage */,
 				2EBD6701211970EA00755F57 /* Fabric */,
-				4990411F516A0A420F868F0B /* [CP] Embed Pods Frameworks */,
 				B55B5C6E214FCE9F0061BE3F /* ShellScript */,
 			);
 			buildRules = (
@@ -269,24 +282,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E1DA9E3488ACBD22CE7382B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2E603363214296C40050EDB3 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,37 +310,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xml=\"$(plutil -extract Fabric.APIKey xml1 -o - $TARGET_BUILD_DIR/$INFOPLIST_PATH)\"\ntoken=\"$(sed -n \"s/.*<string>\\(.*\\)<\\/string>.*/\\1/p\" <<< $xml)\"\necho $token\nif [ -z \"$token\" ]; then\n    token_file=~/.fabric\n    token=\"$(cat $token_file 2>/dev/null)\"\n    if [ \"$token\" ]; then\n        plutil -replace Fabric.APIKey -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n        ${PODS_ROOT}/Fabric/run \"$token\"\n    fi\nfi\n";
+			shellScript = "xml=\"$(plutil -extract Fabric.APIKey xml1 -o - $TARGET_BUILD_DIR/$INFOPLIST_PATH)\"\ntoken=\"$(sed -n \"s/.*<string>\\(.*\\)<\\/string>.*/\\1/p\" <<< $xml)\"\necho $token\nif [ -z \"$token\" ]; then\n    token_file=~/.fabric\n    token=\"$(cat $token_file 2>/dev/null)\"\n    if [ \"$token\" ]; then\n        plutil -replace Fabric.APIKey -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n        ${SRCROOT}/Carthage/Build/iOS/Fabric.framework/run \"$token\"\n    fi\nfi\n";
 		};
-		4990411F516A0A420F868F0B /* [CP] Embed Pods Frameworks */ = {
+		2EF52A1521514EB700F23CCF /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh",
-				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
-				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
-				"${BUILT_PRODUCTS_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework",
-				"${BUILT_PRODUCTS_DIR}/MapboxVision/MapboxVision.framework",
-				"${PODS_ROOT}/MapboxVisionCore/MapboxVisionCore.framework",
-				"${PODS_ROOT}/MapboxVisionCore/MapboxVisionCore.framework.dSYM",
-				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
+			inputFileListPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"$(SRCROOT)/scripts/carthage-input.xcfilelist",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxMobileEvents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxVision.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxVisionCore.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/MapboxVisionCore.framework.dSYM",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "source \"scripts/check_input.sh\"\n/usr/local/bin/carthage copy-frameworks\n";
 		};
 		B55B5C6E214FCE9F0061BE3F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -467,12 +451,15 @@
 		};
 		2E197729211DD3F600311B95 /* AdhocRelease */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8DCA3B59D9AED45E334B9F48 /* Pods-demo.adhocrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GJZR2MEM28;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,13 +589,16 @@
 		};
 		B52787E520F0B46B007D1EA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F7D5F50FBAB4F97882AF991 /* Pods-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = GJZR2MEM28;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,12 +613,15 @@
 		};
 		B52787E620F0B46B007D1EA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBB7CAD12CA06D06A9FC18A0 /* Pods-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GJZR2MEM28;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

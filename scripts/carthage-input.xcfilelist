@@ -1,0 +1,7 @@
+$(SRCROOT)/Carthage/Build/iOS/Mapbox.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxVision.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxVisionCore.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxMobileEvents.framework
+$(SRCROOT)/Carthage/Build/iOS/Zip.framework
+$(SRCROOT)/Carthage/Build/iOS/Fabric.framework
+$(SRCROOT)/Carthage/Build/iOS/Crashlytics.framework
