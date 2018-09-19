@@ -4,11 +4,11 @@ PODS:
   - Fabric (1.7.11)
   - Mapbox-iOS-SDK (4.4.1)
   - MapboxMobileEvents (0.5.1)
-  - MapboxVision (0.0.1-alpha.1):
-    - MapboxMobileEvents (~> 0.5.0)
-    - MapboxVisionCore (~> 0.0.1-alpha.1)
+  - MapboxVision (0.0.1-alpha.2):
+    - MapboxMobileEvents (~> 0.5.1)
+    - MapboxVisionCore (~> 0.0.1-alpha.2)
     - Zip (~> 1.1.0)
-  - MapboxVisionCore (0.0.1-alpha.1):
+  - MapboxVisionCore (0.0.1-alpha.2):
     - OpenCV (~> 2.4.13.6)
   - OpenCV (2.4.13.6)
   - Zip (1.1.0)
@@ -16,8 +16,8 @@ PODS:
 DEPENDENCIES:
   - Crashlytics
   - Fabric
-  - Mapbox-iOS-SDK (~> 4.3)
-  - MapboxVision (~> 0.0.1-alpha.1)
+  - Mapbox-iOS-SDK (~> 4.4)
+  - MapboxVision (~> 0.0.1-alpha.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -35,11 +35,11 @@ SPEC CHECKSUMS:
   Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
   Mapbox-iOS-SDK: e6a4f236c77f914ca2e19b929c6cc6b077ba1c4c
   MapboxMobileEvents: bacf6e176d65b4f3cc5280677183856a81216117
-  MapboxVision: e10965a86997b49ec1001bc2564b729c8fe774fd
-  MapboxVisionCore: bf6e8bca57bd2ea5f82c62cf21c4abb264eeb7ed
+  MapboxVision: 4d96bfe049ec6f3a6c064fe57ce84faa14ace8a3
+  MapboxVisionCore: 7bb0b2a5515cc5616e38c905dcc258a0bf098084
   OpenCV: cd36a3467c21572d658c2640488fe0d5a93ca192
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: f2a8347fefef200880df38158fb02cbc8dc527b5
+PODFILE CHECKSUM: b83af796ac4eb7e35ca02b557e4ec15b9c20b517
 
 COCOAPODS: 1.5.3
