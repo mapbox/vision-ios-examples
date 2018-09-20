@@ -283,7 +283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "token_file=~/.fabric\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\nplutil -replace Fabric.APIKey -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n${PODS_ROOT}/Fabric/run \"$token\"\nfi";
+			shellScript = "xml=\"$(plutil -extract Fabric.APIKey xml1 -o - $TARGET_BUILD_DIR/$INFOPLIST_PATH)\"\ntoken=\"$(sed -n \"s/.*<string>\\(.*\\)<\\/string>.*/\\1/p\" <<< $xml)\"\necho $token\nif [ -z \"$token\" ]; then\n    token_file=~/.fabric\n    token=\"$(cat $token_file 2>/dev/null)\"\n    if [ \"$token\" ]; then\n        plutil -replace Fabric.APIKey -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n        ${PODS_ROOT}/Fabric/run \"$token\"\n    fi\nfi\n";
 		};
 		4990411F516A0A420F868F0B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -327,7 +327,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "token_file=~/.mapbox\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\nplutil -replace MGLMapboxAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\necho 'warning: Missing Mapbox access token'\nopen 'https://www.mapbox.com/account/access-tokens/'\necho \"warning: Get an access token from <https://www.mapbox.com/account/access-tokens/>, then create a new file at $token_file that contains the access token.\"\nfi";
+			shellScript = "xml=\"$(plutil -extract MGLMapboxAccessToken xml1 -o - $TARGET_BUILD_DIR/$INFOPLIST_PATH)\"\ntoken=\"$(sed -n \"s/.*<string>\\(.*\\)<\\/string>.*/\\1/p\" <<< $xml)\"\nif [ -z \"$token\" ]; then\n    token_file=~/.mapbox\n    token=\"$(cat $token_file 2>/dev/null)\"\n    if [ \"$token\" ]; then\n        plutil -replace MGLMapboxAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n    else\n        echo 'warning: Missing Mapbox access token'\n        open 'https://www.mapbox.com/account/access-tokens/'\n    echo \"warning: Get an access token from <https://www.mapbox.com/account/access-tokens/>, then create a new file at $token_file that contains the access token.\"\n    fi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
