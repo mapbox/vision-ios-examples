@@ -62,6 +62,8 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.start()
         
+        resetPerformance()
+        
         presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
         presenter.presentMenu()
@@ -77,6 +79,11 @@ final class ContainerInteractor {
             }
             self.presenter.present(signs: signs)
         }
+    }
+    
+    private func resetPerformance() {
+        visionManager.segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        visionManager.detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
     }
     
     deinit {
@@ -95,6 +102,8 @@ extension ContainerInteractor: ContainerDelegate {
             signTrackerUpdateTimer?.invalidate()
         }
         
+        resetPerformance()
+        
         currentScreen = nil
     }
 }
@@ -108,6 +117,27 @@ extension ContainerInteractor: MenuDelegate {
         if case .signsDetection = screen {
             scheduleSignTrackerUpdates()
         }
+        
+        let segmentationPerformance: ModelPerformance
+        let detectionPerformance: ModelPerformance
+        
+        switch screen {
+        case .signsDetection, .objectDetection:
+            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
+            detectionPerformance = ModelPerformance(mode: .fixed, rate: .high)
+        case .segmentation:
+            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .high)
+            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        case .distanceToObject, .laneDetection:
+            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
+            detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
+        case .map:
+            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
+            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        }
+        
+        visionManager.segmentationPerformance = segmentationPerformance
+        visionManager.detectionPerformance = detectionPerformance
         
         presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: true)
