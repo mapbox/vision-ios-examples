@@ -28,6 +28,7 @@ final class MapViewController: UIViewController, MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
         guard let center = userLocation?.location else { return }
+        mapView.delegate = nil
         mapView.setCenter(center.coordinate, zoomLevel: 15, animated: false)
     }
     
