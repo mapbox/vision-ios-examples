@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2E197730211DF34C00311B95 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19772F211DF34C00311B95 /* MapViewController.swift */; };
+		2E4FEDF4215E5EA600DCB496 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */; };
+		2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */; };
+		2E4FEDFB215E605A00DCB496 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2E4FEE03215E609A00DCB496 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E4FEE01215E609A00DCB496 /* Localizable.strings */; };
+		2E4FEE08215E647400DCB496 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEE07215E647400DCB496 /* Strings.swift */; };
 		2E603356214294A00050EDB3 /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603355214294A00050EDB3 /* Tracker.swift */; };
 		2E60335A214295B30050EDB3 /* Signs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603359214295B20050EDB3 /* Signs.swift */; };
 		2E60335C214295CD0050EDB3 /* DistanceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60335B214295CD0050EDB3 /* DistanceFormatter.swift */; };
@@ -16,9 +21,7 @@
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
 		45A4D92A41167A8820A32A4F /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */; };
 		B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787D520F0B46A007D1EA7 /* AppDelegate.swift */; };
-		B52787DB20F0B46A007D1EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52787D920F0B46A007D1EA7 /* Main.storyboard */; };
 		B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52787DC20F0B46B007D1EA7 /* Assets.xcassets */; };
-		B52787E020F0B46B007D1EA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52787DE20F0B46B007D1EA7 /* LaunchScreen.storyboard */; };
 		B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E720F0B625007D1EA7 /* ContainerViewController.swift */; };
 		B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */; };
 		B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */; };
@@ -44,6 +47,10 @@
 /* Begin PBXFileReference section */
 		0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E19772F211DF34C00311B95 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseChecker.swift; sourceTree = "<group>"; };
+		2E4FEE05215E60B000DCB496 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2E4FEE07215E647400DCB496 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2E603355214294A00050EDB3 /* Tracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		2E603359214295B20050EDB3 /* Signs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signs.swift; sourceTree = "<group>"; };
 		2E60335B214295CD0050EDB3 /* DistanceFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceFormatter.swift; sourceTree = "<group>"; };
@@ -55,9 +62,7 @@
 		8DCA3B59D9AED45E334B9F48 /* Pods-demo.adhocrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.adhocrelease.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.adhocrelease.xcconfig"; sourceTree = "<group>"; };
 		B52787D220F0B46A007D1EA7 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52787D520F0B46A007D1EA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B52787DA20F0B46A007D1EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B52787DC20F0B46B007D1EA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B52787DF20F0B46B007D1EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B52787E120F0B46B007D1EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B52787E720F0B625007D1EA7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -80,9 +85,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E4FEDF1215E5EA600DCB496 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */,
+				2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
 		2E603361214296430050EDB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2E4FEE01215E609A00DCB496 /* Localizable.strings */,
 				B52787E120F0B46B007D1EA7 /* Info.plist */,
 				B52787DC20F0B46B007D1EA7 /* Assets.xcassets */,
 				2E6033602142962C0050EDB3 /* Signs.xcassets */,
@@ -94,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				2E6033642142982D0050EDB3 /* Images.swift */,
+				2E4FEE07215E647400DCB496 /* Strings.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -131,6 +147,7 @@
 		B52787D420F0B46A007D1EA7 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				2E4FEDF1215E5EA600DCB496 /* License */,
 				B5442003214A615D007CB69E /* PaddedLabel.swift */,
 				2E60335D214295F80050EDB3 /* Locale.swift */,
 				2E60335B214295CD0050EDB3 /* DistanceFormatter.swift */,
@@ -140,8 +157,6 @@
 				B56F4A3B213FE7F700DC4313 /* RoadLanesView.swift */,
 				B52787E720F0B625007D1EA7 /* ContainerViewController.swift */,
 				B52787D520F0B46A007D1EA7 /* AppDelegate.swift */,
-				B52787D920F0B46A007D1EA7 /* Main.storyboard */,
-				B52787DE20F0B46B007D1EA7 /* LaunchScreen.storyboard */,
 				B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */,
 				B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */,
 				2E19772F211DF34C00311B95 /* MapViewController.swift */,
@@ -227,10 +242,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B52787E020F0B46B007D1EA7 /* LaunchScreen.storyboard in Resources */,
+				2E4FEDFB215E605A00DCB496 /* (null) in Resources */,
+				2E4FEE03215E609A00DCB496 /* Localizable.strings in Resources */,
 				B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */,
 				B544200021493C20007CB69E /* Signs.xcassets in Resources */,
-				B52787DB20F0B46A007D1EA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +282,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\nset -e\nswiftgen config run\nelse\necho \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi";
+			shellScript = "if which swiftgen >/dev/null; then\nset -e\nswiftgen config run\nelse\necho \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2EBD6701211970EA00755F57 /* Fabric */ = {
@@ -342,10 +357,13 @@
 				B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */,
 				2E60335A214295B30050EDB3 /* Signs.swift in Sources */,
 				2E603356214294A00050EDB3 /* Tracker.swift in Sources */,
+				2E4FEDF4215E5EA600DCB496 /* WelcomeViewController.swift in Sources */,
+				2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */,
 				B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */,
 				B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */,
 				2E6033652142982D0050EDB3 /* Images.swift in Sources */,
 				B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */,
+				2E4FEE08215E647400DCB496 /* Strings.swift in Sources */,
 				2E197730211DF34C00311B95 /* MapViewController.swift in Sources */,
 				2E60335C214295CD0050EDB3 /* DistanceFormatter.swift in Sources */,
 				B544200221496793007CB69E /* DistanceView.swift in Sources */,
@@ -356,20 +374,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B52787D920F0B46A007D1EA7 /* Main.storyboard */ = {
+		2E4FEE01215E609A00DCB496 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B52787DA20F0B46A007D1EA7 /* Base */,
+				2E4FEE05215E60B000DCB496 /* en */,
 			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B52787DE20F0B46B007D1EA7 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B52787DF20F0B46B007D1EA7 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
