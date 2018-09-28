@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: LicenseDelegate {
     func licenseSubmitted() {
-//        LicenseController.submit()
+        LicenseController.submit()
         window.rootViewController = launchVision()
     }
 }
