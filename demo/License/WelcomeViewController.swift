@@ -16,6 +16,8 @@ protocol LicenseDelegate: class {
 
 final class WelcomeViewController: UIViewController {
     weak var licenseDelegate: LicenseDelegate?
+    
+    private let licensePreviewController = LicenseController.previewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,8 @@ final class WelcomeViewController: UIViewController {
         bodyTextView.delegate = self
         
         setupLayout()
+        
+        licensePreviewController.delegate = self
     }
     
     private func setupLayout() {
@@ -107,7 +111,7 @@ final class WelcomeViewController: UIViewController {
     }()
     
     private func licenseTapped() {
-        
+        licensePreviewController.presentPreview(animated: true)
     }
     
     @objc private func buttonTapped() {
@@ -119,6 +123,12 @@ extension WelcomeViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         licenseTapped()
         return false
+    }
+}
+
+extension WelcomeViewController: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
 }
 
