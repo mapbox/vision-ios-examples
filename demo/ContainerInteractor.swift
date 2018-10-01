@@ -170,9 +170,8 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
-        guard case .some(.distanceToObject) = currentScreen else { return }
-        
         guard
+            case .some(.distanceToObject) = currentScreen,
             let roadDescription = visionManager.roadDescription,
             let car = worldDescription?.objects.first,
             roadDescription.currentLane < roadDescription.lanes.count,
