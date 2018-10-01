@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private let licenseCheckKey = "licenseCheckLey"
+private let licenseCheckKey = "licenseCheckKey"
 
 struct LicenseController {
     private init() {}
