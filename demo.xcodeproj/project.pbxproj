@@ -10,7 +10,6 @@
 		2E197730211DF34C00311B95 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19772F211DF34C00311B95 /* MapViewController.swift */; };
 		2E4FEDF4215E5EA600DCB496 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */; };
 		2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */; };
-		2E4FEDFB215E605A00DCB496 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2E4FEE03215E609A00DCB496 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E4FEE01215E609A00DCB496 /* Localizable.strings */; };
 		2E4FEE08215E647400DCB496 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEE07215E647400DCB496 /* Strings.swift */; };
 		2E4FEE0A215E807400DCB496 /* agreement.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2E4FEE09215E807400DCB496 /* agreement.pdf */; };
@@ -248,7 +247,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E4FEDFB215E605A00DCB496 /* (null) in Resources */,
 				2E4FEE03215E609A00DCB496 /* Localizable.strings in Resources */,
 				B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */,
 				2E4FEE0D215E947A00DCB496 /* LaunchScreen.storyboard in Resources */,
