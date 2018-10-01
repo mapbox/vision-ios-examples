@@ -147,6 +147,12 @@ final class MenuViewController: UIViewController {
             laneDetectionButton.heightAnchor.constraint(equalToConstant: MenuViewController.buttonHeight)
         ])
         laneDetectionButton.centerVertically(padding: MenuViewController.buttonPadding)
+        
+        view.addSubview(infoButton)
+        NSLayoutConstraint.activate([
+            infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -MenuViewController.infoButtonPadding),
+            infoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: MenuViewController.infoButtonPadding),
+        ])
     }
     
     @objc private func selected(_ sender: UIButton) {
@@ -161,15 +167,36 @@ final class MenuViewController: UIViewController {
         }
     }
     
+    @objc private func infoTapped() {
+        let previewController = LicenseController.previewController()
+        previewController.delegate = self
+        previewController.presentPreview(animated: true)
+    }
+    
     private let segmentationButton = UIButton.createMenuButton(for: .segmentation)
     private let laneDetectionButton = UIButton.createMenuButton(for: .laneDetection)
     private let distanceToObjectButton = UIButton.createMenuButton(for: .distanceToObject)
     private let signsDetectionButton = UIButton.createMenuButton(for: .signsDetection)
     private let objectDetectorButton = UIButton.createMenuButton(for: .objectDetection)
     private let objectMappingButton = UIButton.createMenuButton(for: .map)
+    
+    private let infoButton: UIButton = {
+        let button = UIButton(type: .detailDisclosure)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
+        button.tintColor = UIColor(white: 0.5, alpha: 0.5)
+        return button
+    }()
 
     private static let buttonPadding: CGFloat = 14.0
     private static let buttonHeight: CGFloat = 147.0
+    private static let infoButtonPadding: CGFloat = 20
+}
+
+extension MenuViewController: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
 }
 
 extension Screen {

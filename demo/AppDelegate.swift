@@ -14,7 +14,7 @@ import Crashlytics
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    let window = UIWindow(frame: UIScreen.main.bounds)
     private var interactor: ContainerInteractor?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -25,10 +25,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
-        guard let containerController = window?.rootViewController as? ContainerViewController else {
-            assertionFailure("Couldn't find container view controller")
-            return false
+        window.rootViewController = makeRootViewController()
+        window.makeKeyAndVisible()
+
+        return true
+    }
+    
+    private func makeRootViewController() -> UIViewController {
+        if LicenseController.checkSubmission() {
+            return launchVision()
+        } else {
+            return launchLicense()
         }
+    }
+    
+    private func launchVision() -> UIViewController {
+        let containerController = ContainerViewController()
         
         let visionManager = VisionManager.shared
         let visionViewController = visionManager.createPresentation()
@@ -41,8 +53,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         interactor = ContainerInteractor(presenter: containerController)
         containerController.delegate = interactor
         menuViewController.delegate = interactor
+        
+        return containerController
+    }
+    
+    private func launchLicense() -> UIViewController {
+        let viewController = WelcomeViewController()
+        viewController.licenseDelegate = self
+        return viewController
+    }
+}
 
-        return true
+extension AppDelegate: LicenseDelegate {
+    func licenseSubmitted() {
+        LicenseController.submit()
+        window.rootViewController = launchVision()
     }
 }
 
