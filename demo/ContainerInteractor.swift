@@ -149,18 +149,12 @@ extension ContainerInteractor: VisionManagerDelegate {
     func visionManager(_ visionManager: VisionManager, didUpdateLaneDepartureState laneDepartureState: LaneDepartureState) {
         guard case .some(.laneDetection) = currentScreen else { return }
         
-        let soundId: SystemSoundID
         switch laneDepartureState {
-        case .normal:
-            soundId = 1334
-        case .warning:
-            soundId = 1333
+        case .normal, .warning: break
         case .alert:
-            soundId = 1323
+            AudioServicesPlaySystemSound(1333)
         }
-        AudioServicesPlayAlertSound(soundId)
     }
-    
     
     func visionManager(_ visionManager: VisionManager, didUpdateSegmentation segmentation: SegmentationMask?) {
         
