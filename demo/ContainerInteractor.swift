@@ -175,6 +175,10 @@ extension ContainerInteractor: VisionManagerDelegate {
         signTracker.update(items)
     }
     
+    func visionManager(_ visionManager: VisionManager, didUpdateRawRoadDescription roadDescription: RoadDescription?) {
+    
+    }
+    
     func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription?) {
         guard case .some(.laneDetection) = currentScreen else { return }
         presenter.present(roadDescription: roadDescription)
