@@ -50,7 +50,11 @@ final class RoadLanesView: UIStackView {
         
         for (index, lane) in description.lanes.enumerated() {
             
-            addArrangedSubview(UIImageView(image: lane.leftMarking.type.image))
+            let leftMarkingView = UIImageView(image: lane.leftMarking.type.image)
+            if description.lanes.first == lane, lane.leftMarking.type == .roadEdge {
+                leftMarkingView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            }
+            addArrangedSubview(leftMarkingView)
             
             if index == description.currentLane {
                 let view = UIImageView(image: Asset.Assets.yourDirection.image)
@@ -87,7 +91,9 @@ private extension LaneMarkingType {
     var image: UIImage {
         let image: UIImage
         switch self {
-        case .solid, .curb:
+        case .roadEdge:
+            image = Asset.Assets.rightCurb.image
+        case .solid:
             image = Asset.Assets.lanesLine.image
         case .doubleSolid:
             image = Asset.Assets.separatorDoubleLane.image
