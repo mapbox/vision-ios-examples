@@ -20,6 +20,9 @@
 		2E60335E214295F80050EDB3 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60335D214295F80050EDB3 /* Locale.swift */; };
 		2E6033652142982D0050EDB3 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6033642142982D0050EDB3 /* Images.swift */; };
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
+		2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */; };
+		2E9BF8FE2166530D000A6A39 /* critical_collision_alert.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FD2166530D000A6A39 /* critical_collision_alert.wav */; };
+		2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */; };
 		45A4D92A41167A8820A32A4F /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB0DA2C1AD50B9D270F7F1A /* Pods_demo.framework */; };
 		B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787D520F0B46A007D1EA7 /* AppDelegate.swift */; };
 		B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52787DC20F0B46B007D1EA7 /* Assets.xcassets */; };
@@ -61,6 +64,9 @@
 		2E6033602142962C0050EDB3 /* Signs.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Signs.xcassets; sourceTree = "<group>"; };
 		2E6033642142982D0050EDB3 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2E603366214299110050EDB3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
+		2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lane_departure_warning.wav; sourceTree = "<group>"; };
+		2E9BF8FD2166530D000A6A39 /* critical_collision_alert.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = critical_collision_alert.wav; sourceTree = "<group>"; };
+		2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPlayer.swift; sourceTree = "<group>"; };
 		4F7D5F50FBAB4F97882AF991 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		8DCA3B59D9AED45E334B9F48 /* Pods-demo.adhocrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.adhocrelease.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.adhocrelease.xcconfig"; sourceTree = "<group>"; };
 		B52787D220F0B46A007D1EA7 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +106,8 @@
 		2E603361214296430050EDB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */,
+				2E9BF8FD2166530D000A6A39 /* critical_collision_alert.wav */,
 				2E4FEE0B215E947A00DCB496 /* LaunchScreen.storyboard */,
 				2E4FEE09215E807400DCB496 /* agreement.pdf */,
 				2E4FEE01215E609A00DCB496 /* Localizable.strings */,
@@ -166,6 +174,7 @@
 				B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */,
 				2E19772F211DF34C00311B95 /* MapViewController.swift */,
 				2E603366214299110050EDB3 /* OrderedDictionary.swift */,
+				2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -248,10 +257,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E4FEE03215E609A00DCB496 /* Localizable.strings in Resources */,
+				2E9BF8FE2166530D000A6A39 /* critical_collision_alert.wav in Resources */,
 				B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */,
 				2E4FEE0D215E947A00DCB496 /* LaunchScreen.storyboard in Resources */,
 				B544200021493C20007CB69E /* Signs.xcassets in Resources */,
 				2E4FEE0A215E807400DCB496 /* agreement.pdf in Resources */,
+				2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +373,7 @@
 				B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */,
 				B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */,
 				2E60335A214295B30050EDB3 /* Signs.swift in Sources */,
+				2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */,
 				2E603356214294A00050EDB3 /* Tracker.swift in Sources */,
 				2E4FEDF4215E5EA600DCB496 /* WelcomeViewController.swift in Sources */,
 				2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */,

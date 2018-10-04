@@ -55,6 +55,8 @@ final class ContainerInteractor {
     private let signTracker = Tracker<SignClassification>(maxCapacity: signTrackerMaxCapacity)
     private var signTrackerUpdateTimer: Timer?
     
+    private let alertPlayer = AlertPlayer()
+    
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
         
@@ -98,8 +100,14 @@ extension ContainerInteractor: ContainerDelegate {
         presenter.presentBackButton(isVisible: false)
         presenter.presentMenu()
         
-        if case .some(.signsDetection) = currentScreen {
-            signTrackerUpdateTimer?.invalidate()
+        if let screen = currentScreen {
+            switch screen {
+            case .signsDetection:
+                signTrackerUpdateTimer?.invalidate()
+            case .laneDetection:
+                alertPlayer.stop()
+            default: break
+            }
         }
         
         resetPerformance()
@@ -150,9 +158,10 @@ extension ContainerInteractor: VisionManagerDelegate {
         guard case .some(.laneDetection) = currentScreen else { return }
         
         switch laneDepartureState {
-        case .normal, .warning: break
+        case .normal, .warning:
+            alertPlayer.stop()
         case .alert:
-            AudioServicesPlaySystemSound(1333)
+            alertPlayer.play(sound: .laneDepartureWarning, repeated: true)
         }
     }
     
