@@ -10,16 +10,7 @@ import Foundation
 import MapboxVision
 
 extension SignClassification {
-    private var fixupType: SignType? {
-        if type.rawValue > SignType.informationHighway.rawValue {
-            return nil
-        }
-        return type
-    }
-    
     func icon(over: Bool, market: Market) -> ImageAsset? {
-        guard let type = fixupType else { return nil }
-        
         switch type {
         case .unknown:
             return nil
