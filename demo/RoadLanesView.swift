@@ -9,21 +9,22 @@
 import UIKit
 import MapboxVision
 
-final class RoadLanesView: UIStackView {
+final class RoadLanesView: UIView {
     
     private let laneHeight: CGFloat = 25
     private let verticalInset: CGFloat = 10
-    private let horizontalInset: CGFloat = 20
+    private let horizontalInset: CGFloat = 7
     
+    private let stackView = UIStackView()
     private var yourDirectionImageView: UIImageView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        spacing = 10
-        alignment = .center
-        axis = .horizontal
-        distribution = .fillProportionally
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
         
         let backgroundImage = Asset.Assets.lanesBg.image.resizableImage(
             withCapInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
@@ -31,13 +32,23 @@ final class RoadLanesView: UIStackView {
         )
         let background = UIImageView(image: backgroundImage)
         background.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(background)
         
+        addSubview(background)
         NSLayoutConstraint.activate([
-            background.topAnchor.constraint(equalTo: topAnchor, constant: -verticalInset),
-            background.bottomAnchor.constraint(equalTo: bottomAnchor, constant: verticalInset),
-            background.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -horizontalInset),
-            background.trailingAnchor.constraint(equalTo: trailingAnchor, constant: horizontalInset)
+            background.topAnchor.constraint(equalTo: topAnchor),
+            background.bottomAnchor.constraint(equalTo: bottomAnchor),
+            background.leadingAnchor.constraint(equalTo: leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: verticalInset),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalInset),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalInset),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalInset)
         ])
     }
     
@@ -54,18 +65,18 @@ final class RoadLanesView: UIStackView {
             if description.lanes.first == lane, lane.leftMarking.type == .roadEdge {
                 leftMarkingView.transform = CGAffineTransform(scaleX: -1, y: 1);
             }
-            addArrangedSubview(leftMarkingView)
+            stackView.addArrangedSubview(leftMarkingView)
             
             if index == description.currentLane {
                 let view = UIImageView(image: Asset.Assets.yourDirection.image)
                 yourDirectionImageView = view
-                addArrangedSubview(view)
+                stackView.addArrangedSubview(view)
             } else  {
-                addArrangedSubview(lane.direction.view)
+                stackView.addArrangedSubview(lane.direction.view)
             }
             
             if description.lanes.last == lane {
-                addArrangedSubview(UIImageView(image: lane.rightMarking.type.image))
+                stackView.addArrangedSubview(UIImageView(image: lane.rightMarking.type.image))
             }
         }
     }
@@ -75,14 +86,14 @@ final class RoadLanesView: UIStackView {
         
         guard let imageX = yourDirectionImageView?.center.x else { return }
         
-        let centerX = self.bounds.size.width / 2
+        let centerX = stackView.bounds.size.width / 2
         let offset = centerX - imageX
         
         transform = CGAffineTransform(translationX: offset, y: 0)
     }
     
     private func removeAllArrangedSubviews() {
-        arrangedSubviews.forEach { $0.removeFromSuperview() }
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         yourDirectionImageView = nil
     }
 }

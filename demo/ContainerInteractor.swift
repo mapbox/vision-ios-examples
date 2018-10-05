@@ -31,6 +31,7 @@ protocol ContainerPresenter: class {
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(distanceToCar: DistanceToCar?, canvasSize: CGSize)
+    func present(laneDepartureState: LaneDepartureState)
     func presentBackButton(isVisible: Bool)
     func dismissMenu()
     func dismissCurrent()
@@ -106,6 +107,7 @@ extension ContainerInteractor: ContainerDelegate {
                 signTrackerUpdateTimer?.invalidate()
             case .laneDetection:
                 alertPlayer.stop()
+                presenter.present(laneDepartureState: .normal)
             default: break
             }
         }
