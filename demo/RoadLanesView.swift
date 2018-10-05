@@ -11,9 +11,8 @@ import MapboxVision
 
 final class RoadLanesView: UIView {
     
-    private let laneHeight: CGFloat = 25
-    private let verticalInset: CGFloat = 10
-    private let horizontalInset: CGFloat = 7
+    private let verticalInset: CGFloat = 9
+    private let horizontalInset: CGFloat = 9
     
     private let stackView = UIStackView()
     private var yourDirectionImageView: UIImageView?
@@ -21,7 +20,7 @@ final class RoadLanesView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        stackView.spacing = 10
+        stackView.spacing = horizontalInset
         stackView.alignment = .center
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally

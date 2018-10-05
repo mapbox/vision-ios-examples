@@ -165,6 +165,8 @@ extension ContainerInteractor: VisionManagerDelegate {
         case .alert:
             alertPlayer.play(sound: .laneDepartureWarning, repeated: true)
         }
+        
+        presenter.present(laneDepartureState: laneDepartureState)
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSegmentation segmentation: SegmentationMask?) {
