@@ -1,11 +1,13 @@
 xcassets:
-    paths:
+    inputs:
         - Resources/Signs.xcassets
         - Resources/Assets.xcassets
-    templateName: swift4
-    output: Generated/Images.swift
+    outputs:
+        templateName: swift4
+        output: Generated/Images.swift
 
 strings:
-    paths: Resources/en.lproj/Localizable.strings
-    templateName: structured-swift4
-    output: Generated/Strings.swift
+    inputs: Resources/en.lproj/Localizable.strings
+    outputs:
+        templateName: structured-swift4
+        output: Generated/Strings.swift
