@@ -10,16 +10,7 @@ import Foundation
 import MapboxVision
 
 extension SignClassification {
-    private var fixupType: SignType? {
-        if type.rawValue > SignType.informationHighway.rawValue {
-            return nil
-        }
-        return type
-    }
-    
     func icon(over: Bool, market: Market) -> ImageAsset? {
-        guard let type = fixupType else { return nil }
-        
         switch type {
         case .unknown:
             return nil
@@ -75,7 +66,7 @@ extension SignClassification {
                 default: return nil
                 }
             }
-        case .end:
+        case .speedLimitEnd:
             switch market {
             case .us:
                 switch number {
@@ -102,7 +93,7 @@ extension SignClassification {
             case .china:
                 return nil
             }
-        case .min:
+        case .speedLimitMin:
             switch market {
             case .us:
                 switch number {
@@ -129,7 +120,7 @@ extension SignClassification {
             case .china:
                 return nil
             }
-        case .trucks:
+        case .speedLimitTrucks:
             switch market {
             case .us:
                 switch number {
@@ -156,7 +147,7 @@ extension SignClassification {
             case .china:
                 return nil
             }
-        case .night:
+        case .speedLimitNight:
             switch market {
             case .us:
                 switch number {
@@ -183,7 +174,7 @@ extension SignClassification {
             case .china:
                 return nil
             }
-        case .pure:
+        case .speedLimitComplementary:
             switch number {
             case 5:  return over ? Asset.Signs.SpeedLimitsComplementary.overSpeedLimitCompUS5 : Asset.Signs.SpeedLimitsComplementary.speedLimitCompUS5
             case 15: return over ? Asset.Signs.SpeedLimitsComplementary.overSpeedLimitCompUS15 : Asset.Signs.SpeedLimitsComplementary.speedLimitCompUS15
@@ -205,7 +196,7 @@ extension SignClassification {
             case 90: return over ? Asset.Signs.SpeedLimitsComplementary.overSpeedLimitCompUS90 : Asset.Signs.SpeedLimitsComplementary.speedLimitCompUS90
             default: return nil
             }
-        case .exit:
+        case .speedLimitExit:
             switch number {
             case 5:
                 return Asset.Signs.Warnings.warningExitUS5
@@ -245,7 +236,7 @@ extension SignClassification {
                 return Asset.Signs.Warnings.warningExitUS90
             default: return nil
             }
-        case .ramp:
+        case .speedLimitRamp:
             switch number {
             case 5:
                 return Asset.Signs.Warnings.warningRampUS5
@@ -285,17 +276,17 @@ extension SignClassification {
                 return Asset.Signs.Warnings.warningRampUS90
             default: return nil
             }
-        case .left:
+        case .warningTurnLeft:
             return Asset.Signs.Warnings.warningTurnLeftUS
-        case .right:
+        case .warningTurnRight:
             return Asset.Signs.Warnings.warningTurnRightUS
-        case .backLeft:
+        case .warningTurnBackLeft:
             return Asset.Signs.Warnings.warningTurnBackUS
-        case .roundAbout:
+        case .warningRoundAbout:
             return Asset.Signs.Warnings.warningRoundaboutUS
-        case .bamp:
+        case .warningSpeedBump:
             return Asset.Signs.Warnings.warningSpeedbumpUS
-        case .winding:
+        case .warningWinding:
             return Asset.Signs.Warnings.warningWindingRoadUS
         case .informationBikeRoute:
             return nil
@@ -305,9 +296,9 @@ extension SignClassification {
             return nil
         case .regulatoryBicyclesOnly:
             return Asset.Signs.Regulatory.regulatoryBicyclesOnlyV1US
-        case .regulatoryDoNotpass:
+        case .regulatoryDoNotPass:
             return Asset.Signs.Regulatory.regulatoryDoNotPassUS
-        case .regulatoryDoNotstopOnTracks:
+        case .regulatoryDoNotDriveOnShoulders:
             return nil
         case .regulatoryDualLanesAllDirectionsOnRight:
             return nil
@@ -353,7 +344,7 @@ extension SignClassification {
             return nil
         case .regulatoryNoRightTurn:
             return Asset.Signs.Regulatory.regulatoryNoRightTurnUS
-        case .regulatoryMoStopping:
+        case .regulatoryNoStopping:
             return nil
         case .regulatoryNoStraightThrough:
             return nil
@@ -394,6 +385,108 @@ extension SignClassification {
         case .warningYieldAhead:
             return nil
         case .informationHighway:
+            return nil
+        case .doNotBlockIntersection:
+            return nil
+        case .regulatoryKeepRightPicture:
+            return nil
+        case .regulatoryKeepRightText:
+            return nil
+        case .regulatoryNoHeavyGoodsVehiclesPicture:
+            return nil
+        case .regulatoryNoLeftTurnText:
+            return nil
+        case .regulatoryOneWayLeftArrow:
+            return nil
+        case .regulatoryOneWayLeftArrowText:
+            return nil
+        case .regulatoryOneWayLeftText:
+            return nil
+        case .regulatoryOneWayRightArrow:
+            return nil
+        case .regulatoryOneWayRightArrowText:
+            return nil
+        case .regulatoryOneWayRightText:
+            return nil
+        case .regulatoryTurnLeftAhead:
+            return nil
+        case .regulatoryTurnLeftOnly:
+            return nil
+        case .regulatoryTurnLeftOrRight:
+            return nil
+        case .regulatoryTurnRightAhead:
+            return nil
+        case .regulatoryYield:
+            return nil
+        case .warningRailwayCrossing:
+            return nil
+        case .warningHairpinCurveRight:
+            return nil
+        case .complementaryOneDirectionLeft:
+            return nil
+        case .complementaryOneDirectionRight:
+            return nil
+        case .warningCurveLeft:
+            return nil
+        case .warningCurveRight:
+            return nil
+        case .warningHorizontalAlignmentLeft:
+            return nil
+        case .warningHorizontalAlignmentRight:
+            return nil
+        case .regulatoryTurnRightOnly:
+            return nil
+        case .whiteTablesText:
+            return nil
+        case .lanes:
+            return nil
+        case .greenPlates:
+            return nil
+        case .warningText:
+            return nil
+        case .warningCrossroads:
+            return nil
+        case .warningPicture:
+            return nil
+        case .complementaryKeepLeft:
+            return nil
+        case .complementaryKeepRight:
+            return nil
+        case .regulatoryExceptBicycle:
+            return nil
+        case .warningAddedLaneRight:
+            return nil
+        case .warningDeadEndText:
+            return nil
+        case .warningDipText:
+            return nil
+        case .warningEmergencyVehicles:
+            return nil
+        case .warningEndText:
+            return nil
+        case .warningFallingRocksOrDebrisRight:
+            return nil
+        case .warningLowGroundClearance:
+            return nil
+        case .warningObstructionMarker:
+            return nil
+        case .warningPlayground:
+            return nil
+        case .warningSecondRoadRight:
+            return nil
+        case .warningTurnLeftOnlyArrow:
+            return nil
+        case .warningTurnLeftOrRightOnlyArrow:
+            return nil
+        case .warningTramsCrossing:
+            return nil
+        case .warningUnevenRoad:
+            return nil
+        case .warningWildAnimals:
+            return nil
+        case .regulatoryParkingRestrictions:
+            return nil
+        case .regulatoryYieldOrStopForPedestrians:
             return nil
         }
     }
