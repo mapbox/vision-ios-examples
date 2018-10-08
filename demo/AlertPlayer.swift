@@ -9,6 +9,8 @@
 import Foundation
 import AVFoundation
 
+private let defaultSound: SystemSoundID = 1002
+
 enum AlertSound {
     case criticalCollisionAlert
     case laneDepartureWarning
@@ -24,16 +26,21 @@ enum AlertSound {
         }
     }
     
-    private var url: URL {
+    private var url: URL? {
         guard let url = Bundle.main.url(forResource: path, withExtension: AlertSound.type) else {
-            fatalError("Alert for name \(path).\(AlertSound.type) is not found")
+            assertionFailure("Alert for name \(path).\(AlertSound.type) is not found")
+            return nil
         }
         return url
     }
     
     var soundID: SystemSoundID? {
         var soundID: SystemSoundID = 0
-        AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
+        if let url = url {
+            AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
+        } else {
+            soundID = defaultSound
+        }
         return soundID
     }
 }
