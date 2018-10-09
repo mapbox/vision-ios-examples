@@ -73,7 +73,7 @@ final class ContainerInteractor {
     }
     
     private func scheduleSignTrackerUpdates() {
-        signTrackerUpdateTimer?.invalidate()
+        stopSignTrackerUpdates()
         
         signTrackerUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let `self` = self else { return }
@@ -82,6 +82,11 @@ final class ContainerInteractor {
             }
             self.presenter.present(signs: signs)
         }
+    }
+    
+    private func stopSignTrackerUpdates() {
+        signTrackerUpdateTimer?.invalidate()
+        signTracker.reset()
     }
     
     private func resetPerformance() {
@@ -104,7 +109,7 @@ extension ContainerInteractor: ContainerDelegate {
         if let screen = currentScreen {
             switch screen {
             case .signsDetection:
-                signTrackerUpdateTimer?.invalidate()
+                stopSignTrackerUpdates()
             case .laneDetection:
                 alertPlayer.stop()
                 presenter.present(laneDepartureState: .normal)
