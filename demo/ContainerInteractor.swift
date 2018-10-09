@@ -31,6 +31,7 @@ protocol ContainerPresenter: class {
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(distanceToCar: DistanceToCar?, canvasSize: CGSize)
+    func present(laneDepartureState: LaneDepartureState)
     func presentBackButton(isVisible: Bool)
     func dismissMenu()
     func dismissCurrent()
@@ -54,6 +55,8 @@ final class ContainerInteractor {
     
     private let signTracker = Tracker<SignClassification>(maxCapacity: signTrackerMaxCapacity)
     private var signTrackerUpdateTimer: Timer?
+    
+    private let alertPlayer = AlertPlayer()
     
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
@@ -98,8 +101,15 @@ extension ContainerInteractor: ContainerDelegate {
         presenter.presentBackButton(isVisible: false)
         presenter.presentMenu()
         
-        if case .some(.signsDetection) = currentScreen {
-            signTrackerUpdateTimer?.invalidate()
+        if let screen = currentScreen {
+            switch screen {
+            case .signsDetection:
+                signTrackerUpdateTimer?.invalidate()
+            case .laneDetection:
+                alertPlayer.stop()
+                presenter.present(laneDepartureState: .normal)
+            default: break
+            }
         }
         
         resetPerformance()
@@ -146,6 +156,18 @@ extension ContainerInteractor: MenuDelegate {
 }
 
 extension ContainerInteractor: VisionManagerDelegate {
+    func visionManager(_ visionManager: VisionManager, didUpdateLaneDepartureState laneDepartureState: LaneDepartureState) {
+        guard case .some(.laneDetection) = currentScreen else { return }
+        
+        switch laneDepartureState {
+        case .normal, .warning:
+            alertPlayer.stop()
+        case .alert:
+            alertPlayer.play(sound: .laneDepartureWarning, repeated: true)
+        }
+        
+        presenter.present(laneDepartureState: laneDepartureState)
+    }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSegmentation segmentation: SegmentationMask?) {
         
@@ -158,6 +180,10 @@ extension ContainerInteractor: VisionManagerDelegate {
     func visionManager(_ visionManager: VisionManager, didUpdateSignClassifications classifications: SignClassifications?) {
         guard case .some(.signsDetection) = currentScreen, let items = classifications?.items else { return }
         signTracker.update(items)
+    }
+    
+    func visionManager(_ visionManager: VisionManager, didUpdateRawRoadDescription roadDescription: RoadDescription?) {
+    
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription?) {

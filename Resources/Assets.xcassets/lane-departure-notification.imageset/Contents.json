@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "lanes-bg.pdf",
+      "filename" : "lane-departure-notification.pdf",
       "alignment-insets" : {
-        "top" : 7,
-        "left" : 7,
-        "bottom" : 7,
-        "right" : 7
+        "top" : 8,
+        "left" : 9,
+        "bottom" : 10,
+        "right" : 9
       }
     }
   ],

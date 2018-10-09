@@ -9,7 +9,7 @@
 import UIKit
 import MapboxVision
 
-private let roadLanesTopInset: CGFloat = 18
+private let bannerInset: CGFloat = 18
 private let roadLanesHeight: CGFloat = 64
 private let smallRelativeInset: CGFloat = 16
 private let buttonHeight: CGFloat = 36
@@ -39,7 +39,7 @@ final class ContainerViewController: UIViewController {
         view.addSubview(roadLanesView)
         NSLayoutConstraint.activate([
             roadLanesView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            roadLanesView.topAnchor.constraint(equalTo: view.topAnchor, constant: roadLanesTopInset),
+            roadLanesView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
             roadLanesView.heightAnchor.constraint(equalToConstant: roadLanesHeight)
         ])
         
@@ -56,6 +56,12 @@ final class ContainerViewController: UIViewController {
             distanceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -smallRelativeInset),
             distanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             distanceLabel.heightAnchor.constraint(equalToConstant: buttonHeight),
+        ])
+        
+        view.addSubview(laneDepartureView)
+        NSLayoutConstraint.activate([
+            laneDepartureView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
+            laneDepartureView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -bannerInset),
         ])
     }
     
@@ -115,6 +121,13 @@ final class ContainerViewController: UIViewController {
         return view
     }()
     
+    private let laneDepartureView: UIImageView = {
+        let view = UIImageView(image: Asset.Assets.laneDepartureNotification.image)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     private lazy var distanceFormatter: DistanceFormatter = {
         return DistanceFormatter(approximate: false)
     }()
@@ -154,6 +167,19 @@ extension ContainerViewController: ContainerPresenter {
         }
         roadLanesView.isHidden = false
         roadLanesView.update(roadDescription)
+    }
+    
+    func present(laneDepartureState: LaneDepartureState) {
+        let isVisible: Bool
+        
+        switch laneDepartureState {
+        case .normal, .warning:
+            isVisible = false
+        case .alert:
+            isVisible = true
+        }
+        
+        laneDepartureView.isHidden = !isVisible
     }
     
     func present(screen: Screen) {
