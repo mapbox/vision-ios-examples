@@ -77,4 +77,8 @@ final class Tracker<T: Equatable & Hashable> {
         }
         return current.map { $0.payload }
     }
+    
+    func reset() {
+        items.removeAll()
+    }
 }
