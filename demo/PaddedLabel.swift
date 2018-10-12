@@ -38,3 +38,18 @@ final class PaddedLabel: UILabel {
         return contentSize
     }
 }
+
+extension PaddedLabel {
+    private static let insets = UIEdgeInsets(top: 5, left: 10, bottom: 4, right: 10)
+    
+    static func createDarkRounded() -> PaddedLabel {
+        let label = PaddedLabel(insets: insets)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        label.layer.cornerRadius = 14
+        label.layer.masksToBounds = true
+        label.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        label.isHidden = true
+        return label
+    }
+}

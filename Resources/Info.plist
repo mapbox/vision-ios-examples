@@ -50,6 +50,7 @@
 	<string>Location and heading information is used for position estimation, localization and AR-related tasks</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>location</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
