@@ -81,7 +81,7 @@ class ARMapNavigationController: UIViewController {
     
     private let hintLabel: UILabel = {
         let label = PaddedLabel.createDarkRounded()
-        label.text = "Tap on the map to select a destination"
+        label.text = L10n.arMapHint
         label.backgroundColor = UIColor(white: 0, alpha: 0.85)
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 18)
