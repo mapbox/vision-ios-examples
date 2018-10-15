@@ -66,6 +66,12 @@ final class ContainerViewController: UIViewController {
             laneDepartureView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
             laneDepartureView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -bannerInset),
         ])
+        
+        view.addSubview(calibrationLabel)
+        NSLayoutConstraint.activate([
+            calibrationLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
+            calibrationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
     }
     
     override func present(viewController: UIViewController) {
@@ -106,7 +112,6 @@ final class ContainerViewController: UIViewController {
     
     private let distanceLabel: PaddedLabel = {
         let view = PaddedLabel.createDarkRounded()
-        view.textColor = .white
         return view
     }()
     
@@ -115,6 +120,11 @@ final class ContainerViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view
+    }()
+    
+    private let calibrationLabel: UILabel = {
+        let label = PaddedLabel.createDarkRounded()
+        return label
     }()
     
     private lazy var distanceFormatter: DistanceFormatter = {
@@ -169,6 +179,12 @@ extension ContainerViewController: ContainerPresenter {
         }
         
         laneDepartureView.isHidden = !isVisible
+    }
+    
+    func present(calibrationProgress: CalibrationProgress?) {
+        calibrationLabel.isHidden = calibrationProgress?.isCalibrated ?? true
+        guard let calibrationProgress = calibrationProgress else { return }
+        calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.progress * 100)))
     }
     
     func present(screen: Screen) {

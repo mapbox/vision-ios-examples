@@ -29,11 +29,14 @@ struct DistanceToCar {
 protocol ContainerPresenter: class {
     func presentVision()
     func present(screen: Screen)
+    func presentBackButton(isVisible: Bool)
+    
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(distanceToCar: DistanceToCar?, canvasSize: CGSize)
     func present(laneDepartureState: LaneDepartureState)
-    func presentBackButton(isVisible: Bool)
+    func present(calibrationProgress: CalibrationProgress?)
+    
     func dismissMenu()
     func dismissCurrent()
 }
@@ -102,6 +105,7 @@ final class ContainerInteractor {
         presenter.present(roadDescription: nil)
         presenter.present(laneDepartureState: .normal)
         presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+        presenter.present(calibrationProgress: nil)
     }
     
     deinit {
@@ -129,8 +133,12 @@ extension ContainerInteractor: MenuDelegate {
         presenter.dismissCurrent()
         presenter.dismissMenu()
         
-        if case .signsDetection = screen {
+        switch screen {
+        case .signsDetection:
             scheduleSignTrackerUpdates()
+        case .distanceToObject:
+            presenter.present(calibrationProgress: visionManager.calibrationProgress)
+        default: break
         }
         
         let segmentationPerformance: ModelPerformance
@@ -229,5 +237,8 @@ extension ContainerInteractor: VisionManagerDelegate {
         presenter.present(distanceToCar: distanceToCar, canvasSize: visionManager.frameSize)
     }
     
-    
+    public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
+        guard case .distanceToObject = currentScreen else { return }
+        presenter.present(calibrationProgress: calibrationProgress)
+    }
 }
