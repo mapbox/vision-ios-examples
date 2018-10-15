@@ -25,7 +25,7 @@ final class ARContainerViewController: UIViewController {
         
         arViewController.view.addSubview(endButton)
         NSLayoutConstraint.activate([
-            endButton.trailingAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            endButton.trailingAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.trailingAnchor),
             endButton.topAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.topAnchor, constant: inset),
             endButton.heightAnchor.constraint(equalToConstant: 44),
             endButton.widthAnchor.constraint(equalToConstant: 90),

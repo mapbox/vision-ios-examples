@@ -41,7 +41,7 @@ class ARMapNavigationController: UIViewController {
         
         view.addSubview(goButton)
         NSLayoutConstraint.activate([
-            goButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            goButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             goButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: inset),
             goButton.heightAnchor.constraint(equalToConstant: 44),
             goButton.widthAnchor.constraint(equalToConstant: 90),
@@ -69,7 +69,8 @@ class ARMapNavigationController: UIViewController {
         button.setTitle("Go", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        let color = UIColor(white: 0, alpha: 0.85)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.35), for: .disabled)
+        let color = UIColor(red: 0, green: 122/255.0, blue: 1.0, alpha: 1.0)
         button.setBackgroundColor(color, for: .normal)
         button.setBackgroundColor(color.withAlphaComponent(0.35), for: .disabled)
         button.layer.cornerRadius = 22
