@@ -241,6 +241,8 @@ extension Screen {
             return "Object Mapping"
         case .arRouting:
             return "AR Routing"
+        case .menu:
+            return "Mapbox Vision Teaser"
         }
     }
     
@@ -260,6 +262,8 @@ extension Screen {
             return Asset.Assets.icon6.image
         case .arRouting:
             return Asset.Assets.icon7.image
+        case .menu:
+            return UIImage()
         }
     }
 }
