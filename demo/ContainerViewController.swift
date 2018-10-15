@@ -8,6 +8,8 @@
 
 import UIKit
 import MapboxVision
+import MapboxVisionAR
+import MapboxNavigation
 
 private let bannerInset: CGFloat = 18
 private let roadLanesHeight: CGFloat = 64
@@ -24,6 +26,7 @@ final class ContainerViewController: UIViewController {
     
     var visionViewController: VisionPresentationViewController?
     var menuViewController: MenuViewController?
+    private lazy var arContainerViewController = ARContainerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,22 +68,9 @@ final class ContainerViewController: UIViewController {
         ])
     }
     
-    private func present(viewController: UIViewController) {
-        addChildViewController(viewController)
+    override func present(viewController: UIViewController) {
+        super.present(viewController: viewController)
         view.insertSubview(viewController.view, belowSubview: backButton)
-        NSLayoutConstraint.activate([
-            viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        ])
-        viewController.didMove(toParentViewController: self)
-    }
-    
-    private func dismiss(viewController: UIViewController) {
-        viewController.willMove(toParentViewController: nil)
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
     }
 
     private let backButton: UIButton = {
@@ -116,7 +106,6 @@ final class ContainerViewController: UIViewController {
     
     private let distanceLabel: PaddedLabel = {
         let view = PaddedLabel.createDarkRounded()
-        view.textColor = UIColor(red: 0.29, green: 1, blue: 0.14 , alpha: 1)
         view.textColor = .white
         return view
     }()
@@ -190,6 +179,7 @@ extension ContainerViewController: ContainerPresenter {
         case .distanceToObject: visionViewController?.frameVisualizationMode = .clear
         case .map: presentMap()
         case .laneDetection: visionViewController?.frameVisualizationMode = .clear
+        case .arRouting: presentARRouting()
         }
     }
     
@@ -217,6 +207,11 @@ extension ContainerViewController: ContainerPresenter {
         present(viewController: viewController)
         currentViewController = viewController
     }
+    
+    private func presentARRouting() {
+        present(viewController: arContainerViewController)
+        currentViewController = arContainerViewController
+    }
 
     func presentBackButton(isVisible: Bool) {
         backButton.isHidden = !isVisible
@@ -241,18 +236,24 @@ extension ContainerViewController: ContainerPresenter {
     }
 }
 
-private extension PaddedLabel {
-    private static let insets = UIEdgeInsets(top: 5, left: 10, bottom: 4, right: 10)
+extension UIViewController {
     
-    static func createDarkRounded() -> PaddedLabel {
-        let label = PaddedLabel(insets: insets)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor(white: 0, alpha: 0.25)
-        label.layer.cornerRadius = 14
-        label.layer.masksToBounds = true
-        label.font = UIFont(name: "AvenirNext-Bold", size: 20)
-        label.isHidden = true
-        return label
+    @objc func present(viewController: UIViewController) {
+        addChildViewController(viewController)
+        view.addSubview(viewController.view)
+        NSLayoutConstraint.activate([
+            viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+        viewController.didMove(toParentViewController: self)
+    }
+    
+    func dismiss(viewController: UIViewController) {
+        viewController.willMove(toParentViewController: nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParentViewController()
     }
 }
 

@@ -16,6 +16,7 @@ enum Screen {
     case distanceToObject
     case map
     case laneDetection
+    case arRouting
 }
 
 struct DistanceToCar {
@@ -147,6 +148,9 @@ extension ContainerInteractor: MenuDelegate {
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
         case .map:
+            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
+            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        case .arRouting:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         }
