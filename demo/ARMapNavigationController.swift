@@ -13,8 +13,6 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 
-private let styleURL = URL(string: "mapbox://styles/willwhite/cjkmusatv0rox2roea7dz7r1p") // TODO: Use dark theme
-
 private let routeEdgeInsets = UIEdgeInsets(top: 100, left: 200, bottom: 100, right: 200)
 private let inset: CGFloat = 18.0
 
@@ -29,7 +27,7 @@ class ARMapNavigationController: UIViewController {
     private var selectedRoute: Route?
     
     override func loadView() {
-        let view = NavigationMapView(frame: .zero, styleURL: nil)
+        let view = NavigationMapView(frame: .zero, styleURL: MGLStyle.darkStyleURL)
         view.delegate = self
         view.showsUserLocation = true
         view.translatesAutoresizingMaskIntoConstraints = false
