@@ -128,7 +128,7 @@ extension ContainerViewController: ContainerPresenter {
     
     func present(signs: [ImageAsset]) {
         signsStack.subviews.forEach { $0.removeFromSuperview() }
-        signsStack.isHidden = false
+        signsStack.isHidden = signs.isEmpty
         signs.map { UIImageView(image: $0.image) }.forEach(signsStack.addArrangedSubview)
     }
     
@@ -180,6 +180,7 @@ extension ContainerViewController: ContainerPresenter {
         case .map: presentMap()
         case .laneDetection: visionViewController?.frameVisualizationMode = .clear
         case .arRouting: presentARRouting()
+        case .menu: presentMenu()
         }
     }
     
@@ -226,10 +227,6 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     func dismissCurrent() {
-        
-        roadLanesView.isHidden = true
-        signsStack.isHidden = true
-        
         guard let viewController = currentViewController else { return }
         dismiss(viewController: viewController)
         currentViewController = nil

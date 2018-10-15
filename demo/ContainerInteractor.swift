@@ -10,6 +10,7 @@ import Foundation
 import MapboxVision
 
 enum Screen {
+    case menu
     case signsDetection
     case segmentation
     case objectDetection
@@ -26,7 +27,6 @@ struct DistanceToCar {
 }
 
 protocol ContainerPresenter: class {
-    func presentMenu()
     func presentVision()
     func present(screen: Screen)
     func present(signs: [ImageAsset])
@@ -50,7 +50,7 @@ private let signTrackerMaxCapacity = 5
 
 final class ContainerInteractor {
     
-    private var currentScreen: Screen?
+    private var currentScreen = Screen.menu
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
     
@@ -70,7 +70,7 @@ final class ContainerInteractor {
         
         presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
-        presenter.presentMenu()
+        presenter.present(screen: .menu)
     }
     
     private func scheduleSignTrackerUpdates() {
@@ -95,6 +95,15 @@ final class ContainerInteractor {
         visionManager.detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
     }
     
+    private func resetPresentation() {
+        stopSignTrackerUpdates()
+        alertPlayer.stop()
+        presenter.present(signs: [])
+        presenter.present(roadDescription: nil)
+        presenter.present(laneDepartureState: .normal)
+        presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+    }
+    
     deinit {
         visionManager.stop()
     }
@@ -105,22 +114,12 @@ extension ContainerInteractor: ContainerDelegate {
     func backButtonPressed() {
         presenter.dismissCurrent()
         presenter.presentBackButton(isVisible: false)
-        presenter.presentMenu()
+        presenter.present(screen: .menu)
         
-        if let screen = currentScreen {
-            switch screen {
-            case .signsDetection:
-                stopSignTrackerUpdates()
-            case .laneDetection:
-                alertPlayer.stop()
-                presenter.present(laneDepartureState: .normal)
-            default: break
-            }
-        }
-        
+        resetPresentation()
         resetPerformance()
         
-        currentScreen = nil
+        currentScreen = .menu
     }
 }
 
@@ -147,7 +146,7 @@ extension ContainerInteractor: MenuDelegate {
         case .distanceToObject, .laneDetection:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
-        case .map:
+        case .map, .menu:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         case .arRouting:
@@ -166,7 +165,7 @@ extension ContainerInteractor: MenuDelegate {
 
 extension ContainerInteractor: VisionManagerDelegate {
     func visionManager(_ visionManager: VisionManager, didUpdateLaneDepartureState laneDepartureState: LaneDepartureState) {
-        guard case .some(.laneDetection) = currentScreen else { return }
+        guard case .laneDetection = currentScreen else { return }
         
         switch laneDepartureState {
         case .normal, .warning:
@@ -187,7 +186,7 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSignClassifications classifications: SignClassifications?) {
-        guard case .some(.signsDetection) = currentScreen, let items = classifications?.items else { return }
+        guard case .signsDetection = currentScreen, let items = classifications?.items else { return }
         signTracker.update(items)
     }
     
@@ -196,7 +195,7 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription?) {
-        guard case .some(.laneDetection) = currentScreen else { return }
+        guard case .laneDetection = currentScreen else { return }
         presenter.present(roadDescription: roadDescription)
     }
     
@@ -206,7 +205,7 @@ extension ContainerInteractor: VisionManagerDelegate {
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
         guard
-            case .some(.distanceToObject) = currentScreen,
+            case .distanceToObject = currentScreen,
             let roadDescription = visionManager.roadDescription,
             let car = worldDescription?.objects.first,
             roadDescription.currentLane < roadDescription.lanes.count,
