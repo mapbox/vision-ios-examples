@@ -9,7 +9,6 @@
 import UIKit
 import MapboxVisionAR
 import MapboxDirections
-import MapboxNavigation
 import MapboxCoreNavigation
 
 private let inset: CGFloat = 18.0
@@ -47,9 +46,9 @@ final class ARContainerViewController: UIViewController {
     
     func present(route: Route) {
         dismiss(viewController: mapViewController)
-
-        let navigationController = NavigationViewController(for: route)
-        arViewController.navigationService = navigationController.navigationService
+        
+        let navigationService = MapboxNavigationService(route: route)
+        arViewController.navigationService = navigationService
         arViewController.navigationService?.delegate = self
         present(viewController: arViewController)
     }
