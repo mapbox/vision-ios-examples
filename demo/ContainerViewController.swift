@@ -26,7 +26,7 @@ final class ContainerViewController: UIViewController {
     
     var visionViewController: VisionPresentationViewController?
     var menuViewController: MenuViewController?
-    lazy var arContainerViewController = ARContainerViewController()
+    private lazy var arContainerViewController = ARContainerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

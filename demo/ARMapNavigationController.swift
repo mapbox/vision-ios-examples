@@ -41,7 +41,7 @@ class ARMapNavigationController: UIViewController {
         
         view.addSubview(goButton)
         NSLayoutConstraint.activate([
-            goButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -inset),
             goButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: inset),
             goButton.heightAnchor.constraint(equalToConstant: 44),
             goButton.widthAnchor.constraint(equalToConstant: 90),

@@ -151,7 +151,7 @@ extension ContainerInteractor: MenuDelegate {
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         case .arRouting:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .high)
+            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         }
         
