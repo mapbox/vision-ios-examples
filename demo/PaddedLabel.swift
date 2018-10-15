@@ -48,6 +48,8 @@ extension PaddedLabel {
         label.backgroundColor = UIColor(white: 0, alpha: 0.25)
         label.layer.cornerRadius = 14
         label.layer.masksToBounds = true
+        label.textColor = .white
+        label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.isHidden = true
         return label
