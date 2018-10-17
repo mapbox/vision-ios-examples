@@ -94,8 +94,10 @@ final class ContainerInteractor {
     }
     
     private func resetPerformance() {
-        visionManager.segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        visionManager.detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        let segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        let detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
+                                                         detectionPerformance: detectionPerformance)
     }
     
     private func resetPresentation() {
@@ -162,8 +164,8 @@ extension ContainerInteractor: MenuDelegate {
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         }
         
-        visionManager.segmentationPerformance = segmentationPerformance
-        visionManager.detectionPerformance = detectionPerformance
+        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
+                                                         detectionPerformance: detectionPerformance)
         
         presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: true)
