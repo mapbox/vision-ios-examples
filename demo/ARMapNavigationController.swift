@@ -67,7 +67,7 @@ class ARMapNavigationController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
         button.setTitle("Go", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(UIColor.white.withAlphaComponent(0.35), for: .disabled)
         let color = UIColor(red: 0, green: 122/255.0, blue: 1.0, alpha: 1.0)
@@ -80,13 +80,15 @@ class ARMapNavigationController: UIViewController {
     }()
     
     private let hintLabel: UILabel = {
-        let label = PaddedLabel.createDarkRounded()
+        let label = PaddedLabel(insets: UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18))
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = L10n.arMapHint
         label.backgroundColor = UIColor(white: 0, alpha: 0.85)
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont(name: "AvenirNext-Medium", size: 18)
         label.layer.cornerRadius = 22
-        label.isHidden = false
+        label.layer.masksToBounds = true
+        label.textAlignment = .center
         return label
     }()
     

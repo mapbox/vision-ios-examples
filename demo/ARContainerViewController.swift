@@ -54,11 +54,15 @@ final class ARContainerViewController: UIViewController {
     }
     
     private let instructionsLabel: UILabel = {
-        let label = PaddedLabel.createDarkRounded()
+        let label = PaddedLabel(insets: UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18))
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor(white: 0, alpha: 0.85)
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont(name: "AvenirNext-Medium", size: 18)
         label.layer.cornerRadius = 22
+        label.isHidden = true
+        label.layer.masksToBounds = true
+        label.textAlignment = .center
         return label
     }()
     
