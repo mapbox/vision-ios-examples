@@ -25,13 +25,13 @@ final class MenuViewController: UIViewController {
             self?.delegate?.selected(screen: screen)
         }
         
-        let segmentationButton = MenuItemButton(for: .segmentation) { select(.segmentation) }
-        let laneDetectionButton = MenuItemButton(for: .laneDetection) { select( .laneDetection) }
-        let distanceToObjectButton = MenuItemButton(for: .distanceToObject) { select(.distanceToObject) }
-        let signsDetectionButton = MenuItemButton(for: .signsDetection) { select(.signsDetection) }
-        let objectDetectorButton = MenuItemButton(for: .objectDetection) { select(.objectDetection) }
-        let objectMappingButton = MenuItemButton(for: .map) { select(.map) }
-        let arRoutingButton = MenuItemButton(for: .arRouting) { select(.arRouting) }
+        let segmentationButton = MenuItemButton(for: .segmentation, action: select)
+        let laneDetectionButton = MenuItemButton(for: .laneDetection, action: select)
+        let distanceToObjectButton = MenuItemButton(for: .distanceToObject, action: select)
+        let signsDetectionButton = MenuItemButton(for: .signsDetection, action: select)
+        let objectDetectorButton = MenuItemButton(for: .objectDetection, action: select)
+        let objectMappingButton = MenuItemButton(for: .map, action: select)
+        let arRoutingButton = MenuItemButton(for: .arRouting, action: select)
         
         let titleView = UIImageView(image: Asset.Assets.title.image)
         titleView.translatesAutoresizingMaskIntoConstraints = false
@@ -251,9 +251,9 @@ private class MenuItemButton: UIView {
     
     private let action: () -> Void
     
-    init(for screen: Screen, _ action: @escaping () -> Void) {
+    init(for screen: Screen, action: @escaping (Screen) -> Void) {
         
-        self.action = action
+        self.action = { action(screen) }
         
         super.init(frame: .zero)
         
