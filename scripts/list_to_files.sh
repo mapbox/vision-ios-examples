@@ -15,7 +15,12 @@ function list_to_files {
     for index in ${!files[@]}; do
         file="$(echo ${files[$index]} | sed -e 's/(\([^)]*\))/{\1}/g')"
         key="${prefix}_${index}"
+
         eval "export ${key}=${file}"
+        if [[ -L "${!key}" ]]; then
+            eval "export ${key}=$(readlink ${!key})"
+        fi
+
         echo "${key} : ${!key}"
     done    
 }
