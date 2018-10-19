@@ -53,12 +53,19 @@ final class ContainerViewController: UIViewController {
         ])
         
         view.addSubview(distanceView)
+        view.addSubview(collisitonObjectView)
         
         view.addSubview(distanceLabel)
         NSLayoutConstraint.activate([
             distanceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -smallRelativeInset),
             distanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             distanceLabel.heightAnchor.constraint(equalToConstant: buttonHeight),
+        ])
+        
+        view.addSubview(collisionAlertView)
+        NSLayoutConstraint.activate([
+            collisionAlertView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
+            collisionAlertView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         view.addSubview(laneDepartureView)
@@ -112,6 +119,20 @@ final class ContainerViewController: UIViewController {
     
     private let distanceLabel: PaddedLabel = {
         let view = PaddedLabel.createDarkRounded()
+        return view
+    }()
+    
+    private let collisitonObjectView: CollisionObjectView = {
+        let view = CollisionObjectView(frame: .zero)
+        view.isHidden = true
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private let collisionAlertView: UIImageView = {
+        let view = UIImageView(image: Asset.Assets.brake.image)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
         return view
     }()
     
@@ -185,6 +206,27 @@ extension ContainerViewController: ContainerPresenter {
         calibrationLabel.isHidden = calibrationProgress?.isCalibrated ?? true
         guard let calibrationProgress = calibrationProgress else { return }
         calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.progress * 100)))
+    }
+    
+    func present(collisionObjectFrame: CGRect?, canvasSize: CGSize) {
+        guard let frame = collisionObjectFrame else {
+            collisitonObjectView.isHidden = true
+            collisionAlertView.isHidden = true
+            return
+        }
+        
+        let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        
+        let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
+        let pct: CGFloat = 2.0
+        let newWidth: CGFloat = sqrt(rect.width * rect.width * pct)
+        let newHeight: CGFloat = sqrt(rect.height * rect.height * pct)
+        let newRect = rect.insetBy(dx: (rect.width - newWidth) / 2, dy: (rect.height - newHeight) / 2)
+        
+        collisitonObjectView.isHidden = false
+        collisionAlertView.isHidden = false
+        collisitonObjectView.update(newRect)
     }
     
     func present(screen: Screen) {
@@ -269,5 +311,3 @@ extension UIViewController {
         viewController.removeFromParentViewController()
     }
 }
-
-
