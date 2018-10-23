@@ -20,10 +20,11 @@ enum Screen {
     case arRouting
 }
 
-struct DistanceToCar {
-    let leftPosition: CGPoint
-    let rightPosition: CGPoint
-    let distance: Double
+enum DistanceToObjectScreenState {
+    case none
+    case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
+    case warning(frame: CGRect, canvasSize: CGSize)
+    case alert
 }
 
 protocol ContainerPresenter: class {
@@ -33,10 +34,9 @@ protocol ContainerPresenter: class {
     
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
-    func present(distanceToCar: DistanceToCar?, canvasSize: CGSize)
+    func present(distanceToObjectState: DistanceToObjectScreenState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
-    func present(collisionObjectFrame: CGRect?, canvasSize: CGSize)
     
     func dismissMenu()
     func dismissCurrent()
@@ -107,7 +107,7 @@ final class ContainerInteractor {
         presenter.present(signs: [])
         presenter.present(roadDescription: nil)
         presenter.present(laneDepartureState: .normal)
-        presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+        presenter.present(distanceToObjectState: .none)
         presenter.present(calibrationProgress: nil)
     }
     
@@ -157,10 +157,7 @@ extension ContainerInteractor: MenuDelegate {
         case .distanceToObject, .laneDetection:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
-        case .map, .menu:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        case .arRouting:
+        case .map, .menu, .arRouting:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         }
@@ -215,33 +212,32 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
-        guard case .distanceToObject = currentScreen, let worldDescription = worldDescription else {
-            presenter.present(collisionObjectFrame: nil, canvasSize: visionManager.frameSize)
-            presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+        
+        guard
+            case .distanceToObject = currentScreen,
+            let worldDescription = worldDescription,
+            let car = worldDescription.collisionObjects.first,
+            car.object.detection.objectType == .car
+        else {
+            presenter.present(distanceToObjectState: .none)
             return
         }
         
-        guard let car = worldDescription.collisionObjects.first.map({ $0.object }), car.objectType == .car else {
-            presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
-            return
+        switch car.state {
+        case .notTriggered:
+            presenter.present(distanceToObjectState: .distance(
+                frame: car.object.detection.boundingBox,
+                distance: car.object.distance,
+                canvasSize: visionManager.frameSize
+            ))
+        case .warning:
+            presenter.present(distanceToObjectState: .warning(
+                frame: car.object.detection.boundingBox,
+                canvasSize: visionManager.frameSize
+            ))
+        case .critical:
+            presenter.present(distanceToObjectState: .alert)
         }
-        
-        let bbox = car.detection.boundingBox
-        let carLeftPosition = CGPoint(x: bbox.minX, y: bbox.maxY)
-        let carRightPosition = CGPoint(x: bbox.maxX, y: bbox.maxY)
-        
-        let distanceToCar = DistanceToCar(
-            leftPosition: carLeftPosition,
-            rightPosition: carRightPosition,
-            distance: car.distance
-        )
-        
-        presenter.present(distanceToCar: distanceToCar, canvasSize: visionManager.frameSize)
-        
-        let collisionAlertFrame = worldDescription.collisionObjects
-            .first { $0.state == .critical }
-            .map { $0.object.detection.boundingBox }
-        presenter.present(collisionObjectFrame: collisionAlertFrame, canvasSize: visionManager.frameSize)
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {

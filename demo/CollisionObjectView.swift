@@ -9,12 +9,32 @@
 import Foundation
 import UIKit
 
+private let collisionColor = UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
+
 final class CollisionObjectView: UIView {
     
     private let imageView = UIImageView(image: Asset.Assets.alert.image)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var gradientLayer: CAGradientLayer? {
+        return layer as? CAGradientLayer
+    }
+    
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+    
+    init() {
+        super.init(frame: .zero)
+        
+        isHidden = true
+        backgroundColor = .clear
+        
+        gradientLayer?.colors = [collisionColor.withAlphaComponent(0.64).cgColor, collisionColor.withAlphaComponent(0.45).cgColor, UIColor.clear.cgColor]
+        gradientLayer?.backgroundColor = UIColor.clear.cgColor
+        gradientLayer?.locations = [0.0, 0.75, 1.0]
+        gradientLayer?.type = "radial"
+        gradientLayer?.startPoint = CGPoint(x: 0.5, y: 0.5)
+        gradientLayer?.endPoint = CGPoint(x: 1, y: 1)
         
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,24 +51,5 @@ final class CollisionObjectView: UIView {
     
     func update(_ frame: CGRect) {
         self.frame = frame
-        setNeedsDisplay()
-    }
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        
-        context.saveGState()
-        
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let colors = [UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0).cgColor, UIColor.clear.cgColor] as CFArray
-        let endRadius = min(frame.width, frame.height) * 0.5
-        let center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
-        guard let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: nil) else { return }
-        
-        context.drawRadialGradient(gradient, startCenter: center, startRadius: 0.0, endCenter: center, endRadius: endRadius, options: CGGradientDrawingOptions.drawsBeforeStartLocation)
-        
-        context.restoreGState()
     }
 }
