@@ -11,7 +11,5 @@ $(SRCROOT)/Carthage/Build/iOS/MapboxGeocoder.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxSpeech.framework
 $(SRCROOT)/Carthage/Build/iOS/Solar.framework
 $(SRCROOT)/Carthage/Build/iOS/Zip.framework
-$(SRCROOT)/Carthage/Build/iOS/Fabric.framework
-$(SRCROOT)/Carthage/Build/iOS/Crashlytics.framework
 $(SRCROOT)/Carthage/Build/iOS/Turf.framework
 $(SRCROOT)/Carthage/Build/iOS/Polyline.framework
