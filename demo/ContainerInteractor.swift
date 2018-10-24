@@ -62,6 +62,7 @@ final class ContainerInteractor {
     private var signTrackerUpdateTimer: Timer?
     
     private let alertPlayer = AlertPlayer()
+    private var lastCollisionState = CollisionState.notTriggered
     
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
@@ -220,6 +221,7 @@ extension ContainerInteractor: VisionManagerDelegate {
             car.object.detection.objectType == .car
         else {
             presenter.present(distanceToObjectState: .none)
+            alertPlayer.stop()
             return
         }
         
@@ -235,11 +237,26 @@ extension ContainerInteractor: VisionManagerDelegate {
                 frame: car.object.detection.boundingBox,
                 canvasSize: visionManager.frameSize
             ))
-            alertPlayer.play(sound: .collisionAlertWarning)
         case .critical:
             presenter.present(distanceToObjectState: .alert)
-            alertPlayer.play(sound: .collisionAlertCritical)
         }
+        
+        playCollisionAlert(for: car.state)
+    }
+    
+    private func playCollisionAlert(for state: CollisionState) {
+        switch state {
+        case .notTriggered:
+            alertPlayer.stop()
+        case .warning where lastCollisionState != state:
+            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
+        case .critical where lastCollisionState != state:
+            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
+        default:
+            break
+        }
+        
+        lastCollisionState = state
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
