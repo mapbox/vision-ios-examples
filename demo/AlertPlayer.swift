@@ -12,15 +12,18 @@ import AVFoundation
 private let defaultSound: SystemSoundID = 1002
 
 enum AlertSound {
-    case criticalCollisionAlert
+    case collisionAlertWarning
+    case collisionAlertCritical
     case laneDepartureWarning
     
     static let type = "wav"
     
     private var path: String {
         switch self {
-        case .criticalCollisionAlert:
-            return "critical_collision_alert"
+        case .collisionAlertWarning:
+            return "collision_alert_critical"
+        case .collisionAlertCritical:
+            return "collision_alert_warning"
         case .laneDepartureWarning:
             return "lane_departure_warning"
         }

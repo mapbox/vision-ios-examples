@@ -20,10 +20,11 @@ enum Screen {
     case arRouting
 }
 
-struct DistanceToCar {
-    let leftPosition: CGPoint
-    let rightPosition: CGPoint
-    let distance: Double
+enum DistanceToObjectScreenState {
+    case none
+    case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
+    case warning(frame: CGRect, canvasSize: CGSize)
+    case alert
 }
 
 protocol ContainerPresenter: class {
@@ -33,7 +34,7 @@ protocol ContainerPresenter: class {
     
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
-    func present(distanceToCar: DistanceToCar?, canvasSize: CGSize)
+    func present(distanceToObjectState: DistanceToObjectScreenState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
     
@@ -61,6 +62,7 @@ final class ContainerInteractor {
     private var signTrackerUpdateTimer: Timer?
     
     private let alertPlayer = AlertPlayer()
+    private var lastCollisionState = CollisionState.notTriggered
     
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
@@ -106,7 +108,7 @@ final class ContainerInteractor {
         presenter.present(signs: [])
         presenter.present(roadDescription: nil)
         presenter.present(laneDepartureState: .normal)
-        presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+        presenter.present(distanceToObjectState: .none)
         presenter.present(calibrationProgress: nil)
     }
     
@@ -156,10 +158,7 @@ extension ContainerInteractor: MenuDelegate {
         case .distanceToObject, .laneDetection:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
-        case .map, .menu:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        case .arRouting:
+        case .map, .menu, .arRouting:
             segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
             detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
         }
@@ -214,29 +213,50 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
+        
         guard
             case .distanceToObject = currentScreen,
-            let roadDescription = visionManager.roadDescription,
-            let car = worldDescription?.objects.first,
-            roadDescription.currentLane < roadDescription.lanes.count,
-            car.objectType == .car
+            let worldDescription = worldDescription,
+            let car = worldDescription.collisionObjects.first,
+            car.object.detection.objectType == .car
         else {
-            presenter.present(distanceToCar: nil, canvasSize: visionManager.frameSize)
+            presenter.present(distanceToObjectState: .none)
+            alertPlayer.stop()
             return
         }
         
-        let width = roadDescription.lanes[roadDescription.currentLane].width
-
-        let carLeftPosition = visionManager.worldToPixel(worldCoordinate: WorldCoordinate(x: car.worldCoordinate.x - (width / 2), y: car.worldCoordinate.y, z: car.worldCoordinate.z))
-        let carRightPosition = visionManager.worldToPixel(worldCoordinate: WorldCoordinate(x: car.worldCoordinate.x + (width / 2), y: car.worldCoordinate.y, z: car.worldCoordinate.z))
+        switch car.state {
+        case .notTriggered:
+            presenter.present(distanceToObjectState: .distance(
+                frame: car.object.detection.boundingBox,
+                distance: car.object.distance,
+                canvasSize: visionManager.frameSize
+            ))
+        case .warning:
+            presenter.present(distanceToObjectState: .warning(
+                frame: car.object.detection.boundingBox,
+                canvasSize: visionManager.frameSize
+            ))
+        case .critical:
+            presenter.present(distanceToObjectState: .alert)
+        }
         
-        let distanceToCar = DistanceToCar(
-            leftPosition: carLeftPosition,
-            rightPosition: carRightPosition,
-            distance: car.distance
-        )
+        playCollisionAlert(for: car.state)
+    }
+    
+    private func playCollisionAlert(for state: CollisionState) {
+        guard lastCollisionState != state else { return }
         
-        presenter.present(distanceToCar: distanceToCar, canvasSize: visionManager.frameSize)
+        switch state {
+        case .notTriggered:
+            alertPlayer.stop()
+        case .warning:
+            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
+        case .critical:
+            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
+        }
+        
+        lastCollisionState = state
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {

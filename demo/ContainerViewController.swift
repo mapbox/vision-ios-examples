@@ -53,12 +53,27 @@ final class ContainerViewController: UIViewController {
         ])
         
         view.addSubview(distanceView)
+        view.addSubview(collisionObjectView)
         
         view.addSubview(distanceLabel)
         NSLayoutConstraint.activate([
             distanceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -smallRelativeInset),
             distanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             distanceLabel.heightAnchor.constraint(equalToConstant: buttonHeight),
+        ])
+        
+        view.addSubview(collisionAlertView)
+        NSLayoutConstraint.activate([
+            collisionAlertView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
+            collisionAlertView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        view.addSubview(collisionBanerView)
+        NSLayoutConstraint.activate([
+            collisionBanerView.topAnchor.constraint(equalTo: view.topAnchor),
+            collisionBanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collisionBanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collisionBanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         view.addSubview(laneDepartureView)
@@ -115,6 +130,24 @@ final class ContainerViewController: UIViewController {
         return view
     }()
     
+    private let collisionObjectView = CollisionObjectView()
+    
+    private let collisionAlertView: UIImageView = {
+        let view = UIImageView(image: Asset.Assets.brake.image)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
+    private let collisionBanerView: UIImageView = {
+        let view = UIImageView(image: Asset.Assets.collisionBanner.image)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(white: 0.0, alpha: 0.6)
+        view.contentMode = .center
+        view.isHidden = true
+        return view
+    }()
+    
     private let laneDepartureView: UIImageView = {
         let view = UIImageView(image: Asset.Assets.laneDepartureNotification.image)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -136,27 +169,74 @@ final class ContainerViewController: UIViewController {
 
 extension ContainerViewController: ContainerPresenter {
     
+    private func dismissDistanceToObjectViews() {
+        distanceView.isHidden = true
+        distanceLabel.isHidden = true
+        
+        collisionAlertView.isHidden = true
+        collisionObjectView.isHidden = true
+        collisionBanerView.isHidden = true
+    }
+    
+    private func present(distance: Double, objectFrame frame: CGRect, canvasSize: CGSize) {
+        distanceView.isHidden = false
+        distanceLabel.isHidden = false
+        
+        collisionAlertView.isHidden = true
+        collisionObjectView.isHidden = true
+        collisionBanerView.isHidden = true
+        
+        let left = CGPoint(x: frame.minX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        let right = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        
+        distanceView.update(left, right)
+        distanceLabel.text = distanceFormatter.string(fromMeters: distance)
+    }
+    
+    private func presentWarning(objectFrame frame: CGRect, canvasSize: CGSize) {
+        distanceView.isHidden = true
+        distanceLabel.isHidden = true
+        
+        collisionAlertView.isHidden = false
+        collisionObjectView.isHidden = false
+        collisionBanerView.isHidden = true
+        
+        let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        
+        let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
+        let coef: CGFloat = 0.25
+        let newRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
+        
+        collisionObjectView.update(newRect)
+    }
+    
+    private func presentAlert() {
+        distanceView.isHidden = true
+        distanceLabel.isHidden = true
+        
+        collisionAlertView.isHidden = true
+        collisionObjectView.isHidden = true
+        collisionBanerView.isHidden = false
+    }
+    
+    func present(distanceToObjectState: DistanceToObjectScreenState) {
+        switch distanceToObjectState {
+        case .none:
+            dismissDistanceToObjectViews()
+        case .distance(let frame, let distance, let canvasSize):
+            present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
+        case .warning(let frame, let canvasSize):
+            presentWarning(objectFrame: frame, canvasSize: canvasSize)
+        case .alert:
+            presentAlert()
+        }
+    }
+    
     func present(signs: [ImageAsset]) {
         signsStack.subviews.forEach { $0.removeFromSuperview() }
         signsStack.isHidden = signs.isEmpty
         signs.map { UIImageView(image: $0.image) }.forEach(signsStack.addArrangedSubview)
-    }
-    
-    func present(distanceToCar: DistanceToCar?, canvasSize: CGSize) {
-        guard let distanceToCar = distanceToCar else {
-            distanceView.isHidden = true
-            distanceLabel.isHidden = true
-            return
-        }
-        
-        distanceView.isHidden = false
-        distanceLabel.isHidden = false
-        
-        let left = distanceToCar.leftPosition.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
-        let right = distanceToCar.rightPosition.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
-        
-        distanceView.update(left, right)
-        distanceLabel.text = distanceFormatter.string(fromMeters: distanceToCar.distance)
     }
     
     func present(roadDescription: RoadDescription?) {
@@ -269,5 +349,3 @@ extension UIViewController {
         viewController.removeFromParentViewController()
     }
 }
-
-
