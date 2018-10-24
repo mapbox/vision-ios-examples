@@ -235,8 +235,10 @@ extension ContainerInteractor: VisionManagerDelegate {
                 frame: car.object.detection.boundingBox,
                 canvasSize: visionManager.frameSize
             ))
+            alertPlayer.play(sound: .collisionAlertWarning)
         case .critical:
             presenter.present(distanceToObjectState: .alert)
+            alertPlayer.play(sound: .collisionAlertCritical)
         }
     }
     
