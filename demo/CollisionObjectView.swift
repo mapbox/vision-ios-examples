@@ -29,12 +29,14 @@ final class CollisionObjectView: UIView {
         isHidden = true
         backgroundColor = .clear
         
-        gradientLayer?.colors = [collisionColor.withAlphaComponent(0.64).cgColor, collisionColor.withAlphaComponent(0.45).cgColor, UIColor.clear.cgColor]
-        gradientLayer?.backgroundColor = UIColor.clear.cgColor
-        gradientLayer?.locations = [0.0, 0.75, 1.0]
-        gradientLayer?.type = "radial"
-        gradientLayer?.startPoint = CGPoint(x: 0.5, y: 0.5)
-        gradientLayer?.endPoint = CGPoint(x: 1, y: 1)
+        if let gradient = gradientLayer {
+            gradient.colors = [collisionColor.withAlphaComponent(0.64).cgColor, collisionColor.withAlphaComponent(0.45).cgColor, UIColor.clear.cgColor]
+            gradient.backgroundColor = UIColor.clear.cgColor
+            gradient.locations = [0.0, 0.75, 1.0]
+            gradient.type = "radial"
+            gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
+            gradient.endPoint = CGPoint(x: 1, y: 1)
+        }
         
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
