@@ -245,15 +245,15 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     private func playCollisionAlert(for state: CollisionState) {
+        guard lastCollisionState != state else { return }
+        
         switch state {
         case .notTriggered:
             alertPlayer.stop()
-        case .warning where lastCollisionState != state:
+        case .warning:
             alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
-        case .critical where lastCollisionState != state:
+        case .critical:
             alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
-        default:
-            break
         }
         
         lastCollisionState = state
