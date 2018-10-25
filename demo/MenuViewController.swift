@@ -181,7 +181,8 @@ final class MenuViewController: UIViewController {
     }
     
     private let infoButton: UIButton = {
-        let button = UIButton(type: .detailDisclosure)
+        let button = UIButton(type: .custom)
+        button.setImage(Asset.Assets.info.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
         button.tintColor = UIColor(white: 0.5, alpha: 0.5)
@@ -205,21 +206,21 @@ extension Screen {
     var title: String {
         switch self {
         case .segmentation:
-            return "Segmentation"
+            return L10n.menuSegmentationButton
         case .laneDetection:
-            return "Lane detection"
+            return L10n.menuLaneDetectionButton
         case .distanceToObject:
-            return "Distance to Object"
+            return L10n.menuCollisionDetectionButton
         case .signsDetection:
-            return "Sign Detection"
+            return L10n.menuSignDetectionButton
         case .objectDetection:
-            return "Object Detection"
+            return L10n.menuObjectDetectionButton
         case .map:
-            return "Object Mapping"
+            return L10n.menuObjectMappingButton
         case .arRouting:
-            return "AR Routing"
+            return L10n.menuARButton
         case .menu:
-            return "Mapbox Vision Teaser"
+            return L10n.menuTitle
         }
     }
     
@@ -230,7 +231,7 @@ extension Screen {
         case .laneDetection:
             return Asset.Assets.icon2.image
         case .distanceToObject:
-            return Asset.Assets.icon3.image
+            return Asset.Assets.collisionDetection.image
         case .signsDetection:
             return Asset.Assets.icon4.image
         case .map:

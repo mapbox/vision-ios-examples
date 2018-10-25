@@ -5,3 +5,13 @@
 "Welcome_Body_LinkSubstring" = "Evaluation Agreement";
 "Welcome_Button" = "Submit";
 "ARMap_Hint" = "Long tap on the map to select a destination";
+
+"Menu_Segmentation_Button" = "Segmentation";
+"Menu_LaneDetection_Button" = "Lane detection";
+"Menu_CollisionDetection_Button" = "Collision detection";
+"Menu_SignDetection_Button" = "Sign Detection";
+"Menu_ObjectDetection_Button" = "Object Detection";
+"Menu_ObjectMapping_Button" = "Object Mapping";
+"Menu_AR_Button" = "AR Routing";
+
+"Menu_Title" = "Mapbox Vision Teaser";
