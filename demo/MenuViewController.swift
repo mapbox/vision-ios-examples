@@ -181,7 +181,8 @@ final class MenuViewController: UIViewController {
     }
     
     private let infoButton: UIButton = {
-        let button = UIButton(type: .detailDisclosure)
+        let button = UIButton(type: .custom)
+        button.setImage(Asset.Assets.info.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
         button.tintColor = UIColor(white: 0.5, alpha: 0.5)
