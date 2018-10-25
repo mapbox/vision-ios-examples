@@ -306,6 +306,7 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     private func presentARRouting() {
+        visionViewController?.view.isHidden = true
         present(viewController: arContainerViewController)
         currentViewController = arContainerViewController
     }
@@ -324,6 +325,9 @@ extension ContainerViewController: ContainerPresenter {
     
     func dismissCurrent() {
         guard let viewController = currentViewController else { return }
+        if currentViewController == arContainerViewController {
+            visionViewController?.view.isHidden = false
+        }
         dismiss(viewController: viewController)
         currentViewController = nil
     }
