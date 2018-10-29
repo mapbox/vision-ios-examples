@@ -7,7 +7,6 @@ $(SRCROOT)/Carthage/Build/iOS/MapboxNavigation.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxNavigationNative.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxDirections.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxMobileEvents.framework
-$(SRCROOT)/Carthage/Build/iOS/MapboxGeocoder.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxSpeech.framework
 $(SRCROOT)/Carthage/Build/iOS/Solar.framework
 $(SRCROOT)/Carthage/Build/iOS/Zip.framework
