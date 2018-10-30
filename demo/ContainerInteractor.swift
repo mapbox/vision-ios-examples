@@ -51,7 +51,7 @@ final class ContainerInteractor {
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
     
-    private let signTracker = Tracker<SignClassification>(maxCapacity: signTrackerMaxCapacity)
+    private let signTracker = Tracker<SignValue>(maxCapacity: signTrackerMaxCapacity)
     private var signTrackerUpdateTimer: Timer?
     
     private let alertPlayer: AlertPlayer
@@ -184,7 +184,7 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSignClassifications classifications: SignClassifications?) {
-        guard case .signsDetection = currentScreen, let items = classifications?.items else { return }
+        guard case .signsDetection = currentScreen, let items = classifications?.items.map({ $0.value }) else { return }
         signTracker.update(items)
     }
     
