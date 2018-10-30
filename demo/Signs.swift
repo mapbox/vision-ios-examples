@@ -9,7 +9,7 @@
 import Foundation
 import MapboxVision
 
-extension SignClassification {
+extension SignValue {
     func icon(over: Bool, market: Market) -> ImageAsset? {
         switch type {
         case .unknown:
