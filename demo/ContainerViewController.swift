@@ -15,6 +15,7 @@ private let bannerInset: CGFloat = 18
 private let roadLanesHeight: CGFloat = 64
 private let smallRelativeInset: CGFloat = 16
 private let buttonHeight: CGFloat = 36
+private let speedLimitHighlightInterval: TimeInterval = 10
 
 final class ContainerViewController: UIViewController {
     
@@ -178,6 +179,7 @@ final class ContainerViewController: UIViewController {
     }()
     
     private weak var currentViewController: UIViewController?
+    private var speedLimitHighlightTimer: Timer?
 }
 
 extension ContainerViewController: ContainerPresenter {
@@ -288,7 +290,14 @@ extension ContainerViewController: ContainerPresenter {
         
         speedLimitView.isHidden = false
         speedLimitView.image = status.sign.image
-        speedLimitView.isHighlighted = status.isHighlighted
+        
+        if status.isHighlighted {
+            speedLimitHighlightTimer?.invalidate()
+            speedLimitView.isHighlighted = true
+            speedLimitHighlightTimer = Timer.scheduledTimer(withTimeInterval: speedLimitHighlightInterval, repeats: false) { [weak self] _ in
+                self?.speedLimitView.isHighlighted = false
+            }
+        }
     }
     
     func present(screen: Screen) {
