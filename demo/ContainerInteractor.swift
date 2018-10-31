@@ -305,12 +305,14 @@ extension ContainerInteractor: VisionManagerDelegate {
             assertionFailure("Image for \(speedLimit.sign), isSpeeding: \(speedLimit.isSpeeding) is not found")
         }
         
-        if lastSafetyState == .none {
+        switch lastSafetyState {
+        case .none, .distance:
             if speedLimit.isSpeeding {
                 alertPlayer.play(sound: .overSpeedLimit, repeated: true)
             } else if isNewLimit {
                 alertPlayer.play(sound: .newSpeedLimit, repeated: false)
             }
+        default: break
         }
         
         lastSpeedLimit = speedLimit
