@@ -59,6 +59,7 @@ protocol MenuDelegate: class {
 
 private let signTrackerMaxCapacity = 5
 private let speedLimitSeenInterval: Float = 5
+private let speedLimitWarningThreshold: Double = 10 // mph
 
 final class ContainerInteractor {
     
@@ -307,7 +308,11 @@ extension ContainerInteractor: VisionManagerDelegate {
         }
         
         if lastCollisionState == .notTriggered {
-            if speedLimit.isSpeeding {
+            let mphSpeed = Measurement(value: Double(speedLimit.speed), unit: UnitSpeed.metersPerSecond)
+                    .converted(to: .milesPerHour).value
+            let isSpeedingThresholdExceeded = mphSpeed > speedLimit.sign.number + speedLimitWarningThreshold
+            
+            if speedLimit.isSpeeding, isSpeedingThresholdExceeded {
                 alertPlayer.play(sound: .overSpeedLimit, repeated: true)
             } else if isNewLimit {
                 alertPlayer.play(sound: .newSpeedLimit, repeated: false)
