@@ -87,6 +87,12 @@ final class ContainerViewController: UIViewController {
             calibrationLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
             calibrationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+        
+        view.addSubview(speedLimitView)
+        NSLayoutConstraint.activate([
+            speedLimitView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
+            speedLimitView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -bannerInset),
+        ])
     }
     
     override func present(viewController: UIViewController) {
@@ -158,6 +164,13 @@ final class ContainerViewController: UIViewController {
     private let calibrationLabel: UILabel = {
         let label = PaddedLabel.createDarkRounded()
         return label
+    }()
+    
+    private let speedLimitView: HighlightedImageView = {
+        let view = HighlightedImageView(image: nil)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.highlightColor = UIColor(red: 1.0, green: 193.0 / 255.0, blue: 26.0 / 255.0, alpha: 1.0)
+        return view
     }()
     
     private lazy var distanceFormatter: DistanceFormatter = {
@@ -268,7 +281,14 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     func present(speedLimitStatus: SpeedLimitStatus?) {
+        guard let status = speedLimitStatus else {
+            speedLimitView.isHidden = true
+            return
+        }
         
+        speedLimitView.isHidden = false
+        speedLimitView.image = status.sign.image
+        speedLimitView.isHighlighted = status.isHighlighted
     }
     
     func present(screen: Screen) {

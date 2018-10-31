@@ -21,6 +21,7 @@
 		2E6033652142982D0050EDB3 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6033642142982D0050EDB3 /* Images.swift */; };
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
 		2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */; };
+		2E8C9A3F2189D17C00A6E5A5 /* HighlightedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8C9A3E2189D17C00A6E5A5 /* HighlightedImageView.swift */; };
 		2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */; };
 		2EF52A0F21514DBC00F23CCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */; };
 		2EF52A1021514DBC00F23CCF /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0A21514DBC00F23CCF /* Zip.framework */; };
@@ -82,6 +83,7 @@
 		2E6033642142982D0050EDB3 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2E603366214299110050EDB3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lane_departure_warning.wav; sourceTree = "<group>"; };
+		2E8C9A3E2189D17C00A6E5A5 /* HighlightedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightedImageView.swift; sourceTree = "<group>"; };
 		2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPlayer.swift; sourceTree = "<group>"; };
 		2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/MapboxMobileEvents.framework"; sourceTree = "<group>"; };
 		2EF52A0A21514DBC00F23CCF /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = "../cv-assist/cv-assist-ios/Carthage/Build/iOS/Zip.framework"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				2E603366214299110050EDB3 /* OrderedDictionary.swift */,
 				2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */,
 				B5045858217A077300BA5133 /* CollisionObjectView.swift */,
+				2E8C9A3E2189D17C00A6E5A5 /* HighlightedImageView.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				2E60335A214295B30050EDB3 /* Signs.swift in Sources */,
 				B5045859217A077300BA5133 /* CollisionObjectView.swift in Sources */,
 				2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */,
+				2E8C9A3F2189D17C00A6E5A5 /* HighlightedImageView.swift in Sources */,
 				2E603356214294A00050EDB3 /* Tracker.swift in Sources */,
 				B532EE062170A9AB00B172FA /* ARMapNavigationController.swift in Sources */,
 				2E4FEDF4215E5EA600DCB496 /* WelcomeViewController.swift in Sources */,
