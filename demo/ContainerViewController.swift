@@ -267,6 +267,10 @@ extension ContainerViewController: ContainerPresenter {
         calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.progress * 100)))
     }
     
+    func present(speedLimitStatus: SpeedLimitStatus?) {
+        
+    }
+    
     func present(screen: Screen) {
         switch screen {
         case .signsDetection: visionViewController?.frameVisualizationMode = .clear

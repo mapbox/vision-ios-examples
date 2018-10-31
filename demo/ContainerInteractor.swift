@@ -27,6 +27,11 @@ enum DistanceToObjectScreenState {
     case alert
 }
 
+struct SpeedLimitStatus {
+    let sign: ImageAsset
+    let isHighlighted: Bool
+}
+
 protocol ContainerPresenter: class {
     func presentVision()
     func present(screen: Screen)
@@ -37,6 +42,8 @@ protocol ContainerPresenter: class {
     func present(distanceToObjectState: DistanceToObjectScreenState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
+    
+    func present(speedLimitStatus: SpeedLimitStatus?)
     
     func dismissMenu()
     func dismissCurrent()
@@ -51,6 +58,7 @@ protocol MenuDelegate: class {
 }
 
 private let signTrackerMaxCapacity = 5
+private let speedLimitSeenInterval: Float = 5
 
 final class ContainerInteractor {
     
@@ -64,6 +72,8 @@ final class ContainerInteractor {
     private let alertPlayer = AlertPlayer()
     private var lastCollisionState = CollisionState.notTriggered
     
+    private var lastSpeedLimit: SpeedLimitValue?
+    
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
         
@@ -76,6 +86,21 @@ final class ContainerInteractor {
         presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
         presenter.present(screen: .menu)
+    }
+    
+    private func playCollisionAlert(for state: CollisionState) {
+        guard lastCollisionState != state else { return }
+        
+        switch state {
+        case .notTriggered:
+            alertPlayer.stop()
+        case .warning:
+            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
+        case .critical:
+            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
+        }
+        
+        lastCollisionState = state
     }
     
     private func scheduleSignTrackerUpdates() {
@@ -244,23 +269,51 @@ extension ContainerInteractor: VisionManagerDelegate {
         playCollisionAlert(for: car.state)
     }
     
-    private func playCollisionAlert(for state: CollisionState) {
-        guard lastCollisionState != state else { return }
-        
-        switch state {
-        case .notTriggered:
-            alertPlayer.stop()
-        case .warning:
-            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
-        case .critical:
-            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
-        }
-        
-        lastCollisionState = state
-    }
-    
-    public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
+    func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
         guard case .distanceToObject = currentScreen else { return }
         presenter.present(calibrationProgress: calibrationProgress)
+    }
+    
+    func visionManager(_ visionManager: VisionManager, didUpdateSpeedLimit speedLimit: SpeedLimitValue?) {
+        guard
+            case .distanceToObject = currentScreen,
+            let speedLimit = speedLimit
+        else {
+            presenter.present(speedLimitStatus: nil)
+            return
+        }
+        
+        let isNewLimit: Bool
+        let isNewSameLimit: Bool
+        if let previousSpeedLimit = lastSpeedLimit {
+            if speedLimit.sign != previousSpeedLimit.sign {
+                isNewLimit = true
+                isNewSameLimit = false
+            } else {
+                isNewLimit = false
+                isNewSameLimit = speedLimit.lastSeen - previousSpeedLimit.lastSeen > speedLimitSeenInterval
+            }
+        } else {
+            isNewLimit = true
+            isNewSameLimit = false
+        }
+        
+        if let image = speedLimit.sign.icon(over: speedLimit.isSpeeding, market: .us) {
+            let isHighlighted = isNewLimit || isNewSameLimit
+            let status = SpeedLimitStatus(sign: image, isHighlighted: isHighlighted)
+            presenter.present(speedLimitStatus: status)
+        } else {
+            assertionFailure("Image for \(speedLimit.sign), isSpeeding: \(speedLimit.isSpeeding) is not found")
+        }
+        
+        if lastCollisionState == .notTriggered {
+            if speedLimit.isSpeeding {
+                alertPlayer.play(sound: .overSpeedLimit, repeated: true)
+            } else if isNewLimit {
+                alertPlayer.play(sound: .newSpeedLimit, repeated: false)
+            }
+        }
+        
+        lastSpeedLimit = speedLimit
     }
 }
