@@ -20,10 +20,10 @@ enum Screen {
     case arRouting
 }
 
-enum DistanceToObjectScreenState {
+enum SafetyState {
     case none
     case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
-    case warning(frame: CGRect, canvasSize: CGSize)
+    case warnings(frames: [CGRect], canvasSize: CGSize)
     case alert
 }
 
@@ -39,7 +39,7 @@ protocol ContainerPresenter: class {
     
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
-    func present(distanceToObjectState: DistanceToObjectScreenState)
+    func present(safetyState: SafetyState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
     
@@ -69,13 +69,18 @@ final class ContainerInteractor {
     private let signTracker = Tracker<SignValue>(maxCapacity: signTrackerMaxCapacity)
     private var signTrackerUpdateTimer: Timer?
     
-    private let alertPlayer = AlertPlayer()
-    private var lastCollisionState = CollisionState.notTriggered
-    
+    private let alertPlayer: AlertPlayer
+    private var lastSafetyState = SafetyState.none
     private var lastSpeedLimit: SpeedLimitValue?
     
-    init(presenter: ContainerPresenter) {
-        self.presenter = presenter
+    struct Dependencies {
+        let alertPlayer: AlertPlayer
+        let presenter: ContainerPresenter
+    }
+    
+    init(dependencies: Dependencies) {
+        self.presenter = dependencies.presenter
+        self.alertPlayer = dependencies.alertPlayer
         
         visionManager = VisionManager.shared
         visionManager.delegate = self
@@ -86,21 +91,6 @@ final class ContainerInteractor {
         presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
         presenter.present(screen: .menu)
-    }
-    
-    private func playCollisionAlert(for state: CollisionState) {
-        guard lastCollisionState != state else { return }
-        
-        switch state {
-        case .notTriggered:
-            alertPlayer.stop()
-        case .warning:
-            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
-        case .critical:
-            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
-        }
-        
-        lastCollisionState = state
     }
     
     private func scheduleSignTrackerUpdates() {
@@ -133,7 +123,7 @@ final class ContainerInteractor {
         presenter.present(signs: [])
         presenter.present(roadDescription: nil)
         presenter.present(laneDepartureState: .normal)
-        presenter.present(distanceToObjectState: .none)
+        presenter.present(safetyState: .none)
         presenter.present(calibrationProgress: nil)
     }
     
@@ -239,34 +229,43 @@ extension ContainerInteractor: VisionManagerDelegate {
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
         
-        guard
-            case .distanceToObject = currentScreen,
-            let worldDescription = worldDescription,
-            let car = worldDescription.collisionObjects.first,
-            car.object.detection.objectType == .car
-        else {
-            presenter.present(distanceToObjectState: .none)
+        var safetyState: SafetyState = .none
+        
+        defer {
+            presenter.present(safetyState: safetyState)
+            playCollisionAlert(for: safetyState)
+        }
+        
+        guard case .distanceToObject = currentScreen, let worldDescription = worldDescription else { return }
+        
+        let supportedCollisionObjects = worldDescription.collisionObjects
+            .filter { $0.object.detection.objectType.isSupportedForCollisionWarning }
+        let hasCriticalState = supportedCollisionObjects.contains { $0.state == .critical }
+        let warnings = supportedCollisionObjects.filter { $0.state == .warning }.map { $0.object }
+        let forwardCar = worldDescription.getForwardCar()
+       
+        if hasCriticalState {
+            safetyState = .alert
+        } else if warnings.count > 0 {
+            safetyState = .warnings(frames: warnings.map { $0.detection.boundingBox }, canvasSize: visionManager.frameSize)
+        } else if let car = forwardCar {
+            safetyState = .distance(frame: car.detection.boundingBox, distance: car.distance, canvasSize: visionManager.frameSize)
+        }
+    }
+    
+    private func playCollisionAlert(for state: SafetyState) {
+        guard lastSafetyState != state else { return }
+        
+        switch state {
+        case .none, .distance:
             alertPlayer.stop()
-            return
+        case .warnings:
+            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
+        case .alert:
+            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
         }
         
-        switch car.state {
-        case .notTriggered:
-            presenter.present(distanceToObjectState: .distance(
-                frame: car.object.detection.boundingBox,
-                distance: car.object.distance,
-                canvasSize: visionManager.frameSize
-            ))
-        case .warning:
-            presenter.present(distanceToObjectState: .warning(
-                frame: car.object.detection.boundingBox,
-                canvasSize: visionManager.frameSize
-            ))
-        case .critical:
-            presenter.present(distanceToObjectState: .alert)
-        }
-        
-        playCollisionAlert(for: car.state)
+        lastSafetyState = state
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
@@ -306,7 +305,7 @@ extension ContainerInteractor: VisionManagerDelegate {
             assertionFailure("Image for \(speedLimit.sign), isSpeeding: \(speedLimit.isSpeeding) is not found")
         }
         
-        if lastCollisionState == .notTriggered {
+        if lastSafetyState == .none {
             if speedLimit.isSpeeding {
                 alertPlayer.play(sound: .overSpeedLimit, repeated: true)
             } else if isNewLimit {
@@ -317,3 +316,24 @@ extension ContainerInteractor: VisionManagerDelegate {
         lastSpeedLimit = speedLimit
     }
 }
+
+private extension ObjectType {
+    var isSupportedForCollisionWarning: Bool {
+        switch self {
+        case .lights, .sign:
+            return false
+        case .car, .person, .bicycle:
+            return true
+        }
+    }
+}
+
+extension SafetyState: Equatable {
+    static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
+        switch (lhs, rhs) {
+        case (.none, .none), (.distance, .distance), (.warnings, .warnings), (.alert, .alert): return true
+        case (.none, _), (.distance, _), (.warnings, _), (.alert, _): return false
+        }
+    }
+}
+

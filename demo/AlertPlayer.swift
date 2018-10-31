@@ -47,7 +47,12 @@ enum AlertSound {
     }
 }
 
-final class AlertPlayer {
+protocol AlertPlayer {
+    func play(sound: AlertSound, repeated: Bool)
+    func stop()
+}
+
+final class AlertSoundPlayer: AlertPlayer {
     
     private struct Item: Equatable, CustomStringConvertible {
         let sound: AlertSound
