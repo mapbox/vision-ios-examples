@@ -23,10 +23,9 @@ final class CollisionObjectView: UIView {
         return CAGradientLayer.self
     }
     
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        isHidden = true
         backgroundColor = .clear
         
         if let gradient = gradientLayer {
@@ -49,9 +48,5 @@ final class CollisionObjectView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func update(_ frame: CGRect) {
-        self.frame = frame
     }
 }

@@ -53,7 +53,6 @@ final class ContainerViewController: UIViewController {
         ])
         
         view.addSubview(distanceView)
-        view.addSubview(collisionObjectView)
         
         view.addSubview(distanceLabel)
         NSLayoutConstraint.activate([
@@ -130,7 +129,7 @@ final class ContainerViewController: UIViewController {
         return view
     }()
     
-    private let collisionObjectView = CollisionObjectView()
+    private var collisionObjectViews: [CollisionObjectView] = []
     
     private let collisionAlertView: UIImageView = {
         let view = UIImageView(image: Asset.Assets.brake.image)
@@ -174,7 +173,6 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = true
-        collisionObjectView.isHidden = true
         collisionBanerView.isHidden = true
     }
     
@@ -183,7 +181,6 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.isHidden = false
         
         collisionAlertView.isHidden = true
-        collisionObjectView.isHidden = true
         collisionBanerView.isHidden = true
         
         let left = CGPoint(x: frame.minX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
@@ -193,22 +190,25 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.text = distanceFormatter.string(fromMeters: distance)
     }
     
-    private func presentWarning(objectFrame frame: CGRect, canvasSize: CGSize) {
+    private func presentWarning(frames: [CGRect], canvasSize: CGSize) {
         distanceView.isHidden = true
         distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = false
-        collisionObjectView.isHidden = false
         collisionBanerView.isHidden = true
         
-        let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
-        let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
-        
-        let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
-        let coef: CGFloat = 0.25
-        let newRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
-        
-        collisionObjectView.update(newRect)
+        for frame in frames {
+            let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+            let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+            
+            let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
+            let coef: CGFloat = 0.25
+            let extendedRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
+            
+            let collisionObjectView = CollisionObjectView(frame: extendedRect)
+            collisionObjectViews.append(collisionObjectView)
+            view.addSubview(collisionObjectView)
+        }
     }
     
     private func presentAlert() {
@@ -216,18 +216,24 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = true
-        collisionObjectView.isHidden = true
         collisionBanerView.isHidden = false
     }
     
-    func present(distanceToObjectState: DistanceToObjectScreenState) {
-        switch distanceToObjectState {
+    private func removeAllCollisionObjectViews() {
+        collisionObjectViews.forEach { $0.removeFromSuperview() }
+        collisionObjectViews.removeAll()
+    }
+    
+    func present(safetyState: SafetyState) {
+        removeAllCollisionObjectViews()
+        
+        switch safetyState {
         case .none:
             dismissDistanceToObjectViews()
         case .distance(let frame, let distance, let canvasSize):
             present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
-        case .warning(let frame, let canvasSize):
-            presentWarning(objectFrame: frame, canvasSize: canvasSize)
+        case .warnings(let frames, let canvasSize):
+            presentWarning(frames: frames, canvasSize: canvasSize)
         case .alert:
             presentAlert()
         }
