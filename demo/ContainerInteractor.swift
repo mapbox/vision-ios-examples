@@ -113,9 +113,8 @@ final class ContainerInteractor {
     
     private func resetPerformance() {
         let segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        let detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
-                                                         detectionPerformance: detectionPerformance)
+        let performance = ModelPerformance(mode: .fixed, rate: .low)
+        visionManager.modelPerformanceConfig = .merged(performance: performance)
     }
     
     private func resetPresentation() {
@@ -161,26 +160,18 @@ extension ContainerInteractor: MenuDelegate {
         default: break
         }
         
-        let segmentationPerformance: ModelPerformance
-        let detectionPerformance: ModelPerformance
+        let performance: ModelPerformance
         
         switch screen {
-        case .signsDetection, .objectDetection:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .high)
-        case .segmentation:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .high)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+        case .signsDetection, .objectDetection, .segmentation:
+            performance = ModelPerformance(mode: .fixed, rate: .high)
         case .distanceToObject, .laneDetection:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
+            performance = ModelPerformance(mode: .fixed, rate: .medium)
         case .map, .menu, .arRouting:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
+            performance = ModelPerformance(mode: .fixed, rate: .low)
         }
         
-        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
-                                                         detectionPerformance: detectionPerformance)
+        visionManager.modelPerformanceConfig = .merged(performance: performance)
         
         presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: true)
