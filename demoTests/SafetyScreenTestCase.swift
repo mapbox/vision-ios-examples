@@ -94,6 +94,7 @@ class SafetyScreenTestCase: XCTestCase {
     }
     
     func testChaningState() {
+        
         let worldDescription = WorldDescription([(.car, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == warningState, "Collision Warning should be presented")
@@ -106,6 +107,7 @@ class SafetyScreenTestCase: XCTestCase {
     }
     
     func testForwarCar() {
+        
         let worldDescription = WorldDescription([(.person, .notTriggered), (.car, .notTriggered)], forwardCarIndex: 1)
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == distanceState, "Distance to lead car should be presented")
