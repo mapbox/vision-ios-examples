@@ -59,7 +59,7 @@ protocol MenuDelegate: class {
 
 private let signTrackerMaxCapacity = 5
 private let speedLimitSeenInterval: Float = 5
-private let speedLimitWarningThreshold: Double = 10 // mph
+private let speedLimitWarningThreshold: Double = 5 // mph
 private let bonnetAdjustment = 1.25
 
 final class ContainerInteractor {
@@ -74,6 +74,8 @@ final class ContainerInteractor {
     private let alertPlayer: AlertPlayer
     private var lastSafetyState = SafetyState.none
     private var lastSpeedLimit: SpeedLimitValue?
+    
+    private var hasBeeped = false
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -113,7 +115,6 @@ final class ContainerInteractor {
     }
     
     private func resetPerformance() {
-        let segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
         let performance = ModelPerformance(mode: .fixed, rate: .low)
         visionManager.modelPerformanceConfig = .merged(performance: performance)
     }
@@ -237,27 +238,28 @@ extension ContainerInteractor: VisionManagerDelegate {
         let warnings = supportedCollisionObjects.filter { $0.state == .warning }.map { $0.object }
         let forwardCar = worldDescription.getForwardCar()
        
+        let shouldBeep = warnings.contains { $0.detection.objectType == .person }
         if hasCriticalState {
             safetyState = .alert
+            if shouldBeep {
+                alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
+            }
         } else if warnings.count > 0 {
             safetyState = .warnings(frames: warnings.map { $0.detection.boundingBox }, canvasSize: visionManager.frameSize)
+            if shouldBeep {
+                alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
+            }
         } else if let car = forwardCar {
             let distanceFromBonnet = max(0, car.distance - bonnetAdjustment)
             safetyState = .distance(frame: car.detection.boundingBox, distance: distanceFromBonnet, canvasSize: visionManager.frameSize)
+            alertPlayer.stop()
+        } else {
+            alertPlayer.stop()
         }
     }
     
     private func playCollisionAlert(for state: SafetyState) {
         guard lastSafetyState != state else { return }
-        
-        switch state {
-        case .none, .distance:
-            alertPlayer.stop()
-        case .warnings:
-            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
-        case .alert:
-            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
-        }
         
         lastSafetyState = state
     }
@@ -305,10 +307,16 @@ extension ContainerInteractor: VisionManagerDelegate {
                     .converted(to: .milesPerHour).value
             let isSpeedingThresholdExceeded = mphSpeed > speedLimit.sign.number + speedLimitWarningThreshold
             
-            if speedLimit.isSpeeding, isSpeedingThresholdExceeded {
-                alertPlayer.play(sound: .overSpeedLimit, repeated: true)
-            } else if isNewLimit {
+            if !speedLimit.isSpeeding {
+                hasBeeped = false
+            }
+            
+            if isNewLimit {
                 alertPlayer.play(sound: .newSpeedLimit, repeated: false)
+                hasBeeped = isSpeedingThresholdExceeded
+            } else if isSpeedingThresholdExceeded && !hasBeeped {
+                alertPlayer.play(sound: .overSpeedLimit, repeated: false)
+                hasBeeped = true
             }
         default: break
         }

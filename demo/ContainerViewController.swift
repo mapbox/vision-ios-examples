@@ -185,7 +185,7 @@ extension ContainerViewController: ContainerPresenter {
     
     private func dismissDistanceToObjectViews() {
         distanceView.isHidden = true
-        distanceLabel.isHidden = true
+//        distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = true
         collisionBanerView.isHidden = true
@@ -193,7 +193,7 @@ extension ContainerViewController: ContainerPresenter {
     
     private func present(distance: Double, objectFrame frame: CGRect, canvasSize: CGSize) {
         distanceView.isHidden = false
-        distanceLabel.isHidden = false
+//        distanceLabel.isHidden = false
         
         collisionAlertView.isHidden = true
         collisionBanerView.isHidden = true
@@ -207,7 +207,7 @@ extension ContainerViewController: ContainerPresenter {
     
     private func presentWarning(frames: [CGRect], canvasSize: CGSize) {
         distanceView.isHidden = true
-        distanceLabel.isHidden = true
+//        distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = false
         collisionBanerView.isHidden = true
@@ -228,7 +228,7 @@ extension ContainerViewController: ContainerPresenter {
     
     private func presentAlert() {
         distanceView.isHidden = true
-        distanceLabel.isHidden = true
+//        distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = true
         collisionBanerView.isHidden = false
