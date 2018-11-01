@@ -60,6 +60,7 @@ protocol MenuDelegate: class {
 private let signTrackerMaxCapacity = 5
 private let speedLimitSeenInterval: Float = 5
 private let speedLimitWarningThreshold: Double = 10 // mph
+private let bonnetAdjustment = 1.25
 
 final class ContainerInteractor {
     
@@ -241,7 +242,8 @@ extension ContainerInteractor: VisionManagerDelegate {
         } else if warnings.count > 0 {
             safetyState = .warnings(frames: warnings.map { $0.detection.boundingBox }, canvasSize: visionManager.frameSize)
         } else if let car = forwardCar {
-            safetyState = .distance(frame: car.detection.boundingBox, distance: car.distance, canvasSize: visionManager.frameSize)
+            let distanceFromBonnet = max(0, car.distance - bonnetAdjustment)
+            safetyState = .distance(frame: car.detection.boundingBox, distance: distanceFromBonnet, canvasSize: visionManager.frameSize)
         }
     }
     
