@@ -233,7 +233,7 @@ extension ContainerInteractor: VisionManagerDelegate {
         let supportedCollisionObjects = worldDescription.collisionObjects
             .filter { $0.object.detection.objectType.isSupportedForCollisionWarning }
         let hasCriticalState = supportedCollisionObjects.contains { $0.state == .critical }
-        let warnings = supportedCollisionObjects.filter { $0.state == .warning }.map { $0.object }
+        let warningCollisions = supportedCollisionObjects.filter { $0.state == .warning }.map { $0.object.detection }
         let forwardCar = worldDescription.getForwardCar()
        
         if hasCriticalState {
