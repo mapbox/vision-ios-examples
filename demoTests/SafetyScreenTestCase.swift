@@ -13,12 +13,13 @@ import MapboxVision
 
 class SafetyScreenTestCase: XCTestCase {
     
+    let distanceState = SafetyState.distance(frame: WorldDescription.bbox,
+                                             distance: WorldDescription.distance,
+                                             canvasSize: VisionManager.shared.frameSize)
+    
     var presenter: MockContainerPresenrer!
     var interactor: ContainerInteractor!
     var alertPlayer: MockAlertPlayer!
-    
-    let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance, canvasSize: VisionManager.shared.frameSize)
-    let warningState = SafetyState.warnings(frames: [WorldDescription.bbox], canvasSize: VisionManager.shared.frameSize)
 
     override func setUp() {
         presenter = MockContainerPresenrer()
@@ -39,7 +40,7 @@ class SafetyScreenTestCase: XCTestCase {
     
     func testCriticalWithAnotherNotTriggeredObject() {
         
-        let worldDescription = WorldDescription([(.car, .critical),(.person, .notTriggered)])
+        let worldDescription = WorldDescription([(.car, .critical), (.person, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == .alert, "Collision Alert should be presented in spite of not triggered another object")
         XCTAssert(alertPlayer.nowPlayning == AlertSound.collisionAlertCritical, "Collision Alert critical sound should be played")
@@ -57,6 +58,8 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning), (.person, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
+        let warningState = SafetyState.warnings(values: [SafetyState.Warning(frame: WorldDescription.bbox, objectType: .car)],
+                                                canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == warningState, "Collision Warning should be presented in spite of not triggered another object")
         XCTAssert(alertPlayer.nowPlayning == AlertSound.collisionAlertWarning, "Collision Alert warning sound should be played")
     }
@@ -65,6 +68,8 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning), (.sign, .critical)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
+        let warningState = SafetyState.warnings(values: [SafetyState.Warning(frame: WorldDescription.bbox, objectType: .car)],
+                                                canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == warningState, "Collision Warning should be presented in spite of unsupported ciritcal object")
         XCTAssert(alertPlayer.nowPlayning == AlertSound.collisionAlertWarning, "Collision Alert warning sound should be played")
     }
@@ -73,6 +78,9 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning), (.car, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
+        let warningState = SafetyState.warnings(values: [SafetyState.Warning(frame: WorldDescription.bbox, objectType: .car),
+                                                         SafetyState.Warning(frame: WorldDescription.bbox, objectType: .car)],
+                                                canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == warningState, "Two Collision Warnings should be presented")
         XCTAssert(alertPlayer.nowPlayning == AlertSound.collisionAlertWarning, "Collision Alert warning sound should be played")
     }
@@ -97,6 +105,8 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
+        let warningState = SafetyState.warnings(values: [SafetyState.Warning(frame: WorldDescription.bbox, objectType: .car)],
+                                                canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == warningState, "Collision Warning should be presented")
         XCTAssert(alertPlayer.nowPlayning == AlertSound.collisionAlertWarning, "Collision Alert warning sound should be played")
         
@@ -118,6 +128,7 @@ class SafetyScreenTestCase: XCTestCase {
 extension WorldDescription {
     
     static let distance: Double = 1.0
+    
     static let bbox: CGRect = .zero
     static let coords = WorldCoordinate(x: 0, y: 0, z: 0)
     
@@ -144,7 +155,10 @@ extension WorldDescription {
             collisionObjects.append(collision)
         }
         
-        self.init(identifier: Identifier(), forwardCarIndex: NSNumber(value: forwardCarIndex), objects: objects, collisionObjects: collisionObjects)
+        self.init(identifier: Identifier(),
+                  forwardCarIndex: NSNumber(value: forwardCarIndex),
+                  objects: objects,
+                  collisionObjects: collisionObjects)
     }
 }
 

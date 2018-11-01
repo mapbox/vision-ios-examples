@@ -190,22 +190,23 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.text = distanceFormatter.string(fromMeters: distance)
     }
     
-    private func presentWarning(frames: [CGRect], canvasSize: CGSize) {
+    private func presentWarnings(warnings: [SafetyState.Warning], canvasSize: CGSize) {
         distanceView.isHidden = true
         distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = false
         collisionBanerView.isHidden = true
         
-        for frame in frames {
-            let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
-            let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        for warning in warnings {
+            let leftTop = warning.frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+            let rightBottom = CGPoint(x: warning.frame.maxX, y: warning.frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
             
             let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
             let coef: CGFloat = 0.25
             let extendedRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
             
             let collisionObjectView = CollisionObjectView(frame: extendedRect)
+            collisionObjectView.color = warning.objectType.color;
             collisionObjectViews.append(collisionObjectView)
             view.addSubview(collisionObjectView)
         }
@@ -232,8 +233,8 @@ extension ContainerViewController: ContainerPresenter {
             dismissDistanceToObjectViews()
         case .distance(let frame, let distance, let canvasSize):
             present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
-        case .warnings(let frames, let canvasSize):
-            presentWarning(frames: frames, canvasSize: canvasSize)
+        case .warnings(let warnings, let canvasSize):
+            presentWarnings(warnings: warnings, canvasSize: canvasSize)
         case .alert:
             presentAlert()
         }
@@ -357,5 +358,21 @@ extension UIViewController {
         viewController.willMove(toParentViewController: nil)
         viewController.view.removeFromSuperview()
         viewController.removeFromParentViewController()
+    }
+}
+
+private extension ObjectType {
+    
+    var color: UIColor? {
+        switch self {
+        case .lights, .sign:
+            return nil
+        case .car:
+            return UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
+        case .person:
+            return UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        case .bicycle:
+            return UIColor(red: 255.0/255.0, green: 204.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        }
     }
 }

@@ -21,9 +21,15 @@ enum Screen {
 }
 
 enum SafetyState {
+    
+    struct Warning {
+        let frame: CGRect
+        let objectType: ObjectType
+    }
+    
     case none
     case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
-    case warnings(frames: [CGRect], canvasSize: CGSize)
+    case warnings(values: [Warning], canvasSize: CGSize)
     case alert
 }
 
@@ -142,11 +148,10 @@ extension ContainerInteractor: MenuDelegate {
     private func modelPerformanceConfig(_ screen: Screen) -> ModelPerformanceConfig {
         switch screen {
         case .signsDetection, .objectDetection:
-            return .separate(segmentationPerformance: ModelPerformance(mode: .fixed, rate: .low),
-                               detectionPerformance: ModelPerformance(mode: .fixed, rate: .high))
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .high))
         case .segmentation:
             return .separate(segmentationPerformance: ModelPerformance(mode: .fixed, rate: .high),
-                               detectionPerformance: ModelPerformance(mode: .fixed, rate: .low))
+                             detectionPerformance: ModelPerformance(mode: .fixed, rate: .low))
         case .distanceToObject, .laneDetection:
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
         case .map, .menu, .arRouting:
@@ -233,15 +238,16 @@ extension ContainerInteractor: VisionManagerDelegate {
        
         if hasCriticalState {
             safetyState = .alert
-        } else if warnings.count > 0 {
-            safetyState = .warnings(frames: warnings.map { $0.detection.boundingBox }, canvasSize: visionManager.frameSize)
+        } else if warningCollisions.count > 0 {
+            let warnings = warningCollisions.map { SafetyState.Warning(frame: $0.boundingBox, objectType: $0.objectType) }
+            safetyState = .warnings(values: warnings, canvasSize: visionManager.frameSize)
         } else if let car = forwardCar {
             safetyState = .distance(frame: car.detection.boundingBox, distance: car.distance, canvasSize: visionManager.frameSize)
         }
     }
     
     private func playCollisionAlert(for state: SafetyState) {
-        guard lastSafetyState != state else { return }
+        guard !lastSafetyState.isEqualIgnoringPayload(state) else { return }
         
         switch state {
         case .none, .distance:
@@ -272,12 +278,33 @@ private extension ObjectType {
     }
 }
 
-extension SafetyState: Equatable {
-    static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
-        switch (lhs, rhs) {
+extension SafetyState {
+    func isEqualIgnoringPayload(_ state: SafetyState) -> Bool {
+        switch (self, state) {
         case (.none, .none), (.distance, .distance), (.warnings, .warnings), (.alert, .alert): return true
         case (.none, _), (.distance, _), (.warnings, _), (.alert, _): return false
         }
+    }
+}
+
+extension SafetyState: Equatable {
+    static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
+        switch (lhs, rhs) {
+        case (.none, .none), (.alert, .alert):
+            return true
+        case let (.distance(lframe, ldistance, lcanvasSize), .distance(rframe, rdistance, rcanvasSize)):
+            return lframe == rframe && ldistance == rdistance && lcanvasSize == rcanvasSize
+        case let (.warnings(lvalues, lcanvasSize), .warnings(rvalues, rcanvasSize)):
+            return lvalues == rvalues && lcanvasSize == rcanvasSize
+        case (.none, _), (.distance, _), (.warnings, _), (.alert, _):
+            return false
+        }
+    }
+}
+
+extension SafetyState.Warning: Equatable {
+    static func == (lhs: SafetyState.Warning, rhs: SafetyState.Warning) -> Bool {
+        return lhs.frame == rhs.frame && lhs.objectType == rhs.objectType
     }
 }
 
