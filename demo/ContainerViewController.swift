@@ -216,9 +216,9 @@ extension ContainerViewController: ContainerPresenter {
                 break
             }
             
-            if let view = collisionObjectView {
-                collisionObjectViews.append(view)
-                view.addSubview(view)
+            if let collisionObjectView = collisionObjectView {
+                collisionObjectViews.append(collisionObjectView)
+                view.addSubview(collisionObjectView)
             }
         }
     }
