@@ -183,20 +183,20 @@ final class ContainerViewController: UIViewController {
 
 extension ContainerViewController: ContainerPresenter {
     
-    private func dismissDistanceToObjectViews() {
+    private func dismissSafetyStateViews() {
         distanceView.isHidden = true
 //        distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = true
         collisionBanerView.isHidden = true
+        
+        collisionObjectViews.forEach { $0.removeFromSuperview() }
+        collisionObjectViews.removeAll()
     }
     
     private func present(distance: Double, objectFrame frame: CGRect, canvasSize: CGSize) {
         distanceView.isHidden = false
 //        distanceLabel.isHidden = false
-        
-        collisionAlertView.isHidden = true
-        collisionBanerView.isHidden = true
         
         let left = CGPoint(x: frame.minX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         let right = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
@@ -205,53 +205,60 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.text = distanceFormatter.string(fromMeters: distance)
     }
     
-    private func presentWarnings(warnings: [SafetyState.Warning], canvasSize: CGSize) {
-        distanceView.isHidden = true
-//        distanceLabel.isHidden = true
+    private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
         
-        collisionAlertView.isHidden = false
-        collisionBanerView.isHidden = true
+        dismissSafetyStateViews()
         
-        for warning in warnings {
-            let leftTop = warning.frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
-            let rightBottom = CGPoint(x: warning.frame.maxX, y: warning.frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        for collision in collisions {
+            var collisionObjectView: CollisionObjectView?
+ 
+            switch collision {
+            case let .warning(.car(frame)):
+                collisionObjectView = createCollisionObjectView(frame: frame, canvasSize: canvasSize)
+                collisionObjectView?.color = SafetyState.Object.carColor
+                collisionAlertView.isHidden = false
+            case let .warning(.person(frame)):
+                collisionObjectView = createCollisionObjectView(frame: frame, canvasSize: canvasSize)
+                collisionObjectView?.exclamationMarkView.isHidden = true
+                collisionObjectView?.color = SafetyState.Object.personColor
+            case .critical(.car):
+                collisionBanerView.isHidden = false
+                return
+            case let .critical(.person(frame)):
+                collisionObjectView = createCollisionObjectView(frame: frame, canvasSize: canvasSize)
+                collisionObjectView?.color = SafetyState.Object.personColor
+                collisionAlertView.isHidden = false
+                break
+            }
             
-            let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
-            let coef: CGFloat = 0.25
-            let extendedRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
-            
-            let collisionObjectView = CollisionObjectView(frame: extendedRect)
-            collisionObjectView.color = warning.objectType.color;
-            collisionObjectViews.append(collisionObjectView)
-            view.addSubview(collisionObjectView)
+            if let view = collisionObjectView {
+                collisionObjectViews.append(view)
+                view.addSubview(view)
+            }
         }
     }
     
-    private func presentAlert() {
-        distanceView.isHidden = true
-//        distanceLabel.isHidden = true
+    private func createCollisionObjectView(frame: CGRect,  canvasSize: CGSize) -> CollisionObjectView {
+        let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
+        let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         
-        collisionAlertView.isHidden = true
-        collisionBanerView.isHidden = false
-    }
-    
-    private func removeAllCollisionObjectViews() {
-        collisionObjectViews.forEach { $0.removeFromSuperview() }
-        collisionObjectViews.removeAll()
+        let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
+        let coef: CGFloat = 0.25
+        let extendedRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
+        
+        return CollisionObjectView(frame: extendedRect)
     }
     
     func present(safetyState: SafetyState) {
-        removeAllCollisionObjectViews()
+        dismissSafetyStateViews()
         
         switch safetyState {
         case .none:
-            dismissDistanceToObjectViews()
-        case .distance(let frame, let distance, let canvasSize):
-            present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
-        case .warnings(let warnings, let canvasSize):
-            presentWarnings(warnings: warnings, canvasSize: canvasSize)
-        case .alert:
-            presentAlert()
+            break;
+        case let .distance(frame, distance):
+            present(distance: distance, objectFrame: frame, canvasSize: safetyState.canvasSize)
+        case let .collisions(collisions):
+            present(collisions: collisions, canvasSize: safetyState.canvasSize)
         }
     }
     
@@ -394,18 +401,7 @@ extension UIViewController {
     }
 }
 
-private extension ObjectType {
-    
-    var color: UIColor? {
-        switch self {
-        case .lights, .sign:
-            return nil
-        case .car:
-            return UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
-        case .person:
-            return UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        case .bicycle:
-            return UIColor(red: 255.0/255.0, green: 204.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        }
-    }
+private extension SafetyState.Object {
+    static let carColor = UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
+    static let personColor = UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 }
