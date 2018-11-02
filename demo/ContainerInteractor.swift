@@ -67,6 +67,7 @@ private let signTrackerMaxCapacity = 5
 private let speedLimitSeenInterval: Float = 5
 private let speedLimitWarningThreshold: Double = 5 // mph
 private let bonnetAdjustment = 1.25
+private let collisionBeepDelay: TimeInterval = 3 // seconds
 
 final class ContainerInteractor {
     
@@ -81,7 +82,10 @@ final class ContainerInteractor {
     private var lastSafetyState = SafetyState.none
     private var lastSpeedLimit: SpeedLimitValue?
     
-    private var hasBeeped = false
+    private var hasBeepedForSpeedLimit = false
+    private var hasBeepedForCollision = false
+    
+    private var beepResetTimer: Timer?
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -118,6 +122,13 @@ final class ContainerInteractor {
     private func stopSignTrackerUpdates() {
         signTrackerUpdateTimer?.invalidate()
         signTracker.reset()
+    }
+    
+    private func scheduleBeepReset() {
+        beepResetTimer?.invalidate()
+        beepResetTimer = Timer.scheduledTimer(withTimeInterval: collisionBeepDelay, repeats: false) { [weak self] _ in
+            self?.hasBeepedForCollision = false
+        }
     }
     
     private func resetPerformance() {
@@ -244,17 +255,22 @@ extension ContainerInteractor: VisionManagerDelegate {
         let warningCollisions = supportedCollisionObjects.filter { $0.state == .warning }.map { $0.object.detection }
         let forwardCar = worldDescription.getForwardCar()
        
-        let shouldBeep = warningCollisions.contains { $0.objectType == .person }
+        let shouldBeep = warningCollisions.contains { $0.objectType == .person } && !hasBeepedForCollision
+        
+        var hasJustBeeped = false
+        
         if hasCriticalState {
             safetyState = .alert
             if shouldBeep {
-                alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
+                alertPlayer.play(sound: .collisionAlertCritical, repeated: false)
+                hasJustBeeped = true
             }
         } else if warningCollisions.count > 0 {
             let warnings = warningCollisions.map { SafetyState.Warning(frame: $0.boundingBox, objectType: $0.objectType) }
             safetyState = .warnings(values: warnings, canvasSize: visionManager.frameSize)
             if shouldBeep {
-                alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
+                alertPlayer.play(sound: .collisionAlertWarning, repeated: false)
+                hasJustBeeped = true
             }
         } else if let car = forwardCar {
             let distanceFromBonnet = max(0, car.distance - bonnetAdjustment)
@@ -262,6 +278,11 @@ extension ContainerInteractor: VisionManagerDelegate {
             alertPlayer.stop()
         } else {
             alertPlayer.stop()
+        }
+        
+        if hasJustBeeped {
+            hasBeepedForCollision = true
+            scheduleBeepReset()
         }
     }
     
@@ -315,15 +336,15 @@ extension ContainerInteractor: VisionManagerDelegate {
             let isSpeedingThresholdExceeded = mphSpeed > speedLimit.sign.number + speedLimitWarningThreshold
             
             if !speedLimit.isSpeeding {
-                hasBeeped = false
+                hasBeepedForSpeedLimit = false
             }
             
             if isNewLimit {
                 alertPlayer.play(sound: .newSpeedLimit, repeated: false)
-                hasBeeped = isSpeedingThresholdExceeded
-            } else if isSpeedingThresholdExceeded && !hasBeeped {
+                hasBeepedForSpeedLimit = isSpeedingThresholdExceeded
+            } else if isSpeedingThresholdExceeded && !hasBeepedForSpeedLimit {
                 alertPlayer.play(sound: .overSpeedLimit, repeated: false)
-                hasBeeped = true
+                hasBeepedForSpeedLimit = true
             }
         default: break
         }
