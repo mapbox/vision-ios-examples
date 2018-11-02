@@ -7,7 +7,7 @@ Example application showing usage of [Mapbox Vision SDK](https://vision.mapbox.c
 2. `brew install carthage` (0.31.0 or later)
 
 ## Installation
-1. `git clone git@github.com:mapbox/vision-ios-examples.git`
+1. `git clone https://github.com/mapbox/vision-ios-examples.git`
 1. `cd vision-ios-examples`
 1. `carthage bootstrap --platform ios`
 1. `open demo.xcodeproj`
