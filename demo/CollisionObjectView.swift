@@ -11,7 +11,7 @@ import UIKit
 
 final class CollisionObjectView: UIView {
     
-    private let imageView = UIImageView(image: Asset.Assets.alert.image)
+    let exclamationMarkView = UIImageView(image: Asset.Assets.alert.image)
     
     private var gradientLayer: CAGradientLayer? {
         return layer as? CAGradientLayer
@@ -34,12 +34,12 @@ final class CollisionObjectView: UIView {
             gradient.endPoint = CGPoint(x: 1, y: 1)
         }
         
-        addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(exclamationMarkView)
+        exclamationMarkView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            exclamationMarkView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            exclamationMarkView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     

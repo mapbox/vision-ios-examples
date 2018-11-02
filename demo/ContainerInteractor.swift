@@ -20,19 +20,6 @@ enum Screen {
     case arRouting
 }
 
-enum SafetyState {
-    
-    struct Warning {
-        let frame: CGRect
-        let objectType: ObjectType
-    }
-    
-    case none
-    case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
-    case warnings(values: [Warning], canvasSize: CGSize)
-    case alert
-}
-
 protocol ContainerPresenter: class {
     func presentVision()
     func present(screen: Screen)
@@ -220,45 +207,11 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
-        
-        var safetyState: SafetyState = .none
-        
-        defer {
-            presenter.present(safetyState: safetyState)
-            playCollisionAlert(for: safetyState)
+        guard case .distanceToObject = currentScreen, let worldDescription = worldDescription else {
+            presenter.present(safetyState: .none)
+            return
         }
-        
-        guard case .distanceToObject = currentScreen, let worldDescription = worldDescription else { return }
-        
-        let supportedCollisionObjects = worldDescription.collisionObjects
-            .filter { $0.object.detection.objectType.isSupportedForCollisionWarning }
-        let hasCriticalState = supportedCollisionObjects.contains { $0.state == .critical }
-        let warningCollisions = supportedCollisionObjects.filter { $0.state == .warning }.map { $0.object.detection }
-        let forwardCar = worldDescription.getForwardCar()
-       
-        if hasCriticalState {
-            safetyState = .alert
-        } else if warningCollisions.count > 0 {
-            let warnings = warningCollisions.map { SafetyState.Warning(frame: $0.boundingBox, objectType: $0.objectType) }
-            safetyState = .warnings(values: warnings, canvasSize: visionManager.frameSize)
-        } else if let car = forwardCar {
-            safetyState = .distance(frame: car.detection.boundingBox, distance: car.distance, canvasSize: visionManager.frameSize)
-        }
-    }
-    
-    private func playCollisionAlert(for state: SafetyState) {
-        guard !lastSafetyState.isEqualIgnoringPayload(state) else { return }
-        
-        switch state {
-        case .none, .distance:
-            alertPlayer.stop()
-        case .warnings:
-            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
-        case .alert:
-            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
-        }
-        
-        lastSafetyState = state
+        presenter.present(safetyState: SafetyState(worldDescription))
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
@@ -266,45 +219,3 @@ extension ContainerInteractor: VisionManagerDelegate {
         presenter.present(calibrationProgress: calibrationProgress)
     }
 }
-
-private extension ObjectType {
-    var isSupportedForCollisionWarning: Bool {
-        switch self {
-        case .lights, .sign:
-            return false
-        case .car, .person, .bicycle:
-            return true
-        }
-    }
-}
-
-extension SafetyState {
-    func isEqualIgnoringPayload(_ state: SafetyState) -> Bool {
-        switch (self, state) {
-        case (.none, .none), (.distance, .distance), (.warnings, .warnings), (.alert, .alert): return true
-        case (.none, _), (.distance, _), (.warnings, _), (.alert, _): return false
-        }
-    }
-}
-
-extension SafetyState: Equatable {
-    static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
-        switch (lhs, rhs) {
-        case (.none, .none), (.alert, .alert):
-            return true
-        case let (.distance(lframe, ldistance, lcanvasSize), .distance(rframe, rdistance, rcanvasSize)):
-            return lframe == rframe && ldistance == rdistance && lcanvasSize == rcanvasSize
-        case let (.warnings(lvalues, lcanvasSize), .warnings(rvalues, rcanvasSize)):
-            return lvalues == rvalues && lcanvasSize == rcanvasSize
-        case (.none, _), (.distance, _), (.warnings, _), (.alert, _):
-            return false
-        }
-    }
-}
-
-extension SafetyState.Warning: Equatable {
-    static func == (lhs: SafetyState.Warning, rhs: SafetyState.Warning) -> Bool {
-        return lhs.frame == rhs.frame && lhs.objectType == rhs.objectType
-    }
-}
-
