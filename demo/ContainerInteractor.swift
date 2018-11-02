@@ -231,7 +231,29 @@ extension ContainerInteractor: VisionManagerDelegate {
             return
         }
         
-        presenter.present(safetyState: SafetyState(worldDescription))
+        let state = SafetyState(worldDescription)
+        
+        switch state {
+        case .none, .distance: break
+            
+        case .collisions(let collisions):
+            let containsPerson = collisions.contains {
+                
+                if case .critical(.person) = $0 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            
+            if containsPerson, !hasBeepedForCollision {
+                alertPlayer.play(sound: .collisionAlertCritical, repeated: false)
+                hasBeepedForCollision = true
+                scheduleBeepReset()
+            }
+        }
+        
+        presenter.present(safetyState: state)
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
