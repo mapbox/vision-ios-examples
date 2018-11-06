@@ -11,83 +11,71 @@ import MapboxVision
 
 enum SafetyState {
     
-    enum Object {
-        case car(CGRect)
-        case person(CGRect)
-    }
-    
-    enum Collision {
-        case warning(Object)
-        case critical(Object)
-    }
-    
-    case none
-    case distance(frame: CGRect, distance: Double)
-    case collisions([Collision])
-    
-    var canvasSize: CGSize {
-        return VisionManager.shared.frameSize
-    }
-    
-    init(_ worldDescription: WorldDescription) {
+    enum ObjectType {
+        case car
+        case person
         
-        let collisions = worldDescription.collisionObjects.compactMap { collision -> Collision? in
-            let bbox = collision.object.detection.boundingBox
-            let type = collision.object.detection.objectType
-            let state = collision.state
-            
-            switch (type, state) {
-            case (.lights, _), (.sign, _), (.bicycle, _), (_, .notTriggered):
+        init?(_ type: MapboxVision.ObjectType) {
+            switch type {
+            case .lights, .sign, .bicycle:
                 return nil
-            case (.car, .warning):
-                return .warning(.car(bbox))
-            case (.car, .critical):
-                return .critical(.car(bbox))
-            case (.person, .warning):
-                return .warning(.person(bbox))
-            case (.person, .critical):
-                return .critical(.person(bbox))
+            case .car:
+                self = .car
+            case .person:
+                self = .person
+            }
+        }
+    }
+    
+    struct Collision {
+        
+        enum State {
+            case warning
+            case critical
+            
+            init?(_ state: CollisionState) {
+                switch state {
+                case .notTriggered:
+                    return nil
+                case .warning:
+                    self = .warning
+                case .critical:
+                    self = .critical
+                }
             }
         }
         
+        let objectType: ObjectType
+        let state: State
+        let boundingBox: CGRect
+    }
+    
+    case none
+    case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
+    case collisions([Collision], canvasSize: CGSize)
+    
+    init(_ worldDescription: WorldDescription, canvasSize: CGSize) {
+        
+        let collisions = worldDescription.collisionObjects.compactMap { collision -> Collision? in
+            
+            let type = collision.object.detection.objectType
+            let state = collision.state
+            
+            guard
+                let objectType = ObjectType(type),
+                let collisionState = Collision.State(state)
+            else { return nil }
+            
+            let boundingBox = collision.object.detection.boundingBox
+            return Collision(objectType: objectType, state: collisionState, boundingBox: boundingBox)
+        }
+        
         if collisions.count > 0 {
-            self = .collisions(collisions)
+            self = .collisions(collisions, canvasSize: canvasSize)
         } else if let car = worldDescription.getForwardCar() {
-            self = .distance(frame: car.detection.boundingBox, distance: car.distance)
+            self = .distance(frame: car.detection.boundingBox, distance: car.distance, canvasSize: canvasSize)
         } else {
             self = .none
         }
     }
 }
-
-extension SafetyState: Equatable {
-
-    static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
-        switch (lhs, rhs) {
-        case (.none, .none):
-            return true
-        case let (.distance(l), .distance(r)):
-            return l.0 == r.0 && l.1 == r.1
-        case let (.collisions(l), .collisions(r)):
-            return l == r
-        case (.none, _), (.distance, _), (.collisions, _):
-            return false
-        }
-    }
-}
-
-extension SafetyState.Collision: Equatable {
-    
-    static func == (lhs: SafetyState.Collision, rhs: SafetyState.Collision) -> Bool {
-        switch (lhs, rhs) {
-        case let (.warning(l), .warning(r)):
-            return l == r
-        case let (.critical(l), .critical(r)):
-            return l == r
-        case (.warning, _), (.critical, _):
-            return false
-        }
-    }
-}
-
-extension SafetyState.Object: Equatable { }

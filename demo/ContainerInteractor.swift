@@ -198,7 +198,7 @@ extension ContainerInteractor: VisionManagerDelegate {
             presenter.present(safetyState: .none)
             return
         }
-        presenter.present(safetyState: SafetyState(worldDescription))
+        presenter.present(safetyState: SafetyState(worldDescription, canvasSize: VisionManager.shared.frameSize))
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
