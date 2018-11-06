@@ -9,7 +9,7 @@
 import Foundation
 import MapboxVision
 
-enum SafetyState {
+enum SafetyState: Equatable {
     
     enum ObjectType {
         case car
@@ -27,7 +27,7 @@ enum SafetyState {
         }
     }
     
-    struct Collision {
+    struct Collision: Equatable {
         
         enum State {
             case warning

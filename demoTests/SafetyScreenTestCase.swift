@@ -113,29 +113,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 }
 
-extension SafetyState: Equatable {
-    
-    public static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
-        switch (lhs, rhs) {
-        case (.none, .none):
-            return true
-        case let (.distance(l), .distance(r)):
-            return l.0 == r.0 && l.1 == r.1
-        case let (.collisions(l), .collisions(r)):
-            return l == r
-        case (.none, _), (.distance, _), (.collisions, _):
-            return false
-        }
-    }
-}
-
-extension SafetyState.Collision: Equatable {
-    
-    public static func == (lhs: SafetyState.Collision, rhs: SafetyState.Collision) -> Bool {
-        return lhs.objectType == rhs.objectType && lhs.state == rhs.state && lhs.boundingBox == rhs.boundingBox
-    }
-}
-
 extension WorldDescription {
     
     static let distance: Double = 1.0
