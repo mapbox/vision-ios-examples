@@ -31,7 +31,6 @@ protocol ContainerPresenter: class {
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
     
-    func dismissMenu()
     func dismissCurrent()
 }
 
@@ -70,11 +69,9 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.start()
         
-        resetPerformance()
-        
         presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
-        presenter.present(screen: .menu)
+        present(screen: .menu)
     }
     
     private func scheduleSignTrackerUpdates() {
@@ -94,45 +91,7 @@ final class ContainerInteractor {
         signTracker.reset()
     }
     
-    private func resetPerformance() {
-        let segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        let detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
-                                                         detectionPerformance: detectionPerformance)
-    }
-    
-    private func resetPresentation() {
-        stopSignTrackerUpdates()
-        alertPlayer.stop()
-        presenter.present(signs: [])
-        presenter.present(roadDescription: nil)
-        presenter.present(laneDepartureState: .normal)
-        presenter.present(safetyState: .none)
-        presenter.present(calibrationProgress: nil)
-    }
-    
-    deinit {
-        visionManager.stop()
-    }
-}
-
-extension ContainerInteractor: ContainerDelegate {
-    
-    func backButtonPressed() {
-        presenter.dismissCurrent()
-        presenter.presentBackButton(isVisible: false)
-        presenter.present(screen: .menu)
-        
-        resetPresentation()
-        resetPerformance()
-        
-        currentScreen = .menu
-    }
-}
-
-extension ContainerInteractor: MenuDelegate {
-    
-    private func modelPerformanceConfig(_ screen: Screen) -> ModelPerformanceConfig {
+    private func modelPerformanceConfig(for screen: Screen) -> ModelPerformanceConfig {
         switch screen {
         case .signsDetection, .objectDetection:
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .high))
@@ -146,10 +105,41 @@ extension ContainerInteractor: MenuDelegate {
         }
     }
     
-    func selected(screen: Screen) {
+    private func resetPresentation() {
+        stopSignTrackerUpdates()
+        alertPlayer.stop()
+        presenter.present(signs: [])
+        presenter.present(roadDescription: nil)
+        presenter.present(laneDepartureState: .normal)
+        presenter.present(safetyState: .none)
+        presenter.present(calibrationProgress: nil)
+    }
+    
+    private func present(screen: Screen) {
         presenter.dismissCurrent()
-        presenter.dismissMenu()
-        
+        visionManager.modelPerformanceConfig = modelPerformanceConfig(for: screen)
+        presenter.present(screen: screen)
+        currentScreen = screen
+    }
+    
+    deinit {
+        visionManager.stop()
+    }
+}
+
+extension ContainerInteractor: ContainerDelegate {
+    
+    func backButtonPressed() {
+        presenter.dismissCurrent()
+        presenter.presentBackButton(isVisible: false)
+        resetPresentation()
+        present(screen: .menu)
+    }
+}
+
+extension ContainerInteractor: MenuDelegate {
+    
+    func selected(screen: Screen) {
         switch screen {
         case .signsDetection:
             scheduleSignTrackerUpdates()
@@ -158,11 +148,8 @@ extension ContainerInteractor: MenuDelegate {
         default: break
         }
         
-        visionManager.modelPerformanceConfig = modelPerformanceConfig(screen)
-        
-        presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: true)
-        currentScreen = screen
+        present(screen: screen)
     }
 }
 

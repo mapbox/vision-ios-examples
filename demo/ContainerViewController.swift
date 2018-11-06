@@ -191,9 +191,6 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
-        
-        dismissSafetyStateViews()
-        
         for collision in collisions {
             var collisionObjectView: CollisionObjectView?
  
@@ -301,6 +298,7 @@ extension ContainerViewController: ContainerPresenter {
         }
         present(viewController: viewController)
         visionViewController?.frameVisualizationMode = .clear
+        currentViewController = menuViewController
     }
     
     func presentVision() {
@@ -327,14 +325,6 @@ extension ContainerViewController: ContainerPresenter {
 
     func presentBackButton(isVisible: Bool) {
         backButton.isHidden = !isVisible
-    }
-    
-    func dismissMenu() {
-        guard let viewController = menuViewController else {
-            assertionFailure("Menu should be initialized before dismiss")
-            return
-        }
-        dismiss(viewController: viewController)
     }
     
     func dismissCurrent() {
