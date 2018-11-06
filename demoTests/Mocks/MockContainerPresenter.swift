@@ -33,7 +33,5 @@ class MockContainerPresenter: ContainerPresenter {
     
     func present(calibrationProgress: CalibrationProgress?) {}
     
-    func dismissMenu() {}
-    
     func dismissCurrent() {}
 }
