@@ -36,7 +36,7 @@
 		B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E720F0B625007D1EA7 /* ContainerViewController.swift */; };
 		B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */; };
 		B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */; };
-		B527D2DD2191A1F700C404C9 /* MockContainerPresenrer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527D2DC2191A1F700C404C9 /* MockContainerPresenrer.swift */; };
+		B527D2DD2191A1F700C404C9 /* MockContainerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527D2DC2191A1F700C404C9 /* MockContainerPresenter.swift */; };
 		B527D2DF2191A5AC00C404C9 /* MockAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527D2DE2191A5AC00C404C9 /* MockAlertPlayer.swift */; };
 		B52A75852180B53700286AD8 /* collision_alert_critical.wav in Resources */ = {isa = PBXBuildFile; fileRef = B52A75832180B53700286AD8 /* collision_alert_critical.wav */; };
 		B52A75862180B53700286AD8 /* collision_alert_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = B52A75842180B53700286AD8 /* collision_alert_warning.wav */; };
@@ -113,7 +113,7 @@
 		B52787E720F0B625007D1EA7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerInteractor.swift; sourceTree = "<group>"; };
-		B527D2DC2191A1F700C404C9 /* MockContainerPresenrer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContainerPresenrer.swift; sourceTree = "<group>"; };
+		B527D2DC2191A1F700C404C9 /* MockContainerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContainerPresenter.swift; sourceTree = "<group>"; };
 		B527D2DE2191A5AC00C404C9 /* MockAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlertPlayer.swift; sourceTree = "<group>"; };
 		B52A75832180B53700286AD8 /* collision_alert_critical.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collision_alert_critical.wav; sourceTree = "<group>"; };
 		B52A75842180B53700286AD8 /* collision_alert_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collision_alert_warning.wav; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 		B527D2DB2191A1E300C404C9 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				B527D2DC2191A1F700C404C9 /* MockContainerPresenrer.swift */,
+				B527D2DC2191A1F700C404C9 /* MockContainerPresenter.swift */,
 				B527D2DE2191A5AC00C404C9 /* MockAlertPlayer.swift */,
 			);
 			path = Mocks;
@@ -502,7 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B527D2DF2191A5AC00C404C9 /* MockAlertPlayer.swift in Sources */,
-				B527D2DD2191A1F700C404C9 /* MockContainerPresenrer.swift in Sources */,
+				B527D2DD2191A1F700C404C9 /* MockContainerPresenter.swift in Sources */,
 				B578BC9521885673003D4AA8 /* SafetyScreenTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

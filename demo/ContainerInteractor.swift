@@ -69,7 +69,6 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.start()
         
-        presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
         present(screen: .menu)
     }
@@ -119,6 +118,7 @@ final class ContainerInteractor {
         presenter.dismissCurrent()
         visionManager.modelPerformanceConfig = modelPerformanceConfig(for: screen)
         presenter.present(screen: screen)
+        presenter.presentBackButton(isVisible: screen != .menu)
         currentScreen = screen
     }
     
@@ -130,8 +130,6 @@ final class ContainerInteractor {
 extension ContainerInteractor: ContainerDelegate {
     
     func backButtonPressed() {
-        presenter.dismissCurrent()
-        presenter.presentBackButton(isVisible: false)
         resetPresentation()
         present(screen: .menu)
     }
@@ -148,7 +146,6 @@ extension ContainerInteractor: MenuDelegate {
         default: break
         }
         
-        presenter.presentBackButton(isVisible: true)
         present(screen: screen)
     }
 }

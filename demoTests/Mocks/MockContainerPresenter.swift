@@ -11,7 +11,7 @@ import MapboxVision
 
 @testable import demo
 
-class MockContainerPresenrer: ContainerPresenter {
+class MockContainerPresenter: ContainerPresenter {
     
     var currentSafetyState: SafetyState = .none
     

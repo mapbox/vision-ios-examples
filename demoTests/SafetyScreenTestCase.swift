@@ -15,12 +15,12 @@ class SafetyScreenTestCase: XCTestCase {
     
     let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance, canvasSize: VisionManager.shared.frameSize)
     
-    var presenter: MockContainerPresenrer!
+    var presenter: MockContainerPresenter!
     var interactor: ContainerInteractor!
     var alertPlayer: MockAlertPlayer!
 
     override func setUp() {
-        presenter = MockContainerPresenrer()
+        presenter = MockContainerPresenter()
         alertPlayer = MockAlertPlayer()
         interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
             alertPlayer: alertPlayer,
