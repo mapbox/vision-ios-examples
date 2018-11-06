@@ -13,7 +13,7 @@ import MapboxVision
 
 class SafetyScreenTestCase: XCTestCase {
     
-    let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance)
+    let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance, canvasSize: VisionManager.shared.frameSize)
     
     var presenter: MockContainerPresenrer!
     var interactor: ContainerInteractor!
@@ -40,7 +40,7 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .critical), (.person, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let result = SafetyState.collisions([.critical(.car(WorldDescription.bbox))])
+        let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .critical, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == result, "Collision Alert should be presented in spite of not triggered another object")
     }
     
@@ -48,7 +48,7 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .critical), (.bicycle, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let result = SafetyState.collisions([.critical(.car(WorldDescription.bbox))])
+        let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .critical, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == result, "Collision Alert should be presented in spite of bicycle")
     }
     
@@ -56,7 +56,7 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning), (.person, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let result = SafetyState.collisions([.warning(.car(WorldDescription.bbox))])
+        let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == result, "Collision Warning should be presented in spite of not triggered another object")
     }
     
@@ -64,15 +64,18 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning), (.sign, .critical)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let warningState = SafetyState.collisions([.warning(.car(WorldDescription.bbox))])
-        XCTAssert(presenter.currentSafetyState == warningState, "Collision Warning should be presented in spite of unsupported ciritcal object")
+        let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
+        XCTAssert(presenter.currentSafetyState == result, "Collision Warning should be presented in spite of unsupported ciritcal object")
     }
     
     func testWarningWithPersonObject() {
         
         let worldDescription = WorldDescription([(.car, .warning), (.person, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let warningState = SafetyState.collisions([.warning(.car(WorldDescription.bbox)), .warning(.person(WorldDescription.bbox))])
+        let warningState = SafetyState.collisions([
+            SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox),
+            SafetyState.Collision(objectType: .person, state: .warning, boundingBox: WorldDescription.bbox)],
+        canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == warningState, "Two different Collision objects should be presented")
     }
     
@@ -94,7 +97,7 @@ class SafetyScreenTestCase: XCTestCase {
         
         let worldDescription = WorldDescription([(.car, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let result = SafetyState.collisions([.warning(.car(WorldDescription.bbox))])
+        let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == result, "Collision Warning should be presented")
         
         let anotherWorldDescription = WorldDescription([(.car, .notTriggered)])
@@ -107,6 +110,29 @@ class SafetyScreenTestCase: XCTestCase {
         let worldDescription = WorldDescription([(.person, .notTriggered), (.car, .notTriggered)], forwardCarIndex: 1)
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == distanceState, "Distance to lead car should be presented")
+    }
+}
+
+extension SafetyState: Equatable {
+    
+    public static func == (lhs: SafetyState, rhs: SafetyState) -> Bool {
+        switch (lhs, rhs) {
+        case (.none, .none):
+            return true
+        case let (.distance(l), .distance(r)):
+            return l.0 == r.0 && l.1 == r.1
+        case let (.collisions(l), .collisions(r)):
+            return l == r
+        case (.none, _), (.distance, _), (.collisions, _):
+            return false
+        }
+    }
+}
+
+extension SafetyState.Collision: Equatable {
+    
+    public static func == (lhs: SafetyState.Collision, rhs: SafetyState.Collision) -> Bool {
+        return lhs.objectType == rhs.objectType && lhs.state == rhs.state && lhs.boundingBox == rhs.boundingBox
     }
 }
 
