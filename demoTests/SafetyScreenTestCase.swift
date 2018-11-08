@@ -81,7 +81,7 @@ class SafetyScreenTestCase: XCTestCase {
     
     func testDistanceToLeadCar() {
 
-        let worldDescription = WorldDescription([(.car, .notTriggered)])
+        let worldDescription = WorldDescription([(.car, .notTriggered)], forwardCarIndex: 0)
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == distanceState, "Distance to lead car should be presented")
     }
@@ -100,7 +100,7 @@ class SafetyScreenTestCase: XCTestCase {
         let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
         XCTAssert(presenter.currentSafetyState == result, "Collision Warning should be presented")
         
-        let anotherWorldDescription = WorldDescription([(.car, .notTriggered)])
+        let anotherWorldDescription = WorldDescription([(.car, .notTriggered)], forwardCarIndex: 0)
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: anotherWorldDescription)
         XCTAssert(presenter.currentSafetyState == distanceState, "Distance to lead car should be presented")
     }
@@ -120,7 +120,7 @@ extension WorldDescription {
     static let bbox: CGRect = .zero
     static let coords = WorldCoordinate(x: 0, y: 0, z: 0)
     
-    convenience init(_ params: [(ObjectType, CollisionState)], forwardCarIndex: UInt = 0) {
+    convenience init(_ params: [(ObjectType, CollisionState)], forwardCarIndex: Int? = nil) {
         
         var objects: [ObjectDescription] = []
         var collisionObjects: [CollisionObjectDescription] = []
@@ -144,7 +144,7 @@ extension WorldDescription {
         }
         
         self.init(identifier: Identifier(),
-                  forwardCarIndex: NSNumber(value: forwardCarIndex),
+                  forwardCar: forwardCarIndex.map { objects[$0] },
                   objects: objects,
                   collisionObjects: collisionObjects)
     }
