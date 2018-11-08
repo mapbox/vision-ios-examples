@@ -72,7 +72,7 @@ enum SafetyState: Equatable {
         
         if collisions.count > 0 {
             self = .collisions(collisions, canvasSize: canvasSize)
-        } else if let car = worldDescription.getForwardCar() {
+        } else if let car = worldDescription.forwardCar {
             self = .distance(frame: car.detection.boundingBox, distance: car.distance, canvasSize: canvasSize)
         } else {
             self = .none
