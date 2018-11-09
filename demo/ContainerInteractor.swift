@@ -20,13 +20,6 @@ enum Screen {
     case arRouting
 }
 
-enum DistanceToObjectScreenState {
-    case none
-    case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
-    case warning(frame: CGRect, canvasSize: CGSize)
-    case alert
-}
-
 protocol ContainerPresenter: class {
     func presentVision()
     func present(screen: Screen)
@@ -34,11 +27,10 @@ protocol ContainerPresenter: class {
     
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
-    func present(distanceToObjectState: DistanceToObjectScreenState)
+    func present(safetyState: SafetyState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
     
-    func dismissMenu()
     func dismissCurrent()
 }
 
@@ -61,11 +53,17 @@ final class ContainerInteractor {
     private let signTracker = Tracker<SignClassification>(maxCapacity: signTrackerMaxCapacity)
     private var signTrackerUpdateTimer: Timer?
     
-    private let alertPlayer = AlertPlayer()
-    private var lastCollisionState = CollisionState.notTriggered
+    private let alertPlayer: AlertPlayer
+    private var lastSafetyState = SafetyState.none
     
-    init(presenter: ContainerPresenter) {
-        self.presenter = presenter
+    struct Dependencies {
+        let alertPlayer: AlertPlayer
+        let presenter: ContainerPresenter
+    }
+    
+    init(dependencies: Dependencies) {
+        self.presenter = dependencies.presenter
+        self.alertPlayer = dependencies.alertPlayer
         
         UserDefaults.standard.setValue(true, forKey: "chinaMarket")
         
@@ -73,11 +71,8 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.start()
         
-        resetPerformance()
-        
-        presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
-        presenter.present(screen: .menu)
+        present(screen: .menu)
     }
     
     private func scheduleSignTrackerUpdates() {
@@ -97,11 +92,18 @@ final class ContainerInteractor {
         signTracker.reset()
     }
     
-    private func resetPerformance() {
-        let segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        let detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
-                                                         detectionPerformance: detectionPerformance)
+    private func modelPerformanceConfig(for screen: Screen) -> ModelPerformanceConfig {
+        switch screen {
+        case .signsDetection, .objectDetection:
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .high))
+        case .segmentation:
+            return .separate(segmentationPerformance: ModelPerformance(mode: .fixed, rate: .high),
+                             detectionPerformance: ModelPerformance(mode: .fixed, rate: .low))
+        case .distanceToObject, .laneDetection:
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
+        case .map, .menu, .arRouting:
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
+        }
     }
     
     private func resetPresentation() {
@@ -110,8 +112,16 @@ final class ContainerInteractor {
         presenter.present(signs: [])
         presenter.present(roadDescription: nil)
         presenter.present(laneDepartureState: .normal)
-        presenter.present(distanceToObjectState: .none)
+        presenter.present(safetyState: .none)
         presenter.present(calibrationProgress: nil)
+    }
+    
+    private func present(screen: Screen) {
+        presenter.dismissCurrent()
+        visionManager.modelPerformanceConfig = modelPerformanceConfig(for: screen)
+        presenter.present(screen: screen)
+        presenter.presentBackButton(isVisible: screen != .menu)
+        currentScreen = screen
     }
     
     deinit {
@@ -122,23 +132,14 @@ final class ContainerInteractor {
 extension ContainerInteractor: ContainerDelegate {
     
     func backButtonPressed() {
-        presenter.dismissCurrent()
-        presenter.presentBackButton(isVisible: false)
-        presenter.present(screen: .menu)
-        
         resetPresentation()
-        resetPerformance()
-        
-        currentScreen = .menu
+        present(screen: .menu)
     }
 }
 
 extension ContainerInteractor: MenuDelegate {
     
     func selected(screen: Screen) {
-        presenter.dismissCurrent()
-        presenter.dismissMenu()
-        
         switch screen {
         case .signsDetection:
             scheduleSignTrackerUpdates()
@@ -147,30 +148,7 @@ extension ContainerInteractor: MenuDelegate {
         default: break
         }
         
-        let segmentationPerformance: ModelPerformance
-        let detectionPerformance: ModelPerformance
-        
-        switch screen {
-        case .signsDetection, .objectDetection:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .high)
-        case .segmentation:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .high)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        case .distanceToObject, .laneDetection:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .medium)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .medium)
-        case .map, .menu, .arRouting:
-            segmentationPerformance = ModelPerformance(mode: .fixed, rate: .low)
-            detectionPerformance = ModelPerformance(mode: .fixed, rate: .low)
-        }
-        
-        visionManager.modelPerformanceConfig = .separate(segmentationPerformance: segmentationPerformance,
-                                                         detectionPerformance: detectionPerformance)
-        
-        presenter.present(screen: screen)
-        presenter.presentBackButton(isVisible: true)
-        currentScreen = screen
+        present(screen: screen)
     }
 }
 
@@ -215,50 +193,11 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription?) {
-        
-        guard
-            case .distanceToObject = currentScreen,
-            let worldDescription = worldDescription,
-            let car = worldDescription.collisionObjects.first,
-            car.object.detection.objectType == .car
-        else {
-            presenter.present(distanceToObjectState: .none)
-            alertPlayer.stop()
+        guard case .distanceToObject = currentScreen, let worldDescription = worldDescription else {
+            presenter.present(safetyState: .none)
             return
         }
-        
-        switch car.state {
-        case .notTriggered:
-            presenter.present(distanceToObjectState: .distance(
-                frame: car.object.detection.boundingBox,
-                distance: car.object.distance,
-                canvasSize: visionManager.frameSize
-            ))
-        case .warning:
-            presenter.present(distanceToObjectState: .warning(
-                frame: car.object.detection.boundingBox,
-                canvasSize: visionManager.frameSize
-            ))
-        case .critical:
-            presenter.present(distanceToObjectState: .alert)
-        }
-        
-        playCollisionAlert(for: car.state)
-    }
-    
-    private func playCollisionAlert(for state: CollisionState) {
-        guard lastCollisionState != state else { return }
-        
-        switch state {
-        case .notTriggered:
-            alertPlayer.stop()
-        case .warning:
-            alertPlayer.play(sound: .collisionAlertWarning, repeated: true)
-        case .critical:
-            alertPlayer.play(sound: .collisionAlertCritical, repeated: true)
-        }
-        
-        lastCollisionState = state
+        presenter.present(safetyState: SafetyState(worldDescription, canvasSize: VisionManager.shared.frameSize))
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {

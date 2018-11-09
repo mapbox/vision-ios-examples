@@ -53,7 +53,6 @@ final class ContainerViewController: UIViewController {
         ])
         
         view.addSubview(distanceView)
-        view.addSubview(collisionObjectView)
         
         view.addSubview(distanceLabel)
         NSLayoutConstraint.activate([
@@ -130,7 +129,7 @@ final class ContainerViewController: UIViewController {
         return view
     }()
     
-    private let collisionObjectView = CollisionObjectView()
+    private var collisionObjectViews: [CollisionObjectView] = []
     
     private let collisionAlertView: UIImageView = {
         let view = UIImageView(image: Asset.Assets.brake.image)
@@ -169,22 +168,20 @@ final class ContainerViewController: UIViewController {
 
 extension ContainerViewController: ContainerPresenter {
     
-    private func dismissDistanceToObjectViews() {
+    private func dismissSafetyStateViews() {
         distanceView.isHidden = true
         distanceLabel.isHidden = true
         
         collisionAlertView.isHidden = true
-        collisionObjectView.isHidden = true
         collisionBanerView.isHidden = true
+        
+        collisionObjectViews.forEach { $0.removeFromSuperview() }
+        collisionObjectViews.removeAll()
     }
     
     private func present(distance: Double, objectFrame frame: CGRect, canvasSize: CGSize) {
         distanceView.isHidden = false
         distanceLabel.isHidden = false
-        
-        collisionAlertView.isHidden = true
-        collisionObjectView.isHidden = true
-        collisionBanerView.isHidden = true
         
         let left = CGPoint(x: frame.minX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         let right = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
@@ -193,43 +190,55 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.text = distanceFormatter.string(fromMeters: distance)
     }
     
-    private func presentWarning(objectFrame frame: CGRect, canvasSize: CGSize) {
-        distanceView.isHidden = true
-        distanceLabel.isHidden = true
-        
-        collisionAlertView.isHidden = false
-        collisionObjectView.isHidden = false
-        collisionBanerView.isHidden = true
-        
+    private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
+        for collision in collisions {
+            var collisionObjectView: CollisionObjectView?
+ 
+            switch (collision.state, collision.objectType) {
+            case (.warning, .car):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
+                collisionAlertView.isHidden = false
+            case (.warning, .person):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
+                collisionObjectView?.exclamationMarkView.isHidden = true
+            case (.critical, .car):
+                collisionBanerView.isHidden = false
+                return
+            case (.critical ,.person):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
+                collisionAlertView.isHidden = false
+            }
+            
+            collisionObjectView?.color = collision.objectType.color
+            
+            if let collisionObjectView = collisionObjectView {
+                collisionObjectViews.append(collisionObjectView)
+                view.addSubview(collisionObjectView)
+            }
+        }
+    }
+    
+    private func createCollisionObjectView(frame: CGRect,  canvasSize: CGSize) -> CollisionObjectView {
         let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         
         let rect = CGRect(x: leftTop.x, y: leftTop.y, width: rightBottom.x - leftTop.x, height: rightBottom.y - leftTop.y)
         let coef: CGFloat = 0.25
-        let newRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
+        let extendedRect = rect.insetBy(dx: -(rect.width * coef), dy: -(rect.height * coef))
         
-        collisionObjectView.update(newRect)
+        return CollisionObjectView(frame: extendedRect)
     }
     
-    private func presentAlert() {
-        distanceView.isHidden = true
-        distanceLabel.isHidden = true
+    func present(safetyState: SafetyState) {
+        dismissSafetyStateViews()
         
-        collisionAlertView.isHidden = true
-        collisionObjectView.isHidden = true
-        collisionBanerView.isHidden = false
-    }
-    
-    func present(distanceToObjectState: DistanceToObjectScreenState) {
-        switch distanceToObjectState {
+        switch safetyState {
         case .none:
-            dismissDistanceToObjectViews()
-        case .distance(let frame, let distance, let canvasSize):
+            break
+        case let .distance(frame, distance, canvasSize):
             present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
-        case .warning(let frame, let canvasSize):
-            presentWarning(objectFrame: frame, canvasSize: canvasSize)
-        case .alert:
-            presentAlert()
+        case let .collisions(collisions, canvasSize):
+            present(collisions: collisions, canvasSize: canvasSize)
         }
     }
     
@@ -287,6 +296,7 @@ extension ContainerViewController: ContainerPresenter {
         }
         present(viewController: viewController)
         visionViewController?.frameVisualizationMode = .clear
+        currentViewController = menuViewController
     }
     
     func presentVision() {
@@ -313,14 +323,6 @@ extension ContainerViewController: ContainerPresenter {
 
     func presentBackButton(isVisible: Bool) {
         backButton.isHidden = !isVisible
-    }
-    
-    func dismissMenu() {
-        guard let viewController = menuViewController else {
-            assertionFailure("Menu should be initialized before dismiss")
-            return
-        }
-        dismiss(viewController: viewController)
     }
     
     func dismissCurrent() {
@@ -351,5 +353,16 @@ extension UIViewController {
         viewController.willMove(toParentViewController: nil)
         viewController.view.removeFromSuperview()
         viewController.removeFromParentViewController()
+    }
+}
+
+private extension SafetyState.ObjectType {
+    var color: UIColor {
+        switch self {
+        case .car:
+            return UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
+        case .person:
+            return UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        }
     }
 }

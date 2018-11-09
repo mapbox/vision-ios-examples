@@ -50,7 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let menuViewController = MenuViewController()
         containerController.menuViewController = menuViewController
         
-        interactor = ContainerInteractor(presenter: containerController)
+        let alertPlayer = AlertSoundPlayer()
+        
+        interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
+            alertPlayer: alertPlayer,
+            presenter: containerController
+        ))
         containerController.delegate = interactor
         menuViewController.delegate = interactor
         

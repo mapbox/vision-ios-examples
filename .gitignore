@@ -53,3 +53,4 @@ demo.xcworkspace
 
 # generated in dev evnironment
 scripts/dev-carthage-input.xcfilelist
+.vscode
