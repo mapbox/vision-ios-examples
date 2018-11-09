@@ -48,7 +48,13 @@ enum AlertSound {
     }
 }
 
-final class AlertPlayer {
+protocol AlertPlayer {
+    func play(sound: AlertSound, repeated: Bool)
+    func stop()
+}
+
+final class AlertSoundPlayer: AlertPlayer {
+    
     private enum State {
         case idle
         case playing(repeated: Bool, soundID: SystemSoundID)
