@@ -67,6 +67,8 @@ final class ContainerInteractor {
     init(presenter: ContainerPresenter) {
         self.presenter = presenter
         
+        UserDefaults.standard.setValue(true, forKey: "chinaMarket")
+        
         visionManager = VisionManager.shared
         visionManager.delegate = self
         visionManager.start()
@@ -84,7 +86,7 @@ final class ContainerInteractor {
         signTrackerUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let `self` = self else { return }
             let signs = self.signTracker.getCurrent().compactMap { sign in
-                return sign.icon(over: false, market: .us)
+                return sign.icon(over: false, market: .china)
             }
             self.presenter.present(signs: signs)
         }

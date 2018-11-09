@@ -59,7 +59,61 @@ extension SignClassification {
                 default: return nil
                 }
             case .china:
-                return nil
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitEU5
+                case 15:
+                    return Asset.Signs.speedLimitEU15
+                case 25:
+                    return Asset.Signs.speedLimitEU25
+                case 35:
+                    return Asset.Signs.speedLimitEU35
+                case 45:
+                    return Asset.Signs.speedLimitEU45
+                case 55:
+                    return Asset.Signs.speedLimitEU55
+                case 65:
+                    return Asset.Signs.speedLimitEU65
+                case 75:
+                    return Asset.Signs.speedLimitEU75
+                case 85:
+                    return Asset.Signs.speedLimitEU85
+                case 95:
+                    return Asset.Signs.speedLimitEU95
+                case 105:
+                    return Asset.Signs.speedLimitEU105
+                case 115:
+                    return Asset.Signs.speedLimitEU115
+                case 125:
+                    return Asset.Signs.speedLimitEU125
+                case 10:
+                    return Asset.Signs.speedLimitEU10
+                case 20:
+                    return Asset.Signs.speedLimitEU20
+                case 30:
+                    return Asset.Signs.speedLimitEU30
+                case 40:
+                    return Asset.Signs.speedLimitEU40
+                case 50:
+                    return Asset.Signs.speedLimitEU50
+                case 60:
+                    return Asset.Signs.speedLimitEU60
+                case 70:
+                    return Asset.Signs.speedLimitEU70
+                case 80:
+                    return Asset.Signs.speedLimitEU80
+                case 90:
+                    return Asset.Signs.speedLimitEU90
+                case 100:
+                    return Asset.Signs.speedLimitEU100
+                case 110:
+                    return Asset.Signs.speedLimitEU110
+                case 120:
+                    return Asset.Signs.speedLimitEU120
+                case 130:
+                    return Asset.Signs.speedLimitEU130
+                default: return nil
+                }
             }
         case .speedLimitEnd:
             switch market {
