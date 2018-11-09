@@ -43,6 +43,7 @@ protocol MenuDelegate: class {
 }
 
 private let signTrackerMaxCapacity = 5
+private let collisionAlertDelay: TimeInterval = 3 // seconds
 
 final class ContainerInteractor {
     
@@ -55,6 +56,9 @@ final class ContainerInteractor {
     
     private let alertPlayer: AlertPlayer
     private var lastSafetyState = SafetyState.none
+    
+    private var hasRecentlyPlayedCollisionAlert = false
+    private var collisionAlertResetTimer: Timer?
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -101,6 +105,13 @@ final class ContainerInteractor {
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
         case .map, .menu, .arRouting:
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
+        }
+    }
+    
+    private func scheduleCollisionAlertReset() {
+        collisionAlertResetTimer?.invalidate()
+        collisionAlertResetTimer = Timer.scheduledTimer(withTimeInterval: collisionAlertDelay, repeats: false) { [weak self] _ in
+            self?.hasRecentlyPlayedCollisionAlert = false
         }
     }
     
@@ -195,7 +206,21 @@ extension ContainerInteractor: VisionManagerDelegate {
             presenter.present(safetyState: .none)
             return
         }
-        presenter.present(safetyState: SafetyState(worldDescription, canvasSize: VisionManager.shared.frameSize))
+        
+        let state = SafetyState(worldDescription, canvasSize: visionManager.frameSize)
+        
+        switch state {
+        case .none, .distance: break
+        case .collisions(let collisions, _):
+            let containsPerson = collisions.contains { $0.objectType == .person && $0.state == .critical }
+            if containsPerson, !hasRecentlyPlayedCollisionAlert {
+                alertPlayer.play(sound: .collisionAlertCritical, repeated: false)
+                hasRecentlyPlayedCollisionAlert = true
+                scheduleCollisionAlertReset()
+            }
+        }
+        
+        presenter.present(safetyState: state)
     }
     
     public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
