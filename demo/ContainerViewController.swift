@@ -206,30 +206,25 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
-        
-        dismissSafetyStateViews()
-        
         for collision in collisions {
             var collisionObjectView: CollisionObjectView?
  
-            switch collision {
-            case let .warning(.car(frame)):
-                collisionObjectView = createCollisionObjectView(frame: frame, canvasSize: canvasSize)
-                collisionObjectView?.color = SafetyState.Object.carColor
+            switch (collision.state, collision.objectType) {
+            case (.warning, .car):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
                 collisionAlertView.isHidden = false
-            case let .warning(.person(frame)):
-                collisionObjectView = createCollisionObjectView(frame: frame, canvasSize: canvasSize)
+            case (.warning, .person):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
                 collisionObjectView?.exclamationMarkView.isHidden = true
-                collisionObjectView?.color = SafetyState.Object.personColor
-            case .critical(.car):
+            case (.critical, .car):
                 collisionBanerView.isHidden = false
                 return
-            case let .critical(.person(frame)):
-                collisionObjectView = createCollisionObjectView(frame: frame, canvasSize: canvasSize)
-                collisionObjectView?.color = SafetyState.Object.personColor
+            case (.critical ,.person):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
                 collisionAlertView.isHidden = false
-                break
             }
+            
+            collisionObjectView?.color = collision.objectType.color
             
             if let collisionObjectView = collisionObjectView {
                 collisionObjectViews.append(collisionObjectView)
@@ -254,11 +249,11 @@ extension ContainerViewController: ContainerPresenter {
         
         switch safetyState {
         case .none:
-            break;
-        case let .distance(frame, distance):
-            present(distance: distance, objectFrame: frame, canvasSize: safetyState.canvasSize)
-        case let .collisions(collisions):
-            present(collisions: collisions, canvasSize: safetyState.canvasSize)
+            break
+        case let .distance(frame, distance, canvasSize):
+            present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
+        case let .collisions(collisions, canvasSize):
+            present(collisions: collisions, canvasSize: canvasSize)
         }
     }
     
@@ -334,6 +329,7 @@ extension ContainerViewController: ContainerPresenter {
         }
         present(viewController: viewController)
         visionViewController?.frameVisualizationMode = .clear
+        currentViewController = menuViewController
     }
     
     func presentVision() {
@@ -360,14 +356,6 @@ extension ContainerViewController: ContainerPresenter {
 
     func presentBackButton(isVisible: Bool) {
         backButton.isHidden = !isVisible
-    }
-    
-    func dismissMenu() {
-        guard let viewController = menuViewController else {
-            assertionFailure("Menu should be initialized before dismiss")
-            return
-        }
-        dismiss(viewController: viewController)
     }
     
     func dismissCurrent() {
@@ -401,7 +389,13 @@ extension UIViewController {
     }
 }
 
-private extension SafetyState.Object {
-    static let carColor = UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
-    static let personColor = UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+private extension SafetyState.ObjectType {
+    var color: UIColor {
+        switch self {
+        case .car:
+            return UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
+        case .person:
+            return UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        }
+    }
 }

@@ -35,10 +35,8 @@ protocol ContainerPresenter: class {
     func present(safetyState: SafetyState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
-    
     func present(speedLimitStatus: SpeedLimitStatus?)
     
-    func dismissMenu()
     func dismissCurrent()
 }
 
@@ -54,7 +52,6 @@ private let signTrackerMaxCapacity = 5
 private let speedLimitSeenInterval: Float = 5
 private let speedLimitWarningThreshold: Double = 5 // mph
 private let bonnetAdjustment = 1.25
-private let collisionBeepDelay: TimeInterval = 3 // seconds
 
 final class ContainerInteractor {
     
@@ -70,9 +67,6 @@ final class ContainerInteractor {
     private var lastSpeedLimit: SpeedLimitValue?
     
     private var hasBeepedForSpeedLimit = false
-    private var hasBeepedForCollision = false
-    
-    private var beepResetTimer: Timer?
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -87,11 +81,8 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.start()
         
-        resetPerformance()
-        
-        presenter.presentBackButton(isVisible: false)
         presenter.presentVision()
-        presenter.present(screen: .menu)
+        present(screen: .menu)
     }
     
     private func scheduleSignTrackerUpdates() {
@@ -111,16 +102,18 @@ final class ContainerInteractor {
         signTracker.reset()
     }
     
-    private func scheduleBeepReset() {
-        beepResetTimer?.invalidate()
-        beepResetTimer = Timer.scheduledTimer(withTimeInterval: collisionBeepDelay, repeats: false) { [weak self] _ in
-            self?.hasBeepedForCollision = false
+    private func modelPerformanceConfig(for screen: Screen) -> ModelPerformanceConfig {
+        switch screen {
+        case .signsDetection, .objectDetection:
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .high))
+        case .segmentation:
+            return .separate(segmentationPerformance: ModelPerformance(mode: .fixed, rate: .high),
+                             detectionPerformance: ModelPerformance(mode: .fixed, rate: .low))
+        case .distanceToObject, .laneDetection:
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
+        case .map, .menu, .arRouting:
+            return .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
         }
-    }
-    
-    private func resetPerformance() {
-        let performance = ModelPerformance(mode: .fixed, rate: .low)
-        visionManager.modelPerformanceConfig = .merged(performance: performance)
     }
     
     private func resetPresentation() {
@@ -133,6 +126,14 @@ final class ContainerInteractor {
         presenter.present(calibrationProgress: nil)
     }
     
+    private func present(screen: Screen) {
+        presenter.dismissCurrent()
+        visionManager.modelPerformanceConfig = modelPerformanceConfig(for: screen)
+        presenter.present(screen: screen)
+        presenter.presentBackButton(isVisible: screen != .menu)
+        currentScreen = screen
+    }
+    
     deinit {
         visionManager.stop()
     }
@@ -141,23 +142,14 @@ final class ContainerInteractor {
 extension ContainerInteractor: ContainerDelegate {
     
     func backButtonPressed() {
-        presenter.dismissCurrent()
-        presenter.presentBackButton(isVisible: false)
-        presenter.present(screen: .menu)
-        
         resetPresentation()
-        resetPerformance()
-        
-        currentScreen = .menu
+        present(screen: .menu)
     }
 }
 
 extension ContainerInteractor: MenuDelegate {
     
     func selected(screen: Screen) {
-        presenter.dismissCurrent()
-        presenter.dismissMenu()
-        
         switch screen {
         case .signsDetection:
             scheduleSignTrackerUpdates()
@@ -166,22 +158,7 @@ extension ContainerInteractor: MenuDelegate {
         default: break
         }
         
-        let performance: ModelPerformance
-        
-        switch screen {
-        case .signsDetection, .objectDetection, .segmentation:
-            performance = ModelPerformance(mode: .fixed, rate: .high)
-        case .distanceToObject, .laneDetection:
-            performance = ModelPerformance(mode: .fixed, rate: .medium)
-        case .map, .menu, .arRouting:
-            performance = ModelPerformance(mode: .fixed, rate: .low)
-        }
-        
-        visionManager.modelPerformanceConfig = .merged(performance: performance)
-        
-        presenter.present(screen: screen)
-        presenter.presentBackButton(isVisible: true)
-        currentScreen = screen
+        present(screen: screen)
     }
 }
 
@@ -230,30 +207,7 @@ extension ContainerInteractor: VisionManagerDelegate {
             presenter.present(safetyState: .none)
             return
         }
-        
-        let state = SafetyState(worldDescription)
-        
-        switch state {
-        case .none, .distance: break
-            
-        case .collisions(let collisions):
-            let containsPerson = collisions.contains {
-                
-                if case .critical(.person) = $0 {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            
-            if containsPerson, !hasBeepedForCollision {
-                alertPlayer.play(sound: .collisionAlertCritical, repeated: false)
-                hasBeepedForCollision = true
-                scheduleBeepReset()
-            }
-        }
-        
-        presenter.present(safetyState: state)
+        presenter.present(safetyState: SafetyState(worldDescription, canvasSize: VisionManager.shared.frameSize))
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
