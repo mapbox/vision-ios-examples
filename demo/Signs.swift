@@ -58,7 +58,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitEnd:
@@ -103,7 +103,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitEndUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitMin:
@@ -148,7 +148,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitMinUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitTrucks:
@@ -193,7 +193,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitTrucksUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitNight:
@@ -238,7 +238,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitNightUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitComplementary:
