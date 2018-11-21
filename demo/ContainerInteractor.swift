@@ -30,6 +30,7 @@ protocol ContainerPresenter: class {
     func present(safetyState: SafetyState)
     func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
+    func present(speedLimit: ImageAsset?)
     
     func dismissCurrent()
 }
@@ -47,6 +48,11 @@ private let collisionAlertDelay: TimeInterval = 3 // seconds
 
 final class ContainerInteractor {
     
+    private struct SpeedLimitState {
+        let speedLimit: SpeedLimit
+        let isSpeeding: Bool
+    }
+    
     private var currentScreen = Screen.menu
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
@@ -56,6 +62,10 @@ final class ContainerInteractor {
     
     private let alertPlayer: AlertPlayer
     private var lastSafetyState = SafetyState.none
+    private var lastSpeedLimitState: SpeedLimitState?
+    
+    private var hasRecentlyPlayedSpeedLimitAlert = false
+    private var speedLimitAlertResetTimer: Timer?
     
     private var hasRecentlyPlayedCollisionAlert = false
     private var collisionAlertResetTimer: Timer?
@@ -71,6 +81,7 @@ final class ContainerInteractor {
         
         visionManager = VisionManager.shared
         visionManager.delegate = self
+        visionManager.roadRestrictionsDelegate = self
         visionManager.start()
         
         presenter.presentVision()
@@ -115,6 +126,13 @@ final class ContainerInteractor {
         }
     }
     
+    private func scheduleSpeedLimitAlertReset() {
+        speedLimitAlertResetTimer?.invalidate()
+        speedLimitAlertResetTimer = Timer.scheduledTimer(withTimeInterval: collisionAlertDelay, repeats: false) { [weak self] _ in
+            self?.hasRecentlyPlayedSpeedLimitAlert = false
+        }
+    }
+    
     private func resetPresentation() {
         stopSignTrackerUpdates()
         alertPlayer.stop()
@@ -131,6 +149,11 @@ final class ContainerInteractor {
         presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: screen != .menu)
         currentScreen = screen
+    }
+    
+    private func check(_ speedLimit: SpeedLimit?, at position: Position?) -> Bool {
+        guard let speedLimit = speedLimit, let position = position else { return false }
+        return position.speed > speedLimit.maxSpeed
     }
     
     deinit {
@@ -226,5 +249,32 @@ extension ContainerInteractor: VisionManagerDelegate {
     func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
         guard case .distanceToObject = currentScreen else { return }
         presenter.present(calibrationProgress: calibrationProgress)
+    }
+}
+
+extension ContainerInteractor: VisionManagerRoadRestrictionsDelegate {
+    func visionManager(_ visionManager: VisionManager, didUpdateSpeedLimit speedLimit: SpeedLimit?) {
+        guard
+            case .distanceToObject = currentScreen,
+            let speedLimit = speedLimit
+        else {
+            presenter.present(speedLimit: nil)
+            lastSpeedLimitState = nil
+            return
+        }
+        
+        let isSpeeding = check(speedLimit, at: visionManager.estimatedPosition)
+        let wasSpeeding = lastSpeedLimitState?.isSpeeding ?? false
+        let hasStartedSpeeding = isSpeeding && !wasSpeeding
+        
+        if hasStartedSpeeding, !hasRecentlyPlayedSpeedLimitAlert {
+            alertPlayer.play(sound: .overSpeedLimit, repeated: false)
+            hasRecentlyPlayedSpeedLimitAlert = true
+        }
+        
+        let sign = SignValue(type: .speedLimit, number: speedLimit.maxSpeed).icon(over: isSpeeding, market: .us)
+        presenter.present(speedLimit: sign)
+        
+        lastSpeedLimitState = SpeedLimitState(speedLimit: speedLimit, isSpeeding: isSpeeding)
     }
 }

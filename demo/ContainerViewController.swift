@@ -86,6 +86,12 @@ final class ContainerViewController: UIViewController {
             calibrationLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
             calibrationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+        
+        view.addSubview(speedLimitView)
+        NSLayoutConstraint.activate([
+            speedLimitView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
+            speedLimitView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -bannerInset),
+        ])
     }
     
     override func present(viewController: UIViewController) {
@@ -157,6 +163,12 @@ final class ContainerViewController: UIViewController {
     private let calibrationLabel: UILabel = {
         let label = PaddedLabel.createDarkRounded()
         return label
+    }()
+    
+    private let speedLimitView: UIImageView = {
+        let view = UIImageView(image: nil)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var distanceFormatter: DistanceFormatter = {
@@ -274,6 +286,16 @@ extension ContainerViewController: ContainerPresenter {
         calibrationLabel.isHidden = calibrationProgress?.isCalibrated ?? true
         guard let calibrationProgress = calibrationProgress else { return }
         calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.progress * 100)))
+    }
+    
+    func present(speedLimit: ImageAsset?) {
+        guard let speedLimit = speedLimit else {
+            speedLimitView.isHidden = true
+            return
+        }
+        
+        speedLimitView.isHidden = false
+        speedLimitView.image = speedLimit.image
     }
     
     func present(screen: Screen) {

@@ -8,7 +8,7 @@
 
 "Menu_Segmentation_Button" = "Segmentation";
 "Menu_LaneDetection_Button" = "Lane detection";
-"Menu_CollisionDetection_Button" = "Collision detection";
+"Menu_CollisionDetection_Button" = "Safety mode";
 "Menu_SignDetection_Button" = "Sign Detection";
 "Menu_ObjectDetection_Button" = "Object Detection";
 "Menu_ObjectMapping_Button" = "Object Mapping";
