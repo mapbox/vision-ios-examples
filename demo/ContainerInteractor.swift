@@ -223,7 +223,7 @@ extension ContainerInteractor: VisionManagerDelegate {
         presenter.present(safetyState: state)
     }
     
-    public func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
+    func visionManager(_ visionManager: VisionManager, didUpdateCalibrationProgress calibrationProgress: CalibrationProgress) {
         guard case .distanceToObject = currentScreen else { return }
         presenter.present(calibrationProgress: calibrationProgress)
     }

@@ -15,7 +15,7 @@ final class DistanceView: UIView {
     private static let height: CGFloat = 15
     
     func update(_ left: CGPoint, _ right: CGPoint) {
-        frame = CGRect(x: left.x, y: left.y, width: right.x - left.x, height: DistanceView.height)
+        frame = CGRect(x: left.x, y: left.y, width: right.x - left.x + DistanceView.height, height: DistanceView.height)
         setNeedsDisplay()
     }
 
@@ -29,7 +29,7 @@ final class DistanceView: UIView {
         context.saveGState()
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let colorComponents = UIColor.green.cgColor.components! + UIColor.clear.cgColor.components!
+        let colorComponents = UIColor.green.cgColor.components! + UIColor.green.withAlphaComponent(0).cgColor.components!
         let locations: [CGFloat] = [0.0, 1.0]
 
         guard let gradient = CGGradient(colorSpace: colorSpace, colorComponents: colorComponents, locations: locations, count: 2) else {
