@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E197730211DF34C00311B95 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19772F211DF34C00311B95 /* MapViewController.swift */; };
+		2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */; };
 		2E4FEDF4215E5EA600DCB496 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */; };
 		2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */; };
 		2E4FEE03215E609A00DCB496 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E4FEE01215E609A00DCB496 /* Localizable.strings */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		2E19772F211DF34C00311B95 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSwitchingView.swift; sourceTree = "<group>"; };
 		2E4FEDF2215E5EA600DCB496 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseChecker.swift; sourceTree = "<group>"; };
 		2E4FEE05215E60B000DCB496 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */,
 				B5045858217A077300BA5133 /* CollisionObjectView.swift */,
 				B5314421218C7DA7001B6DEB /* SafetyState.swift */,
+				2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */,
+				2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */,
 				2E60335E214295F80050EDB3 /* Locale.swift in Sources */,
 				B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */,
 				B532EE072170A9AB00B172FA /* UIButton+BackgroudColor.swift in Sources */,

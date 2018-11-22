@@ -12,7 +12,7 @@ import MapboxVision
 extension SignValue {
     func icon(over: Bool, market: Market) -> ImageAsset? {
         let asset = getIcon(over, market)
-        assert(asset != nil, "Icon for \(self) with over: \(over) for market: \(market) is not found")
+        assert(asset != nil, "Icon for \(self) with over: \(over) for market: \(market.rawValue) is not found")
         return asset
     }
     

@@ -165,8 +165,9 @@ final class ContainerViewController: UIViewController {
         return label
     }()
     
-    private let speedLimitView: UIImageView = {
-        let view = UIImageView(image: nil)
+    private let speedLimitView: ImageSwitchingView = {
+        let view = ImageSwitchingView()
+        view.spacing = bannerInset
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -288,14 +289,18 @@ extension ContainerViewController: ContainerPresenter {
         calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.progress * 100)))
     }
     
-    func present(speedLimit: ImageAsset?) {
+    func present(speedLimit: ImageAsset?, isNew: Bool) {
         guard let speedLimit = speedLimit else {
             speedLimitView.isHidden = true
             return
         }
         
         speedLimitView.isHidden = false
-        speedLimitView.image = speedLimit.image
+        if isNew {
+            speedLimitView.switch(to: speedLimit.image)
+        } else {
+            speedLimitView.image = speedLimit.image
+        }
     }
     
     func present(screen: Screen) {
