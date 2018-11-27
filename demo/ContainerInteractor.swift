@@ -54,6 +54,26 @@ final class ContainerInteractor {
         let isSpeeding: Bool
     }
     
+    private class AutoResetRestriction {
+        var isAllowed: Bool = true
+        
+        private let resetInterval: TimeInterval
+        
+        private var timer: Timer?
+        
+        init(resetInterval: TimeInterval) {
+            self.resetInterval = resetInterval
+        }
+        
+        func restrict() {
+            isAllowed = false
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: resetInterval, repeats: false) { [weak self] _ in
+                self?.isAllowed = true
+            }
+        }
+    }
+    
     private var currentScreen = Screen.menu
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
@@ -65,11 +85,8 @@ final class ContainerInteractor {
     private var lastSafetyState = SafetyState.none
     private var lastSpeedLimitState: SpeedLimitState?
     
-    private var hasRecentlyPlayedSpeedLimitAlert = false
-    private var speedLimitAlertResetTimer: Timer?
-    
-    private var hasRecentlyPlayedCollisionAlert = false
-    private var collisionAlertResetTimer: Timer?
+    private var speedLimitAlertRestriction = AutoResetRestriction(resetInterval: speedLimitAlertDelay)
+    private var collisionAlertRestriction = AutoResetRestriction(resetInterval: collisionAlertDelay)
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -117,22 +134,6 @@ final class ContainerInteractor {
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
         case .map, .menu, .arRouting:
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
-        }
-    }
-    
-    private func scheduleCollisionAlertReset() {
-        hasRecentlyPlayedCollisionAlert = true
-        collisionAlertResetTimer?.invalidate()
-        collisionAlertResetTimer = Timer.scheduledTimer(withTimeInterval: collisionAlertDelay, repeats: false) { [weak self] _ in
-            self?.hasRecentlyPlayedCollisionAlert = false
-        }
-    }
-    
-    private func scheduleSpeedLimitAlertReset() {
-        hasRecentlyPlayedSpeedLimitAlert = true
-        speedLimitAlertResetTimer?.invalidate()
-        speedLimitAlertResetTimer = Timer.scheduledTimer(withTimeInterval: speedLimitAlertDelay, repeats: false) { [weak self] _ in
-            self?.hasRecentlyPlayedSpeedLimitAlert = false
         }
     }
     
@@ -191,9 +192,9 @@ final class ContainerInteractor {
         let wasSpeeding = oldState?.isSpeeding ?? false
         let hasStartedSpeeding = newState.isSpeeding && !wasSpeeding
         
-        if hasStartedSpeeding, !hasRecentlyPlayedSpeedLimitAlert {
+        if hasStartedSpeeding, speedLimitAlertRestriction.isAllowed {
             alertPlayer.play(sound: .overSpeedLimit, repeated: false)
-            scheduleSpeedLimitAlertReset()
+            speedLimitAlertRestriction.restrict()
         }
     }
     
@@ -277,9 +278,9 @@ extension ContainerInteractor: VisionManagerDelegate {
         case .none, .distance: break
         case .collisions(let collisions, _):
             let containsPerson = collisions.contains { $0.objectType == .person && $0.state == .critical }
-            if containsPerson, !hasRecentlyPlayedCollisionAlert {
+            if containsPerson, collisionAlertRestriction.isAllowed {
                 alertPlayer.play(sound: .collisionAlertCritical, repeated: false)
-                scheduleCollisionAlertReset()
+                collisionAlertRestriction.restrict()
             }
         }
         

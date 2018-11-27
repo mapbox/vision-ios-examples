@@ -291,6 +291,7 @@ extension ContainerViewController: ContainerPresenter {
     
     func present(speedLimit: ImageAsset?, isNew: Bool) {
         guard let speedLimit = speedLimit else {
+            speedLimitView.reset()
             speedLimitView.isHidden = true
             return
         }
