@@ -15,10 +15,6 @@ enum AlertSound {
     case collisionAlertWarning
     case collisionAlertCritical
     case laneDepartureWarning
-    
-    @available(*, deprecated, message: "Provide the sound")
-    case newSpeedLimit
-    @available(*, deprecated, message: "Provide the sound")
     case overSpeedLimit
     
     static let type = "wav"
@@ -31,10 +27,8 @@ enum AlertSound {
             return "collision_alert_warning"
         case .laneDepartureWarning:
             return "lane_departure_warning"
-        case .newSpeedLimit:
-            return "lane_departure_warning"
         case .overSpeedLimit:
-            return "lane_departure_warning"
+            return "overspeed_warning"
         }
     }
     
