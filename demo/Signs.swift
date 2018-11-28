@@ -59,6 +59,62 @@ extension SignClassification {
                 default: return nil
                 }
             case .china:
+                switch number {
+                case 5:
+                    return over ? Asset.Signs.speedLimitEU5Over : Asset.Signs.speedLimitEU5
+                case 15:
+                    return over ? Asset.Signs.speedLimitEU15Over : Asset.Signs.speedLimitEU15
+                case 25:
+                    return over ? Asset.Signs.speedLimitEU25Over : Asset.Signs.speedLimitEU25
+                case 35:
+                    return over ? Asset.Signs.speedLimitEU35Over : Asset.Signs.speedLimitEU35
+                case 45:
+                    return over ? Asset.Signs.speedLimitEU45Over : Asset.Signs.speedLimitEU45
+                case 55:
+                    return over ? Asset.Signs.speedLimitEU55Over : Asset.Signs.speedLimitEU55
+                case 65:
+                    return over ? Asset.Signs.speedLimitEU65Over : Asset.Signs.speedLimitEU65
+                case 75:
+                    return over ? Asset.Signs.speedLimitEU75Over : Asset.Signs.speedLimitEU75
+                case 85:
+                    return over ? Asset.Signs.speedLimitEU85Over : Asset.Signs.speedLimitEU85
+                case 95:
+                    return over ? Asset.Signs.speedLimitEU95Over : Asset.Signs.speedLimitEU95
+                case 105:
+                    return over ? Asset.Signs.speedLimitEU105Over : Asset.Signs.speedLimitEU105
+                case 115:
+                    return over ? Asset.Signs.speedLimitEU115Over : Asset.Signs.speedLimitEU115
+                case 125:
+                    return over ? Asset.Signs.speedLimitEU125Over : Asset.Signs.speedLimitEU125
+                case 10:
+                    return over ? Asset.Signs.speedLimitEU10Over : Asset.Signs.speedLimitEU10
+                case 20:
+                    return over ? Asset.Signs.speedLimitEU20Over : Asset.Signs.speedLimitEU20
+                case 30:
+                    return over ? Asset.Signs.speedLimitEU30Over : Asset.Signs.speedLimitEU30
+                case 40:
+                    return over ? Asset.Signs.speedLimitEU40Over : Asset.Signs.speedLimitEU40
+                case 50:
+                    return over ? Asset.Signs.speedLimitEU50Over : Asset.Signs.speedLimitEU50
+                case 60:
+                    return over ? Asset.Signs.speedLimitEU60Over : Asset.Signs.speedLimitEU60
+                case 70:
+                    return over ? Asset.Signs.speedLimitEU70Over : Asset.Signs.speedLimitEU70
+                case 80:
+                    return over ? Asset.Signs.speedLimitEU80Over : Asset.Signs.speedLimitEU80
+                case 90:
+                    return over ? Asset.Signs.speedLimitEU90Over : Asset.Signs.speedLimitEU90
+                case 100:
+                    return over ? Asset.Signs.speedLimitEU100Over : Asset.Signs.speedLimitEU100
+                case 110:
+                    return over ? Asset.Signs.speedLimitEU110Over : Asset.Signs.speedLimitEU110
+                case 120:
+                    return over ? Asset.Signs.speedLimitEU120Over : Asset.Signs.speedLimitEU120
+                case 130:
+                    return over ? Asset.Signs.speedLimitEU130 : Asset.Signs.speedLimitEU130
+                default: return nil
+                }
+            case .unknown:
                 return nil
             }
         case .speedLimitEnd:
@@ -103,7 +159,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitEndUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitMin:
@@ -148,7 +204,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitMinUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitTrucks:
@@ -193,7 +249,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitTrucksUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitNight:
@@ -238,7 +294,7 @@ extension SignClassification {
                     return Asset.Signs.speedLimitNightUS90
                 default: return nil
                 }
-            case .china:
+            case .china, .unknown:
                 return nil
             }
         case .speedLimitComplementary:
