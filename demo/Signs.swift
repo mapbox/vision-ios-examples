@@ -21,7 +21,62 @@ extension SignValue {
         case .unknown:
             return nil
         case .mass:
-            return nil
+            switch market {
+            case .china:
+                switch number {
+                case 5:
+                    return Asset.Signs.mass5CN
+                case 15:
+                    return Asset.Signs.mass15CN
+                case 25:
+                    return Asset.Signs.mass25CN
+                case 35:
+                    return Asset.Signs.mass35CN
+                case 45:
+                    return Asset.Signs.mass45CN
+                case 55:
+                    return Asset.Signs.mass55CN
+                case 65:
+                    return Asset.Signs.mass65CN
+                case 75:
+                    return Asset.Signs.mass75CN
+                case 85:
+                    return Asset.Signs.mass85CN
+                case 95:
+                    return Asset.Signs.mass95CN
+                case 105:
+                    return Asset.Signs.mass105CN
+                case 115:
+                    return Asset.Signs.mass115CN
+                case 10:
+                    return Asset.Signs.mass10CN
+                case 20:
+                    return Asset.Signs.mass20CN
+                case 30:
+                    return Asset.Signs.mass30CN
+                case 40:
+                    return Asset.Signs.mass40CN
+                case 50:
+                    return Asset.Signs.mass50CN
+                case 60:
+                    return Asset.Signs.mass60CN
+                case 70:
+                    return Asset.Signs.mass70CN
+                case 80:
+                    return Asset.Signs.mass80CN
+                case 90:
+                    return Asset.Signs.mass90CN
+                case 100:
+                    return Asset.Signs.mass100CN
+                case 110:
+                    return Asset.Signs.mass110CN
+                case 120:
+                    return Asset.Signs.mass120CN
+                default: return nil
+                }
+            case .us, .unknown:
+                return nil
+            }
         case .speedLimit:
             switch market {
             case .us:
@@ -165,7 +220,59 @@ extension SignValue {
                     return over ? Asset.Signs.speedLimitEndUS90Over : Asset.Signs.speedLimitEndUS90
                 default: return nil
                 }
-            case .china, .unknown:
+            case .china:
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitEnd5CN
+                case 15:
+                    return Asset.Signs.speedLimitEnd15CN
+                case 25:
+                    return Asset.Signs.speedLimitEnd25CN
+                case 35:
+                    return Asset.Signs.speedLimitEnd35CN
+                case 45:
+                    return Asset.Signs.speedLimitEnd45CN
+                case 55:
+                    return Asset.Signs.speedLimitEnd55CN
+                case 65:
+                    return Asset.Signs.speedLimitEnd65CN
+                case 75:
+                    return Asset.Signs.speedLimitEnd75CN
+                case 85:
+                    return Asset.Signs.speedLimitEnd85CN
+                case 95:
+                    return Asset.Signs.speedLimitEnd95CN
+                case 105:
+                    return Asset.Signs.speedLimitEnd105CN
+                case 115:
+                    return Asset.Signs.speedLimitEnd115CN
+                case 10:
+                    return Asset.Signs.speedLimitEnd10CN
+                case 20:
+                    return Asset.Signs.speedLimitEnd20CN
+                case 30:
+                    return Asset.Signs.speedLimitEnd30CN
+                case 40:
+                    return Asset.Signs.speedLimitEnd40CN
+                case 50:
+                    return Asset.Signs.speedLimitEnd50CN
+                case 60:
+                    return Asset.Signs.speedLimitEnd60CN
+                case 70:
+                    return Asset.Signs.speedLimitEnd70CN
+                case 80:
+                    return Asset.Signs.speedLimitEnd80CN
+                case 90:
+                    return Asset.Signs.speedLimitEnd90CN
+                case 100:
+                    return Asset.Signs.speedLimitEnd100CN
+                case 110:
+                    return Asset.Signs.speedLimitEnd110CN
+                case 120:
+                    return Asset.Signs.speedLimitEnd120CN
+                default: return nil
+                }
+            case .unknown:
                 return nil
             }
         case .speedLimitMin:
@@ -210,7 +317,55 @@ extension SignValue {
                     return over ? Asset.Signs.speedLimitMinUS90Over : Asset.Signs.speedLimitMinUS90
                 default: return nil
                 }
-            case .china, .unknown:
+            case .china:
+                switch number {
+                case 5:
+                    return Asset.Signs.speedMinimum5CN
+                case 10:
+                    return Asset.Signs.speedMinimum10CN
+                case 15:
+                    return Asset.Signs.speedMinimum15CN
+                case 20:
+                    return Asset.Signs.speedMinimum20CN
+                case 25:
+                    return Asset.Signs.speedMinimum25CN
+                case 30:
+                    return Asset.Signs.speedMinimum30CN
+                case 35:
+                    return Asset.Signs.speedMinimum35CN
+                case 40:
+                    return Asset.Signs.speedMinimum40CN
+                case 55:
+                    return Asset.Signs.speedMinimum55CN
+                case 60:
+                    return Asset.Signs.speedMinimum60CN
+                case 65:
+                    return Asset.Signs.speedMinimum65CN
+                case 70:
+                    return Asset.Signs.speedMinimum70CN
+                case 75:
+                    return Asset.Signs.speedMinimum75CN
+                case 80:
+                    return Asset.Signs.speedMinimum80CN
+                case 85:
+                    return Asset.Signs.speedMinimum85CN
+                case 90:
+                    return Asset.Signs.speedMinimum90CN
+                case 95:
+                    return Asset.Signs.speedMinimum95CN
+                case 100:
+                    return Asset.Signs.speedMinimum100CN
+                case 105:
+                    return Asset.Signs.speedMinimum105CN
+                case 110:
+                    return Asset.Signs.speedMinimum110CN
+                case 115:
+                    return Asset.Signs.speedMinimum115CN
+                case 120:
+                    return Asset.Signs.speedMinimum120CN
+                default: return nil
+                }
+            case .unknown:
                 return nil
             }
         case .speedLimitTrucks:
@@ -434,7 +589,7 @@ extension SignValue {
         case .warningSpeedBump:
             return Asset.Signs.warningSpeedBumpUS
         case .warningWindingRoad:
-            return Asset.Signs.warningWindingRoadUS
+            return market.isChina ? Asset.Signs.warningWindingRoadCN : Asset.Signs.warningWindingRoadUS
         case .informationBikeRoute:
             return Asset.Signs.informationBikeRouteUS
         case .informationParking:
@@ -464,47 +619,47 @@ extension SignValue {
         case .regulatoryEndOfSchoolZone:
             return Asset.Signs.regulatoryEndOfSchoolZoneUS
         case .regulatoryGoStraight:
-            return Asset.Signs.regulatoryGoStraightUS
+            return market.isChina ? Asset.Signs.regulatoryGoStraightCN : Asset.Signs.regulatoryGoStraightUS
         case .regulatoryGoStraightOrTurnLeft:
             return Asset.Signs.regulatoryGoStraightOrTurnLeftUS
         case .regulatoryGoStraightOrTurnRight:
             return Asset.Signs.regulatoryGoStraightOrTurnRightUS
         case .regulatoryHeightLimit:
-            return Asset.Signs.regulatoryHeightLimitUS
+            return market.isChina ? Asset.Signs.regulatoryHeightLimitCN : Asset.Signs.regulatoryHeightLimitUS
         case .regulatoryLeftTurnYieldOnGreen:
             return Asset.Signs.regulatoryLeftTurnYieldOnGreenUS
         case .regulatoryNoBicycles:
             return Asset.Signs.regulatoryNoBicyclesUS
         case .regulatoryNoEntry:
-            return Asset.Signs.regulatoryNoEntryUS
+            return market.isChina ? Asset.Signs.regulatoryNoEntryCN : Asset.Signs.regulatoryNoEntryUS
         case .regulatoryNoLeftOrUTurn:
             return Asset.Signs.regulatoryNoLeftOrUTurnUS
         case .regulatoryNoLeftTurn:
-            return Asset.Signs.regulatoryNoLeftTurnUS
+            return market.isChina ? Asset.Signs.regulatoryNoLeftTurnCN : Asset.Signs.regulatoryNoLeftTurnUS
         case .regulatoryNoMotorVehicles:
-            return Asset.Signs.regulatoryNoMotorVehiclesUS
+            return market.isChina ? Asset.Signs.regulatoryNoMotorVehiclesCN : Asset.Signs.regulatoryNoMotorVehiclesUS
         case .regulatoryNoParking:
-            return Asset.Signs.regulatoryNoParkingUS
+            return market.isChina ? Asset.Signs.regulatoryNoParkingCN : Asset.Signs.regulatoryNoParkingUS
         case .regulatoryNoParkingOrNoStopping:
             return Asset.Signs.regulatoryNoParkingOrNoStoppingUS
         case .regulatoryNoPedestrians:
-            return Asset.Signs.regulatoryNoPedestriansUS
+            return market.isChina ? Asset.Signs.regulatoryNoPedestriansCN : Asset.Signs.regulatoryNoPedestriansUS
         case .regulatoryNoRightTurn:
-            return Asset.Signs.regulatoryNoRightTurnUS
+            return market.isChina ? Asset.Signs.regulatoryNoRightTurnCN : Asset.Signs.regulatoryNoRightTurnUS
         case .regulatoryNoStopping:
             return Asset.Signs.regulatoryNoStoppingUS
         case .regulatoryNoStraightThrough:
-            return Asset.Signs.regulatoryNoStraightThroughUS
+            return market.isChina ? Asset.Signs.regulatoryNoStraightThroughCN : Asset.Signs.regulatoryNoStraightThroughUS
         case .regulatoryNoUTurn:
-            return Asset.Signs.regulatoryNoUTurnUS
+            return market.isChina ? Asset.Signs.regulatoryNoUTurnCN : Asset.Signs.regulatoryNoUTurnUS
         case .regulatoryOneWayStraight:
             return Asset.Signs.regulatoryOneWayStraightUS
         case .regulatoryReversibleLanes:
             return Asset.Signs.regulatoryReversibleLanesUS
         case .regulatoryRoadClosedToVehicles:
-            return Asset.Signs.regulatoryRoadClosedToVehiclesUS
+            return market.isChina ? Asset.Signs.regulatoryRoadClosedToVehiclesCN : Asset.Signs.regulatoryRoadClosedToVehiclesUS
         case .regulatoryStop:
-            return Asset.Signs.regulatoryStopUS
+            return market.isChina ? Asset.Signs.regulatoryStopCN : Asset.Signs.regulatoryStopUS
         case .regulatoryTrafficSignalPhotoEnforced:
             return Asset.Signs.regulatoryTrafficSignalPhotoEnforcedUS
         case .regulatoryTripleLanesGoStraightCenterLane:
@@ -516,13 +671,13 @@ extension SignValue {
         case .warningPassLeftOrRight:
             return Asset.Signs.warningPassLeftOrRightUS
         case .warningPedestriansCrossing:
-            return Asset.Signs.warningPedestriansCrossingUS
+            return market.isChina ? Asset.Signs.warningPedestriansCrossingCN : Asset.Signs.warningPedestriansCrossingUS
         case .warningRoadNarrowsLeft:
-            return Asset.Signs.warningRoadNarrowsLeftUS
+            return market.isChina ? Asset.Signs.warningRoadNarrowsLeftCN : Asset.Signs.warningRoadNarrowsLeftUS
         case .warningRoadNarrowsRight:
-            return Asset.Signs.warningRoadNarrowsRightUS
+            return market.isChina ? Asset.Signs.warningRoadNarrowsRightCN : Asset.Signs.warningRoadNarrowsRightUS
         case .warningSchoolZone:
-            return Asset.Signs.warningSchoolZoneUS
+            return market.isChina ? Asset.Signs.warningSchoolZoneCN : Asset.Signs.warningSchoolZoneUS
         case .warningStopAhead:
             return Asset.Signs.warningStopAheadUS
         case .warningTrafficSignals:
@@ -540,7 +695,7 @@ extension SignValue {
         case .regulatoryKeepRightText:
             return Asset.Signs.regulatoryKeepRightTextUS
         case .regulatoryNoHeavyGoodsVehiclesPicture:
-            return Asset.Signs.regulatoryNoHeavyGoodsVehiclesPictureUS
+            return market.isChina ? Asset.Signs.regulatoryNoHeavyGoodsVehiclesPictureCN : Asset.Signs.regulatoryNoHeavyGoodsVehiclesPictureUS
         case .regulatoryNoLeftTurnText:
             return Asset.Signs.regulatoryNoLeftTurnTextUS
         case .regulatoryOneWayLeftArrow:
@@ -558,13 +713,13 @@ extension SignValue {
         case .regulatoryTurnLeftAhead:
             return Asset.Signs.regulatoryTurnLeftAheadUS
         case .regulatoryTurnLeft:
-            return Asset.Signs.regulatoryTurnLeftUS
+            return market.isChina ? Asset.Signs.regulatoryTurnLeftCN : Asset.Signs.regulatoryTurnLeftUS
         case .regulatoryTurnLeftOrRight:
-            return Asset.Signs.regulatoryTurnLeftOrRightUS
+            return market.isChina ? Asset.Signs.regulatoryTurnLeftOrTurnRightCN : Asset.Signs.regulatoryTurnLeftOrRightUS
         case .regulatoryTurnRightAhead:
             return Asset.Signs.regulatoryTurnRightAheadUS
         case .regulatoryYield:
-            return Asset.Signs.regulatoryYieldUS
+            return market.isChina ? Asset.Signs.regulatoryYieldCN : Asset.Signs.regulatoryYieldUS
         case .warningRailwayCrossing:
             return Asset.Signs.warningRailwayCrossingUS
         case .warningHairpinCurveRight:
@@ -574,15 +729,15 @@ extension SignValue {
         case .complementaryOneDirectionRight:
             return Asset.Signs.complementaryOneDirectionRightUS
         case .warningCurveLeft:
-            return Asset.Signs.warningCurveLeftUS
+            return market.isChina ? Asset.Signs.warningCurveLeftCN : Asset.Signs.warningCurveLeftUS
         case .warningCurveRight:
-            return Asset.Signs.warningCurveRightUS
+            return market.isChina ? Asset.Signs.warningCurveRightCN : Asset.Signs.warningCurveRightUS
         case .warningHorizontalAlignmentLeft:
             return Asset.Signs.warningHorizontalAlignmentLeftUS
         case .warningHorizontalAlignmentRight:
             return Asset.Signs.warningHorizontalAlignmentRightUS
         case .regulatoryTurnRight:
-            return Asset.Signs.regulatoryTurnRightUS
+            return market.isChina ? Asset.Signs.regulatoryTurnRightCN : Asset.Signs.regulatoryTurnRightUS
         case .whiteTablesText:
             return Asset.Signs.whiteTablesTextUS
         case .lanes:
@@ -598,7 +753,7 @@ extension SignValue {
         case .complementaryKeepLeft:
             return Asset.Signs.complementaryKeepLeftUS
         case .complementaryKeepRight:
-            return Asset.Signs.complementaryKeepRightUS
+            return market.isChina ? Asset.Signs.complementaryKeepRightCN : Asset.Signs.complementaryKeepRightUS
         case .regulatoryExceptBicycle:
             return Asset.Signs.regulatoryExceptBicycleUS
         case .warningAddedLaneRight:
@@ -620,7 +775,7 @@ extension SignValue {
         case .warningPlayground:
             return Asset.Signs.warningPlaygroundUS
         case .warningSecondRoadRight:
-            return Asset.Signs.warningSecondRoadRightUS
+            return market.isChina ? Asset.Signs.warningSecondRoadRightCN : Asset.Signs.warningSecondRoadRightUS
         case .warningTurnLeftOnlyArrow:
             return Asset.Signs.warningTurnLeftOnlyArrowUS
         case .warningTurnLeftOrRightOnlyArrow:
@@ -635,6 +790,64 @@ extension SignValue {
             return Asset.Signs.regulatoryParkingRestrictionsUS
         case .regulatoryYieldOrStopForPedestrians:
             return Asset.Signs.regulatoryYieldOrStopForPedestriansUS
+        case .regulatoryNoBuses:
+            return market.isChina ? Asset.Signs.regulatoryNoBusesCN : nil
+        case .regulatoryNoMotorVehiclesExceptMotorcyclesg1:
+            return market.isChina ? Asset.Signs.regulatoryNoMotorcyclesOrMopedsCN : nil
+        case .regulatoryNoMotorVehiclesExceptMotorcycles:
+            return market.isChina ? Asset.Signs.regulatoryNoMotorVehiclesExceptMotorcyclesCN : nil
+        case .regulatoryNoMotorcyclesOrMopeds:
+            return market.isChina ? Asset.Signs.regulatoryNoMotorcyclesOrMopedsCN : nil
+        case .regulatoryNoMotorVehiclesEntry:
+            return market.isChina ? Asset.Signs.regulatoryNoMotorVehiclesEntryCN : nil
+        case .regulatoryNoTurnLeftOrTurnRight:
+            return market.isChina ? Asset.Signs.regulatoryNoTurnLeftOrTurnRightCN : nil
+        case .regulatoryNoOvertaking:
+            return market.isChina ? Asset.Signs.regulatoryNoOvertakingCN : nil
+        case .regulatoryNoHonking:
+            return market.isChina ? Asset.Signs.regulatoryNoHonkingCN : nil
+        case .regulatoryWidthLimit:
+            return nil
+        case .regulatoryAxleWeightLimit:
+            return market.isChina ? Asset.Signs.regulatoryAxleWeightLimitCN : nil
+        case .regulatoryNoVehiclesCarryingExplosives:
+            return market.isChina ? Asset.Signs.regulatoryNoVehiclesCarryingExplosivesCN : nil
+        case .regulatoryRoundabout:
+            return market.isChina ? Asset.Signs.regulatoryRoundaboutCN : nil
+        case .regulatoryHonking:
+            return market.isChina ? Asset.Signs.regulatoryHonkingCN : nil
+        case .regulatoryPedestriansCrossing:
+            return market.isChina ? Asset.Signs.regulatoryPedestriansCrossingCN : nil
+        case .regulatoryMotorVehicles:
+            return market.isChina ? Asset.Signs.regulatoryMotorVehiclesCN : nil
+        case .regulatoryUTurn:
+            return market.isChina ? Asset.Signs.regulatoryUTurnCN : nil
+        case .warningSteepAscent:
+            return market.isChina ? Asset.Signs.warningSteepAscentCN : nil
+        case .warningSteepDescent:
+            return market.isChina ? Asset.Signs.warningSteepDescentCN : nil
+        case .warningVillage:
+            return market.isChina ? Asset.Signs.warningVillageCN : nil
+        case .warningRailroadCrossingWithBarriers:
+             return market.isChina ? Asset.Signs.warningRailroadCrossingWithBarriersCN : nil
+        case .warningNoMotorVehicles:
+            return market.isChina ? Asset.Signs.warningNoMotorVehiclesCN : nil
+        case .warningKeepSlowdown:
+            return market.isChina ? Asset.Signs.warningKeepSlowdownCN : nil
+        case .warningDangerousTraffic:
+            return market.isChina ? Asset.Signs.warningDangerousTrafficCN : nil
+        case .warningRoadworks:
+            return market.isChina ? Asset.Signs.warningRoadworksCN : nil
+        case .warningSecondRoadLeft:
+            return market.isChina ? Asset.Signs.warningSecondRoadLeftCN : nil
+        case .otherSigns:
+            return nil
         }
+    }
+}
+
+private extension Market {
+    var isChina: Bool {
+        return self == Market.china
     }
 }
