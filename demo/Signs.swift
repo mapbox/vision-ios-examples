@@ -792,8 +792,8 @@ extension SignValue {
             return Asset.Signs.regulatoryYieldOrStopForPedestriansUS
         case .regulatoryNoBuses:
             return market.isChina ? Asset.Signs.regulatoryNoBusesCN : nil
-        case .regulatoryNoMotorVehiclesExceptMotorcyclesg1:
-            return market.isChina ? Asset.Signs.regulatoryNoMotorcyclesOrMopedsCN : nil
+        case .regulatoryNoMotorVehiclesExceptMotorcycles_g1:
+            return market.isChina ? Asset.Signs.regulatoryNoMotorVehiclesExceptMotorcyclesG1CN : nil
         case .regulatoryNoMotorVehiclesExceptMotorcycles:
             return market.isChina ? Asset.Signs.regulatoryNoMotorVehiclesExceptMotorcyclesCN : nil
         case .regulatoryNoMotorcyclesOrMopeds:
@@ -807,7 +807,7 @@ extension SignValue {
         case .regulatoryNoHonking:
             return market.isChina ? Asset.Signs.regulatoryNoHonkingCN : nil
         case .regulatoryWidthLimit:
-            return nil
+            return market.isChina ? Asset.Signs.regulatoryWidthLimitCN : nil
         case .regulatoryAxleWeightLimit:
             return market.isChina ? Asset.Signs.regulatoryAxleWeightLimitCN : nil
         case .regulatoryNoVehiclesCarryingExplosives:
@@ -840,8 +840,6 @@ extension SignValue {
             return market.isChina ? Asset.Signs.warningRoadworksCN : nil
         case .warningSecondRoadLeft:
             return market.isChina ? Asset.Signs.warningSecondRoadLeftCN : nil
-        case .otherSigns:
-            return nil
         }
     }
 }
