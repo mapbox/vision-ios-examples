@@ -111,9 +111,7 @@ final class ContainerInteractor {
         
         signTrackerUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let `self` = self else { return }
-            let signs = self.signTracker.getCurrent().compactMap { sign in
-                return sign.icon(over: false, country: .us)
-            }
+            let signs = self.signTracker.getCurrent().compactMap { self.getIcon(for: $0, over: false) }
             self.presenter.present(signs: signs)
         }
     }
@@ -183,7 +181,7 @@ final class ContainerInteractor {
     }
     
     private func presentSpeedLimit(oldState: SpeedLimitState?, newState: SpeedLimitState) {
-        let sign = SignValue(type: .speedLimit, number: newState.speedLimit.maxSpeed).icon(over: newState.isSpeeding, country: .us)
+        let sign = getIcon(for: SignValue(type: .speedLimit, number: newState.speedLimit.maxSpeed), over: newState.isSpeeding)
         let isNew = oldState == nil || oldState!.speedLimit != newState.speedLimit
         presenter.present(speedLimit: sign, isNew: isNew)
     }
@@ -196,6 +194,10 @@ final class ContainerInteractor {
             alertPlayer.play(sound: .overSpeedLimit, repeated: false)
             speedLimitAlertRestriction.restrict()
         }
+    }
+    
+    private func getIcon(for sign: SignValue, over: Bool) -> ImageAsset? {
+        return sign.icon(over: over, country: VisionManager.shared.country)
     }
     
     deinit {
