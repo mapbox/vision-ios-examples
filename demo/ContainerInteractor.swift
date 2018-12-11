@@ -112,7 +112,7 @@ final class ContainerInteractor {
         signTrackerUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let `self` = self else { return }
             let signs = self.signTracker.getCurrent().compactMap { sign in
-                return sign.icon(over: false, market: .us)
+                return sign.icon(over: false, country: .us)
             }
             self.presenter.present(signs: signs)
         }
@@ -183,7 +183,7 @@ final class ContainerInteractor {
     }
     
     private func presentSpeedLimit(oldState: SpeedLimitState?, newState: SpeedLimitState) {
-        let sign = SignValue(type: .speedLimit, number: newState.speedLimit.maxSpeed).icon(over: newState.isSpeeding, market: .us)
+        let sign = SignValue(type: .speedLimit, number: newState.speedLimit.maxSpeed).icon(over: newState.isSpeeding, country: .us)
         let isNew = oldState == nil || oldState!.speedLimit != newState.speedLimit
         presenter.present(speedLimit: sign, isNew: isNew)
     }
