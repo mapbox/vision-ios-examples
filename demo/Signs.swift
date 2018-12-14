@@ -18,7 +18,7 @@ extension SignValue {
     
     private func getIcon(_ over: Bool, _ country: Country) -> ImageAsset? {
         switch country {
-        case .us:
+        case .USA:
             switch type {
             case .unknown:
                 return nil
