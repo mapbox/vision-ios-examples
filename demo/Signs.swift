@@ -10,14 +10,14 @@ import Foundation
 import MapboxVision
 
 extension SignValue {
-    func icon(over: Bool, market: Market) -> ImageAsset? {
-        let asset = getIcon(over, market)
-        assert(asset != nil, "Icon for \(self) with over: \(over) for market: \(market.rawValue) is not found")
+    func icon(over: Bool, country: Country) -> ImageAsset? {
+        let asset = getIcon(over, country)
+        assert(asset != nil, "Icon for \(self) with over: \(over) for country: \(country.rawValue) is not found")
         return asset
     }
     
-    private func getIcon(_ over: Bool, _ market: Market) -> ImageAsset? {
-        switch market {
+    private func getIcon(_ over: Bool, _ country: Country) -> ImageAsset? {
+        switch country {
         case .us:
             switch type {
             case .unknown:
