@@ -558,13 +558,7 @@ extension SignValue {
                 return Asset.Signs.regulatoryYieldOrStopForPedestriansUS
             case .regulatoryNoBuses:
                 return nil
-            case .regulatoryNoMotorVehiclesExceptMotorcycles_g1:
-                return nil
-            case .regulatoryNoMotorVehiclesExceptMotorcycles:
-                return nil
             case .regulatoryNoMotorcyclesOrMopeds:
-                return nil
-            case .regulatoryNoMotorVehiclesEntry:
                 return nil
             case .regulatoryNoTurnLeftOrTurnRight:
                 return nil
@@ -588,15 +582,13 @@ extension SignValue {
                 return nil
             case .regulatoryUTurn:
                 return nil
+            case .regulatoryNoSmallPassengerCar:
+                return nil
             case .warningSteepAscent:
                 return nil
             case .warningSteepDescent:
                 return nil
             case .warningVillage:
-                return nil
-            case .warningRailroadCrossingWithBarriers:
-                return nil
-            case .warningNoMotorVehicles:
                 return nil
             case .warningKeepSlowdown:
                 return nil
@@ -1043,14 +1035,8 @@ extension SignValue {
                 return Asset.Signs.regulatoryYieldOrStopForPedestriansUS
             case .regulatoryNoBuses:
                 return Asset.Signs.regulatoryNoBusesCN
-            case .regulatoryNoMotorVehiclesExceptMotorcycles_g1:
-                return Asset.Signs.regulatoryNoMotorVehiclesExceptMotorcyclesG1CN
-            case .regulatoryNoMotorVehiclesExceptMotorcycles:
-                return Asset.Signs.regulatoryNoMotorVehiclesExceptMotorcyclesCN
             case .regulatoryNoMotorcyclesOrMopeds:
                 return Asset.Signs.regulatoryNoMotorcyclesOrMopedsCN
-            case .regulatoryNoMotorVehiclesEntry:
-                return Asset.Signs.regulatoryNoMotorVehiclesEntryCN
             case .regulatoryNoTurnLeftOrTurnRight:
                 return Asset.Signs.regulatoryNoTurnLeftOrTurnRightCN
             case .regulatoryNoOvertaking:
@@ -1073,16 +1059,14 @@ extension SignValue {
                 return Asset.Signs.regulatoryMotorVehiclesCN
             case .regulatoryUTurn:
                 return Asset.Signs.regulatoryUTurnCN
+            case .regulatoryNoSmallPassengerCar:
+                return Asset.Signs.regulatoryNoSmallPassengerCarCN;
             case .warningSteepAscent:
                 return Asset.Signs.warningSteepAscentCN
             case .warningSteepDescent:
                 return Asset.Signs.warningSteepDescentCN
             case .warningVillage:
                 return Asset.Signs.warningVillageCN
-            case .warningRailroadCrossingWithBarriers:
-                return Asset.Signs.warningRailroadCrossingWithBarriersCN
-            case .warningNoMotorVehicles:
-                return Asset.Signs.warningNoMotorVehiclesCN
             case .warningKeepSlowdown:
                 return Asset.Signs.warningKeepSlowdownCN
             case .warningDangerousTraffic:
