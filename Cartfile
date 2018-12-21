@@ -1,3 +1,3 @@
 binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json"
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json"
-github "mapbox/mapbox-vision-ar-ios" ~> 0.0.1-alpha.4.1
+github "mapbox/mapbox-vision-ar-ios" ~> 0.2.0
