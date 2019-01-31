@@ -13,7 +13,7 @@ import MapboxVision
 
 class SafetyScreenTestCase: XCTestCase {
     
-    let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance, canvasSize: VisionManager.shared.frameSize)
+    let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance - SafetyState.bonnetAdjustment, canvasSize: VisionManager.shared.frameSize)
     
     var presenter: MockContainerPresenter!
     var interactor: ContainerInteractor!
@@ -115,7 +115,7 @@ class SafetyScreenTestCase: XCTestCase {
 
 extension WorldDescription {
     
-    static let distance: Double = 1.0
+    static let distance: Double = 5.0
     
     static let bbox: CGRect = .zero
     static let coords = WorldCoordinate(x: 0, y: 0, z: 0)

@@ -9,9 +9,9 @@
 import Foundation
 import MapboxVision
 
-private let bonnetAdjustment = 1.25
-
 enum SafetyState: Equatable {
+    
+    public static let bonnetAdjustment = 1.25
     
     enum ObjectType {
         case car
@@ -75,7 +75,7 @@ enum SafetyState: Equatable {
         if collisions.count > 0 {
             self = .collisions(collisions, canvasSize: canvasSize)
         } else if let car = worldDescription.forwardCar {
-            let distance = max(0, car.distance - bonnetAdjustment)
+            let distance = max(0, car.distance - SafetyState.bonnetAdjustment)
             self = .distance(frame: car.detection.boundingBox, distance: distance, canvasSize: canvasSize)
         } else {
             self = .none
