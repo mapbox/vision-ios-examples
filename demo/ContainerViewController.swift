@@ -255,6 +255,18 @@ extension ContainerViewController: ContainerPresenter {
         }
     }
     
+    func present(frame: CMSampleBuffer) {
+        visionViewController?.present(sampleBuffer: frame)
+    }
+    
+    func present(segmentation: SegmentationMask) {
+        visionViewController?.present(segmentation: segmentation)
+    }
+    
+    func present(detections: Detections) {
+        visionViewController?.present(detections: detections)
+    }
+    
     func present(signs: [ImageAsset]) {
         signsStack.subviews.forEach { $0.removeFromSuperview() }
         signsStack.isHidden = signs.isEmpty

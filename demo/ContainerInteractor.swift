@@ -25,6 +25,10 @@ protocol ContainerPresenter: class {
     func present(screen: Screen)
     func presentBackButton(isVisible: Bool)
     
+    func present(frame: CMSampleBuffer)
+    func present(segmentation: SegmentationMask)
+    func present(detections: Detections)
+    
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(safetyState: SafetyState)
@@ -247,21 +251,30 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSegmentation segmentation: SegmentationMask?) {
-        
+        guard
+            case .segmentation = currentScreen,
+            let segmentation = segmentation
+        else { return }
+        presenter.present(segmentation: segmentation)
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateDetections detections: Detections?) {
-        
+        guard
+            case .objectDetection = currentScreen,
+            let detections = detections
+        else { return }
+        presenter.present(detections: detections)
     }
     
     func visionManager(_ visionManager: VisionManager, didUpdateSignClassifications classifications: SignClassifications?) {
-        guard case .signsDetection = currentScreen, let items = classifications?.items.map({ $0.value }) else { return }
+        guard
+            case .signsDetection = currentScreen,
+            let items = classifications?.items.map({ $0.value })
+        else { return }
         signTracker.update(items)
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateRawRoadDescription roadDescription: RoadDescription?) {
-    
-    }
+    func visionManager(_ visionManager: VisionManager, didUpdateRawRoadDescription roadDescription: RoadDescription?) {}
     
     func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription?) {
         guard case .laneDetection = currentScreen else { return }

@@ -42,10 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func launchVision() -> UIViewController {
         let containerController = ContainerViewController()
         
-        let visionManager = VisionManager.shared
-        let visionViewController = visionManager.createPresentation()
-        
-        containerController.visionViewController = visionViewController
+        containerController.visionViewController = VisionPresentationViewController()
         
         let menuViewController = MenuViewController()
         containerController.menuViewController = menuViewController
