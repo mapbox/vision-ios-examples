@@ -102,7 +102,8 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.roadRestrictionsDelegate = self
         
-        visionManager.start(videoSource: camera)
+        visionManager.initialize(videoSource: camera)
+        visionManager.start()
         camera.start()
         
         presenter.presentVision()
@@ -204,7 +205,7 @@ final class ContainerInteractor {
     }
     
     deinit {
-        visionManager.stop()
+        visionManager.shutdown()
     }
 }
 
