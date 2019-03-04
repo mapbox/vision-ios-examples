@@ -77,6 +77,7 @@ final class ContainerInteractor {
     private var currentScreen = Screen.menu
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
+    private let camera = CameraVideoSource()
     
     private let signTracker = Tracker<SignValue>(maxCapacity: signTrackerMaxCapacity)
     private var signTrackerUpdateTimer: Timer?
@@ -100,7 +101,10 @@ final class ContainerInteractor {
         visionManager = VisionManager.shared
         visionManager.delegate = self
         visionManager.roadRestrictionsDelegate = self
+        
+        visionManager.initialize(videoSource: camera)
         visionManager.start()
+        camera.start()
         
         presenter.presentVision()
         present(screen: .menu)
@@ -201,7 +205,7 @@ final class ContainerInteractor {
     }
     
     deinit {
-        visionManager.stop()
+        visionManager.shutdown()
     }
 }
 
