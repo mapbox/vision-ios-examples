@@ -106,6 +106,7 @@ final class ContainerInteractor {
         visionManager.delegate = self
         visionManager.roadRestrictionsDelegate = self
         
+        camera.add(observer: self)
         visionManager.initialize(videoSource: camera)
         visionManager.start()
         camera.start()
@@ -210,6 +211,7 @@ final class ContainerInteractor {
     
     deinit {
         visionManager.shutdown()
+        camera.remove(observer: self)
     }
 }
 
@@ -315,5 +317,11 @@ extension ContainerInteractor: VisionManagerDelegate {
 extension ContainerInteractor: VisionManagerRoadRestrictionsDelegate {
     func visionManager(_ visionManager: VisionManager, didUpdateSpeedLimit speedLimit: SpeedLimit?) {
         update(speedLimit: speedLimit, position: visionManager.estimatedPosition)
+    }
+}
+
+extension ContainerInteractor: VideoSourceObserver {
+    func videoSource(_ videoSource: VideoSource, didOutput videoSample: VideoSample) {
+        presenter.present(frame: videoSample.buffer)
     }
 }
