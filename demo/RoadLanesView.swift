@@ -57,25 +57,25 @@ final class RoadLanesView: UIView {
     
     func update(_ description: RoadDescription) {
         removeAllArrangedSubviews()
-        
+
         for (index, lane) in description.lanes.enumerated() {
             
-            let leftMarkingView = UIImageView(image: lane.leftMarking.type.image)
-            if description.lanes.first == lane, lane.leftMarking.type == .roadEdge {
+            let leftMarkingView = UIImageView(image: lane.leftEdge.type.image)
+            if description.lanes.first == lane, lane.leftEdge.type == .curb {
                 leftMarkingView.transform = CGAffineTransform(scaleX: -1, y: 1);
             }
             stackView.addArrangedSubview(leftMarkingView)
-            
-            if index == description.currentLane {
+
+            if index == description.currentLaneIndex {
                 let view = UIImageView(image: Asset.Assets.yourDirection.image)
                 yourDirectionImageView = view
                 stackView.addArrangedSubview(view)
             } else  {
                 stackView.addArrangedSubview(lane.direction.view)
             }
-            
+
             if description.lanes.last == lane {
-                stackView.addArrangedSubview(UIImageView(image: lane.rightMarking.type.image))
+                stackView.addArrangedSubview(UIImageView(image: lane.rightEdge.type.image))
             }
         }
     }
@@ -97,20 +97,22 @@ final class RoadLanesView: UIView {
     }
 }
 
-private extension LaneMarkingType {
+private extension LaneEdgeType {
     var image: UIImage {
         let image: UIImage
         switch self {
-        case .roadEdge:
+        case .curb:
             image = Asset.Assets.rightCurb.image
-        case .solid:
+        case .markupSolid:
             image = Asset.Assets.lanesLine.image
-        case .doubleSolid:
+        case .markupDoubleSolid:
             image = Asset.Assets.separatorDoubleLane.image
-        case .dashed:
+        case .markupDashed:
             image = Asset.Assets.halfLane.image
         case .unknown:
             image = Asset.Assets.questionMark.image
+        case .construction:
+            image = UIImage()
         }
         return image
     }
@@ -127,6 +129,8 @@ private extension LaneDirection {
             view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         case .reverse:
             view = UIImageView(image: Asset.Assets.arrowReversed.image)
+        case .unkwnown:
+            view = UIImageView()
         }
         return view
     }

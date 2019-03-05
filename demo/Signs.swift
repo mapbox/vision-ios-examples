@@ -9,7 +9,7 @@
 import Foundation
 import MapboxVision
 
-extension SignValue {
+extension Sign {
     func icon(over: Bool, country: Country) -> ImageAsset? {
         let asset = getIcon(over, country)
         assert(asset != nil, "Icon for \(self) with over: \(over) for country: \(country.rawValue) is not found")
