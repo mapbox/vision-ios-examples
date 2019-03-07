@@ -112,12 +112,10 @@ final class ContainerInteractor {
         self.presenter = dependencies.presenter
         self.alertPlayer = dependencies.alertPlayer
         
-        visionManager = VisionManager.shared
+        visionManager = VisionManager.create(videoSource: camera)
         
         camera.add(observer: self)
-        visionManager.initialize(videoSource: camera)
-        visionManager.delegate = self
-        visionManager.start()
+        visionManager.start(delegate: self)
         camera.start()
         
         presenter.presentVision()
@@ -215,11 +213,11 @@ final class ContainerInteractor {
     }
     
     private func getIcon(for sign: Sign, over: Bool) -> ImageAsset? {
-        return sign.icon(over: over, country: VisionManager.shared.country)
+        return sign.icon(over: over, country: visionManager.country)
     }
     
     deinit {
-        visionManager.shutdown()
+        visionManager.destroy()
         camera.remove(observer: self)
     }
 }
