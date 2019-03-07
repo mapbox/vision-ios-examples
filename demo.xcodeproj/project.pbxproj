@@ -23,6 +23,7 @@
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
 		2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */; };
 		2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */; };
+		2EA4E18722319091007690AC /* VisionDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4E18622319091007690AC /* VisionDelegateProxy.swift */; };
 		2EF52A0F21514DBC00F23CCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */; };
 		2EF52A1021514DBC00F23CCF /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0A21514DBC00F23CCF /* Zip.framework */; };
 		2EF52A1121514DBC00F23CCF /* MapboxVisionCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0B21514DBC00F23CCF /* MapboxVisionCore.framework */; };
@@ -100,6 +101,7 @@
 		2E603366214299110050EDB3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lane_departure_warning.wav; sourceTree = "<group>"; };
 		2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPlayer.swift; sourceTree = "<group>"; };
+		2EA4E18622319091007690AC /* VisionDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionDelegateProxy.swift; sourceTree = "<group>"; };
 		2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		2EF52A0A21514DBC00F23CCF /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/iOS/Zip.framework; sourceTree = "<group>"; };
 		2EF52A0B21514DBC00F23CCF /* MapboxVisionCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxVisionCore.framework; path = Carthage/Build/iOS/MapboxVisionCore.framework; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				B5045858217A077300BA5133 /* CollisionObjectView.swift */,
 				B5314421218C7DA7001B6DEB /* SafetyState.swift */,
 				2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */,
+				2EA4E18622319091007690AC /* VisionDelegateProxy.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EA4E18722319091007690AC /* VisionDelegateProxy.swift in Sources */,
 				B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */,
 				2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */,
 				2E60335E214295F80050EDB3 /* Locale.swift in Sources */,

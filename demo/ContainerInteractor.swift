@@ -115,7 +115,7 @@ final class ContainerInteractor {
         visionManager = VisionManager.create(videoSource: camera)
         
         camera.add(observer: self)
-        visionManager.start(delegate: self)
+        visionManager.start(delegate: VisionDelegateProxy(delegate: self))
         camera.start()
         
         presenter.presentVision()
