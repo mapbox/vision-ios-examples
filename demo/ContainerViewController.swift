@@ -203,33 +203,33 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.text = distanceFormatter.string(fromMeters: distance)
     }
     
-    private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
-        for collision in collisions {
-            var collisionObjectView: CollisionObjectView?
- 
-            switch (collision.state, collision.objectType) {
-            case (.warning, .car):
-                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
-                collisionAlertView.isHidden = false
-            case (.warning, .person):
-                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
-                collisionObjectView?.exclamationMarkView.isHidden = true
-            case (.critical, .car):
-                collisionBanerView.isHidden = false
-                return
-            case (.critical ,.person):
-                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
-                collisionAlertView.isHidden = false
-            }
-            
-            collisionObjectView?.color = collision.objectType.color
-            
-            if let collisionObjectView = collisionObjectView {
-                collisionObjectViews.append(collisionObjectView)
-                view.addSubview(collisionObjectView)
-            }
-        }
-    }
+//    private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
+//        for collision in collisions {
+//            var collisionObjectView: CollisionObjectView?
+//
+//            switch (collision.state, collision.objectType) {
+//            case (.warning, .car):
+//                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
+//                collisionAlertView.isHidden = false
+//            case (.warning, .person):
+//                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
+//                collisionObjectView?.exclamationMarkView.isHidden = true
+//            case (.critical, .car):
+//                collisionBanerView.isHidden = false
+//                return
+//            case (.critical ,.person):
+//                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
+//                collisionAlertView.isHidden = false
+//            }
+//
+//            collisionObjectView?.color = collision.objectType.color
+//
+//            if let collisionObjectView = collisionObjectView {
+//                collisionObjectViews.append(collisionObjectView)
+//                view.addSubview(collisionObjectView)
+//            }
+//        }
+//    }
     
     private func createCollisionObjectView(frame: CGRect,  canvasSize: CGSize) -> CollisionObjectView {
         let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
@@ -242,28 +242,28 @@ extension ContainerViewController: ContainerPresenter {
         return CollisionObjectView(frame: extendedRect)
     }
     
-    func present(safetyState: SafetyState) {
-        dismissSafetyStateViews()
-        
-        switch safetyState {
-        case .none:
-            break
-        case let .distance(frame, distance, canvasSize):
-            present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
-        case let .collisions(collisions, canvasSize):
-            present(collisions: collisions, canvasSize: canvasSize)
-        }
-    }
+//    func present(safetyState: SafetyState) {
+//        dismissSafetyStateViews()
+//
+//        switch safetyState {
+//        case .none:
+//            break
+//        case let .distance(frame, distance, canvasSize):
+//            present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
+//        case let .collisions(collisions, canvasSize):
+//            present(collisions: collisions, canvasSize: canvasSize)
+//        }
+//    }
     
     func present(frame: CMSampleBuffer) {
         visionViewController?.present(sampleBuffer: frame)
     }
     
-    func present(segmentation: SegmentationMask) {
+    func present(segmentation: FrameSegmentation) {
         visionViewController?.present(segmentation: segmentation)
     }
     
-    func present(detections: Detections) {
+    func present(detections: FrameDetections) {
         visionViewController?.present(detections: detections)
     }
     
@@ -274,12 +274,14 @@ extension ContainerViewController: ContainerPresenter {
     }
     
     func present(roadDescription: RoadDescription?) {
-        guard let roadDescription = roadDescription else {
-            roadLanesView.isHidden = true
-            return
+        DispatchQueue.main.async {
+            guard let roadDescription = roadDescription else {
+                self.roadLanesView.isHidden = true
+                return
+            }
+            self.roadLanesView.isHidden = false
+            self.roadLanesView.update(roadDescription)
         }
-        roadLanesView.isHidden = false
-        roadLanesView.update(roadDescription)
     }
     
     func present(laneDepartureState: LaneDepartureState) {
@@ -298,7 +300,7 @@ extension ContainerViewController: ContainerPresenter {
     func present(calibrationProgress: CalibrationProgress?) {
         calibrationLabel.isHidden = calibrationProgress?.isCalibrated ?? true
         guard let calibrationProgress = calibrationProgress else { return }
-        calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.progress * 100)))
+        calibrationLabel.text = L10n.generalCalibration(Int(ceil(calibrationProgress.calibrationProgress * 100)))
     }
     
     func present(speedLimit: ImageAsset?, isNew: Bool) {
