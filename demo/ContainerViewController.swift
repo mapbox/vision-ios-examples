@@ -31,6 +31,8 @@ final class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        arContainerViewController.navigationDelegate = self
+        
         view.addSubview(backButton)
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 18),
@@ -256,7 +258,13 @@ extension ContainerViewController: ContainerPresenter {
 //    }
     
     func present(frame: CMSampleBuffer) {
-        visionViewController?.present(sampleBuffer: frame)
+        if currentViewController == visionViewController {
+            visionViewController?.present(sampleBuffer: frame)
+        } else if currentViewController == arContainerViewController {
+            if let frame: CVPixelBuffer = CMSampleBufferGetImageBuffer(frame) {
+                arContainerViewController.present(frame: frame)
+            }
+        }
     }
     
     func present(segmentation: FrameSegmentation) {
@@ -316,6 +324,14 @@ extension ContainerViewController: ContainerPresenter {
         } else {
             speedLimitView.image = speedLimit.image
         }
+    }
+    
+    func present(camera: ARCamera) {
+        arContainerViewController.present(camera: camera)
+    }
+    
+    func present(lane: ARLane?) {
+        arContainerViewController.present(lane: lane)
     }
     
     func present(screen: Screen) {
@@ -406,5 +422,16 @@ private extension SafetyState.ObjectType {
         case .person:
             return UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         }
+    }
+}
+
+extension ContainerViewController: NavigationManagerDelegate {
+    
+    func navigationManager(_ navigationManager: NavigationManager, didUpdate route: MapboxVisionAR.Route) {
+        delegate?.didNavigationRouteUpdated(route: route)
+    }
+    
+    func navigationManagerArrivedAtDestination(_ navigationManager: NavigationManager) {
+        delegate?.didNavigationRouteUpdated(route: nil)
     }
 }
