@@ -334,17 +334,23 @@ extension ContainerInteractor: VisionManagerDelegate {
 
 extension ContainerInteractor: VideoSourceObserver {
     func videoSource(_ videoSource: VideoSource, didOutput videoSample: VideoSample) {
-        presenter.present(frame: videoSample.buffer)
+        DispatchQueue.main.async { [weak self] in
+            self?.presenter.present(frame: videoSample.buffer)
+        }
     }
 }
 
 extension ContainerInteractor: VisionARDelegate {
     
     func onARCameraUpdated(visionARManager: VisionARManager, camera: ARCamera) {
-        presenter.present(camera: camera)
+        DispatchQueue.main.async { [weak self] in
+            self?.presenter.present(camera: camera)
+        }
     }
     
     func onARLaneUpdated(visionARManager: VisionARManager, lane: ARLane?) {
-        presenter.present(lane: lane)
+        DispatchQueue.main.async { [weak self] in
+            self?.presenter.present(lane: lane)
+        }
     }
 }
