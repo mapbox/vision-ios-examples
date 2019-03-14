@@ -8,6 +8,7 @@
 
 import Foundation
 import MapboxVision
+import MapboxVisionAR
 
 enum Screen {
     case menu
@@ -43,6 +44,9 @@ protocol ContainerPresenter: class {
     func present(calibrationProgress: CalibrationProgress?)
     func present(speedLimit: ImageAsset?, isNew: Bool)
     
+    func present(camera: ARCamera)
+    func present(lane: ARLane?)
+    
     func dismissCurrent()
 }
 
@@ -52,6 +56,7 @@ protocol MenuDelegate: class {
 
 @objc protocol ContainerDelegate: class {
     func backButtonPressed()
+    func didNavigationRouteUpdated(route: MapboxVisionAR.Route?)
 }
 
 private let signTrackerMaxCapacity = 5
@@ -88,6 +93,7 @@ final class ContainerInteractor {
     private var currentScreen = Screen.menu
     private let presenter: ContainerPresenter
     private let visionManager: VisionManager
+    private var visionARManager: VisionARManager?
     private let camera = CameraVideoSource()
     
     private let signTracker = Tracker<Sign>(maxCapacity: signTrackerMaxCapacity)
@@ -113,6 +119,7 @@ final class ContainerInteractor {
         self.alertPlayer = dependencies.alertPlayer
         
         visionManager = VisionManager.create(videoSource: camera)
+        visionARManager = VisionARManager.create(visionManager: visionManager, delegate: self)
         
         camera.add(observer: self)
         visionManager.start(delegate: VisionDelegateProxy(delegate: self))
@@ -228,6 +235,12 @@ extension ContainerInteractor: ContainerDelegate {
         resetPresentation()
         present(screen: .menu)
     }
+    
+    func didNavigationRouteUpdated(route: MapboxVisionAR.Route?) {
+        if let route = route {
+            visionARManager?.setRoute(route)
+        }
+    }
 }
 
 extension ContainerInteractor: MenuDelegate {
@@ -321,6 +334,23 @@ extension ContainerInteractor: VisionManagerDelegate {
 
 extension ContainerInteractor: VideoSourceObserver {
     func videoSource(_ videoSource: VideoSource, didOutput videoSample: VideoSample) {
-        presenter.present(frame: videoSample.buffer)
+        DispatchQueue.main.async { [weak self] in
+            self?.presenter.present(frame: videoSample.buffer)
+        }
+    }
+}
+
+extension ContainerInteractor: VisionARDelegate {
+    
+    func onARCameraUpdated(visionARManager: VisionARManager, camera: ARCamera) {
+        DispatchQueue.main.async { [weak self] in
+            self?.presenter.present(camera: camera)
+        }
+    }
+    
+    func onARLaneUpdated(visionARManager: VisionARManager, lane: ARLane?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.presenter.present(lane: lane)
+        }
     }
 }

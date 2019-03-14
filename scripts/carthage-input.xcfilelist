@@ -1,4 +1,5 @@
 $(SRCROOT)/Carthage/Build/iOS/Mapbox.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxVisionARCore.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxVisionAR.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxVision.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxVisionCore.framework
