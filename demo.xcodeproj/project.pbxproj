@@ -59,6 +59,8 @@
 		B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5442003214A615D007CB69E /* PaddedLabel.swift */; };
 		B578BC9521885673003D4AA8 /* SafetyScreenTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578BC9421885673003D4AA8 /* SafetyScreenTestCase.swift */; };
 		B583DF872240FC3B00D73673 /* ZIPFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B583DF862240FC3B00D73673 /* ZIPFoundation.framework */; };
+		B580C368223BC4AB0095C4C2 /* MapboxVisionSafety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B580C367223BC4AB0095C4C2 /* MapboxVisionSafety.framework */; };
+		B580C36A223BC52F0095C4C2 /* MapboxVisionSafetyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B580C369223BC52F0095C4C2 /* MapboxVisionSafetyCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +144,8 @@
 		B578BC9421885673003D4AA8 /* SafetyScreenTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyScreenTestCase.swift; sourceTree = "<group>"; };
 		B578BC9621885673003D4AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B583DF862240FC3B00D73673 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZIPFoundation.framework; path = Carthage/Build/iOS/ZIPFoundation.framework; sourceTree = "<group>"; };
+		B580C367223BC4AB0095C4C2 /* MapboxVisionSafety.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapboxVisionSafety.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B580C369223BC52F0095C4C2 /* MapboxVisionSafetyCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapboxVisionSafetyCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B583DF872240FC3B00D73673 /* ZIPFoundation.framework in Frameworks */,
+				B580C36A223BC52F0095C4C2 /* MapboxVisionSafetyCore.framework in Frameworks */,
+				B580C368223BC4AB0095C4C2 /* MapboxVisionSafety.framework in Frameworks */,
 				B532EE132170BAC100B172FA /* Turf.framework in Frameworks */,
 				B532EE112170BA9200B172FA /* MapboxNavigationNative.framework in Frameworks */,
 				B532EE0F2170BA5400B172FA /* MapboxNavigation.framework in Frameworks */,
@@ -216,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				B583DF862240FC3B00D73673 /* ZIPFoundation.framework */,
+				B580C369223BC52F0095C4C2 /* MapboxVisionSafetyCore.framework */,
+				B580C367223BC4AB0095C4C2 /* MapboxVisionSafety.framework */,
 				2EA4E18A22319906007690AC /* MapboxVisionARCore.framework */,
 				B532EE122170BAC100B172FA /* Turf.framework */,
 				B532EE102170BA9200B172FA /* MapboxNavigationNative.framework */,
