@@ -141,7 +141,6 @@
 		B578BC9221885673003D4AA8 /* demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B578BC9421885673003D4AA8 /* SafetyScreenTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyScreenTestCase.swift; sourceTree = "<group>"; };
 		B578BC9621885673003D4AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B583DF842240F5E800D73673 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZIPFoundation.framework; path = "../mapbox-vision-ios/Carthage/Build/iOS/ZIPFoundation.framework"; sourceTree = "<group>"; };
 		B583DF862240FC3B00D73673 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZIPFoundation.framework; path = Carthage/Build/iOS/ZIPFoundation.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,7 +215,6 @@
 		2EF52A0821514DBC00F23CCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B583DF842240F5E800D73673 /* ZIPFoundation.framework */,
 				B583DF862240FC3B00D73673 /* ZIPFoundation.framework */,
 				2EA4E18A22319906007690AC /* MapboxVisionARCore.framework */,
 				B532EE122170BAC100B172FA /* Turf.framework */,
