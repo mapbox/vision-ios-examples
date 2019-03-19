@@ -10,6 +10,6 @@ $(SRCROOT)/Carthage/Build/iOS/MapboxDirections.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxMobileEvents.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxSpeech.framework
 $(SRCROOT)/Carthage/Build/iOS/Solar.framework
-$(SRCROOT)/Carthage/Build/iOS/Zip.framework
+$(SRCROOT)/Carthage/Build/iOS/ZIPFoundation.framework
 $(SRCROOT)/Carthage/Build/iOS/Turf.framework
 $(SRCROOT)/Carthage/Build/iOS/Polyline.framework
