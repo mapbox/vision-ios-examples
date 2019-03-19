@@ -26,7 +26,6 @@
 		2EA4E18722319091007690AC /* VisionDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4E18622319091007690AC /* VisionDelegateProxy.swift */; };
 		2EA4E18B22319906007690AC /* MapboxVisionARCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA4E18A22319906007690AC /* MapboxVisionARCore.framework */; };
 		2EF52A0F21514DBC00F23CCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0921514DBC00F23CCF /* MapboxMobileEvents.framework */; };
-		2EF52A1021514DBC00F23CCF /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0A21514DBC00F23CCF /* Zip.framework */; };
 		2EF52A1121514DBC00F23CCF /* MapboxVisionCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0B21514DBC00F23CCF /* MapboxVisionCore.framework */; };
 		2EF52A1221514DBC00F23CCF /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0C21514DBC00F23CCF /* Mapbox.framework */; };
 		2EF52A1321514DBC00F23CCF /* MapboxVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0D21514DBC00F23CCF /* MapboxVision.framework */; };
@@ -59,6 +58,7 @@
 		B544200221496793007CB69E /* DistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F4A3C213FE7F800DC4313 /* DistanceView.swift */; };
 		B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5442003214A615D007CB69E /* PaddedLabel.swift */; };
 		B578BC9521885673003D4AA8 /* SafetyScreenTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578BC9421885673003D4AA8 /* SafetyScreenTestCase.swift */; };
+		B583DF872240FC3B00D73673 /* ZIPFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B583DF862240FC3B00D73673 /* ZIPFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +141,7 @@
 		B578BC9221885673003D4AA8 /* demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B578BC9421885673003D4AA8 /* SafetyScreenTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyScreenTestCase.swift; sourceTree = "<group>"; };
 		B578BC9621885673003D4AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B583DF862240FC3B00D73673 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZIPFoundation.framework; path = Carthage/Build/iOS/ZIPFoundation.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B583DF872240FC3B00D73673 /* ZIPFoundation.framework in Frameworks */,
 				B532EE132170BAC100B172FA /* Turf.framework in Frameworks */,
 				B532EE112170BA9200B172FA /* MapboxNavigationNative.framework in Frameworks */,
 				B532EE0F2170BA5400B172FA /* MapboxNavigation.framework in Frameworks */,
@@ -156,7 +158,6 @@
 				2EA4E18B22319906007690AC /* MapboxVisionARCore.framework in Frameworks */,
 				B532EE012170A8D900B172FA /* MapboxVisionAR.framework in Frameworks */,
 				2EF52A0F21514DBC00F23CCF /* MapboxMobileEvents.framework in Frameworks */,
-				2EF52A1021514DBC00F23CCF /* Zip.framework in Frameworks */,
 				2EF52A1121514DBC00F23CCF /* MapboxVisionCore.framework in Frameworks */,
 				2EF52A1221514DBC00F23CCF /* Mapbox.framework in Frameworks */,
 				2EF52A1321514DBC00F23CCF /* MapboxVision.framework in Frameworks */,
@@ -214,6 +215,7 @@
 		2EF52A0821514DBC00F23CCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B583DF862240FC3B00D73673 /* ZIPFoundation.framework */,
 				2EA4E18A22319906007690AC /* MapboxVisionARCore.framework */,
 				B532EE122170BAC100B172FA /* Turf.framework */,
 				B532EE102170BA9200B172FA /* MapboxNavigationNative.framework */,
