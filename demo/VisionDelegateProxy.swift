@@ -20,6 +20,13 @@ final class VisionDelegateProxy {
 }
 
 extension VisionDelegateProxy: VisionManagerDelegate {
+    
+    func visionManager(_ visionManager: VisionManager, didAuthorizationStatusChanged status: AuthorizationStatus) {
+        queue.async { [unowned self] in
+            self.delegate?.visionManager(visionManager, didAuthorizationStatusChanged: status)
+        }
+    }
+    
     func visionManager(_ visionManager: VisionManager, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) -> Void {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateFrameSegmentation: frameSegmentation)
