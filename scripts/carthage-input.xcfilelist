@@ -3,6 +3,8 @@ $(SRCROOT)/Carthage/Build/iOS/MapboxVisionARCore.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxVisionAR.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxVision.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxVisionCore.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxVisionSafety.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxVisionSafetyCore.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxCoreNavigation.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxNavigation.framework
 $(SRCROOT)/Carthage/Build/iOS/MapboxNavigationNative.framework

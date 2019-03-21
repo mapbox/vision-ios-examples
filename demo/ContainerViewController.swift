@@ -205,35 +205,35 @@ extension ContainerViewController: ContainerPresenter {
         distanceLabel.text = distanceFormatter.string(fromMeters: distance)
     }
     
-//    private func present(collisions: [SafetyState.Collision], canvasSize: CGSize) {
-//        for collision in collisions {
-//            var collisionObjectView: CollisionObjectView?
-//
-//            switch (collision.state, collision.objectType) {
-//            case (.warning, .car):
-//                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
-//                collisionAlertView.isHidden = false
-//            case (.warning, .person):
-//                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
-//                collisionObjectView?.exclamationMarkView.isHidden = true
-//            case (.critical, .car):
-//                collisionBanerView.isHidden = false
-//                return
-//            case (.critical ,.person):
-//                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: canvasSize)
-//                collisionAlertView.isHidden = false
-//            }
-//
-//            collisionObjectView?.color = collision.objectType.color
-//
-//            if let collisionObjectView = collisionObjectView {
-//                collisionObjectViews.append(collisionObjectView)
-//                view.addSubview(collisionObjectView)
-//            }
-//        }
-//    }
+    private func present(collisions: [SafetyState.Collision]) {
+        for collision in collisions {
+            var collisionObjectView: CollisionObjectView?
+
+            switch (collision.state, collision.objectType) {
+            case (.warning, .car):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: collision.imageSize.cgSize)
+                collisionAlertView.isHidden = false
+            case (.warning, .person):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: collision.imageSize.cgSize)
+                collisionObjectView?.exclamationMarkView.isHidden = true
+            case (.critical, .car):
+                collisionBanerView.isHidden = false
+                return
+            case (.critical ,.person):
+                collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: collision.imageSize.cgSize)
+                collisionAlertView.isHidden = false
+            }
+
+            collisionObjectView?.color = collision.objectType.color
+
+            if let collisionObjectView = collisionObjectView {
+                collisionObjectViews.append(collisionObjectView)
+                view.addSubview(collisionObjectView)
+            }
+        }
+    }
     
-    private func createCollisionObjectView(frame: CGRect,  canvasSize: CGSize) -> CollisionObjectView {
+    private func createCollisionObjectView(frame: CGRect, canvasSize: CGSize) -> CollisionObjectView {
         let leftTop = frame.origin.convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         let rightBottom = CGPoint(x: frame.maxX, y: frame.maxY).convertForAspectRatioFill(from: canvasSize, to: view.bounds.size)
         
@@ -244,26 +244,24 @@ extension ContainerViewController: ContainerPresenter {
         return CollisionObjectView(frame: extendedRect)
     }
     
-//    func present(safetyState: SafetyState) {
-//        dismissSafetyStateViews()
-//
-//        switch safetyState {
-//        case .none:
-//            break
-//        case let .distance(frame, distance, canvasSize):
-//            present(distance: distance, objectFrame: frame, canvasSize: canvasSize)
-//        case let .collisions(collisions, canvasSize):
-//            present(collisions: collisions, canvasSize: canvasSize)
-//        }
-//    }
+    func present(safetyState: SafetyState) {
+        dismissSafetyStateViews()
+
+        switch safetyState {
+        case .none:
+            break
+        case let .collisions(collisions):
+            present(collisions: collisions)
+        }
+    }
     
     func present(frame: CMSampleBuffer) {
-        if currentViewController == visionViewController {
-            visionViewController?.present(sampleBuffer: frame)
-        } else if currentViewController == arContainerViewController {
+        if currentViewController == arContainerViewController {
             if let frame: CVPixelBuffer = CMSampleBufferGetImageBuffer(frame) {
                 arContainerViewController.present(frame: frame)
             }
+        } else {
+            visionViewController?.present(sampleBuffer: frame)
         }
     }
     
