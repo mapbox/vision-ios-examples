@@ -242,7 +242,7 @@ extension ContainerInteractor: ContainerDelegate {
     
     func didNavigationRouteUpdated(route: MapboxVisionAR.Route?) {
         if let route = route {
-            visionARManager?.setRoute(route)
+            visionARManager?.set(route: route)
         }
     }
 }
@@ -268,14 +268,10 @@ extension ContainerInteractor: VisionManagerDelegate {
         updateSpeedLimits()
     }
     
-    func visionManager(_ visionManager: VisionManager, didCountryChanged country: Country) {
+    func visionManager(_ visionManager: VisionManager, didUpdateCountry country: Country) {
         currentCountry = country
     }
     
-    func visionManager(_ visionManager: VisionManager, didAuthorizationStatusChanged status: AuthorizationStatus) {
-        
-    }
-
     func visionManager(_ visionManager: VisionManager, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) {
         guard case .segmentation = currentScreen else { return }
         presenter.present(segmentation: frameSegmentation)

@@ -258,9 +258,7 @@ extension ContainerViewController: ContainerPresenter {
     
     func present(frame: CMSampleBuffer) {
         if currentViewController == arContainerViewController {
-            if let frame: CVPixelBuffer = CMSampleBufferGetImageBuffer(frame) {
-                arContainerViewController.present(frame: frame)
-            }
+            arContainerViewController.present(sampleBuffer: frame)
         } else {
             visionViewController?.present(sampleBuffer: frame)
         }
