@@ -21,9 +21,15 @@ final class VisionDelegateProxy {
 
 extension VisionDelegateProxy: VisionManagerDelegate {
     
-    func visionManager(_ visionManager: VisionManager, didAuthorizationStatusChanged status: AuthorizationStatus) {
+    func visionManager(_ visionManager: VisionManager, didUpdateAuthorizationStatus status: AuthorizationStatus) {
         queue.async { [unowned self] in
-            self.delegate?.visionManager(visionManager, didAuthorizationStatusChanged: status)
+            self.delegate?.visionManager(visionManager, didUpdateAuthorizationStatus: status)
+        }
+    }
+    
+    func visionManager(_ visionManager: VisionManager, didUpdateCountry country: Country) {
+        queue.async { [unowned self] in
+            self.delegate?.visionManager(visionManager, didUpdateCountry: country)
         }
     }
     
