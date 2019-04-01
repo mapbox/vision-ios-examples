@@ -10,7 +10,7 @@ import Foundation
 import MapboxVision
 import MapboxVisionAR
 import MapboxVisionSafety
-import AVFoundation
+import CoreMedia
 
 enum Screen {
     case menu
@@ -114,7 +114,7 @@ final class ContainerInteractor {
     
     private var speedLimits: SpeedLimits?
     private var currentSpeed: Float?
-    private var currentCountry: Country?
+    private var currentCountry: Country = .unknown
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -224,11 +224,7 @@ final class ContainerInteractor {
     }
     
     private func getIcon(for sign: Sign, over: Bool) -> ImageAsset? {
-        guard let country = currentCountry else {
-            assertionFailure("Contry should be known before asking for a Sign asset")
-            return nil
-        }
-        return sign.icon(over: over, country: country)
+        return sign.icon(over: over, country: currentCountry)
     }
     
     deinit {
@@ -342,7 +338,6 @@ extension ContainerInteractor: VisionSafetyDelegate {
         guard case .distanceToObject = currentScreen else { return }
         DispatchQueue.main.async { [weak self] in
             self?.speedLimits = roadRestrictions.speedLimits
-            self?.updateSpeedLimits()
         }
     }
     
