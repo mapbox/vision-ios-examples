@@ -10,6 +10,7 @@ import Foundation
 import MapboxVision
 import MapboxVisionAR
 import MapboxVisionSafety
+import CoreMedia
 
 enum Screen {
     case menu
@@ -113,6 +114,7 @@ final class ContainerInteractor {
     
     private var speedLimits: SpeedLimits?
     private var currentSpeed: Float?
+    private var currentCountry: Country = .unknown
     
     struct Dependencies {
         let alertPlayer: AlertPlayer
@@ -222,7 +224,7 @@ final class ContainerInteractor {
     }
     
     private func getIcon(for sign: Sign, over: Bool) -> ImageAsset? {
-        return sign.icon(over: over, country: visionManager.country)
+        return sign.icon(over: over, country: currentCountry)
     }
     
     deinit {
@@ -262,6 +264,14 @@ extension ContainerInteractor: MenuDelegate {
 
 extension ContainerInteractor: VisionManagerDelegate {
     
+    func visionManagerDidFinishUpdate(_ visionManager: VisionManager) {
+        updateSpeedLimits()
+    }
+    
+    func visionManager(_ visionManager: VisionManager, didCountryChanged country: Country) {
+        currentCountry = country
+    }
+    
     func visionManager(_ visionManager: VisionManager, didAuthorizationStatusChanged status: AuthorizationStatus) {
         
     }
@@ -296,7 +306,6 @@ extension ContainerInteractor: VisionManagerDelegate {
     func visionManager(_ visionManager: VisionManager, didUpdateVehicleLocation vehicleLocation: VehicleLocation) {
         guard case .distanceToObject = currentScreen else { return }
         currentSpeed = vehicleLocation.speed
-        updateSpeedLimits()
     }
 }
 
@@ -329,7 +338,6 @@ extension ContainerInteractor: VisionSafetyDelegate {
         guard case .distanceToObject = currentScreen else { return }
         DispatchQueue.main.async { [weak self] in
             self?.speedLimits = roadRestrictions.speedLimits
-            self?.updateSpeedLimits()
         }
     }
     
