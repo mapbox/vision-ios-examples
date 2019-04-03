@@ -10,6 +10,7 @@ import UIKit
 import MapboxVisionAR
 import MapboxDirections
 import MapboxCoreNavigation
+import CoreMedia
 
 private let inset: CGFloat = 18.0
 
@@ -59,8 +60,8 @@ final class ARContainerViewController: UIViewController {
         present(viewController: arViewController)
     }
     
-    func present(frame: CVPixelBuffer) {
-        arViewController.present(frame: frame)
+    func present(sampleBuffer: CMSampleBuffer) {
+        arViewController.present(sampleBuffer: sampleBuffer)
     }
     
     func present(lane: ARLane?) {
