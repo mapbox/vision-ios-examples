@@ -599,7 +599,7 @@ extension Sign {
             case .warningSecondRoadLeft:
                 return nil
             }
-        case .china:
+        case .china, .other:
             switch type {
             case .unknown:
                 return nil
