@@ -432,6 +432,8 @@
 			);
 			name = SwiftGen;
 			outputPaths = (
+				"$(SRCROOT)/Generated/Images.swift",
+				"$(SRCROOT)/Generated/Strings.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
