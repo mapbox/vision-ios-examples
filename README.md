@@ -14,8 +14,11 @@ In order to fetch and use Vision SDK, you will need to obtain two tokens at [tok
 ## Installation
 1. `git clone https://github.com/mapbox/vision-ios-examples.git`
 1. `cd vision-ios-examples`
-1. Put your *private* token instead of `<ADD-TOKEN-HERE>` in `Cartfile.resolved`
-1. `carthage bootstrap --platform ios`
+1. Open `Cartfile` and uncomment two lines concerning Vision:
+	- `binary "https://api.mapbox.com/downloads/...`
+	- `github "mapbox/mapbox-vision-ios"...`
+1. Put your *private* token instead of `<ADD-TOKEN-HERE>` in `Cartfile`
+1. `carthage update --platform ios`
 1. `open demo.xcodeproj`
 1. Put your *public* token into the value of the `MGLMapboxAccessToken` key within the `Info.plist` file
 1. Run the application
