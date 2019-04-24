@@ -1,5 +1,5 @@
 binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json"
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json"
 
-binary "https://api.mapbox.com/downloads/v1/vision/ios/mapbox-vision-native-all.carthage?access_token=<ADD-TOKEN-HERE>" ~> 0.3.0
-github "mapbox/mapbox-vision-ios" ~> 0.3.0
+# binary "https://api.mapbox.com/downloads/v1/vision/ios/mapbox-vision-native-all.carthage?access_token=<ADD-TOKEN-HERE>" ~> 0.3.0
+# github "mapbox/mapbox-vision-ios" ~> 0.3.0
