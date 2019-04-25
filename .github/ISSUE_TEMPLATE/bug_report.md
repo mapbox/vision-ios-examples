@@ -7,25 +7,33 @@ assignees: ''
 
 ---
 
-**Description**
+- [ ] I have read and followed all the instructions provided in the [README.md](https://github.com/mapbox/vision-ios-examples/blob/master/README.md).
+
+## Description
+
 A clear and concise description of what the bug is.
 
-**Steps To Reproduce**
+## Steps To Reproduce
+
 Steps to reproduce the behavior:
 1. Go to '...'
-2. Click on '....'
-4. See error
+1. Click on '....'
+1. See error
 
-**Expected behavior**
+## Expected behavior
+
 A clear and concise description of what you expected to happen.
 
-**Actual behavior**
+## Actual behavior
+
 A clear and concise description of what you have experienced instead.
 
-**Screenshots**
+## Screenshots
+
 If applicable, add screenshots to help explain your problem.
 
-**Configuration**
+## Configuration
+
  - Device: [e.g. iPhone8]
  - OS: [e.g. iOS11.2]
  - Browser [e.g. stock browser, safari]
@@ -36,5 +44,5 @@ Put the contents of the Cartfile.resolved here
 !!! STRIP YOUR MAPBOX TOKEN !!!
 ```
 
-**Additional context**
+## Additional context
 Add any other context about the problem here.
