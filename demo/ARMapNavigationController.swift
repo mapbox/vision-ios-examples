@@ -18,13 +18,13 @@ private let inset: CGFloat = 18.0
 
 class ARMapNavigationController: UIViewController {
     
-    var completion: ((Route) -> Void)?
+    var completion: ((MapboxDirections.Route) -> Void)?
     
     private var mapView: NavigationMapView {
         return view as! NavigationMapView
     }
     
-    private var selectedRoute: Route?
+    private var selectedRoute: MapboxDirections.Route?
     
     override func loadView() {
         let view = NavigationMapView(frame: .zero, styleURL: MGLStyle.darkStyleURL)

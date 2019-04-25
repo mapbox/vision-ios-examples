@@ -33,5 +33,7 @@ class MockContainerPresenter: ContainerPresenter {
     
     func present(calibrationProgress: CalibrationProgress?) {}
     
+    func present(speedLimit: ImageAsset?, isNew: Bool) {}
+    
     func dismissCurrent() {}
 }

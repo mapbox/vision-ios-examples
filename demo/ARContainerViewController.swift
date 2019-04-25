@@ -10,17 +10,24 @@ import UIKit
 import MapboxVisionAR
 import MapboxDirections
 import MapboxCoreNavigation
+import CoreMedia
 
 private let inset: CGFloat = 18.0
 
 final class ARContainerViewController: UIViewController {
 
     private lazy var mapViewController = ARMapNavigationController()
-    private lazy var arViewController = VisionARNavigationViewController()
+    private lazy var arViewController = VisionARViewController()
+    
+    weak var navigationDelegate: NavigationManagerDelegate? {
+        didSet {
+            arViewController.navigationDelegate = navigationDelegate
+        }
+    }
     
     override func viewDidLoad() {
         mapViewController.completion = present
-        
+
         presentMap()
         
         arViewController.view.addSubview(endButton)
@@ -44,13 +51,25 @@ final class ARContainerViewController: UIViewController {
         present(viewController: mapViewController)
     }
     
-    func present(route: Route) {
+    func present(route: MapboxDirections.Route) {
         dismiss(viewController: mapViewController)
         
         let navigationService = MapboxNavigationService(route: route)
         arViewController.navigationService = navigationService
         arViewController.navigationService?.delegate = self
         present(viewController: arViewController)
+    }
+    
+    func present(sampleBuffer: CMSampleBuffer) {
+        arViewController.present(sampleBuffer: sampleBuffer)
+    }
+    
+    func present(lane: ARLane?) {
+        arViewController.present(lane: lane)
+    }
+    
+    func present(camera: ARCamera) {
+        arViewController.present(camera: camera)
     }
     
     private let instructionsLabel: UILabel = {

@@ -7,19 +7,19 @@
 //
 
 import Foundation
-import MapboxVision
-
-private let bonnetAdjustment = 1.25
+import MapboxVisionSafety
 
 enum SafetyState: Equatable {
+    
+    public static let bonnetAdjustment = 1.25
     
     enum ObjectType {
         case car
         case person
         
-        init?(_ type: MapboxVision.ObjectType) {
+        init?(_ type: DetectionClass) {
             switch type {
-            case .lights, .sign, .bicycle:
+            case .trafficLight, .trafficSign, .bicycle:
                 return nil
             case .car:
                 self = .car
@@ -30,14 +30,14 @@ enum SafetyState: Equatable {
     }
     
     struct Collision: Equatable {
-        
+
         enum State {
             case warning
             case critical
-            
-            init?(_ state: CollisionState) {
-                switch state {
-                case .notTriggered:
+
+            init?(_ level: CollisionDangerLevel) {
+                switch level {
+                case .none:
                     return nil
                 case .warning:
                     self = .warning
@@ -46,37 +46,38 @@ enum SafetyState: Equatable {
                 }
             }
         }
-        
+
         let objectType: ObjectType
         let state: State
         let boundingBox: CGRect
+        let imageSize: ImageSize
     }
-    
+
     case none
-    case distance(frame: CGRect, distance: Double, canvasSize: CGSize)
-    case collisions([Collision], canvasSize: CGSize)
-    
-    init(_ worldDescription: WorldDescription, canvasSize: CGSize) {
-        
-        let collisions = worldDescription.collisionObjects.compactMap { collision -> Collision? in
-            
-            let type = collision.object.detection.objectType
-            let state = collision.state
-            
+    case collisions([Collision])
+
+    init(_ collisionObjects: [CollisionObject]) {
+
+        let collisions = collisionObjects.compactMap { collision -> Collision? in
+
+            let type = collision.object.detectionClass
+            let level = collision.dangerLevel
+
             guard
                 let objectType = ObjectType(type),
-                let collisionState = Collision.State(state)
+                let collisionState = Collision.State(level)
             else { return nil }
-            
-            let boundingBox = collision.object.detection.boundingBox
-            return Collision(objectType: objectType, state: collisionState, boundingBox: boundingBox)
+
+            let boundingBox = collision.lastDetection.boundingBox
+            let imageSize = collision.lastFrame.image.size
+            return Collision(objectType: objectType,
+                             state: collisionState,
+                             boundingBox: boundingBox,
+                             imageSize: imageSize)
         }
-        
+
         if collisions.count > 0 {
-            self = .collisions(collisions, canvasSize: canvasSize)
-        } else if let car = worldDescription.forwardCar {
-            let distance = max(0, car.distance - bonnetAdjustment)
-            self = .distance(frame: car.detection.boundingBox, distance: distance, canvasSize: canvasSize)
+            self = .collisions(collisions)
         } else {
             self = .none
         }
