@@ -27,7 +27,7 @@ final class PaddedLabel: UILabel {
     }
     
     override func drawText(in rect: CGRect) {
-        let textRect = UIEdgeInsetsInsetRect(rect, insets)
+        let textRect = rect.inset(by: insets)
         super.drawText(in: textRect)
     }
     
