@@ -42,7 +42,6 @@ protocol ContainerPresenter: class {
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(safetyState: SafetyState)
-    func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
     func present(speedLimit: ImageAsset?, isNew: Bool)
     
@@ -173,7 +172,6 @@ final class ContainerInteractor {
         alertPlayer.stop()
         presenter.present(signs: [])
         presenter.present(roadDescription: nil)
-        presenter.present(laneDepartureState: .normal)
         presenter.present(safetyState: .none)
         presenter.present(calibrationProgress: nil)
         presenter.present(speedLimit: nil, isNew: false)
