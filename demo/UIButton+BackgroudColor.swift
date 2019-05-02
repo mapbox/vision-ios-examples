@@ -1,7 +1,4 @@
 //
-//  UIButton+BackgroudColor.swift
-//  demo
-//
 //  Created by Maksim on 10/9/18.
 //  Copyright © 2018 Mapbox. All rights reserved.
 //

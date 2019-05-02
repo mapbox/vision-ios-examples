@@ -1,7 +1,4 @@
 //
-//  Signs.swift
-//  cv-assist-ios
-//
 //  Created by Maksim Vaniukevich on 3/21/18.
 //  Copyright © 2018 Mapbox. All rights reserved.
 //

@@ -1,7 +1,4 @@
 //
-//  RoadLanesView.swift
-//  cv-assist-ios
-//
 //  Created by Maksim Vaniukevich on 7/11/18.
 //  Copyright © 2018 Mapbox. All rights reserved.
 //

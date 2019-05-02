@@ -1,3 +1,8 @@
+//
+//  Created by Maksim Vaniukevich on 9/17/18.
+//  Copyright © 2018 Mapbox. All rights reserved.
+//
+
 import Foundation
 
 /// A generic collection for storing key-value pairs in an ordered manner.

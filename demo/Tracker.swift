@@ -1,6 +1,6 @@
 //
-// Created by Alexander Pristavko on 5/26/18.
-// Copyright (c) 2018 Mapbox. All rights reserved.
+//  Created by Alexander Pristavko on 5/26/18.
+//  Copyright (c) 2018 Mapbox. All rights reserved.
 //
 
 import Foundation

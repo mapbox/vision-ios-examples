@@ -1,7 +1,4 @@
 //
-//  ImageSwitchingView.swift
-//  demo
-//
 //  Created by Alexander Pristavko on 11/21/18.
 //  Copyright © 2018 Mapbox. All rights reserved.
 //

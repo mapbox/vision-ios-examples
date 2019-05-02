@@ -1,7 +1,4 @@
 //
-//  MockContainerPresenrer.swift
-//  demoTests
-//
 //  Created by Maksim on 11/6/18.
 //  Copyright © 2018 Mapbox. All rights reserved.
 //
