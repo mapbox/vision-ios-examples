@@ -29,8 +29,6 @@ class MockContainerPresenter: ContainerPresenter {
     
     func present(roadDescription: RoadDescription?) {}
     
-    func present(laneDepartureState: LaneDepartureState) {}
-    
     func present(calibrationProgress: CalibrationProgress?) {}
     
     func present(speedLimit: ImageAsset?, isNew: Bool) {}
