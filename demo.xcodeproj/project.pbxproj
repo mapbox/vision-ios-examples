@@ -21,7 +21,6 @@
 		2E60335E214295F80050EDB3 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60335D214295F80050EDB3 /* Locale.swift */; };
 		2E6033652142982D0050EDB3 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6033642142982D0050EDB3 /* Images.swift */; };
 		2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E603366214299110050EDB3 /* OrderedDictionary.swift */; };
-		2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */; };
 		2E9BF90021665318000A6A39 /* AlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */; };
 		2EA4E18722319091007690AC /* DelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4E18622319091007690AC /* DelegateProxy.swift */; };
 		2EA4E18B22319906007690AC /* MapboxVisionARNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA4E18A22319906007690AC /* MapboxVisionARNative.framework */; };
@@ -102,7 +101,6 @@
 		2E6033602142962C0050EDB3 /* Signs.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Signs.xcassets; sourceTree = "<group>"; };
 		2E6033642142982D0050EDB3 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2E603366214299110050EDB3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
-		2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lane_departure_warning.wav; sourceTree = "<group>"; };
 		2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPlayer.swift; sourceTree = "<group>"; };
 		2EA4E18622319091007690AC /* DelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateProxy.swift; sourceTree = "<group>"; };
 		2EA4E18A22319906007690AC /* MapboxVisionARNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MapboxVisionARNative.framework; path = Carthage/Build/iOS/MapboxVisionARNative.framework; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 		2E603361214296430050EDB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2E6BF178216662DA00A7CD12 /* lane_departure_warning.wav */,
 				B52A75832180B53700286AD8 /* collision_alert_critical.wav */,
 				B52A75842180B53700286AD8 /* collision_alert_warning.wav */,
 				2E4FEE0B215E947A00DCB496 /* LaunchScreen.storyboard */,
@@ -408,7 +405,6 @@
 				2E4FEE0D215E947A00DCB496 /* LaunchScreen.storyboard in Resources */,
 				B544200021493C20007CB69E /* Signs.xcassets in Resources */,
 				2E4FEE0A215E807400DCB496 /* agreement.pdf in Resources */,
-				2E6BF179216662DA00A7CD12 /* lane_departure_warning.wav in Resources */,
 				9D72A44113D27519A4189D85 /* overspeed_warning.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,6 +425,9 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Resources/Assets.xcassets",
+				"$(SRCROOT)/Resources/Signs.xcassets",
+				"$(SRCROOT)/Resources/en.lproj",
 			);
 			name = SwiftGen;
 			outputPaths = (
