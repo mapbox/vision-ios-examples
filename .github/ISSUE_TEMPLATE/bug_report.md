@@ -36,8 +36,7 @@ If applicable, add screenshots to help explain your problem.
 
  - Device: [e.g. iPhone8]
  - OS: [e.g. iOS11.2]
- - Browser [e.g. stock browser, safari]
- - TestFlight version (if applicable) [e.g. 0.0.1 (22)]
+ - TestFlight version (if applicable): [e.g. 0.0.1 (22)]
  - `Cartfile.resolved` (if build from source):
 ```
 Put the contents of the Cartfile.resolved here
