@@ -29,7 +29,7 @@ final class CollisionObjectView: UIView {
         if let gradient = gradientLayer {
             gradient.backgroundColor = UIColor.clear.cgColor
             gradient.locations = [0.0, 0.75, 1.0]
-            gradient.type = "radial"
+            gradient.type = .radial
             gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
             gradient.endPoint = CGPoint(x: 1, y: 1)
         }

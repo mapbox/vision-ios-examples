@@ -87,7 +87,7 @@ final class WelcomeViewController: UIViewController {
         
         textView.attributedText = text
         textView.linkTextAttributes = Dictionary(uniqueKeysWithValues:
-            linkAttributes.map { return ($0.key.rawValue, $0.value) }
+            linkAttributes.map { return ($0.key, $0.value) }
         )
         textView.isEditable = false
         textView.isUserInteractionEnabled = true
@@ -136,7 +136,7 @@ private extension NSMutableAttributedString {
     func setSubstringAsLink(substring: String, linkURL: String) {
         let range = mutableString.range(of: substring)
         if range.location != NSNotFound {
-            addAttribute(NSAttributedStringKey.link, value: linkURL, range: range)
+            addAttribute(NSAttributedString.Key.link, value: linkURL, range: range)
         }
     }
 }

@@ -367,7 +367,7 @@ extension ContainerViewController: ContainerPresenter {
 extension UIViewController {
     
     @objc func present(viewController: UIViewController) {
-        addChildViewController(viewController)
+        addChild(viewController)
         view.addSubview(viewController.view)
         NSLayoutConstraint.activate([
             viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
@@ -375,13 +375,13 @@ extension UIViewController {
             viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     func dismiss(viewController: UIViewController) {
-        viewController.willMove(toParentViewController: nil)
+        viewController.willMove(toParent: nil)
         viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent()
     }
 }
 
