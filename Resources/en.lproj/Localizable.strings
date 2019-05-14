@@ -1,8 +1,9 @@
 "General_Calibration" = "Calibration: %d%%";
 
 "Welcome_Title" = "Welcome to Mapbox Vision Teaser!";
-"Welcome_Body" = "I have read and agree, on behalf of myself and my\ncompany and its affiliates, to be bound by the terms of\nthe Vision SDK Evaluation Agreement.";
-"Welcome_Body_LinkSubstring" = "Evaluation Agreement";
+"Welcome_Body" = "I agree to the Mapbox Terms of Service and Privacy Policy";
+"Terms_of_Service_LinkSubstring" = "Terms of Service";
+"Privacy_Policy_LinkSubstring" = "Privacy Policy";
 "Welcome_Button" = "Submit";
 "ARMap_Hint" = "Long tap on the map to select a destination";
 

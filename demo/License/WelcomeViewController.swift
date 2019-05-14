@@ -8,18 +8,13 @@ protocol LicenseDelegate: class {
 
 final class WelcomeViewController: UIViewController {
     weak var licenseDelegate: LicenseDelegate?
-    
-    private let licensePreviewController = LicenseController.previewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .black
-        bodyTextView.delegate = self
         
         setupLayout()
-        
-        licensePreviewController.delegate = self
     }
     
     private func setupLayout() {
@@ -67,7 +62,8 @@ final class WelcomeViewController: UIViewController {
             .paragraphStyle: paragraph,
         ]
         let text = NSMutableAttributedString(string: L10n.welcomeBody, attributes: attributes)
-        text.setSubstringAsLink(substring: L10n.welcomeBodyLinkSubstring, linkURL: "custom")
+        text.setSubstringAsLink(substring: L10n.termsOfServiceLinkSubstring, linkURL: "https://www.mapbox.com/tos/")
+        text.setSubstringAsLink(substring: L10n.privacyPolicyLinkSubstring, linkURL: "https://www.mapbox.com/privacy/")
         
         let linkAttributes: [NSAttributedString.Key : Any] = [
             .font: UIFont(name: "AvenirNext-DemiBold", size: 18.0)!,
@@ -102,25 +98,8 @@ final class WelcomeViewController: UIViewController {
         return button
     }()
     
-    private func licenseTapped() {
-        licensePreviewController.presentPreview(animated: true)
-    }
-    
     @objc private func buttonTapped() {
         licenseDelegate?.licenseSubmitted()
-    }
-}
-
-extension WelcomeViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        licenseTapped()
-        return false
-    }
-}
-
-extension WelcomeViewController: UIDocumentInteractionControllerDelegate {
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        return self
     }
 }
 
