@@ -6,8 +6,22 @@ protocol LicenseDelegate: class {
     func licenseSubmitted()
 }
 
-final class WelcomeViewController: UIViewController {
+final class LicenseViewController: UIViewController {
     weak var licenseDelegate: LicenseDelegate?
+    private let exitOnDone: Bool
+
+    init(buttonTitle: String = L10n.welcomeButton, title: String = L10n.welcomeTitle, exitOnDone: Bool = false) {
+        self.exitOnDone = exitOnDone
+
+        super.init(nibName: nil, bundle: nil)
+
+        titleLabel.text = title
+        self.button.setTitle(buttonTitle, for: .normal)
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +113,11 @@ final class WelcomeViewController: UIViewController {
     }()
     
     @objc private func buttonTapped() {
-        licenseDelegate?.licenseSubmitted()
+        if exitOnDone {
+            dismiss(viewController: self)
+        } else {
+            licenseDelegate?.licenseSubmitted()
+        }
     }
 }
 

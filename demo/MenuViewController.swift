@@ -167,9 +167,7 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func infoTapped() {
-        let previewController = LicenseController.previewController()
-        previewController.delegate = self
-        previewController.presentPreview(animated: true)
+        present(viewController: LicenseViewController(buttonTitle: L10n.infoButton, title: L10n.infoTitle, exitOnDone: true))
     }
     
     private let infoButton: UIButton = {
@@ -185,12 +183,6 @@ final class MenuViewController: UIViewController {
     private static let cellHeight: CGFloat = 147.0
     private static let cellWidth: CGFloat = 180.0
     private static let infoButtonPadding: CGFloat = 20
-}
-
-extension MenuViewController: UIDocumentInteractionControllerDelegate {
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        return self
-    }
 }
 
 extension Screen {

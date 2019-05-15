@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func launchLicense() -> UIViewController {
-        let viewController = WelcomeViewController()
+        let viewController = LicenseViewController()
         viewController.licenseDelegate = self
         return viewController
     }

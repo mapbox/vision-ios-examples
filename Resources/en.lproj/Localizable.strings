@@ -5,6 +5,8 @@
 "Terms_of_Service_LinkSubstring" = "Terms of Service";
 "Privacy_Policy_LinkSubstring" = "Privacy Policy";
 "Welcome_Button" = "Submit";
+"Info_Title" = "Info";
+"Info_Button" = "Close";
 "ARMap_Hint" = "Long tap on the map to select a destination";
 
 "Menu_Segmentation_Button" = "Segmentation";
