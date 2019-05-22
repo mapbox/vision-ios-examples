@@ -1,8 +1,3 @@
-//
-//  Created by Maksim Vaniukevich on 9/17/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import Foundation
 
 extension Locale {

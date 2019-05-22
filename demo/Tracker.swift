@@ -1,8 +1,3 @@
-//
-//  Created by Alexander Pristavko on 5/26/18.
-//  Copyright (c) 2018 Mapbox. All rights reserved.
-//
-
 import Foundation
 
 private let expiryDeadline = 10 * 30

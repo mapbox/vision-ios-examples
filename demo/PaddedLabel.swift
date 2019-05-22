@@ -1,9 +1,3 @@
-//
-//  Created by Alexander Pristavko on 4/12/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
-
 import Foundation
 import UIKit
 

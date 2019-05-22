@@ -1,8 +1,3 @@
-//
-//  Created by Maksim Vaniukevich on 7/11/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import UIKit
 import MapboxVision
 

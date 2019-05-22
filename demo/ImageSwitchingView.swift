@@ -1,8 +1,3 @@
-//
-//  Created by Alexander Pristavko on 11/21/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import UIKit
 
 private let translationDuration: TimeInterval = 0.5
