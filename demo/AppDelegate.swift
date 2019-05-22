@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  demo
-//
-//  Created by Maksim on 7/7/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import UIKit
 import MapboxVision
 import Fabric

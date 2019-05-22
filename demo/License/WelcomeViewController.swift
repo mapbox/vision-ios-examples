@@ -1,11 +1,3 @@
-//
-//  WelcomeViewController.swift
-//  demo
-//
-//  Created by Alexander Pristavko on 9/28/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import UIKit
 
 private let highlightColor = UIColor(red: 0.0, green: 122.0 / 255.0, blue: 1.0, alpha: 1.0)

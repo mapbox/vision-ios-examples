@@ -1,11 +1,3 @@
-//
-//  DistanceView.swift
-//  cv-assist-ios
-//
-//  Created by Maksim Vaniukevich on 2/27/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import MapboxVision

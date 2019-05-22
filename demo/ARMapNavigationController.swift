@@ -1,11 +1,3 @@
-//
-//  ARMapNavigationController.swift
-//  cv-assist-ios
-//
-//  Created by Alexander Pristavko on 3/20/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import Mapbox

@@ -1,11 +1,3 @@
-//
-//  ContainerViewController.swift
-//  demo
-//
-//  Created by Maksim Vaniukevich on 7/7/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import UIKit
 import MapboxVision
 import MapboxVisionAR
