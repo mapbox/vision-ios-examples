@@ -591,7 +591,7 @@ extension Sign {
             case .warningSecondRoadLeft:
                 return nil
             }
-        case .china, .other:
+        case .UK, .china, .other: // FIXME: This is fake support for UK signs. Reimplement it as soon as models/assets are available (https://github.com/mapbox/vision-ios-examples/issues/74)
             switch type {
             case .unknown:
                 return nil
