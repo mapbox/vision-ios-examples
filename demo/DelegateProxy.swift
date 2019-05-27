@@ -14,61 +14,61 @@ class DelegateProxy<Delegate: AnyObject> {
 }
 
 extension DelegateProxy: VisionManagerDelegate where Delegate: VisionManagerDelegate {
-    func visionManager(_ visionManager: VisionManager, didUpdateAuthorizationStatus authorizationStatus: AuthorizationStatus) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateAuthorizationStatus authorizationStatus: AuthorizationStatus) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateAuthorizationStatus: authorizationStatus)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateFrameSegmentation: frameSegmentation)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateFrameDetections frameDetections: FrameDetections) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameDetections frameDetections: FrameDetections) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateFrameDetections: frameDetections)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateFrameSignClassifications: frameSignClassifications)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateRoadDescription roadDescription: RoadDescription) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateRoadDescription: roadDescription)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateWorldDescription worldDescription: WorldDescription) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateWorldDescription worldDescription: WorldDescription) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateWorldDescription: worldDescription)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateVehicleState vehicleState: VehicleState) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateVehicleState vehicleState: VehicleState) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateVehicleState: vehicleState)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateCamera camera: Camera) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateCamera camera: Camera) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateCamera: camera)
         }
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateCountry country: Country) -> Void {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateCountry country: Country) {
         queue.async { [unowned self] in
             self.delegate?.visionManager(visionManager, didUpdateCountry: country)
         }
     }
     
-    func visionManagerDidCompleteUpdate(_ visionManager: VisionManager) -> Void {
+    func visionManagerDidCompleteUpdate(_ visionManager: VisionManagerProtocol) {
         queue.async { [unowned self] in
             self.delegate?.visionManagerDidCompleteUpdate(visionManager)
         }
