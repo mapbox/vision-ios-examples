@@ -42,7 +42,6 @@ protocol ContainerPresenter: class {
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(safetyState: SafetyState)
-    func present(laneDepartureState: LaneDepartureState)
     func present(calibrationProgress: CalibrationProgress?)
     func present(speedLimit: ImageAsset?, isNew: Bool)
     
@@ -94,10 +93,10 @@ final class ContainerInteractor {
     
     private var currentScreen = Screen.menu
     private let presenter: ContainerPresenter
-    private let visionManager: VisionManager
+    private let visionManager: VisionManagerProtocol
     private var visionARManager: VisionARManager?
     private var visionSafetyManager: VisionSafetyManager?
-    private let camera = CameraVideoSource()
+    private let camera: VideoSource
     
     private lazy var delegateProxy = DelegateProxy(delegate: self)
     
@@ -126,15 +125,20 @@ final class ContainerInteractor {
     init(dependencies: Dependencies) {
         self.presenter = dependencies.presenter
         self.alertPlayer = dependencies.alertPlayer
-        
-        visionManager = VisionManager.create(videoSource: camera)
+
+        let camera = CameraVideoSource()
+        camera.start()
+        let visionManager = VisionManager.create(videoSource: camera)
+
+        self.camera = camera
+        self.visionManager = visionManager
+
         visionARManager = VisionARManager.create(visionManager: visionManager, delegate: delegateProxy)
         visionSafetyManager = VisionSafetyManager.create(visionManager: visionManager, delegate: delegateProxy)
-        
+
         camera.add(observer: self)
         visionManager.start(delegate: delegateProxy)
-        camera.start()
-        
+
         presenter.presentVision()
         present(screen: .menu)
     }
@@ -173,7 +177,6 @@ final class ContainerInteractor {
         alertPlayer.stop()
         presenter.present(signs: [])
         presenter.present(roadDescription: nil)
-        presenter.present(laneDepartureState: .normal)
         presenter.present(safetyState: .none)
         presenter.present(calibrationProgress: nil)
         presenter.present(speedLimit: nil, isNew: false)
@@ -230,7 +233,6 @@ final class ContainerInteractor {
     }
     
     deinit {
-        visionManager.destroy()
         camera.remove(observer: self)
     }
 }
@@ -265,43 +267,43 @@ extension ContainerInteractor: MenuDelegate {
 }
 
 extension ContainerInteractor: VisionManagerDelegate {
-    func visionManager(_ visionManager: VisionManager, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) {
         guard case .segmentation = currentScreen else { return }
         presenter.present(segmentation: frameSegmentation)
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateFrameDetections frameDetections: FrameDetections) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameDetections frameDetections: FrameDetections) {
         guard case .objectDetection = currentScreen else { return }
         presenter.present(detections: frameDetections)
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) {
         guard case .signsDetection = currentScreen else { return }
         let items = frameSignClassifications.signs.map({ $0.sign })
         signTracker.update(items)
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateVehicleState vehicleState: VehicleState) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateVehicleState vehicleState: VehicleState) {
         guard case .distanceToObject = currentScreen else { return }
         currentSpeed = vehicleState.speed
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateRoadDescription roadDescription: RoadDescription) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateRoadDescription roadDescription: RoadDescription) {
         guard case .laneDetection = currentScreen else { return }
         presenter.present(roadDescription: roadDescription)
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateCamera camera: Camera) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateCamera camera: Camera) {
         calibrationProgress = camera
         guard case .distanceToObject = currentScreen else { return }
         presenter.present(calibrationProgress: camera)
     }
     
-    func visionManager(_ visionManager: VisionManager, didUpdateCountry country: Country) {
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateCountry country: Country) {
         currentCountry = country
     }
     
-    func visionManagerDidCompleteUpdate(_ visionManager: VisionManager) {
+    func visionManagerDidCompleteUpdate(_ visionManager: VisionManagerProtocol) {
         updateSpeedLimits()
     }
 }

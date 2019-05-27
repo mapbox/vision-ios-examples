@@ -4,7 +4,7 @@ Example application showing usage of [Mapbox Vision SDK](https://vision.mapbox.c
 
 ## Dependencies
 1. `brew install SwiftGen` (6.0 or later)
-1. `brew install carthage` (0.31.0 or later)
+1. `brew install carthage` (0.33.0 or later)
 
 ## Tokens
 In order to fetch and use Vision SDK, you will need to obtain two tokens at [tokens page in your Mapbox account](https://account.mapbox.com/access-tokens/create/):

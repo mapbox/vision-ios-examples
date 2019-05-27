@@ -78,12 +78,6 @@ final class ContainerViewController: UIViewController {
             collisionBanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        view.addSubview(laneDepartureView)
-        NSLayoutConstraint.activate([
-            laneDepartureView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
-            laneDepartureView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -bannerInset),
-        ])
-        
         view.addSubview(calibrationLabel)
         NSLayoutConstraint.activate([
             calibrationLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
@@ -152,13 +146,6 @@ final class ContainerViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.6)
         view.contentMode = .center
-        view.isHidden = true
-        return view
-    }()
-    
-    private let laneDepartureView: UIImageView = {
-        let view = UIImageView(image: Asset.Assets.laneDepartureNotification.image)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view
     }()
@@ -289,19 +276,6 @@ extension ContainerViewController: ContainerPresenter {
         }
     }
     
-    func present(laneDepartureState: LaneDepartureState) {
-        let isVisible: Bool
-        
-        switch laneDepartureState {
-        case .normal, .warning:
-            isVisible = false
-        case .alert:
-            isVisible = true
-        }
-        
-        laneDepartureView.isHidden = !isVisible
-    }
-    
     func present(calibrationProgress: CalibrationProgress?) {
         calibrationLabel.isHidden = calibrationProgress?.isCalibrated ?? true
         guard let calibrationProgress = calibrationProgress else { return }
@@ -393,7 +367,7 @@ extension ContainerViewController: ContainerPresenter {
 extension UIViewController {
     
     @objc func present(viewController: UIViewController) {
-        addChildViewController(viewController)
+        addChild(viewController)
         view.addSubview(viewController.view)
         NSLayoutConstraint.activate([
             viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
@@ -401,13 +375,13 @@ extension UIViewController {
             viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     func dismiss(viewController: UIViewController) {
-        viewController.willMove(toParentViewController: nil)
+        viewController.willMove(toParent: nil)
         viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent()
     }
 }
 
