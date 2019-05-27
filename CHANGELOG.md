@@ -1,7 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-- Changed handling of `NavigationService` with its rerouting, etc. events, now it's not in `MapboxVisionAR` module
+
+- Changed handling of `NavigationService` with its rerouting, etc. events, it's moved out of `MapboxVisionAR` module, now it is in `ARContainerViewController`
 
 ## 1.0-21
 
