@@ -57,7 +57,6 @@ private let collisionAlertDelay: TimeInterval = 3
 private let speedLimitAlertDelay: TimeInterval = 5
 
 final class ContainerInteractor {
-
     private struct SpeedLimitState: Equatable {
         let speedLimits: SpeedLimits
         let isSpeeding: Bool
@@ -230,7 +229,6 @@ final class ContainerInteractor {
 }
 
 extension ContainerInteractor: ContainerDelegate {
-
     func backButtonPressed() {
         resetPresentation()
         present(screen: .menu)
@@ -244,7 +242,6 @@ extension ContainerInteractor: ContainerDelegate {
 }
 
 extension ContainerInteractor: MenuDelegate {
-
     func selected(screen: Screen) {
         switch screen {
         case .signsDetection:

@@ -36,7 +36,6 @@ protocol AlertPlayer {
 }
 
 final class AlertSoundPlayer: AlertPlayer {
-
     private struct Item: Equatable, CustomStringConvertible {
         let sound: AlertSound
         let repeated: Bool

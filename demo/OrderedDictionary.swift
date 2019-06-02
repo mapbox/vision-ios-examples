@@ -6,7 +6,6 @@ import Foundation
 /// Same as in an array, all key-value pairs (elements) are kept sorted and accessible by
 /// a zero-based integer index.
 struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
-
     // ======================================================= //
     // MARK: - Type Aliases
     // ======================================================= //
@@ -519,7 +518,6 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
 
     /// The backing storage for the mapping of keys to values.
     fileprivate var _keysToValues = [Key: Value]()
-
 }
 
 // ======================================================= //
@@ -569,17 +567,14 @@ typealias OrderedDictionaryValues<Key: Hashable, Value> = LazyMapBidirectionalCo
 // ======================================================= //
 
 extension OrderedDictionary: ExpressibleByArrayLiteral {
-
     /// Creates an ordered dictionary initialized from an array literal containing a list of
     /// key-value pairs.
     init(arrayLiteral elements: Element...) {
         self.init(elements)
     }
-
 }
 
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
-
     /// Creates an ordered dictionary initialized from a dictionary literal.
     init(dictionaryLiteral elements: (Key, Value)...) {
         self.init(elements.map { element in
@@ -587,7 +582,6 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
             return (key: key, value: value)
         })
     }
-
 }
 
 // ======================================================= //
@@ -601,12 +595,10 @@ extension OrderedDictionary: Equatable where Value: Equatable {}
 #endif
 
 extension OrderedDictionary where Value: Equatable {
-
     /// Returns a Boolean value that indicates whether the two given ordered dictionaries with
     /// equatable values are equal.
     static func == (lhs: OrderedDictionary, rhs: OrderedDictionary) -> Bool {
         return lhs._orderedKeys == rhs._orderedKeys
                 && lhs._keysToValues == rhs._keysToValues
     }
-
 }

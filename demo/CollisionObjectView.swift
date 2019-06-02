@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 
 final class CollisionObjectView: UIView {
-
     let exclamationMarkView = UIImageView(image: Asset.Assets.alert.image)
 
     private var gradientLayer: CAGradientLayer? {

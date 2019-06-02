@@ -5,12 +5,10 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     let window = UIWindow(frame: UIScreen.main.bounds)
     private var interactor: ContainerInteractor?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         let _ = MTLCreateSystemDefaultDevice()
 
         application.isIdleTimerDisabled = true

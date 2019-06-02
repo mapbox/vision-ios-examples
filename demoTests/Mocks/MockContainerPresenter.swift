@@ -4,7 +4,6 @@ import MapboxVision
 @testable import demo
 
 class MockContainerPresenter: ContainerPresenter {
-
     var currentSafetyState: SafetyState = .none
 
     func present(safetyState: SafetyState) {

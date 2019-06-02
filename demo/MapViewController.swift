@@ -5,7 +5,6 @@ import UIKit
 private let styleURL = URL(string: "mapbox://styles/willwhite/cjkmusatv0rox2roea7dz7r1p")
 
 final class MapViewController: UIViewController, MGLMapViewDelegate {
-
     override func viewDidLoad() {
         view.addSubview(mapView)
         NSLayoutConstraint.activate([

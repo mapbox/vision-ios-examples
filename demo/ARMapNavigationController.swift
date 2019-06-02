@@ -9,7 +9,6 @@ private let routeEdgeInsets = UIEdgeInsets(top: 100, left: 200, bottom: 100, rig
 private let inset: CGFloat = 18.0
 
 class ARMapNavigationController: UIViewController {
-
     var completion: ((MapboxDirections.Route) -> Void)?
 
     private var mapView: NavigationMapView {

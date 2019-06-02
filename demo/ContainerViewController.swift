@@ -10,7 +10,6 @@ private let smallRelativeInset: CGFloat = 16
 private let buttonHeight: CGFloat = 36
 
 final class ContainerViewController: UIViewController {
-
     weak var delegate: ContainerDelegate? {
         willSet {
             backButton.removeTarget(delegate, action: #selector(ContainerDelegate.backButtonPressed), for: .touchUpInside)
@@ -165,7 +164,6 @@ final class ContainerViewController: UIViewController {
 }
 
 extension ContainerViewController: ContainerPresenter {
-
     private func dismissSafetyStateViews() {
         distanceView.isHidden = true
         distanceLabel.isHidden = true
@@ -360,7 +358,6 @@ extension ContainerViewController: ContainerPresenter {
 }
 
 extension UIViewController {
-
     @objc func present(viewController: UIViewController) {
         addChild(viewController)
         view.addSubview(viewController.view)

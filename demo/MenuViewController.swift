@@ -1,7 +1,6 @@
 import UIKit
 
 final class MenuViewController: UIViewController {
-
     weak var delegate: MenuDelegate?
 
     override func viewDidLoad() {
@@ -198,7 +197,6 @@ final class MenuViewController: UIViewController {
 }
 
 extension Screen {
-
     var title: String {
         switch self {
         case .segmentation:
@@ -243,13 +241,11 @@ extension Screen {
 }
 
 private class MenuItemButton: UIView {
-
     private let padding: CGFloat = 8
 
     private let action: () -> Void
 
     init(for screen: Screen, action: @escaping (Screen) -> Void) {
-
         self.action = { action(screen) }
 
         super.init(frame: .zero)

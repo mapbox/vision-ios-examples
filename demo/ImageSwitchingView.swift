@@ -6,7 +6,6 @@ private let timing = UICubicTimingParameters(controlPoint1: CGPoint(x: 0.25, y: 
                                              controlPoint2: CGPoint(x: 0.25, y: 1))
 
 final class ImageSwitchingView: UIView {
-
     var image: UIImage? {
         get {
             return (stack.arrangedSubviews.first as? UIImageView)?.image

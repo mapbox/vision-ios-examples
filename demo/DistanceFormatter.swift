@@ -1,7 +1,6 @@
 import CoreLocation
 
 extension CLLocationDistance {
-
     static let metersPerMile: CLLocationDistance = 1_609.344
     static let feetPerMeter: CLLocationDistance = 3.28084
 

@@ -2,7 +2,6 @@ import MapboxVision
 import UIKit
 
 final class RoadLanesView: UIView {
-
     private let verticalInset: CGFloat = 9
     private let horizontalInset: CGFloat = 9
 
@@ -51,7 +50,6 @@ final class RoadLanesView: UIView {
         removeAllArrangedSubviews()
 
         for (index, lane) in description.lanes.enumerated() {
-
             let leftMarkingView = UIImageView(image: lane.leftEdge.type.image)
             if description.lanes.first == lane, lane.leftEdge.type == .curb {
                 leftMarkingView.transform = CGAffineTransform(scaleX: -1, y: 1);

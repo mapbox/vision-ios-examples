@@ -2,7 +2,6 @@ import Foundation
 import MapboxVisionSafety
 
 enum SafetyState: Equatable {
-
     public static let bonnetAdjustment = 1.25
 
     enum ObjectType {
@@ -22,7 +21,6 @@ enum SafetyState: Equatable {
     }
 
     struct Collision: Equatable {
-
         enum State {
             case warning
             case critical
@@ -49,9 +47,7 @@ enum SafetyState: Equatable {
     case collisions([Collision])
 
     init(_ collisionObjects: [CollisionObject]) {
-
         let collisions = collisionObjects.compactMap { collision -> Collision? in
-
             let type = collision.object.detectionClass
             let level = collision.dangerLevel
 

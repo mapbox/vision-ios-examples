@@ -7,7 +7,6 @@ import UIKit
 private let inset: CGFloat = 18.0
 
 final class ARContainerViewController: UIViewController {
-
     private lazy var mapViewController = ARMapNavigationController()
     private lazy var arViewController = VisionARViewController()
 
@@ -90,7 +89,6 @@ final class ARContainerViewController: UIViewController {
 }
 
 extension ARContainerViewController: NavigationServiceDelegate {
-
     func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
         instructionsLabel.isHidden = false
         instructionsLabel.text = progress.currentLegProgress.currentStep.instructions

@@ -6,7 +6,6 @@ private let oldPayloadBorder = 80
 private let oldPayloadHashShift = 5
 
 final class Tracker<T: Equatable & Hashable> {
-
     struct Item {
         fileprivate let payload: T
         fileprivate private(set) var seenCounter: Int

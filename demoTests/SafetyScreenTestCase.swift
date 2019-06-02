@@ -4,7 +4,6 @@ import XCTest
 @testable import demo
 
 class SafetyScreenTestCase: XCTestCase {
-
     let distanceState = SafetyState.distance(frame: WorldDescription.bbox, distance: WorldDescription.distance - SafetyState.bonnetAdjustment, canvasSize: VisionManager.shared.frameSize)
 
     var presenter: MockContainerPresenter!
@@ -29,7 +28,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testCriticalWithAnotherNotTriggeredObject() {
-
         let worldDescription = WorldDescription([(.car, .critical), (.person, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .critical, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
@@ -37,7 +35,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testCriticalWithAnotherWarningObject() {
-
         let worldDescription = WorldDescription([(.car, .critical), (.bicycle, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .critical, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
@@ -45,7 +42,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testWarningWithAnotherNotTriggeredObject() {
-
         let worldDescription = WorldDescription([(.car, .warning), (.person, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
@@ -53,7 +49,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testWarningWithAnotherUnsupportedCriticalObject() {
-
         let worldDescription = WorldDescription([(.car, .warning), (.sign, .critical)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
@@ -61,7 +56,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testWarningWithPersonObject() {
-
         let worldDescription = WorldDescription([(.car, .warning), (.person, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         let warningState = SafetyState.collisions([
@@ -72,21 +66,18 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testDistanceToLeadCar() {
-
         let worldDescription = WorldDescription([(.car, .notTriggered)], forwardCarIndex: 0)
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == distanceState, "Distance to lead car should be presented")
     }
 
     func testDistanceToLeadObject() {
-
         let worldDescription = WorldDescription([(.sign, .notTriggered)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == .none, "Distance to lead sign shouldn't be presented")
     }
 
     func testChaningState() {
-
         let worldDescription = WorldDescription([(.car, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         let result = SafetyState.collisions([SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox)], canvasSize: VisionManager.shared.frameSize)
@@ -98,7 +89,6 @@ class SafetyScreenTestCase: XCTestCase {
     }
 
     func testForwarCar() {
-
         let worldDescription = WorldDescription([(.person, .notTriggered), (.car, .notTriggered)], forwardCarIndex: 1)
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
         XCTAssert(presenter.currentSafetyState == distanceState, "Distance to lead car should be presented")
@@ -106,14 +96,12 @@ class SafetyScreenTestCase: XCTestCase {
 }
 
 extension WorldDescription {
-
     static let distance: Double = 5.0
 
     static let bbox: CGRect = .zero
     static let coords = WorldCoordinate(x: 0, y: 0, z: 0)
 
     convenience init(_ params: [(ObjectType, CollisionState)], forwardCarIndex: Int? = nil) {
-
         var objects: [ObjectDescription] = []
         var collisionObjects: [CollisionObjectDescription] = []
 
