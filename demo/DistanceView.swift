@@ -1,6 +1,6 @@
 import Foundation
-import UIKit
 import MapboxVision
+import UIKit
 
 final class DistanceView: UIView {
 

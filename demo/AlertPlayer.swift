@@ -1,5 +1,5 @@
-import Foundation
 import AVFoundation
+import Foundation
 
 private let defaultSound: SystemSoundID = 1002
 

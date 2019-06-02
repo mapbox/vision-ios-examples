@@ -1,5 +1,5 @@
-import UIKit
 import MapboxVision
+import UIKit
 
 final class RoadLanesView: UIView {
 

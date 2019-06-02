@@ -1,8 +1,8 @@
+import CoreMedia
 import Foundation
 import MapboxVision
 import MapboxVisionAR
 import MapboxVisionSafety
-import CoreMedia
 
 enum Screen {
     case menu

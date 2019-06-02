@@ -1,9 +1,9 @@
 import Foundation
-import UIKit
 import Mapbox
 import MapboxCoreNavigation
-import MapboxNavigation
 import MapboxDirections
+import MapboxNavigation
+import UIKit
 
 private let routeEdgeInsets = UIEdgeInsets(top: 100, left: 200, bottom: 100, right: 200)
 private let inset: CGFloat = 18.0

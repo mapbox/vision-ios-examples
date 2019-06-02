@@ -1,8 +1,8 @@
-import UIKit
+import CoreMedia
+import MapboxNavigation
 import MapboxVision
 import MapboxVisionAR
-import MapboxNavigation
-import CoreMedia
+import UIKit
 
 private let bannerInset: CGFloat = 18
 private let roadLanesHeight: CGFloat = 64

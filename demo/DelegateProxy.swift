@@ -1,7 +1,7 @@
 import Foundation
 import MapboxVision
-import MapboxVisionSafety
 import MapboxVisionAR
+import MapboxVisionSafety
 
 class DelegateProxy<Delegate: AnyObject> {
     private weak var delegate: Delegate?

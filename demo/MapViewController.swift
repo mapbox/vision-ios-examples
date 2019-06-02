@@ -1,6 +1,6 @@
 import Foundation
-import UIKit
 import Mapbox
+import UIKit
 
 private let styleURL = URL(string: "mapbox://styles/willwhite/cjkmusatv0rox2roea7dz7r1p")
 

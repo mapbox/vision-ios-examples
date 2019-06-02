@@ -1,7 +1,7 @@
-import UIKit
-import MapboxVision
-import Fabric
 import Crashlytics
+import Fabric
+import MapboxVision
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -1,8 +1,8 @@
-import UIKit
-import MapboxVisionAR
-import MapboxDirections
-import MapboxCoreNavigation
 import CoreMedia
+import MapboxCoreNavigation
+import MapboxDirections
+import MapboxVisionAR
+import UIKit
 
 private let inset: CGFloat = 18.0
 

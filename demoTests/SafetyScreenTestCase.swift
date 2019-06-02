@@ -1,5 +1,5 @@
-import XCTest
 import MapboxVision
+import XCTest
 
 @testable import demo
 
