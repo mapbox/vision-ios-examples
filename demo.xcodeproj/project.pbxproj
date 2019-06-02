@@ -322,6 +322,7 @@
 				2EF52A1521514EB700F23CCF /* Carthage */,
 				2EBD6701211970EA00755F57 /* Fabric */,
 				B55B5C6E214FCE9F0061BE3F /* ShellScript */,
+				3A5E8C0322A438EE00CC0954 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -339,6 +340,7 @@
 				B578BC8E21885673003D4AA8 /* Sources */,
 				B578BC8F21885673003D4AA8 /* Frameworks */,
 				B578BC9021885673003D4AA8 /* Resources */,
+				3A5E8C0422A4390E00CC0954 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -471,6 +473,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "source \"scripts/check_input.sh\"\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		3A5E8C0322A438EE00CC0954 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		3A5E8C0422A4390E00CC0954 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		B55B5C6E214FCE9F0061BE3F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
