@@ -55,7 +55,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     ///
     /// - Parameter unsorted: The unsorted dictionary.
     /// - Parameter areInIncreasingOrder: The sort function which compares the key-value pairs.
-    init(unsorted: Dictionary<Key, Value>, areInIncreasingOrder: (Element, Element) -> Bool) {
+    init(unsorted: [Key: Value], areInIncreasingOrder: (Element, Element) -> Bool) {
         let elements = unsorted
                 .map { (key: $0.key, value: $0.value) }
                 .sorted(by: areInIncreasingOrder)
@@ -93,7 +93,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     // ======================================================= //
 
     /// Converts itself to a common unsorted dictionary.
-    var unorderedDictionary: Dictionary<Key, Value> {
+    var unorderedDictionary: [Key: Value] {
         return _keysToValues
     }
 
