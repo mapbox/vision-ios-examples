@@ -41,7 +41,7 @@ final class Tracker<T: Equatable & Hashable> {
             if items[key] == nil {
                 items[key] = Item(payload)
             } else {
-                if (items[key]!.expirationCounter > oldPayloadBorder) {
+                if items[key]!.expirationCounter > oldPayloadBorder {
                     let oldHash = key + oldPayloadHashShift
                     items[oldHash] = items[key]!
                     items[key] = Item(payload)

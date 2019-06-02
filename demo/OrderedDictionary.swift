@@ -358,7 +358,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
         let replacedElement = self[index]
 
         // If its key differs, remove its associated value
-        if (!keyPresentAtIndex) {
+        if !keyPresentAtIndex {
             _keysToValues.removeValue(forKey: replacedElement.key)
         }
 
