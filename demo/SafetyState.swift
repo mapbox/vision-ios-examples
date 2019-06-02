@@ -2,13 +2,13 @@ import Foundation
 import MapboxVisionSafety
 
 enum SafetyState: Equatable {
-    
+
     public static let bonnetAdjustment = 1.25
-    
+
     enum ObjectType {
         case car
         case person
-        
+
         init?(_ type: DetectionClass) {
             switch type {
             case .trafficLight, .trafficSign, .bicycle:
@@ -20,7 +20,7 @@ enum SafetyState: Equatable {
             }
         }
     }
-    
+
     struct Collision: Equatable {
 
         enum State {

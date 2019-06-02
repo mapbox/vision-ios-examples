@@ -13,12 +13,12 @@ final class ARContainerViewController: UIViewController {
 
     weak var navigationDelegate: NavigationDelegate?
     private var navigationService: NavigationService?
-    
+
     override func viewDidLoad() {
         mapViewController.completion = present
 
         presentMap()
-        
+
         arViewController.view.addSubview(endButton)
         NSLayoutConstraint.activate([
             endButton.trailingAnchor.constraint(equalTo: arViewController.view.trailingAnchor, constant: -inset),
@@ -26,7 +26,7 @@ final class ARContainerViewController: UIViewController {
             endButton.heightAnchor.constraint(equalToConstant: 44),
             endButton.widthAnchor.constraint(equalToConstant: 90),
         ])
-        
+
         arViewController.view.addSubview(instructionsLabel)
         NSLayoutConstraint.activate([
             instructionsLabel.centerXAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.centerXAnchor),
@@ -34,12 +34,12 @@ final class ARContainerViewController: UIViewController {
             instructionsLabel.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-    
+
     @objc func presentMap() {
         dismiss(viewController: arViewController)
         present(viewController: mapViewController)
     }
-    
+
     func present(route: MapboxDirections.Route) {
         dismiss(viewController: mapViewController)
 
@@ -49,19 +49,19 @@ final class ARContainerViewController: UIViewController {
         present(viewController: arViewController)
         navigationService?.start()
     }
-    
+
     func present(sampleBuffer: CMSampleBuffer) {
         arViewController.present(sampleBuffer: sampleBuffer)
     }
-    
+
     func present(lane: ARLane?) {
         arViewController.present(lane: lane)
     }
-    
+
     func present(camera: ARCamera) {
         arViewController.present(camera: camera)
     }
-    
+
     private let instructionsLabel: UILabel = {
         let label = PaddedLabel(insets: UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18))
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ final class ARContainerViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     private let endButton: UIButton = {
         let button = UIButton(type: .roundedRect)
         button.translatesAutoresizingMaskIntoConstraints = false

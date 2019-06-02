@@ -10,19 +10,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var interactor: ContainerInteractor?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+
         let _ = MTLCreateSystemDefaultDevice()
-        
+
         application.isIdleTimerDisabled = true
-        
+
         Fabric.with([Crashlytics.self])
-        
+
         window.rootViewController = makeRootViewController()
         window.makeKeyAndVisible()
 
         return true
     }
-    
+
     private func makeRootViewController() -> UIViewController {
         if LicenseController.checkSubmission() {
             return launchVision()
@@ -30,27 +30,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return launchLicense()
         }
     }
-    
+
     private func launchVision() -> UIViewController {
         let containerController = ContainerViewController()
-        
+
         containerController.visionViewController = VisionPresentationViewController()
-        
+
         let menuViewController = MenuViewController()
         containerController.menuViewController = menuViewController
-        
+
         let alertPlayer = AlertSoundPlayer()
-        
+
         interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
             alertPlayer: alertPlayer,
             presenter: containerController
         ))
         containerController.delegate = interactor
         menuViewController.delegate = interactor
-        
+
         return containerController
     }
-    
+
     private func launchLicense() -> UIViewController {
         let viewController = LicenseViewController()
         viewController.licenseDelegate = self

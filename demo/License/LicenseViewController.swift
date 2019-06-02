@@ -16,14 +16,14 @@ final class LicenseViewController: UIViewController {
         
         setupLayout()
     }
-    
+
     private func setupLayout() {
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(bodyTextView)
         stack.addArrangedSubview(button)
-        
+
         stack.setCustomSpacing(10, after: titleLabel)
-        
+
         view.addSubview(stack)
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: 123),
@@ -34,7 +34,7 @@ final class LicenseViewController: UIViewController {
             stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
-    
+
     private let stack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ final class LicenseViewController: UIViewController {
         stack.spacing = 30
         return stack
     }()
-    
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
@@ -51,7 +51,7 @@ final class LicenseViewController: UIViewController {
         label.text = L10n.licenseTitle
         return label
     }()
-    
+
     private let bodyTextView: UITextView = {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
@@ -61,6 +61,7 @@ final class LicenseViewController: UIViewController {
             .kern: 0.0,
             .paragraphStyle: paragraph,
         ]
+
         let text = NSMutableAttributedString(string: L10n.licenseBody, attributes: attributes)
         text.setSubstringAsLink(substring: L10n.generalTermsOfService, linkURL: GlobalConstants.tosLink)
         text.setSubstringAsLink(substring: L10n.generalPrivacyPolicy, linkURL: GlobalConstants.privacyPolicyLink)
@@ -82,7 +83,7 @@ final class LicenseViewController: UIViewController {
 
         return textView
     }()
-    
+
     private let button: UIButton = {
         let button = UIButton(type: .roundedRect)
         
@@ -91,13 +92,13 @@ final class LicenseViewController: UIViewController {
         button.setBackgroundColor(highlightColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        
+
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 22
-        
+
         return button
     }()
-    
+
     @objc private func buttonTapped() {
         licenseDelegate?.licenseSubmitted()
     }
