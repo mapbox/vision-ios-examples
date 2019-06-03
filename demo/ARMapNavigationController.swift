@@ -97,7 +97,7 @@ class ARMapNavigationController: UIViewController {
 
         let options = NavigationRouteOptions(coordinates: [origin, destination], profileIdentifier: .automobile)
 
-        directions.calculate(options) { [weak self] (_, routes, error) in
+        directions.calculate(options) { [weak self] _, routes, error in
             guard let `self` = self, error == nil, let route = routes?.first else { return }
 
             self.goButton.isEnabled = true
