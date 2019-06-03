@@ -1,3 +1,5 @@
+// swiftlint:disable cyclomatic_complexity file_length
+
 import Foundation
 import MapboxVision
 
@@ -8,6 +10,7 @@ extension Sign {
         return asset
     }
 
+    // swiftlint:disable:next function_body_length
     private func getIcon(_ over: Bool, _ country: Country) -> ImageAsset? {
         switch country {
         case .USA:
