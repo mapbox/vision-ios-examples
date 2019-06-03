@@ -8,11 +8,8 @@ protocol LicenseDelegate: class {
 
 final class LicenseViewController: UIViewController {
     weak var licenseDelegate: LicenseDelegate?
-    private let exitOnDone: Bool
 
-    init(buttonTitle: String = L10n.welcomeButton, title: String = L10n.welcomeTitle, exitOnDone: Bool = false) {
-        self.exitOnDone = exitOnDone
-
+    init(buttonTitle: String = L10n.welcomeButton, title: String = L10n.welcomeTitle) {
         super.init(nibName: nil, bundle: nil)
 
         titleLabel.text = title
@@ -76,8 +73,8 @@ final class LicenseViewController: UIViewController {
             .paragraphStyle: paragraph,
         ]
         let text = NSMutableAttributedString(string: L10n.welcomeBody, attributes: attributes)
-        text.setSubstringAsLink(substring: L10n.termsOfServiceLinkSubstring, linkURL: "https://www.mapbox.com/tos/")
-        text.setSubstringAsLink(substring: L10n.privacyPolicyLinkSubstring, linkURL: "https://www.mapbox.com/privacy/")
+        text.setSubstringAsLink(substring: L10n.termsOfServiceOption, linkURL: "https://www.mapbox.com/tos/")
+        text.setSubstringAsLink(substring: L10n.privacyPolicyOption, linkURL: "https://www.mapbox.com/privacy/")
         
         let linkAttributes: [NSAttributedString.Key : Any] = [
             .font: UIFont(name: "AvenirNext-DemiBold", size: 18.0)!,
@@ -113,11 +110,7 @@ final class LicenseViewController: UIViewController {
     }()
     
     @objc private func buttonTapped() {
-        if exitOnDone {
-            dismiss(viewController: self)
-        } else {
-            licenseDelegate?.licenseSubmitted()
-        }
+        licenseDelegate?.licenseSubmitted()
     }
 }
 

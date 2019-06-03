@@ -1,13 +1,14 @@
 "General_Calibration" = "Calibration: %d%%";
 
 "Welcome_Title" = "Welcome to Mapbox Vision Teaser!";
-"Welcome_Body" = "I agree to the Mapbox Terms of Service and Privacy Policy";
-"Terms_of_Service_LinkSubstring" = "Terms of Service";
-"Privacy_Policy_LinkSubstring" = "Privacy Policy";
+"Welcome_Body" = "By using this application you acknowledge that you have read and agree to the Mapbox Terms of Service and Privacy Policy";
+"Terms_of_Service_Option" = "Terms of Service";
+"Privacy_Policy_Option" = "Privacy Policy";
 "Welcome_Button" = "Submit";
-"Info_Title" = "Info";
-"Info_Button" = "Close";
 "ARMap_Hint" = "Long tap on the map to select a destination";
+
+"Info_Dialog" = "I have read and agree to the Mapbox";
+"Cancel_Button" = "Cancel";
 
 "Menu_Segmentation_Button" = "Segmentation";
 "Menu_LaneDetection_Button" = "Lane detection";

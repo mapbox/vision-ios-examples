@@ -167,7 +167,19 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func infoTapped() {
-        present(viewController: LicenseViewController(buttonTitle: L10n.infoButton, title: L10n.infoTitle, exitOnDone: true))
+        let alert = UIAlertController(title: L10n.infoDialog, message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: L10n.termsOfServiceOption, style: .default, handler: { _ in
+            guard let url = URL(string: "https://www.mapbox.com/tos/") else { return }
+            UIApplication.shared.open(url)
+        }))
+        alert.addAction(UIAlertAction(title: L10n.privacyPolicyOption, style: .default, handler: { _ in
+            guard let url = URL(string: "https://www.mapbox.com/privacy/") else { return }
+            UIApplication.shared.open(url)
+        }))
+        alert.addAction(UIAlertAction(title: L10n.cancelButton, style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
     }
     
     private let infoButton: UIButton = {
