@@ -382,9 +382,9 @@ private extension SafetyState.ObjectType {
     var color: UIColor {
         switch self {
         case .car:
-            return UIColor(red: 1.0, green: 0, blue: 55/255.0, alpha: 1.0)
+            return UIColor(red: 1.0, green: 0, blue: 55 / 255.0, alpha: 1.0)
         case .person:
-            return UIColor(red: 239.0/255.0, green: 6.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+            return UIColor(red: 239.0 / 255.0, green: 6.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
         }
     }
 }

@@ -61,7 +61,7 @@ class ARMapNavigationController: UIViewController {
         button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(UIColor.white.withAlphaComponent(0.35), for: .disabled)
-        let color = UIColor(red: 0, green: 122/255.0, blue: 1.0, alpha: 1.0)
+        let color = UIColor(red: 0, green: 122 / 255.0, blue: 1.0, alpha: 1.0)
         button.setBackgroundColor(color, for: .normal)
         button.setBackgroundColor(color.withAlphaComponent(0.35), for: .disabled)
         button.layer.cornerRadius = 22
