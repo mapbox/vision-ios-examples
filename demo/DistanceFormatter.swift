@@ -82,10 +82,8 @@ struct RoundingTable {
     let thresholds: [Threshold]
 
     func threshold(for distance: CLLocationDistance) -> Threshold {
-        for threshold in thresholds {
-            if distance < threshold.maximumDistance {
-                return threshold
-            }
+        for threshold in thresholds where threshold.maximumDistance > distance {
+            return threshold
         }
         return thresholds.last!
     }
