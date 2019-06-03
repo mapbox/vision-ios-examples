@@ -38,7 +38,7 @@ final class RoadLanesView: UIView {
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: verticalInset),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalInset),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalInset),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalInset)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalInset),
         ])
     }
 

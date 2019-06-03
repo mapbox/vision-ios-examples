@@ -63,7 +63,7 @@ class SafetyScreenTestCase: XCTestCase {
         let warningState = SafetyState.collisions(
             [
                 SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox),
-                SafetyState.Collision(objectType: .person, state: .warning, boundingBox: WorldDescription.bbox)
+                SafetyState.Collision(objectType: .person, state: .warning, boundingBox: WorldDescription.bbox),
             ],
             canvasSize: VisionManager.shared.frameSize
         )

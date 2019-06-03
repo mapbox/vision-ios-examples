@@ -128,7 +128,7 @@ final class DistanceFormatter: LengthFormatter {
                     .init(maximumDistance: 5_000,
                           roundingIncrement: 0,
                           unit: .kilometer,
-                          maximumFractionDigits: 0)
+                          maximumFractionDigits: 0),
                 ]
             )
         } else {
@@ -145,7 +145,7 @@ final class DistanceFormatter: LengthFormatter {
                     .init(maximumDistance: 5_000,
                           roundingIncrement: 0,
                           unit: .kilometer,
-                          maximumFractionDigits: 0)
+                          maximumFractionDigits: 0),
                 ]
             )
         }
@@ -174,7 +174,7 @@ final class DistanceFormatter: LengthFormatter {
                     .init(maximumDistance: 5.inMiles(),
                           roundingIncrement: 0,
                           unit: .mile,
-                          maximumFractionDigits: 0)
+                          maximumFractionDigits: 0),
                 ]
             )
         } else {
@@ -191,7 +191,7 @@ final class DistanceFormatter: LengthFormatter {
                     .init(maximumDistance: 5.inMiles(),
                           roundingIncrement: 0,
                           unit: .mile,
-                          maximumFractionDigits: 0)
+                          maximumFractionDigits: 0),
                 ]
             )
         }
@@ -212,7 +212,7 @@ final class DistanceFormatter: LengthFormatter {
                     .init(maximumDistance: 5.inMiles(),
                           roundingIncrement: 0,
                           unit: .mile,
-                          maximumFractionDigits: 0)
+                          maximumFractionDigits: 0),
                 ]
             )
         } else {
@@ -229,7 +229,7 @@ final class DistanceFormatter: LengthFormatter {
                     .init(maximumDistance: 5.inMiles(),
                           roundingIncrement: 0,
                           unit: .mile,
-                          maximumFractionDigits: 0)
+                          maximumFractionDigits: 0),
                 ]
             )
         }

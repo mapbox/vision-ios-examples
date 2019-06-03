@@ -42,7 +42,7 @@ class ARMapNavigationController: UIViewController {
         NSLayoutConstraint.activate([
             hintLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             hintLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: inset),
-            hintLabel.heightAnchor.constraint(equalToConstant: 44)
+            hintLabel.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 

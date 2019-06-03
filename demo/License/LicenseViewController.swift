@@ -68,7 +68,7 @@ final class LicenseViewController: UIViewController {
 
         let linkAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "AvenirNext-DemiBold", size: 18.0)!,
-            .foregroundColor: highlightColor
+            .foregroundColor: highlightColor,
         ]
         let textView = UITextView()
 

@@ -30,7 +30,7 @@ final class CollisionObjectView: UIView {
 
         NSLayoutConstraint.activate([
             exclamationMarkView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            exclamationMarkView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            exclamationMarkView.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
 
@@ -40,7 +40,7 @@ final class CollisionObjectView: UIView {
             gradientLayer?.colors = [
                 color.withAlphaComponent(0.64).cgColor,
                 color.withAlphaComponent(0.45).cgColor,
-                color.withAlphaComponent(0).cgColor
+                color.withAlphaComponent(0).cgColor,
             ]
         }
     }

@@ -33,14 +33,14 @@ final class ContainerViewController: UIViewController {
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 18),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             backButton.widthAnchor.constraint(lessThanOrEqualToConstant: 44),
-            backButton.heightAnchor.constraint(lessThanOrEqualToConstant: 44)
+            backButton.heightAnchor.constraint(lessThanOrEqualToConstant: 44),
         ])
 
         view.addSubview(roadLanesView)
         NSLayoutConstraint.activate([
             roadLanesView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             roadLanesView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
-            roadLanesView.heightAnchor.constraint(equalToConstant: roadLanesHeight)
+            roadLanesView.heightAnchor.constraint(equalToConstant: roadLanesHeight),
         ])
 
         view.addSubview(signsStack)
@@ -61,7 +61,7 @@ final class ContainerViewController: UIViewController {
         view.addSubview(collisionAlertView)
         NSLayoutConstraint.activate([
             collisionAlertView.topAnchor.constraint(equalTo: view.topAnchor, constant: bannerInset),
-            collisionAlertView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            collisionAlertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
 
         view.addSubview(collisionBanerView)
@@ -69,7 +69,7 @@ final class ContainerViewController: UIViewController {
             collisionBanerView.topAnchor.constraint(equalTo: view.topAnchor),
             collisionBanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collisionBanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collisionBanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            collisionBanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
 
         view.addSubview(calibrationLabel)
@@ -366,7 +366,7 @@ extension UIViewController {
             viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         ])
         viewController.didMove(toParent: self)
     }

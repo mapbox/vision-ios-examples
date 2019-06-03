@@ -31,7 +31,7 @@ final class ARContainerViewController: UIViewController {
         NSLayoutConstraint.activate([
             instructionsLabel.centerXAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.centerXAnchor),
             instructionsLabel.topAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.topAnchor, constant: inset),
-            instructionsLabel.heightAnchor.constraint(equalToConstant: 44)
+            instructionsLabel.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 
