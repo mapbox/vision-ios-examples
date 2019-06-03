@@ -117,9 +117,9 @@ extension WorldDescription {
                                       confidence: 0)
 
             let object = ObjectDescription(identifier: Identifier(),
-                                          distance: WorldDescription.distance,
-                                          worldCoordinate: WorldDescription.coords,
-                                          detection: detection)
+                                           distance: WorldDescription.distance,
+                                           worldCoordinate: WorldDescription.coords,
+                                           detection: detection)
             objects.append(object)
 
             let collision = CollisionObjectDescription(object: object,

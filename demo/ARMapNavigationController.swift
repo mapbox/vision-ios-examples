@@ -54,7 +54,7 @@ class ARMapNavigationController: UIViewController {
     }
 
     private let goButton: UIButton = {
-       let button = UIButton(type: .roundedRect)
+        let button = UIButton(type: .roundedRect)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
         button.setTitle("Go", for: .normal)
