@@ -75,8 +75,8 @@ final class LicenseViewController: UIViewController {
         textView.backgroundColor = .clear
 
         textView.attributedText = text
-        textView.linkTextAttributes = Dictionary(uniqueKeysWithValues:
-            linkAttributes.map { ($0.key, $0.value) }
+        textView.linkTextAttributes = Dictionary(
+            uniqueKeysWithValues: linkAttributes.map { ($0.key, $0.value) }
         )
         textView.isEditable = false
         textView.isUserInteractionEnabled = true
