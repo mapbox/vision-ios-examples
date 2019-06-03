@@ -22,7 +22,7 @@ protocol CalibrationProgress {
 
 extension Camera: CalibrationProgress {}
 
-protocol ContainerPresenter: class {
+protocol ContainerPresenter: AnyObject {
     func presentVision()
     func present(screen: Screen)
     func presentBackButton(isVisible: Bool)
@@ -43,11 +43,11 @@ protocol ContainerPresenter: class {
     func dismissCurrent()
 }
 
-protocol MenuDelegate: class {
+protocol MenuDelegate: AnyObject {
     func selected(screen: Screen)
 }
 
-@objc protocol ContainerDelegate: class {
+@objc protocol ContainerDelegate: AnyObject {
     func backButtonPressed()
     func didNavigationRouteUpdated(route: MapboxVisionAR.Route?)
 }
