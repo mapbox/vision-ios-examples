@@ -58,10 +58,13 @@ class SafetyScreenTestCase: XCTestCase {
     func testWarningWithPersonObject() {
         let worldDescription = WorldDescription([(.car, .warning), (.person, .warning)])
         interactor.visionManager(VisionManager.shared, didUpdateWorldDescription: worldDescription)
-        let warningState = SafetyState.collisions([
-            SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox),
-            SafetyState.Collision(objectType: .person, state: .warning, boundingBox: WorldDescription.bbox)],
-        canvasSize: VisionManager.shared.frameSize)
+        let warningState = SafetyState.collisions(
+            [
+                SafetyState.Collision(objectType: .car, state: .warning, boundingBox: WorldDescription.bbox),
+                SafetyState.Collision(objectType: .person, state: .warning, boundingBox: WorldDescription.bbox)
+            ],
+            canvasSize: VisionManager.shared.frameSize
+        )
         XCTAssert(presenter.currentSafetyState == warningState, "Two different Collision objects should be presented")
     }
 

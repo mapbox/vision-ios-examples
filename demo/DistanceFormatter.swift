@@ -109,41 +109,131 @@ final class DistanceFormatter: LengthFormatter {
     // Rounding tables for metric, imperial, and UK measurement systems. The last threshold is used as a default.
     lazy var roundingTableMetric: RoundingTable = {
         if approx {
-            return RoundingTable(thresholds: [.init(maximumDistance: 25, roundingIncrement: 5, unit: .meter, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 100, roundingIncrement: 25, unit: .meter, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 999, roundingIncrement: 50, unit: .meter, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 3_000, roundingIncrement: 0, unit: .kilometer, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 5_000, roundingIncrement: 0, unit: .kilometer, maximumFractionDigits: 0)])
+            return RoundingTable(
+                thresholds: [
+                    .init(maximumDistance: 25,
+                          roundingIncrement: 5,
+                          unit: .meter,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 100,
+                          roundingIncrement: 25,
+                          unit: .meter,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 999,
+                          roundingIncrement: 50,
+                          unit: .meter,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 3_000,
+                          roundingIncrement: 0,
+                          unit: .kilometer,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 5_000,
+                          roundingIncrement: 0,
+                          unit: .kilometer,
+                          maximumFractionDigits: 0)
+                ]
+            )
         } else {
-            return RoundingTable(thresholds: [.init(maximumDistance: 999, roundingIncrement: 0, unit: .meter, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 3_000, roundingIncrement: 0, unit: .kilometer, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 5_000, roundingIncrement: 0, unit: .kilometer, maximumFractionDigits: 0)])
+            return RoundingTable(
+                thresholds: [
+                    .init(maximumDistance: 999,
+                          roundingIncrement: 0,
+                          unit: .meter,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 3_000,
+                          roundingIncrement: 0,
+                          unit: .kilometer,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 5_000,
+                          roundingIncrement: 0,
+                          unit: .kilometer,
+                          maximumFractionDigits: 0)
+                ]
+            )
         }
     }()
 
     lazy var roundingTableUK: RoundingTable = {
         if approx {
-            return RoundingTable(thresholds: [.init(maximumDistance: 20.inYards(), roundingIncrement: 10, unit: .yard, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 100.inYards(), roundingIncrement: 25, unit: .yard, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 0.1.inMiles(), roundingIncrement: 50, unit: .yard, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 3.inMiles(), roundingIncrement: 0.1, unit: .mile, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 5.inMiles(), roundingIncrement: 0, unit: .mile, maximumFractionDigits: 0)])
+            return RoundingTable(
+                thresholds: [
+                    .init(maximumDistance: 20.inYards(),
+                          roundingIncrement: 10,
+                          unit: .yard,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 100.inYards(),
+                          roundingIncrement: 25,
+                          unit: .yard,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 0.1.inMiles(),
+                          roundingIncrement: 50,
+                          unit: .yard,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 3.inMiles(),
+                          roundingIncrement: 0.1,
+                          unit: .mile,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 5.inMiles(),
+                          roundingIncrement: 0,
+                          unit: .mile,
+                          maximumFractionDigits: 0)
+                ]
+            )
         } else {
-            return RoundingTable(thresholds: [.init(maximumDistance: 0.1.inMiles(), roundingIncrement: 0, unit: .yard, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 3.inMiles(), roundingIncrement: 0.1, unit: .mile, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 5.inMiles(), roundingIncrement: 0, unit: .mile, maximumFractionDigits: 0)])
+            return RoundingTable(
+                thresholds: [
+                    .init(maximumDistance: 0.1.inMiles(),
+                          roundingIncrement: 0,
+                          unit: .yard,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 3.inMiles(),
+                          roundingIncrement: 0.1,
+                          unit: .mile,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 5.inMiles(),
+                          roundingIncrement: 0,
+                          unit: .mile,
+                          maximumFractionDigits: 0)
+                ]
+            )
         }
     }()
 
     lazy var roundingTableImperial: RoundingTable = {
         if approx {
-            return RoundingTable(thresholds: [.init(maximumDistance: 0.1.inMiles(), roundingIncrement: 50, unit: .foot, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 3.inMiles(), roundingIncrement: 0.1, unit: .mile, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 5.inMiles(), roundingIncrement: 0, unit: .mile, maximumFractionDigits: 0)])
+            return RoundingTable(
+                thresholds: [
+                    .init(maximumDistance: 0.1.inMiles(),
+                          roundingIncrement: 50,
+                          unit: .foot,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 3.inMiles(),
+                          roundingIncrement: 0.1,
+                          unit: .mile,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 5.inMiles(),
+                          roundingIncrement: 0,
+                          unit: .mile,
+                          maximumFractionDigits: 0)
+                ]
+            )
         } else {
-            return RoundingTable(thresholds: [.init(maximumDistance: 1.inMiles(), roundingIncrement: 0, unit: .foot, maximumFractionDigits: 0),
-                                              .init(maximumDistance: 3.inMiles(), roundingIncrement: 0.1, unit: .mile, maximumFractionDigits: 1),
-                                              .init(maximumDistance: 5.inMiles(), roundingIncrement: 0, unit: .mile, maximumFractionDigits: 0)])
+            return RoundingTable(
+                thresholds: [
+                    .init(maximumDistance: 1.inMiles(),
+                          roundingIncrement: 0,
+                          unit: .foot,
+                          maximumFractionDigits: 0),
+                    .init(maximumDistance: 3.inMiles(),
+                          roundingIncrement: 0.1,
+                          unit: .mile,
+                          maximumFractionDigits: 1),
+                    .init(maximumDistance: 5.inMiles(),
+                          roundingIncrement: 0,
+                          unit: .mile,
+                          maximumFractionDigits: 0)
+                ]
+            )
         }
     }()
 
