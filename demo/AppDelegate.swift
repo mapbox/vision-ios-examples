@@ -62,4 +62,3 @@ extension AppDelegate: LicenseDelegate {
         window.rootViewController = launchVision()
     }
 }
-
