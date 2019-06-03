@@ -60,7 +60,7 @@ final class RoadLanesView: UIView {
                 let view = UIImageView(image: Asset.Assets.yourDirection.image)
                 yourDirectionImageView = view
                 stackView.addArrangedSubview(view)
-            } else  {
+            } else {
                 stackView.addArrangedSubview(lane.direction.view)
             }
 
