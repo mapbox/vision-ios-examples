@@ -55,7 +55,7 @@ final class LicenseViewController: UIViewController {
     private let bodyTextView: UITextView = {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
-        let attributes: [NSAttributedString.Key : Any] = [
+        let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "AvenirNext-Regular", size: 18)!,
             .foregroundColor: UIColor.white,
             .kern: 0.0,
@@ -66,7 +66,7 @@ final class LicenseViewController: UIViewController {
         text.setSubstringAsLink(substring: L10n.generalTermsOfService, linkURL: GlobalConstants.tosLink)
         text.setSubstringAsLink(substring: L10n.generalPrivacyPolicy, linkURL: GlobalConstants.privacyPolicyLink)
 
-        let linkAttributes: [NSAttributedString.Key : Any] = [
+        let linkAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "AvenirNext-DemiBold", size: 18.0)!,
             .foregroundColor: highlightColor
         ]

@@ -303,7 +303,7 @@ final class DistanceFormatter: LengthFormatter {
      `NSAttributedStringKey.quantity` is applied to the numeric quantity.
      */
     @objc
-    override func attributedString(for obj: Any, withDefaultAttributes attrs: [NSAttributedString.Key : Any]? = nil) -> NSAttributedString? {
+    override func attributedString(for obj: Any, withDefaultAttributes attrs: [NSAttributedString.Key: Any]? = nil) -> NSAttributedString? {
         guard let distance = obj as? CLLocationDistance else {
             return nil
         }
