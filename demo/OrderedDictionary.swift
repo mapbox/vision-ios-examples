@@ -500,13 +500,13 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     }
 
     /// Returns the position immediately after the given index.
-    func index(after i: Index) -> Index {
-        return _orderedKeys.index(after: i)
+    func index(after index: Index) -> Index {
+        return _orderedKeys.index(after: index)
     }
 
     /// Returns the position immediately before the given index.
-    func index(before i: Index) -> Index {
-        return _orderedKeys.index(before: i)
+    func index(before index: Index) -> Index {
+        return _orderedKeys.index(before: index)
     }
 
     // ======================================================= //
