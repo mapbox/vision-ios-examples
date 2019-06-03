@@ -64,7 +64,7 @@ enum SafetyState: Equatable {
                              imageSize: imageSize)
         }
 
-        if collisions.count > 0 {
+        if !collisions.isEmpty {
             self = .collisions(collisions)
         } else {
             self = .none
