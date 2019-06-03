@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var interactor: ContainerInteractor?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let _ = MTLCreateSystemDefaultDevice()
+        _ = MTLCreateSystemDefaultDevice()
 
         application.isIdleTimerDisabled = true
 
