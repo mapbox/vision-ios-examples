@@ -6,6 +6,7 @@ private let styleURL = URL(string: "mapbox://styles/willwhite/cjkmusatv0rox2roea
 
 final class MapViewController: UIViewController, MGLMapViewDelegate {
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.addSubview(mapView)
         NSLayoutConstraint.activate([
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

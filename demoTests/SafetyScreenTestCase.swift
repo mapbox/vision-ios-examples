@@ -11,6 +11,7 @@ class SafetyScreenTestCase: XCTestCase {
     var alertPlayer: MockAlertPlayer!
 
     override func setUp() {
+        super.setUp()
         presenter = MockContainerPresenter()
         alertPlayer = MockAlertPlayer()
         interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
@@ -25,6 +26,7 @@ class SafetyScreenTestCase: XCTestCase {
         presenter = nil
         alertPlayer = nil
         interactor = nil
+        super.tearDown()
     }
 
     func testCriticalWithAnotherNotTriggeredObject() {

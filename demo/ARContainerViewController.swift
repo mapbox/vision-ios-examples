@@ -14,6 +14,7 @@ final class ARContainerViewController: UIViewController {
     private var navigationService: NavigationService?
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         mapViewController.completion = present
 
         presentMap()
