@@ -268,7 +268,7 @@ extension ContainerInteractor: VisionManagerDelegate {
 
     func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) {
         guard case .signsDetection = currentScreen else { return }
-        let items = frameSignClassifications.signs.map({ $0.sign })
+        let items = frameSignClassifications.signs.map { $0.sign }
         signTracker.update(items)
     }
 
