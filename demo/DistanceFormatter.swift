@@ -237,7 +237,7 @@ final class DistanceFormatter: LengthFormatter {
 
     /**
      Intializes a new `DistanceFormatter`.
-     
+
      - parameter approximate: approximates the distances.
      */
     @objc
@@ -269,9 +269,9 @@ final class DistanceFormatter: LengthFormatter {
 
     /**
      Returns a more human readable `String` from a given `CLLocationDistance`.
-     
+
      The user’s `Locale` is used here to set the units.
-    */
+     */
     @objc
     func string(from distance: CLLocationDistance) -> String {
         numberFormatter.positivePrefix = ""
@@ -297,7 +297,7 @@ final class DistanceFormatter: LengthFormatter {
 
     /**
      Returns an attributed string containing the formatted, converted distance.
-     
+
      `NSAttributedStringKey.quantity` is applied to the numeric quantity.
      */
     @objc
