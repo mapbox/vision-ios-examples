@@ -10,7 +10,7 @@ enum AlertSound {
 
     static let type = "wav"
 
-    fileprivate var path: String {
+    private var path: String {
         switch self {
         case .collisionAlertWarning:
             return "collision_alert_critical"
