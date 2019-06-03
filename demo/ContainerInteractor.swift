@@ -138,7 +138,7 @@ final class ContainerInteractor {
         stopSignTrackerUpdates()
 
         signTrackerUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             let signs = self.signTracker.getCurrent().compactMap { self.getIcon(for: $0, over: false) }
             self.presenter.present(signs: signs)
         }
