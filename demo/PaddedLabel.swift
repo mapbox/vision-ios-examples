@@ -9,7 +9,7 @@ final class PaddedLabel: UILabel {
         super.init(frame: .zero)
     }
 
-    convenience override init(frame: CGRect) {
+    override convenience init(frame: CGRect) {
         self.init(insets: .zero)
     }
 
