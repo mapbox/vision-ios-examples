@@ -52,7 +52,7 @@ final class RoadLanesView: UIView {
         for (index, lane) in description.lanes.enumerated() {
             let leftMarkingView = UIImageView(image: lane.leftEdge.type.image)
             if description.lanes.first == lane, lane.leftEdge.type == .curb {
-                leftMarkingView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                leftMarkingView.transform = CGAffineTransform(scaleX: -1, y: 1)
             }
             stackView.addArrangedSubview(leftMarkingView)
 

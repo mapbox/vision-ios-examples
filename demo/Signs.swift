@@ -1052,7 +1052,7 @@ extension Sign {
             case .regulatoryUTurn:
                 return Asset.Signs.regulatoryUTurnCN
             case .regulatoryNoSmallPassengerCar:
-                return Asset.Signs.regulatoryNoSmallPassengerCarCN;
+                return Asset.Signs.regulatoryNoSmallPassengerCarCN
             case .warningSteepAscent:
                 return Asset.Signs.warningSteepAscentCN
             case .warningSteepDescent:
