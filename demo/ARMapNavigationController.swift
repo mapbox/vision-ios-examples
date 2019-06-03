@@ -85,7 +85,8 @@ class ARMapNavigationController: UIViewController {
 
     private let directions = Directions(accessToken: nil)
 
-    @objc private func selectPlace(sender: UIGestureRecognizer) {
+    @objc
+    private func selectPlace(sender: UIGestureRecognizer) {
         guard sender.state == .began else { return }
 
         goButton.isEnabled = false
@@ -109,7 +110,8 @@ class ARMapNavigationController: UIViewController {
         }
     }
 
-    @objc private func goTapped() {
+    @objc
+    private func goTapped() {
         guard let route = selectedRoute else { return }
         completion?(route)
     }

@@ -272,7 +272,8 @@ private class MenuItemButton: UIView {
         addGestureRecognizer(gestureRecogrizer)
     }
 
-    @objc func tap() {
+    @objc
+    func tap() {
         action()
     }
 

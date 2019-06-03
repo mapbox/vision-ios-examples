@@ -34,7 +34,8 @@ final class ARContainerViewController: UIViewController {
         ])
     }
 
-    @objc func presentMap() {
+    @objc
+    func presentMap() {
         dismiss(viewController: arViewController)
         present(viewController: mapViewController)
     }

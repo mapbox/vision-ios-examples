@@ -358,7 +358,8 @@ extension ContainerViewController: ContainerPresenter {
 }
 
 extension UIViewController {
-    @objc func present(viewController: UIViewController) {
+    @objc
+    func present(viewController: UIViewController) {
         addChild(viewController)
         view.addSubview(viewController.view)
         NSLayoutConstraint.activate([
