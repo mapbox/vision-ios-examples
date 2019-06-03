@@ -200,7 +200,7 @@ extension ContainerViewController: ContainerPresenter {
             case (.critical, .car):
                 collisionBanerView.isHidden = false
                 return
-            case (.critical ,.person):
+            case (.critical, .person):
                 collisionObjectView = createCollisionObjectView(frame: collision.boundingBox, canvasSize: collision.imageSize.cgSize)
                 collisionAlertView.isHidden = false
             }
