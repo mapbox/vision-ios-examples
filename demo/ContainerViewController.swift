@@ -157,7 +157,7 @@ final class ContainerViewController: UIViewController {
     }()
 
     private lazy var distanceFormatter: DistanceFormatter = {
-        return DistanceFormatter(approximate: false)
+        DistanceFormatter(approximate: false)
     }()
 
     private weak var currentViewController: UIViewController?
