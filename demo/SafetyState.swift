@@ -2,7 +2,7 @@ import Foundation
 import MapboxVisionSafety
 
 enum SafetyState: Equatable {
-    public static let bonnetAdjustment = 1.25
+    static let bonnetAdjustment = 1.25
 
     enum ObjectType {
         case car
