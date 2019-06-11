@@ -3,7 +3,7 @@ import UIKit
 final class MenuViewController: UIViewController {
     
     weak var delegate: MenuDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -167,17 +167,17 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func infoTapped() {
-        let alert = UIAlertController(title: L10n.infoDialog, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: L10n.termsOfServiceOption, style: .default, handler: { _ in
-            guard let url = URL(string: "https://www.mapbox.com/tos/") else { return }
+        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default, handler: { _ in
+            guard let url = URL(string: GlobalConstants.tosLink) else { return }
             UIApplication.shared.open(url)
         }))
-        alert.addAction(UIAlertAction(title: L10n.privacyPolicyOption, style: .default, handler: { _ in
-            guard let url = URL(string: "https://www.mapbox.com/privacy/") else { return }
+        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default, handler: { _ in
+            guard let url = URL(string: GlobalConstants.privacyPolicyLink) else { return }
             UIApplication.shared.open(url)
         }))
-        alert.addAction(UIAlertAction(title: L10n.cancelButton, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: L10n.generalButtonCancel, style: .cancel, handler: nil))
 
         self.present(alert, animated: true)
     }

@@ -9,17 +9,6 @@ protocol LicenseDelegate: class {
 final class LicenseViewController: UIViewController {
     weak var licenseDelegate: LicenseDelegate?
 
-    init(buttonTitle: String = L10n.welcomeButton, title: String = L10n.welcomeTitle) {
-        super.init(nibName: nil, bundle: nil)
-
-        titleLabel.text = title
-        self.button.setTitle(buttonTitle, for: .normal)
-    }
-
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,7 +48,7 @@ final class LicenseViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.textColor = .white
-        label.text = L10n.welcomeTitle
+        label.text = L10n.licenseTitle
         return label
     }()
     
@@ -72,32 +61,32 @@ final class LicenseViewController: UIViewController {
             .kern: 0.0,
             .paragraphStyle: paragraph,
         ]
-        let text = NSMutableAttributedString(string: L10n.welcomeBody, attributes: attributes)
-        text.setSubstringAsLink(substring: L10n.termsOfServiceOption, linkURL: "https://www.mapbox.com/tos/")
-        text.setSubstringAsLink(substring: L10n.privacyPolicyOption, linkURL: "https://www.mapbox.com/privacy/")
-        
+        let text = NSMutableAttributedString(string: L10n.licenseBody, attributes: attributes)
+        text.setSubstringAsLink(substring: L10n.generalTermsOfService, linkURL: GlobalConstants.tosLink)
+        text.setSubstringAsLink(substring: L10n.generalPrivacyPolicy, linkURL: GlobalConstants.privacyPolicyLink)
+
         let linkAttributes: [NSAttributedString.Key : Any] = [
             .font: UIFont(name: "AvenirNext-DemiBold", size: 18.0)!,
             .foregroundColor: highlightColor
         ]
         let textView = UITextView()
-        
+
         textView.backgroundColor = .clear
-        
+
         textView.attributedText = text
         textView.linkTextAttributes = Dictionary(uniqueKeysWithValues:
             linkAttributes.map { return ($0.key, $0.value) }
         )
         textView.isEditable = false
         textView.isUserInteractionEnabled = true
-        
+
         return textView
     }()
     
     private let button: UIButton = {
         let button = UIButton(type: .roundedRect)
         
-        button.setTitle(L10n.welcomeButton, for: .normal)
+        button.setTitle(L10n.licenseButton, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundColor(highlightColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
