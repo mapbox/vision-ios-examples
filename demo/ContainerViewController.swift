@@ -12,6 +12,9 @@ private let buttonHeight: CGFloat = 36
 final class ContainerViewController: UIViewController {
     
     weak var delegate: ContainerDelegate? {
+        willSet {
+            backButton.removeTarget(delegate, action: #selector(ContainerDelegate.backButtonPressed), for: .touchUpInside)
+        }
         didSet {
             backButton.addTarget(delegate, action: #selector(ContainerDelegate.backButtonPressed), for: .touchUpInside)
         }
@@ -23,7 +26,7 @@ final class ContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         arContainerViewController.navigationDelegate = self
         
         view.addSubview(backButton)
@@ -388,13 +391,13 @@ private extension SafetyState.ObjectType {
     }
 }
 
-extension ContainerViewController: NavigationManagerDelegate {
+extension ContainerViewController: NavigationDelegate {
     
-    func navigationManager(_ navigationManager: NavigationManager, didUpdate route: MapboxVisionAR.Route) {
+    func navigation(didUpdate route: MapboxVisionAR.Route) {
         delegate?.didNavigationRouteUpdated(route: route)
     }
     
-    func navigationManagerArrivedAtDestination(_ navigationManager: NavigationManager) {
+    func navigationDidArriveAtDestination() {
         delegate?.didNavigationRouteUpdated(route: nil)
     }
 }

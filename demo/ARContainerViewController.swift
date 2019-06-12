@@ -10,12 +10,9 @@ final class ARContainerViewController: UIViewController {
 
     private lazy var mapViewController = ARMapNavigationController()
     private lazy var arViewController = VisionARViewController()
-    
-    weak var navigationDelegate: NavigationManagerDelegate? {
-        didSet {
-            arViewController.navigationDelegate = navigationDelegate
-        }
-    }
+
+    weak var navigationDelegate: NavigationDelegate?
+    private var navigationService: NavigationService?
     
     override func viewDidLoad() {
         mapViewController.completion = present
@@ -45,11 +42,12 @@ final class ARContainerViewController: UIViewController {
     
     func present(route: MapboxDirections.Route) {
         dismiss(viewController: mapViewController)
-        
-        let navigationService = MapboxNavigationService(route: route)
-        arViewController.navigationService = navigationService
-        arViewController.navigationService?.delegate = self
+
+        navigationService = MapboxNavigationService(route: route)
+        navigationService?.delegate = self
+        navigationDelegate?.navigation(didUpdate: Route(route: route))
         present(viewController: arViewController)
+        navigationService?.start()
     }
     
     func present(sampleBuffer: CMSampleBuffer) {
@@ -92,9 +90,25 @@ final class ARContainerViewController: UIViewController {
 }
 
 extension ARContainerViewController: NavigationServiceDelegate {
-    
+
     func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
         instructionsLabel.isHidden = false
         instructionsLabel.text = progress.currentLegProgress.currentStep.instructions
     }
+
+    func navigationService(_ service: NavigationService, didArriveAt waypoint: Waypoint) -> Bool {
+        if service.routeProgress.isFinalLeg, service.routeProgress.currentLeg.destination == waypoint {
+            navigationDelegate?.navigationDidArriveAtDestination()
+        }
+        return true
+    }
+
+    func navigationService(_ service: NavigationService, didRerouteAlong route: MapboxDirections.Route, at location: CLLocation?, proactive: Bool) {
+        navigationDelegate?.navigation(didUpdate: Route(route: route))
+    }
+}
+
+public protocol NavigationDelegate: class {
+    func navigation(didUpdate route: MapboxVisionARNative.Route)
+    func navigationDidArriveAtDestination()
 }
