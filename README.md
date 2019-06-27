@@ -1,3 +1,5 @@
+[![Secret-shield enabled](https://github.com/mapbox/secret-shield/blob/assets/secret-shield-enabled-badge.svg)](https://github.com/mapbox/secret-shield/blob/master/docs/enabledBadge.md)
+
 # Mapbox Vision SDK Examples
 
 Example application showing usage of [Mapbox Vision SDK](https://vision.mapbox.com/).
