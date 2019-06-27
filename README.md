@@ -7,6 +7,7 @@ Example application showing usage of [Mapbox Vision SDK](https://vision.mapbox.c
 ## Dependencies
 1. `brew install SwiftGen` (6.0 or later)
 1. `brew install carthage` (0.33.0 or later)
+1. We use [secret-shield](https://github.com/mapbox/secret-shield) tool which runs as a pre-commit hook. In order to enable it you should install [Komondor git hooks manager](https://github.com/shibapm/Komondor) by running `swift run komondor install`
 
 ## Tokens
 In order to fetch and use Vision SDK, you will need to obtain two tokens at [tokens page in your Mapbox account](https://account.mapbox.com/access-tokens/create/):
