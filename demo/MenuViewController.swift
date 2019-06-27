@@ -3,7 +3,7 @@ import UIKit
 final class MenuViewController: UIViewController {
     
     weak var delegate: MenuDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -167,9 +167,19 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func infoTapped() {
-        let previewController = LicenseController.previewController()
-        previewController.delegate = self
-        previewController.presentPreview(animated: true)
+        let alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default, handler: { _ in
+            guard let url = URL(string: GlobalConstants.tosLink) else { return }
+            UIApplication.shared.open(url)
+        }))
+        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default, handler: { _ in
+            guard let url = URL(string: GlobalConstants.privacyPolicyLink) else { return }
+            UIApplication.shared.open(url)
+        }))
+        alert.addAction(UIAlertAction(title: L10n.generalButtonCancel, style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
     }
     
     private let infoButton: UIButton = {
@@ -185,12 +195,6 @@ final class MenuViewController: UIViewController {
     private static let cellHeight: CGFloat = 147.0
     private static let cellWidth: CGFloat = 180.0
     private static let infoButtonPadding: CGFloat = 20
-}
-
-extension MenuViewController: UIDocumentInteractionControllerDelegate {
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        return self
-    }
 }
 
 extension Screen {

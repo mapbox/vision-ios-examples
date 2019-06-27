@@ -13,11 +13,4 @@ struct LicenseController {
     static func submit() {
         UserDefaults.standard.setValue(true, forKey: licenseCheckKey)
     }
-    
-    static func previewController() -> UIDocumentInteractionController {
-        let path =  Bundle.main.path(forResource: "agreement", ofType: "pdf")!
-        let previewController = UIDocumentInteractionController(url: URL(fileURLWithPath: path))
-        previewController.name = "Evaluation Agreement"
-        return previewController
-    }
 }

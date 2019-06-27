@@ -6,20 +6,15 @@ protocol LicenseDelegate: class {
     func licenseSubmitted()
 }
 
-final class WelcomeViewController: UIViewController {
+final class LicenseViewController: UIViewController {
     weak var licenseDelegate: LicenseDelegate?
-    
-    private let licensePreviewController = LicenseController.previewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .black
-        bodyTextView.delegate = self
         
         setupLayout()
-        
-        licensePreviewController.delegate = self
     }
     
     private func setupLayout() {
@@ -53,7 +48,7 @@ final class WelcomeViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.textColor = .white
-        label.text = L10n.welcomeTitle
+        label.text = L10n.licenseTitle
         return label
     }()
     
@@ -66,31 +61,32 @@ final class WelcomeViewController: UIViewController {
             .kern: 0.0,
             .paragraphStyle: paragraph,
         ]
-        let text = NSMutableAttributedString(string: L10n.welcomeBody, attributes: attributes)
-        text.setSubstringAsLink(substring: L10n.welcomeBodyLinkSubstring, linkURL: "custom")
-        
+        let text = NSMutableAttributedString(string: L10n.licenseBody, attributes: attributes)
+        text.setSubstringAsLink(substring: L10n.generalTermsOfService, linkURL: GlobalConstants.tosLink)
+        text.setSubstringAsLink(substring: L10n.generalPrivacyPolicy, linkURL: GlobalConstants.privacyPolicyLink)
+
         let linkAttributes: [NSAttributedString.Key : Any] = [
             .font: UIFont(name: "AvenirNext-DemiBold", size: 18.0)!,
             .foregroundColor: highlightColor
         ]
         let textView = UITextView()
-        
+
         textView.backgroundColor = .clear
-        
+
         textView.attributedText = text
         textView.linkTextAttributes = Dictionary(uniqueKeysWithValues:
             linkAttributes.map { return ($0.key, $0.value) }
         )
         textView.isEditable = false
         textView.isUserInteractionEnabled = true
-        
+
         return textView
     }()
     
     private let button: UIButton = {
         let button = UIButton(type: .roundedRect)
         
-        button.setTitle(L10n.welcomeButton, for: .normal)
+        button.setTitle(L10n.licenseButton, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundColor(highlightColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
@@ -102,25 +98,8 @@ final class WelcomeViewController: UIViewController {
         return button
     }()
     
-    private func licenseTapped() {
-        licensePreviewController.presentPreview(animated: true)
-    }
-    
     @objc private func buttonTapped() {
         licenseDelegate?.licenseSubmitted()
-    }
-}
-
-extension WelcomeViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        licenseTapped()
-        return false
-    }
-}
-
-extension WelcomeViewController: UIDocumentInteractionControllerDelegate {
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        return self
     }
 }
 
