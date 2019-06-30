@@ -108,7 +108,7 @@ extension ARContainerViewController: NavigationServiceDelegate {
     }
 }
 
-public protocol NavigationDelegate: class {
+public protocol NavigationDelegate: AnyObject {
     func navigation(didUpdate route: MapboxVisionARNative.Route)
     func navigationDidArriveAtDestination()
 }

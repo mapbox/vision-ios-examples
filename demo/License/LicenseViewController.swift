@@ -13,7 +13,7 @@ final class LicenseViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .black
-        
+
         setupLayout()
     }
 
@@ -86,7 +86,7 @@ final class LicenseViewController: UIViewController {
 
     private let button: UIButton = {
         let button = UIButton(type: .roundedRect)
-        
+
         button.setTitle(L10n.licenseButton, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundColor(highlightColor, for: .normal)
@@ -99,7 +99,8 @@ final class LicenseViewController: UIViewController {
         return button
     }()
 
-    @objc private func buttonTapped() {
+    @objc
+    private func buttonTapped() {
         licenseDelegate?.licenseSubmitted()
     }
 }

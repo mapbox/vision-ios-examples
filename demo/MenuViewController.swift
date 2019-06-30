@@ -295,17 +295,18 @@ final class MenuViewController: UIViewController {
         ])
     }
 
-    @objc private func infoTapped() {
+    @objc
+    private func infoTapped() {
         let alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default) { _ in
             guard let url = URL(string: GlobalConstants.tosLink) else { return }
             UIApplication.shared.open(url)
-        }))
-        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default, handler: { _ in
+        })
+        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default) { _ in
             guard let url = URL(string: GlobalConstants.privacyPolicyLink) else { return }
             UIApplication.shared.open(url)
-        }))
+        })
         alert.addAction(UIAlertAction(title: L10n.generalButtonCancel, style: .cancel, handler: nil))
 
         self.present(alert, animated: true)

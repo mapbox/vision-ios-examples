@@ -390,11 +390,10 @@ private extension SafetyState.ObjectType {
 }
 
 extension ContainerViewController: NavigationDelegate {
-    
     func navigation(didUpdate route: MapboxVisionAR.Route) {
         delegate?.didNavigationRouteUpdated(route: route)
     }
-    
+
     func navigationDidArriveAtDestination() {
         delegate?.didNavigationRouteUpdated(route: nil)
     }
