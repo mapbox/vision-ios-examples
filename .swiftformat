@@ -6,3 +6,5 @@
 
 # The rest of rules (disabled for now)
 # andOperator,braces,consecutiveBlankLines,consecutiveSpaces,fileHeader,hoistPatternLet,linebreaks,numberFormatting,redundantExtensionACL,redundantSelf,specifiers,unusedArguments
+
+--exclude Generated
