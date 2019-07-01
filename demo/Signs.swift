@@ -664,7 +664,7 @@ extension Sign {
                 return nil
             case .informationLivingStreet:
                 return nil
-            case .regulatoryMotorWay:
+            case .regulatoryMotorway:
                 return nil
             case .regulatorySharedLaneBicyclesPedestrians:
                 return nil
@@ -1245,7 +1245,7 @@ extension Sign {
                 return nil
             case .informationLivingStreet:
                 return nil
-            case .regulatoryMotorWay:
+            case .regulatoryMotorway:
                 return nil
             case .regulatorySharedLaneBicyclesPedestrians:
                 return nil
