@@ -59,41 +59,41 @@ extension Sign {
             case .speedLimitEnd:
                 switch number {
                 case 5:
-                    return over ? Asset.Signs.speedLimitEndUS5Over : Asset.Signs.speedLimitEndUS5
+                    return Asset.Signs.speedLimitEndUS5
                 case 15:
-                    return over ? Asset.Signs.speedLimitEndUS15Over : Asset.Signs.speedLimitEndUS15
+                    return Asset.Signs.speedLimitEndUS15
                 case 25:
-                    return over ? Asset.Signs.speedLimitEndUS25Over : Asset.Signs.speedLimitEndUS25
+                    return Asset.Signs.speedLimitEndUS25
                 case 35:
-                    return over ? Asset.Signs.speedLimitEndUS35Over : Asset.Signs.speedLimitEndUS35
+                    return Asset.Signs.speedLimitEndUS35
                 case 45:
-                    return over ? Asset.Signs.speedLimitEndUS45Over : Asset.Signs.speedLimitEndUS45
+                    return Asset.Signs.speedLimitEndUS45
                 case 55:
-                    return over ? Asset.Signs.speedLimitEndUS55Over : Asset.Signs.speedLimitEndUS55
+                    return Asset.Signs.speedLimitEndUS55
                 case 65:
-                    return over ? Asset.Signs.speedLimitEndUS65Over : Asset.Signs.speedLimitEndUS65
+                    return Asset.Signs.speedLimitEndUS65
                 case 75:
-                    return over ? Asset.Signs.speedLimitEndUS75Over : Asset.Signs.speedLimitEndUS75
+                    return Asset.Signs.speedLimitEndUS75
                 case 10:
-                    return over ? Asset.Signs.speedLimitEndUS10Over : Asset.Signs.speedLimitEndUS10
+                    return Asset.Signs.speedLimitEndUS10
                 case 20:
-                    return over ? Asset.Signs.speedLimitEndUS20Over : Asset.Signs.speedLimitEndUS20
+                    return Asset.Signs.speedLimitEndUS20
                 case 30:
-                    return over ? Asset.Signs.speedLimitEndUS30Over : Asset.Signs.speedLimitEndUS30
+                    return Asset.Signs.speedLimitEndUS30
                 case 40:
-                    return over ? Asset.Signs.speedLimitEndUS40Over : Asset.Signs.speedLimitEndUS40
+                    return Asset.Signs.speedLimitEndUS40
                 case 50:
-                    return over ? Asset.Signs.speedLimitEndUS50Over : Asset.Signs.speedLimitEndUS50
+                    return Asset.Signs.speedLimitEndUS50
                 case 60:
-                    return over ? Asset.Signs.speedLimitEndUS60Over : Asset.Signs.speedLimitEndUS60
+                    return Asset.Signs.speedLimitEndUS60
                 case 70:
-                    return over ? Asset.Signs.speedLimitEndUS70Over : Asset.Signs.speedLimitEndUS70
+                    return Asset.Signs.speedLimitEndUS70
                 case 80:
-                    return over ? Asset.Signs.speedLimitEndUS80Over : Asset.Signs.speedLimitEndUS80
+                    return Asset.Signs.speedLimitEndUS80
                 case 85:
-                    return over ? Asset.Signs.speedLimitEndUS85Over : Asset.Signs.speedLimitEndUS85
+                    return Asset.Signs.speedLimitEndUS85
                 case 90:
-                    return over ? Asset.Signs.speedLimitEndUS90Over : Asset.Signs.speedLimitEndUS90
+                    return Asset.Signs.speedLimitEndUS90
                 default: return nil
                 }
             case .speedLimitMin:
@@ -590,217 +590,321 @@ extension Sign {
                 return nil
             case .warningSecondRoadLeft:
                 return nil
+            case .regulatoryNoTurnOnRedText:
+                return nil
+            case .warningAddedLaneLeft:
+                return nil
+            case .warningFlaggersInRoad:
+                return nil
+            case .warningLoop270Degree:
+                return nil
+            case .warningRoadNarrows:
+                return nil
+            case .warningSlipperyRoadSurface:
+                return nil
+            case .regulatoryBusLane:
+                return nil
+            case .regulatoryEndNoOvertaking:
+                return nil
+            case .regulatoryNoHumanCargoTricycleEntry:
+                return nil
+            case .regulatoryNoHumanPassengerTricycleEntry:
+                return nil
+            case .regulatoryNoRickshaws:
+                return nil
+            case .regulatoryNoStraightThroughOrTurnLeft:
+                return nil
+            case .regulatoryNoStraightThroughOrTurnRight:
+                return nil
+            case .regulatoryNoTractors:
+                return nil
+            case .regulatoryNoTricycles:
+                return nil
+            case .regulatoryUTurnOrTurnLeft:
+                return nil
+            case .regulatoryWalk:
+                return nil
+            case .warningDangerousMountainRoadLeft:
+                return nil
+            case .warningDangerousMountainRoadRight:
+                return nil
+            case .warningDomesticAnimals:
+                return nil
+            case .warningFallingRocksOrDebrisLeft:
+                return nil
+            case .warningHazardLane:
+                return nil
+            case .warningRailroadCrossingWithoutBarriers:
+                return nil
+            case .warningReverseCurveLeft:
+                return nil
+            case .warningReverseCurveRight:
+                return nil
+            case .warningSoftShoulderLeft:
+                return nil
+            case .warningSoftShoulderRight:
+                return nil
+            case .warningTunnel:
+                return nil
+            case .warningWaterPavement:
+                return nil
+            case .speedLimitAdvMax:
+                return nil
+            case .speedLimitEndAdv:
+                return nil
+            case .regulatoryEndLimitedAccessRoad:
+                return nil
+            case .regulatoryEndMotorway:
+                return nil
+            case .regulatoryEquestriansOnly:
+                return nil
+            case .regulatoryGasStation:
+                return nil
+            case .informationHospital:
+                return nil
+            case .informationLivingStreet:
+                return nil
+            case .regulatoryMotorway:
+                return nil
+            case .regulatorySharedLaneBicyclesPedestrians:
+                return nil
+            case .regulatoryEndPriorityRoad:
+                return nil
+            case .regulatoryEndProhibition:
+                return nil
+            case .regulatoryGiveWayToOncomingTraffic:
+                return nil
+            case .regulatoryMinSafeDist:
+                return nil
+            case .regulatoryNoDangerGoods:
+                return nil
+            case .regulatoryNoOverHeavy:
+                return nil
+            case .regulatoryPriorityOverOncomingTraffic:
+                return nil
+            case .regulatoryPriorityRoad:
+                return nil
+            case .regulatoryWeightLimit:
+                return nil
+            case .warningDangerousCrosswinds:
+                return nil
+            case .warningIcyRoad:
+                return nil
+            case .warningLowFlyingAircraft:
+                return nil
+            case .warningOpeningOrSwingBridge:
+                return nil
+            case .warningRailwayCrossingWithBarriers:
+                return nil
+            case .warningTrafficQueues:
+                return nil
             }
-        case .UK, .china, .other: // FIXME: This is fake support for UK signs. Reimplement it as soon as models/assets are available (https://github.com/mapbox/vision-ios-examples/issues/74)
+        case .china:
             switch type {
             case .unknown:
                 return nil
             case .mass:
                 switch number {
                 case 5:
-                    return Asset.Signs.mass5CN
+                    return Asset.Signs.massCN5
                 case 15:
-                    return Asset.Signs.mass15CN
+                    return Asset.Signs.massCN15
                 case 25:
-                    return Asset.Signs.mass25CN
+                    return Asset.Signs.massCN25
                 case 35:
-                    return Asset.Signs.mass35CN
+                    return Asset.Signs.massCN35
                 case 45:
-                    return Asset.Signs.mass45CN
+                    return Asset.Signs.massCN45
                 case 55:
-                    return Asset.Signs.mass55CN
+                    return Asset.Signs.massCN55
                 case 65:
-                    return Asset.Signs.mass65CN
+                    return Asset.Signs.massCN65
                 case 75:
-                    return Asset.Signs.mass75CN
+                    return Asset.Signs.massCN75
                 case 85:
-                    return Asset.Signs.mass85CN
+                    return Asset.Signs.massCN85
                 case 95:
-                    return Asset.Signs.mass95CN
+                    return Asset.Signs.massCN95
                 case 105:
-                    return Asset.Signs.mass105CN
+                    return Asset.Signs.massCN105
                 case 115:
-                    return Asset.Signs.mass115CN
+                    return Asset.Signs.massCN115
                 case 10:
-                    return Asset.Signs.mass10CN
+                    return Asset.Signs.massCN10
                 case 20:
-                    return Asset.Signs.mass20CN
+                    return Asset.Signs.massCN20
                 case 30:
-                    return Asset.Signs.mass30CN
+                    return Asset.Signs.massCN30
                 case 40:
-                    return Asset.Signs.mass40CN
+                    return Asset.Signs.massCN40
                 case 50:
-                    return Asset.Signs.mass50CN
+                    return Asset.Signs.massCN50
                 case 60:
-                    return Asset.Signs.mass60CN
+                    return Asset.Signs.massCN60
                 case 70:
-                    return Asset.Signs.mass70CN
+                    return Asset.Signs.massCN70
                 case 80:
-                    return Asset.Signs.mass80CN
+                    return Asset.Signs.massCN80
                 case 90:
-                    return Asset.Signs.mass90CN
+                    return Asset.Signs.massCN90
                 case 100:
-                    return Asset.Signs.mass100CN
+                    return Asset.Signs.massCN100
                 case 110:
-                    return Asset.Signs.mass110CN
+                    return Asset.Signs.massCN110
                 case 120:
-                    return Asset.Signs.mass120CN
+                    return Asset.Signs.massCN120
                 default: return nil
                 }
             case .speedLimit:
                 switch number {
                 case 5:
-                    return over ? Asset.Signs.speedLimitEU5Over : Asset.Signs.speedLimitEU5
+                    return over ? Asset.Signs.speedLimitCN5Over : Asset.Signs.speedLimitCN5
                 case 15:
-                    return over ? Asset.Signs.speedLimitEU15Over : Asset.Signs.speedLimitEU15
+                    return over ? Asset.Signs.speedLimitCN15Over : Asset.Signs.speedLimitCN15
                 case 25:
-                    return over ? Asset.Signs.speedLimitEU25Over : Asset.Signs.speedLimitEU25
+                    return over ? Asset.Signs.speedLimitCN25Over : Asset.Signs.speedLimitCN25
                 case 35:
-                    return over ? Asset.Signs.speedLimitEU35Over : Asset.Signs.speedLimitEU35
+                    return over ? Asset.Signs.speedLimitCN35Over : Asset.Signs.speedLimitCN35
                 case 45:
-                    return over ? Asset.Signs.speedLimitEU45Over : Asset.Signs.speedLimitEU45
+                    return over ? Asset.Signs.speedLimitCN45Over : Asset.Signs.speedLimitCN45
                 case 55:
-                    return over ? Asset.Signs.speedLimitEU55Over : Asset.Signs.speedLimitEU55
+                    return over ? Asset.Signs.speedLimitCN55Over : Asset.Signs.speedLimitCN55
                 case 65:
-                    return over ? Asset.Signs.speedLimitEU65Over : Asset.Signs.speedLimitEU65
+                    return over ? Asset.Signs.speedLimitCN65Over : Asset.Signs.speedLimitCN65
                 case 75:
-                    return over ? Asset.Signs.speedLimitEU75Over : Asset.Signs.speedLimitEU75
+                    return over ? Asset.Signs.speedLimitCN75Over : Asset.Signs.speedLimitCN75
                 case 85:
-                    return over ? Asset.Signs.speedLimitEU85Over : Asset.Signs.speedLimitEU85
+                    return over ? Asset.Signs.speedLimitCN85Over : Asset.Signs.speedLimitCN85
                 case 95:
-                    return over ? Asset.Signs.speedLimitEU95Over : Asset.Signs.speedLimitEU95
+                    return over ? Asset.Signs.speedLimitCN95Over : Asset.Signs.speedLimitCN95
                 case 105:
-                    return over ? Asset.Signs.speedLimitEU105Over : Asset.Signs.speedLimitEU105
+                    return over ? Asset.Signs.speedLimitCN105Over : Asset.Signs.speedLimitCN105
                 case 115:
-                    return over ? Asset.Signs.speedLimitEU115Over : Asset.Signs.speedLimitEU115
-                case 125:
-                    return over ? Asset.Signs.speedLimitEU125Over : Asset.Signs.speedLimitEU125
+                    return over ? Asset.Signs.speedLimitCN115Over : Asset.Signs.speedLimitCN115
                 case 10:
-                    return over ? Asset.Signs.speedLimitEU10Over : Asset.Signs.speedLimitEU10
+                    return over ? Asset.Signs.speedLimitCN10Over : Asset.Signs.speedLimitCN10
                 case 20:
-                    return over ? Asset.Signs.speedLimitEU20Over : Asset.Signs.speedLimitEU20
+                    return over ? Asset.Signs.speedLimitCN20Over : Asset.Signs.speedLimitCN20
                 case 30:
-                    return over ? Asset.Signs.speedLimitEU30Over : Asset.Signs.speedLimitEU30
+                    return over ? Asset.Signs.speedLimitCN30Over : Asset.Signs.speedLimitCN30
                 case 40:
-                    return over ? Asset.Signs.speedLimitEU40Over : Asset.Signs.speedLimitEU40
+                    return over ? Asset.Signs.speedLimitCN40Over : Asset.Signs.speedLimitCN40
                 case 50:
-                    return over ? Asset.Signs.speedLimitEU50Over : Asset.Signs.speedLimitEU50
+                    return over ? Asset.Signs.speedLimitCN50Over : Asset.Signs.speedLimitCN50
                 case 60:
-                    return over ? Asset.Signs.speedLimitEU60Over : Asset.Signs.speedLimitEU60
+                    return over ? Asset.Signs.speedLimitCN60Over : Asset.Signs.speedLimitCN60
                 case 70:
-                    return over ? Asset.Signs.speedLimitEU70Over : Asset.Signs.speedLimitEU70
+                    return over ? Asset.Signs.speedLimitCN70Over : Asset.Signs.speedLimitCN70
                 case 80:
-                    return over ? Asset.Signs.speedLimitEU80Over : Asset.Signs.speedLimitEU80
+                    return over ? Asset.Signs.speedLimitCN80Over : Asset.Signs.speedLimitCN80
                 case 90:
-                    return over ? Asset.Signs.speedLimitEU90Over : Asset.Signs.speedLimitEU90
+                    return over ? Asset.Signs.speedLimitCN90Over : Asset.Signs.speedLimitCN90
                 case 100:
-                    return over ? Asset.Signs.speedLimitEU100Over : Asset.Signs.speedLimitEU100
+                    return over ? Asset.Signs.speedLimitCN100Over : Asset.Signs.speedLimitCN100
                 case 110:
-                    return over ? Asset.Signs.speedLimitEU110Over : Asset.Signs.speedLimitEU110
+                    return over ? Asset.Signs.speedLimitCN110Over : Asset.Signs.speedLimitCN110
                 case 120:
-                    return over ? Asset.Signs.speedLimitEU120Over : Asset.Signs.speedLimitEU120
-                case 130:
-                    return over ? Asset.Signs.speedLimitEU130 : Asset.Signs.speedLimitEU130
+                    return over ? Asset.Signs.speedLimitCN120Over : Asset.Signs.speedLimitCN120
                 default: return nil
                 }
             case .speedLimitEnd:
                 switch number {
                 case 5:
-                    return Asset.Signs.speedLimitEnd5CN
+                    return Asset.Signs.speedLimitEndCN5
                 case 15:
-                    return Asset.Signs.speedLimitEnd15CN
+                    return Asset.Signs.speedLimitEndCN15
                 case 25:
-                    return Asset.Signs.speedLimitEnd25CN
+                    return Asset.Signs.speedLimitEndCN25
                 case 35:
-                    return Asset.Signs.speedLimitEnd35CN
+                    return Asset.Signs.speedLimitEndCN35
                 case 45:
-                    return Asset.Signs.speedLimitEnd45CN
+                    return Asset.Signs.speedLimitEndCN45
                 case 55:
-                    return Asset.Signs.speedLimitEnd55CN
+                    return Asset.Signs.speedLimitEndCN55
                 case 65:
-                    return Asset.Signs.speedLimitEnd65CN
+                    return Asset.Signs.speedLimitEndCN65
                 case 75:
-                    return Asset.Signs.speedLimitEnd75CN
+                    return Asset.Signs.speedLimitEndCN75
                 case 85:
-                    return Asset.Signs.speedLimitEnd85CN
+                    return Asset.Signs.speedLimitEndCN85
                 case 95:
-                    return Asset.Signs.speedLimitEnd95CN
+                    return Asset.Signs.speedLimitEndCN95
                 case 105:
-                    return Asset.Signs.speedLimitEnd105CN
+                    return Asset.Signs.speedLimitEndCN105
                 case 115:
-                    return Asset.Signs.speedLimitEnd115CN
+                    return Asset.Signs.speedLimitEndCN115
                 case 10:
-                    return Asset.Signs.speedLimitEnd10CN
+                    return Asset.Signs.speedLimitEndCN10
                 case 20:
-                    return Asset.Signs.speedLimitEnd20CN
+                    return Asset.Signs.speedLimitEndCN20
                 case 30:
-                    return Asset.Signs.speedLimitEnd30CN
+                    return Asset.Signs.speedLimitEndCN30
                 case 40:
-                    return Asset.Signs.speedLimitEnd40CN
+                    return Asset.Signs.speedLimitEndCN40
                 case 50:
-                    return Asset.Signs.speedLimitEnd50CN
+                    return Asset.Signs.speedLimitEndCN50
                 case 60:
-                    return Asset.Signs.speedLimitEnd60CN
+                    return Asset.Signs.speedLimitEndCN60
                 case 70:
-                    return Asset.Signs.speedLimitEnd70CN
+                    return Asset.Signs.speedLimitEndCN70
                 case 80:
-                    return Asset.Signs.speedLimitEnd80CN
+                    return Asset.Signs.speedLimitEndCN80
                 case 90:
-                    return Asset.Signs.speedLimitEnd90CN
+                    return Asset.Signs.speedLimitEndCN90
                 case 100:
-                    return Asset.Signs.speedLimitEnd100CN
+                    return Asset.Signs.speedLimitEndCN100
                 case 110:
-                    return Asset.Signs.speedLimitEnd110CN
+                    return Asset.Signs.speedLimitEndCN110
                 case 120:
-                    return Asset.Signs.speedLimitEnd120CN
+                    return Asset.Signs.speedLimitEndCN120
                 default: return nil
                 }
             case .speedLimitMin:
                 switch number {
                 case 5:
-                    return Asset.Signs.speedMinimum5CN
+                    return Asset.Signs.speedMinimumCN5
                 case 10:
-                    return Asset.Signs.speedMinimum10CN
+                    return Asset.Signs.speedMinimumCN10
                 case 15:
-                    return Asset.Signs.speedMinimum15CN
+                    return Asset.Signs.speedMinimumCN15
                 case 20:
-                    return Asset.Signs.speedMinimum20CN
+                    return Asset.Signs.speedMinimumCN20
                 case 25:
-                    return Asset.Signs.speedMinimum25CN
+                    return Asset.Signs.speedMinimumCN25
                 case 30:
-                    return Asset.Signs.speedMinimum30CN
+                    return Asset.Signs.speedMinimumCN30
                 case 35:
-                    return Asset.Signs.speedMinimum35CN
+                    return Asset.Signs.speedMinimumCN35
                 case 40:
-                    return Asset.Signs.speedMinimum40CN
+                    return Asset.Signs.speedMinimumCN40
                 case 55:
-                    return Asset.Signs.speedMinimum55CN
+                    return Asset.Signs.speedMinimumCN55
                 case 60:
-                    return Asset.Signs.speedMinimum60CN
+                    return Asset.Signs.speedMinimumCN60
                 case 65:
-                    return Asset.Signs.speedMinimum65CN
+                    return Asset.Signs.speedMinimumCN65
                 case 70:
-                    return Asset.Signs.speedMinimum70CN
+                    return Asset.Signs.speedMinimumCN70
                 case 75:
-                    return Asset.Signs.speedMinimum75CN
+                    return Asset.Signs.speedMinimumCN75
                 case 80:
-                    return Asset.Signs.speedMinimum80CN
+                    return Asset.Signs.speedMinimumCN80
                 case 85:
-                    return Asset.Signs.speedMinimum85CN
+                    return Asset.Signs.speedMinimumCN85
                 case 90:
-                    return Asset.Signs.speedMinimum90CN
+                    return Asset.Signs.speedMinimumCN90
                 case 95:
-                    return Asset.Signs.speedMinimum95CN
+                    return Asset.Signs.speedMinimumCN95
                 case 100:
-                    return Asset.Signs.speedMinimum100CN
+                    return Asset.Signs.speedMinimumCN100
                 case 105:
-                    return Asset.Signs.speedMinimum105CN
+                    return Asset.Signs.speedMinimumCN105
                 case 110:
-                    return Asset.Signs.speedMinimum110CN
+                    return Asset.Signs.speedMinimumCN110
                 case 115:
-                    return Asset.Signs.speedMinimum115CN
+                    return Asset.Signs.speedMinimumCN115
                 case 120:
-                    return Asset.Signs.speedMinimum120CN
+                    return Asset.Signs.speedMinimumCN120
                 default: return nil
                 }
             case .speedLimitTrucks:
@@ -1052,7 +1156,7 @@ extension Sign {
             case .regulatoryUTurn:
                 return Asset.Signs.regulatoryUTurnCN
             case .regulatoryNoSmallPassengerCar:
-                return Asset.Signs.regulatoryNoSmallPassengerCarCN;
+                return Asset.Signs.regulatoryNoSmallPassengerCarCN
             case .warningSteepAscent:
                 return Asset.Signs.warningSteepAscentCN
             case .warningSteepDescent:
@@ -1067,6 +1171,887 @@ extension Sign {
                 return Asset.Signs.warningRoadworksCN
             case .warningSecondRoadLeft:
                 return Asset.Signs.warningSecondRoadLeftCN
+            case .regulatoryNoTurnOnRedText:
+                return nil
+            case .warningAddedLaneLeft:
+                return nil
+            case .warningFlaggersInRoad:
+                return nil
+            case .warningLoop270Degree:
+                return nil
+            case .warningRoadNarrows:
+                return nil
+            case .warningSlipperyRoadSurface:
+                return nil
+            case .regulatoryBusLane:
+                return nil
+            case .regulatoryEndNoOvertaking:
+                return nil
+            case .regulatoryNoHumanCargoTricycleEntry:
+                return nil
+            case .regulatoryNoHumanPassengerTricycleEntry:
+                return nil
+            case .regulatoryNoRickshaws:
+                return nil
+            case .regulatoryNoStraightThroughOrTurnLeft:
+                return nil
+            case .regulatoryNoStraightThroughOrTurnRight:
+                return nil
+            case .regulatoryNoTractors:
+                return nil
+            case .regulatoryNoTricycles:
+                return nil
+            case .regulatoryUTurnOrTurnLeft:
+                return nil
+            case .regulatoryWalk:
+                return nil
+            case .warningDangerousMountainRoadLeft:
+                return nil
+            case .warningDangerousMountainRoadRight:
+                return nil
+            case .warningDomesticAnimals:
+                return nil
+            case .warningFallingRocksOrDebrisLeft:
+                return nil
+            case .warningHazardLane:
+                return nil
+            case .warningRailroadCrossingWithoutBarriers:
+                return nil
+            case .warningReverseCurveLeft:
+                return nil
+            case .warningReverseCurveRight:
+                return nil
+            case .warningSoftShoulderLeft:
+                return nil
+            case .warningSoftShoulderRight:
+                return nil
+            case .warningTunnel:
+                return nil
+            case .warningWaterPavement:
+                return nil
+            case .speedLimitAdvMax:
+                return nil
+            case .speedLimitEndAdv:
+                return nil
+            case .regulatoryEndLimitedAccessRoad:
+                return nil
+            case .regulatoryEndMotorway:
+                return nil
+            case .regulatoryEquestriansOnly:
+                return nil
+            case .regulatoryGasStation:
+                return nil
+            case .informationHospital:
+                return nil
+            case .informationLivingStreet:
+                return nil
+            case .regulatoryMotorway:
+                return nil
+            case .regulatorySharedLaneBicyclesPedestrians:
+                return nil
+            case .regulatoryEndPriorityRoad:
+                return nil
+            case .regulatoryEndProhibition:
+                return nil
+            case .regulatoryGiveWayToOncomingTraffic:
+                return nil
+            case .regulatoryMinSafeDist:
+                return nil
+            case .regulatoryNoDangerGoods:
+                return nil
+            case .regulatoryNoOverHeavy:
+                return nil
+            case .regulatoryPriorityOverOncomingTraffic:
+                return nil
+            case .regulatoryPriorityRoad:
+                return nil
+            case .regulatoryWeightLimit:
+                return nil
+            case .warningDangerousCrosswinds:
+                return nil
+            case .warningIcyRoad:
+                return nil
+            case .warningLowFlyingAircraft:
+                return nil
+            case .warningOpeningOrSwingBridge:
+                return nil
+            case .warningRailwayCrossingWithBarriers:
+                return nil
+            case .warningTrafficQueues:
+                return nil
+            }
+        case .UK, .other:
+            switch type {
+            case .unknown:
+                return nil
+            case .speedLimit:
+                switch number {
+                case 5:
+                    return over ? Asset.Signs.speedLimitEU5Over : Asset.Signs.speedLimitEU5
+                case 10:
+                    return over ? Asset.Signs.speedLimitEU10Over : Asset.Signs.speedLimitEU10
+                case 15:
+                    return over ? Asset.Signs.speedLimitEU15Over : Asset.Signs.speedLimitEU15
+                case 20:
+                    return over ? Asset.Signs.speedLimitEU20Over : Asset.Signs.speedLimitEU20
+                case 25:
+                    return over ? Asset.Signs.speedLimitEU25Over : Asset.Signs.speedLimitEU25
+                case 30:
+                    return over ? Asset.Signs.speedLimitEU30Over : Asset.Signs.speedLimitEU30
+                case 35:
+                    return over ? Asset.Signs.speedLimitEU35Over : Asset.Signs.speedLimitEU35
+                case 40:
+                    return over ? Asset.Signs.speedLimitEU40Over : Asset.Signs.speedLimitEU40
+                case 45:
+                    return over ? Asset.Signs.speedLimitEU45Over : Asset.Signs.speedLimitEU45
+                case 50:
+                    return over ? Asset.Signs.speedLimitEU50Over : Asset.Signs.speedLimitEU50
+                case 55:
+                    return over ? Asset.Signs.speedLimitEU55Over : Asset.Signs.speedLimitEU55
+                case 60:
+                    return over ? Asset.Signs.speedLimitEU60Over : Asset.Signs.speedLimitEU60
+                case 65:
+                    return over ? Asset.Signs.speedLimitEU65Over : Asset.Signs.speedLimitEU65
+                case 70:
+                    return over ? Asset.Signs.speedLimitEU70Over : Asset.Signs.speedLimitEU70
+                case 75:
+                    return over ? Asset.Signs.speedLimitEU75Over : Asset.Signs.speedLimitEU75
+                case 80:
+                    return over ? Asset.Signs.speedLimitEU80Over : Asset.Signs.speedLimitEU80
+                case 85:
+                    return over ? Asset.Signs.speedLimitEU85Over : Asset.Signs.speedLimitEU85
+                case 90:
+                    return over ? Asset.Signs.speedLimitEU90Over : Asset.Signs.speedLimitEU90
+                case 95:
+                    return over ? Asset.Signs.speedLimitEU95Over : Asset.Signs.speedLimitEU95
+                case 100:
+                    return over ? Asset.Signs.speedLimitEU100Over : Asset.Signs.speedLimitEU100
+                case 105:
+                    return over ? Asset.Signs.speedLimitEU105Over : Asset.Signs.speedLimitEU105
+                case 110:
+                    return over ? Asset.Signs.speedLimitEU110Over : Asset.Signs.speedLimitEU110
+                case 115:
+                    return over ? Asset.Signs.speedLimitEU115Over : Asset.Signs.speedLimitEU115
+                case 120:
+                    return over ? Asset.Signs.speedLimitEU120Over : Asset.Signs.speedLimitEU120
+                default: return nil
+                }
+            case .speedLimitEnd:
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitEndEU5
+                case 10:
+                    return Asset.Signs.speedLimitEndEU10
+                case 15:
+                    return Asset.Signs.speedLimitEndEU15
+                case 20:
+                    return Asset.Signs.speedLimitEndEU20
+                case 25:
+                    return Asset.Signs.speedLimitEndEU25
+                case 30:
+                    return Asset.Signs.speedLimitEndEU30
+                case 35:
+                    return Asset.Signs.speedLimitEndEU35
+                case 40:
+                    return Asset.Signs.speedLimitEndEU40
+                case 45:
+                    return Asset.Signs.speedLimitEndEU45
+                case 50:
+                    return Asset.Signs.speedLimitEndEU50
+                case 55:
+                    return Asset.Signs.speedLimitEndEU55
+                case 60:
+                    return Asset.Signs.speedLimitEndEU60
+                case 65:
+                    return Asset.Signs.speedLimitEndEU65
+                case 70:
+                    return Asset.Signs.speedLimitEndEU70
+                case 75:
+                    return Asset.Signs.speedLimitEndEU75
+                case 80:
+                    return Asset.Signs.speedLimitEndEU80
+                case 85:
+                    return Asset.Signs.speedLimitEndEU85
+                case 90:
+                    return Asset.Signs.speedLimitEndEU90
+                case 95:
+                    return Asset.Signs.speedLimitEndEU95
+                case 100:
+                    return Asset.Signs.speedLimitEndEU100
+                case 105:
+                    return Asset.Signs.speedLimitEndEU105
+                case 110:
+                    return Asset.Signs.speedLimitEndEU110
+                case 115:
+                    return Asset.Signs.speedLimitEndEU115
+                case 120:
+                    return Asset.Signs.speedLimitEndEU120
+                default: return nil
+                }
+            case .speedLimitMin:
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitMinEU5
+                case 10:
+                    return Asset.Signs.speedLimitMinEU10
+                case 15:
+                    return Asset.Signs.speedLimitMinEU15
+                case 20:
+                    return Asset.Signs.speedLimitMinEU20
+                case 25:
+                    return Asset.Signs.speedLimitMinEU25
+                case 30:
+                    return Asset.Signs.speedLimitMinEU30
+                case 35:
+                    return Asset.Signs.speedLimitMinEU35
+                case 40:
+                    return Asset.Signs.speedLimitMinEU40
+                case 45:
+                    return Asset.Signs.speedLimitMinEU45
+                case 50:
+                    return Asset.Signs.speedLimitMinEU50
+                case 55:
+                    return Asset.Signs.speedLimitMinEU55
+                case 60:
+                    return Asset.Signs.speedLimitMinEU60
+                case 65:
+                    return Asset.Signs.speedLimitMinEU65
+                case 70:
+                    return Asset.Signs.speedLimitMinEU70
+                case 75:
+                    return Asset.Signs.speedLimitMinEU75
+                case 80:
+                    return Asset.Signs.speedLimitMinEU80
+                case 85:
+                    return Asset.Signs.speedLimitMinEU85
+                case 90:
+                    return Asset.Signs.speedLimitMinEU90
+                case 95:
+                    return Asset.Signs.speedLimitMinEU95
+                case 100:
+                    return Asset.Signs.speedLimitMinEU100
+                case 105:
+                    return Asset.Signs.speedLimitMinEU105
+                case 110:
+                    return Asset.Signs.speedLimitMinEU110
+                case 115:
+                    return Asset.Signs.speedLimitMinEU115
+                case 120:
+                    return Asset.Signs.speedLimitMinEU120
+                default: return nil
+                }
+            case .speedLimitAdvMax:
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitAdvMaxEU5
+                case 10:
+                    return Asset.Signs.speedLimitAdvMaxEU10
+                case 15:
+                    return Asset.Signs.speedLimitAdvMaxEU15
+                case 20:
+                    return Asset.Signs.speedLimitAdvMaxEU20
+                case 25:
+                    return Asset.Signs.speedLimitAdvMaxEU25
+                case 30:
+                    return Asset.Signs.speedLimitAdvMaxEU30
+                case 35:
+                    return Asset.Signs.speedLimitAdvMaxEU35
+                case 40:
+                    return Asset.Signs.speedLimitAdvMaxEU40
+                case 45:
+                    return Asset.Signs.speedLimitAdvMaxEU45
+                case 50:
+                    return Asset.Signs.speedLimitAdvMaxEU50
+                case 55:
+                    return Asset.Signs.speedLimitAdvMaxEU55
+                case 60:
+                    return Asset.Signs.speedLimitAdvMaxEU60
+                case 65:
+                    return Asset.Signs.speedLimitAdvMaxEU65
+                case 70:
+                    return Asset.Signs.speedLimitAdvMaxEU70
+                case 75:
+                    return Asset.Signs.speedLimitAdvMaxEU75
+                case 80:
+                    return Asset.Signs.speedLimitAdvMaxEU80
+                case 85:
+                    return Asset.Signs.speedLimitAdvMaxEU85
+                case 90:
+                    return Asset.Signs.speedLimitAdvMaxEU90
+                case 95:
+                    return Asset.Signs.speedLimitAdvMaxEU95
+                case 100:
+                    return Asset.Signs.speedLimitAdvMaxEU100
+                case 105:
+                    return Asset.Signs.speedLimitAdvMaxEU115
+                case 110:
+                    return Asset.Signs.speedLimitAdvMaxEU110
+                case 115:
+                    return Asset.Signs.speedLimitAdvMaxEU115
+                case 120:
+                    return Asset.Signs.speedLimitAdvMaxEU120
+                default: return nil
+                }
+            case .speedLimitEndAdv:
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitEndAdvEU5
+                case 10:
+                    return Asset.Signs.speedLimitEndAdvEU10
+                case 15:
+                    return Asset.Signs.speedLimitEndAdvEU15
+                case 20:
+                    return Asset.Signs.speedLimitEndAdvEU20
+                case 25:
+                    return Asset.Signs.speedLimitEndAdvEU25
+                case 30:
+                    return Asset.Signs.speedLimitEndAdvEU30
+                case 35:
+                    return Asset.Signs.speedLimitEndAdvEU35
+                case 40:
+                    return Asset.Signs.speedLimitEndAdvEU40
+                case 45:
+                    return Asset.Signs.speedLimitEndAdvEU45
+                case 50:
+                    return Asset.Signs.speedLimitEndAdvEU50
+                case 55:
+                    return Asset.Signs.speedLimitEndAdvEU55
+                case 60:
+                    return Asset.Signs.speedLimitEndAdvEU60
+                case 65:
+                    return Asset.Signs.speedLimitEndAdvEU65
+                case 70:
+                    return Asset.Signs.speedLimitEndAdvEU70
+                case 75:
+                    return Asset.Signs.speedLimitEndAdvEU75
+                case 80:
+                    return Asset.Signs.speedLimitEndAdvEU80
+                case 85:
+                    return Asset.Signs.speedLimitEndAdvEU85
+                case 90:
+                    return Asset.Signs.speedLimitEndAdvEU90
+                case 95:
+                    return Asset.Signs.speedLimitEndAdvEU95
+                case 100:
+                    return Asset.Signs.speedLimitEndAdvEU100
+                case 105:
+                    return Asset.Signs.speedLimitEndAdvEU115
+                case 110:
+                    return Asset.Signs.speedLimitEndAdvEU110
+                case 115:
+                    return Asset.Signs.speedLimitEndAdvEU115
+                case 120:
+                    return Asset.Signs.speedLimitEndAdvEU120
+                default: return nil
+                }
+            case .complementaryKeepLeft:
+                return Asset.Signs.complementaryKeepLeftEU
+            case .complementaryKeepRight:
+                return Asset.Signs.complementaryKeepRightEU
+            case .informationHospital:
+                return Asset.Signs.informationHospitalEU
+            case .informationLivingStreet:
+                if country == .UK {
+                    return Asset.Signs.informationLivingStreetUK
+                } else if country == .other {
+                    return Asset.Signs.informationLivingStreetEU
+                } else {
+                    return nil
+                }
+            case .informationParking:
+                return Asset.Signs.informationParkingEU
+            case .regulatoryAxleWeightLimit:
+                return Asset.Signs.regulatoryAxleWeightLimitEU
+            case .regulatoryBicyclesOnly:
+                return Asset.Signs.regulatoryBicyclesOnlyEU
+            case .regulatoryBusLane:
+                return Asset.Signs.regulatoryBusLaneEU
+            case .regulatoryDualLanesTurnLeftOrStraight:
+                return Asset.Signs.regulatoryDualLanesTurnLeftOrStraightEU
+            case .regulatoryDualLanesTurnRightOrStraight:
+                return Asset.Signs.regulatoryDualLanesTurnRightOrStraightEU
+            case .regulatoryEndLimitedAccessRoad:
+                return Asset.Signs.regulatoryEndLimitedAccessRoadEU
+            case .regulatoryEndMotorway:
+                if country == .UK {
+                    return Asset.Signs.regulatoryEndMotorwayUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryEndMotorwayEU
+                } else {
+                    return nil
+                }
+            case .regulatoryEndPriorityRoad:
+                return Asset.Signs.regulatoryEndPriorityRoadEU
+            case .regulatoryEndProhibition:
+                if country == .UK {
+                    return Asset.Signs.regulatoryEndProhibitionUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryEndProhibitionEU
+                } else {
+                    return nil
+                }
+            case .regulatoryGiveWayToOncomingTraffic:
+                if country == .UK {
+                    return Asset.Signs.regulatoryGiveWayToOncomingTrafficUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryGiveWayToOncomingTrafficEU
+                } else {
+                    return nil
+                }
+            case .regulatoryGoStraight:
+                return Asset.Signs.regulatoryGoStraightEU
+            case .regulatoryHeightLimit:
+                return Asset.Signs.regulatoryHeightLimitEU
+            case .regulatoryMinSafeDist:
+                return Asset.Signs.regulatoryMinSafeDistEU
+            case .regulatoryMotorVehicles:
+                return Asset.Signs.regulatoryMotorVehiclesEU
+            case .regulatoryMotorway:
+                if country == .UK {
+                    return Asset.Signs.regulatoryMotorwayUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryMotorwayEU
+                } else {
+                    return nil
+                }
+            case .regulatoryNoBicycles:
+                return Asset.Signs.regulatoryNoBicyclesEU
+            case .regulatoryNoBuses:
+                return Asset.Signs.regulatoryNoBusesEU
+            case .regulatoryNoDangerGoods:
+                if country == .UK {
+                    return Asset.Signs.regulatoryNoDangerGoodsUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryNoDangerGoodsEU
+                } else {
+                    return nil
+                }
+            case .regulatoryNoEntry:
+                return Asset.Signs.regulatoryNoEntryEU
+            case .regulatoryNoHeavyGoodsVehiclesPicture:
+                return Asset.Signs.regulatoryNoHeavyGoodsVehiclesPictureEU
+            case .regulatoryNoLeftTurn:
+                return Asset.Signs.regulatoryNoLeftTurnEU
+            case .regulatoryNoMotorVehicles:
+                return Asset.Signs.regulatoryNoMotorVehiclesEU
+            case .regulatoryNoMotorcyclesOrMopeds:
+                return Asset.Signs.regulatoryNoMotorcyclesOrMopedsEU
+            case .regulatoryNoOverHeavy:
+                return Asset.Signs.regulatoryNoOverHeavyEU
+            case .regulatoryNoOvertaking:
+                if country == .UK {
+                    return Asset.Signs.regulatoryNoOvertakingUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryNoOvertakingEU
+                } else {
+                    return nil
+                }
+            case .regulatoryNoParking:
+                return Asset.Signs.regulatoryNoParkingEU
+            case .regulatoryNoPedestrians:
+                if country == .UK {
+                    return Asset.Signs.regulatoryNoPedestriansUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryNoPedestriansEU
+                } else {
+                    return nil
+                }
+            case .regulatoryNoRightTurn:
+                return Asset.Signs.regulatoryNoRightTurnEU
+            case .regulatoryNoUTurn:
+                return Asset.Signs.regulatoryNoUTurnEU
+            case .regulatoryNoParkingOrNoStopping:
+                return Asset.Signs.regulatoryNoParkingOrNoStoppingEU
+            case .regulatoryOneWayLeftArrow:
+                return Asset.Signs.regulatoryOneWayLeftArrowEU
+            case .regulatoryOneWayRightArrow:
+                return Asset.Signs.regulatoryOneWayRightArrowEU
+            case .regulatoryOneWayStraight:
+                return Asset.Signs.regulatoryOneWayStraightEU
+            case .regulatoryPedestriansCrossing:
+                return Asset.Signs.regulatoryPedestriansCrossingEU
+            case .regulatoryPriorityOverOncomingTraffic:
+                if country == .UK {
+                    return Asset.Signs.regulatoryPriorityOverOncomingTrafficUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryPriorityOverOncomingTrafficEU
+                } else {
+                    return nil
+                }
+            case .regulatoryPriorityRoad:
+                return Asset.Signs.regulatoryPriorityRoadEU
+            case .regulatoryRoadClosedToVehicles:
+                return Asset.Signs.regulatoryRoadClosedToVehiclesEU
+            case .regulatoryRoundabout:
+                return Asset.Signs.regulatoryRoundaboutEU
+            case .regulatorySharedLaneBicyclesPedestrians:
+                if country == .UK {
+                    return Asset.Signs.regulatorySharedLaneBicyclesPedestriansUK
+                } else if country == .other {
+                    return Asset.Signs.regulatorySharedLaneBicyclesPedestriansEU
+                } else {
+                    return nil
+                }
+            case .regulatoryStop:
+                return Asset.Signs.regulatoryStopEU
+            case .regulatoryTurnLeft:
+                return Asset.Signs.regulatoryTurnLeftEU
+            case .regulatoryTurnLeftOrRight:
+                return Asset.Signs.regulatoryTurnLeftOrRightEU
+            case .regulatoryTurnRight:
+                return Asset.Signs.regulatoryTurnRightEU
+            case .regulatoryWalk:
+                return Asset.Signs.regulatoryWalkEU
+            case .regulatoryWeightLimit:
+                return Asset.Signs.regulatoryWeightLimitEU
+            case .regulatoryWidthLimit:
+                return Asset.Signs.regulatoryWidthLimitEU
+            case .regulatoryYield:
+                if country == .UK {
+                    return Asset.Signs.regulatoryYieldUK
+                } else if country == .other {
+                    return Asset.Signs.regulatoryYieldEU
+                } else {
+                    return nil
+                }
+            case .warningBicyclesCrossing:
+                return Asset.Signs.warningBicyclesCrossingEU
+            case .warningCurveLeft:
+                return Asset.Signs.warningCurveLeftEU
+            case .warningCurveRight:
+                return Asset.Signs.warningCurveRightEU
+            case .warningDangerousCrosswinds:
+                if country == .UK {
+                    return Asset.Signs.warningDangerousCrosswindsUK
+                } else if country == .other {
+                    return Asset.Signs.warningDangerousCrosswindsEU
+                } else {
+                    return nil
+                }
+            case .warningDangerousTraffic:
+                return Asset.Signs.warningDangerousTrafficEU
+            case .warningDeadEndText:
+                return Asset.Signs.warningDeadEndTextEU
+            case .warningDomesticAnimals:
+                if country == .UK {
+                    return Asset.Signs.warningDomesticAnimalsUK
+                } else if country == .other {
+                    return Asset.Signs.warningDomesticAnimalsEU
+                } else {
+                    return nil
+                }
+            case .warningFallingRocksOrDebrisLeft:
+                return Asset.Signs.warningFallingRocksOrDebrisLeftEU
+            case .warningFallingRocksOrDebrisRight:
+                return Asset.Signs.warningFallingRocksOrDebrisRightEU
+            case .warningIcyRoad:
+                return Asset.Signs.warningIcyRoadEU
+            case .warningLowFlyingAircraft:
+                return Asset.Signs.warningLowFlyingAircraftEU
+            case .warningLowGroundClearance:
+                if country == .UK {
+                    return Asset.Signs.warningLowGroundClearanceUK
+                } else if country == .other {
+                    return Asset.Signs.warningLowGroundClearanceEU
+                } else {
+                    return nil
+                }
+            case .warningOpeningOrSwingBridge:
+                return Asset.Signs.warningOpeningOrSwingBridgeEU
+            case .warningPassLeftOrRight:
+                return Asset.Signs.warningPassLeftOrRightEU
+            case .warningPedestriansCrossing:
+                if country == .UK {
+                    return Asset.Signs.warningPedestriansCrossingUK
+                } else if country == .other {
+                    return Asset.Signs.warningPedestriansCrossingEU
+                } else {
+                    return nil
+                }
+            case .warningRailroadCrossingWithoutBarriers:
+                if country == .UK {
+                    return Asset.Signs.warningRailroadCrossingWithoutBarriersUK
+                } else if country == .other {
+                    return Asset.Signs.warningRailroadCrossingWithoutBarriersEU
+                } else {
+                    return nil
+                }
+            case .warningRailwayCrossing:
+                return Asset.Signs.warningRailwayCrossingEU
+            case .warningRailwayCrossingWithBarriers:
+                return Asset.Signs.warningRailwayCrossingWithBarriersEU
+            case .warningRoadNarrows:
+                return Asset.Signs.warningRoadNarrowsEU
+            case .warningRoadNarrowsLeft:
+                return Asset.Signs.warningRoadNarrowsLeftEU
+            case .warningRoadNarrowsRight:
+                return Asset.Signs.warningRoadNarrowsRightEU
+            case .warningRoadworks:
+                if country == .UK {
+                    return Asset.Signs.warningRoadworksUK
+                } else if country == .other {
+                    return Asset.Signs.warningRoadworksEU
+                } else {
+                    return nil
+                }
+            case .warningRoundabout:
+                if country == .UK {
+                    return Asset.Signs.warningRoundAboutUK
+                } else if country == .other {
+                    return Asset.Signs.warningRoundAboutEU
+                } else {
+                    return nil
+                }
+            case .warningSchoolZone:
+                if country == .UK {
+                    return Asset.Signs.warningSchoolZoneUK
+                } else if country == .other {
+                    return Asset.Signs.warningSchoolZoneEU
+                } else {
+                    return nil
+                }
+            case .warningSlipperyRoadSurface:
+                return Asset.Signs.warningSlipperyRoadSurfaceEU
+            case .warningSoftShoulderLeft:
+                return Asset.Signs.warningSoftShoulderLeftEU
+            case .warningSoftShoulderRight:
+                return Asset.Signs.warningSoftShoulderRightEU
+            case .warningSpeedBump:
+                return Asset.Signs.warningSpeedBumpEU
+            case .warningSteepAscent:
+                return Asset.Signs.warningSteepAscentEU
+            case .warningSteepDescent:
+                return Asset.Signs.warningSteepDescentEU
+            case .warningTrafficQueues:
+                if country == .UK {
+                    return Asset.Signs.warningTrafficQueuesUK
+                } else if country == .other {
+                    return Asset.Signs.warningTrafficQueuesEU
+                } else {
+                    return nil
+                }
+            case .warningTrafficSignals:
+                return Asset.Signs.warningTrafficSignalsEU
+            case .warningTramsCrossing:
+                return Asset.Signs.warningTramsCrossingEU
+            case .warningTwoWayTraffic:
+                if country == .UK {
+                    return Asset.Signs.warningTwoWayTrafficUK
+                } else if country == .other {
+                    return Asset.Signs.warningTwoWayTrafficEU
+                } else {
+                    return nil
+                }
+            case .warningUnevenRoad:
+                return Asset.Signs.warningUnevenRoadEU
+            case .warningWildAnimals:
+                if country == .UK {
+                    return Asset.Signs.warningWildAnimalsUK
+                } else if country == .other {
+                    return Asset.Signs.warningWildAnimalsEU
+                } else {
+                    return nil
+                }
+            case .warningWindingRoad:
+                if country == .UK {
+                    return Asset.Signs.warningWindingRoadUK
+                } else if country == .other {
+                    return Asset.Signs.warningWindingRoadEU
+                } else {
+                    return nil
+                }
+            case .speedLimitNight:
+                return nil
+            case .speedLimitTrucks:
+                return nil
+            case .mass:
+                return nil
+            case .speedLimitComplementary:
+                return nil
+            case .speedLimitExit:
+                return nil
+            case .speedLimitRamp:
+                return nil
+            case .warningTurnLeft:
+                return nil
+            case .warningTurnRight:
+                return nil
+            case .warningHairpinCurveLeft:
+                return nil
+            case .informationBikeRoute:
+                return nil
+            case .regulatoryAllDirectionsPermitted:
+                return nil
+            case .regulatoryDoNotPass:
+                return nil
+            case .regulatoryDoNotDriveOnShoulder:
+                return nil
+            case .regulatoryDualLanesAllDirectionsOnRight:
+                return nil
+            case .regulatoryDualLanesGoLeftOrRight:
+                return nil
+            case .regulatoryDualLanesGoStraightOnLeft:
+                return nil
+            case .regulatoryDualLanesGoStraightOnRight:
+                return nil
+            case .regulatoryDualLanesTurnLeft:
+                return nil
+            case .regulatoryEndOfSchoolZone:
+                return nil
+            case .regulatoryGoStraightOrTurnLeft:
+                return nil
+            case .regulatoryGoStraightOrTurnRight:
+                return nil
+            case .regulatoryLeftTurnYieldOnGreen:
+                return nil
+            case .regulatoryNoLeftOrUTurn:
+                return nil
+            case .regulatoryNoStopping:
+                return nil
+            case .regulatoryNoStraightThrough:
+                return nil
+            case .regulatoryReversibleLanes:
+                return nil
+            case .regulatoryTrafficSignalPhotoEnforced:
+                return nil
+            case .regulatoryTripleLanesGoStraightCenterLane:
+                return nil
+            case .warningHeightRestriction:
+                return nil
+            case .warningStopAhead:
+                return nil
+            case .warningYieldAhead:
+                return nil
+            case .informationHighway:
+                return nil
+            case .regulatoryDoNotBlockIntersection:
+                return nil
+            case .regulatoryKeepRightPicture:
+                return nil
+            case .regulatoryKeepRightText:
+                return nil
+            case .regulatoryNoLeftTurnText:
+                return nil
+            case .regulatoryOneWayLeftArrowText:
+                return nil
+            case .regulatoryOneWayLeftText:
+                return nil
+            case .regulatoryOneWayRightArrowText:
+                return nil
+            case .regulatoryOneWayRightText:
+                return nil
+            case .regulatoryTurnLeftAhead:
+                return nil
+            case .regulatoryTurnRightAhead:
+                return nil
+            case .warningHairpinCurveRight:
+                return nil
+            case .complementaryOneDirectionLeft:
+                return nil
+            case .complementaryOneDirectionRight:
+                return nil
+            case .warningHorizontalAlignmentLeft:
+                return nil
+            case .warningHorizontalAlignmentRight:
+                return nil
+            case .whiteTablesText:
+                return nil
+            case .lanes:
+                return nil
+            case .greenPlates:
+                return nil
+            case .warningText:
+                return nil
+            case .warningCrossroads:
+                return nil
+            case .warningPicture:
+                return nil
+            case .regulatoryExceptBicycle:
+                return nil
+            case .warningAddedLaneRight:
+                return nil
+            case .warningDipText:
+                return nil
+            case .warningEmergencyVehicles:
+                return nil
+            case .warningEndText:
+                return nil
+            case .warningObstructionMarker:
+                return nil
+            case .warningPlayground:
+                return nil
+            case .warningSecondRoadRight:
+                return nil
+            case .warningTurnLeftOnlyArrow:
+                return nil
+            case .warningTurnLeftOrRightOnlyArrow:
+                return nil
+            case .regulatoryParkingRestrictions:
+                return nil
+            case .regulatoryYieldOrStopForPedestrians:
+                return nil
+            case .regulatoryNoTurnLeftOrTurnRight:
+                return nil
+            case .regulatoryNoHonking:
+                return nil
+            case .regulatoryNoVehiclesCarryingExplosives:
+                return nil
+            case .regulatoryHonking:
+                return nil
+            case .regulatoryUTurn:
+                return nil
+            case .regulatoryNoSmallPassengerCar:
+                return nil
+            case .warningVillage:
+                return nil
+            case .warningKeepSlowdown:
+                return nil
+            case .warningSecondRoadLeft:
+                return nil
+            case .regulatoryNoTurnOnRedText:
+                return nil
+            case .warningAddedLaneLeft:
+                return nil
+            case .warningFlaggersInRoad:
+                return nil
+            case .warningLoop270Degree:
+                return nil
+            case .regulatoryEndNoOvertaking:
+                return nil
+            case .regulatoryNoHumanCargoTricycleEntry:
+                return nil
+            case .regulatoryNoHumanPassengerTricycleEntry:
+                return nil
+            case .regulatoryNoRickshaws:
+                return nil
+            case .regulatoryNoStraightThroughOrTurnLeft:
+                return nil
+            case .regulatoryNoStraightThroughOrTurnRight:
+                return nil
+            case .regulatoryNoTractors:
+                return nil
+            case .regulatoryNoTricycles:
+                return nil
+            case .regulatoryUTurnOrTurnLeft:
+                return nil
+            case .warningDangerousMountainRoadLeft:
+                return nil
+            case .warningDangerousMountainRoadRight:
+                return nil
+            case .warningHazardLane:
+                return nil
+            case .warningReverseCurveLeft:
+                return nil
+            case .warningReverseCurveRight:
+                return nil
+            case .warningTunnel:
+                return nil
+            case .warningWaterPavement:
+                return nil
+            case .regulatoryEquestriansOnly:
+                return nil
+            case .regulatoryGasStation:
+                return nil
             }
         case .unknown:
             return nil
