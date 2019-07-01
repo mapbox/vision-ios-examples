@@ -31,6 +31,7 @@
 		2EF52A18215152F600F23CCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A16215152F600F23CCF /* Crashlytics.framework */; };
 		2EF52A19215152F600F23CCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A17215152F600F23CCF /* Fabric.framework */; };
 		5A3E42CD22B3D2C80035A010 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E42CC22B3D2C80035A010 /* GlobalConstants.swift */; };
+		5AFC926222C22EEF00A17776 /* ARRoute+DirectionsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFC926122C22EEF00A17776 /* ARRoute+DirectionsRoute.swift */; };
 		9D72A44113D27519A4189D85 /* overspeed_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9D72A05DDD42EEC518F18D23 /* overspeed_warning.wav */; };
 		B5045859217A077300BA5133 /* CollisionObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5045858217A077300BA5133 /* CollisionObjectView.swift */; };
 		B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787D520F0B46A007D1EA7 /* AppDelegate.swift */; };
@@ -111,6 +112,7 @@
 		2EF52A16215152F600F23CCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		2EF52A17215152F600F23CCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
 		5A3E42CC22B3D2C80035A010 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		5AFC926122C22EEF00A17776 /* ARRoute+DirectionsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARRoute+DirectionsRoute.swift"; sourceTree = "<group>"; };
 		9D72A05DDD42EEC518F18D23 /* overspeed_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = overspeed_warning.wav; sourceTree = "<group>"; };
 		B5045858217A077300BA5133 /* CollisionObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionObjectView.swift; sourceTree = "<group>"; };
 		B52787D220F0B46A007D1EA7 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +286,7 @@
 				2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */,
 				2EA4E18622319091007690AC /* DelegateProxy.swift */,
 				5A3E42CC22B3D2C80035A010 /* GlobalConstants.swift */,
+				5AFC926122C22EEF00A17776 /* ARRoute+DirectionsRoute.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				2E6033652142982D0050EDB3 /* Images.swift in Sources */,
 				B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */,
 				5A3E42CD22B3D2C80035A010 /* GlobalConstants.swift in Sources */,
+				5AFC926222C22EEF00A17776 /* ARRoute+DirectionsRoute.swift in Sources */,
 				B532EE052170A9AB00B172FA /* ARContainerViewController.swift in Sources */,
 				2E4FEE08215E647400DCB496 /* Strings.swift in Sources */,
 				B5314422218C7DA7001B6DEB /* SafetyState.swift in Sources */,
