@@ -1,11 +1,10 @@
 import Foundation
-import UIKit
 import MapboxVision
+import UIKit
 
 final class DistanceView: UIView {
-    
     private static let height: CGFloat = 15
-    
+
     func update(_ left: CGPoint, _ right: CGPoint) {
         frame = CGRect(x: left.x, y: left.y, width: right.x - left.x + DistanceView.height, height: DistanceView.height)
         setNeedsDisplay()

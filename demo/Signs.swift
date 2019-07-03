@@ -1,3 +1,5 @@
+// swiftlint:disable cyclomatic_complexity file_length
+
 import Foundation
 import MapboxVision
 
@@ -7,7 +9,8 @@ extension Sign {
         assert(asset != nil || country == .unknown, "Icon for \(self) with over: \(over) for country: \(country.rawValue) is not found")
         return asset
     }
-    
+
+    // swiftlint:disable:next function_body_length
     private func getIcon(_ over: Bool, _ country: Country) -> ImageAsset? {
         switch country {
         case .USA:

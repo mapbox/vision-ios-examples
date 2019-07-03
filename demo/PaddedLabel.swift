@@ -3,25 +3,25 @@ import UIKit
 
 final class PaddedLabel: UILabel {
     private let insets: UIEdgeInsets
-    
+
     init(insets: UIEdgeInsets) {
         self.insets = insets
         super.init(frame: .zero)
     }
-    
-    convenience override init(frame: CGRect) {
+
+    override convenience init(frame: CGRect) {
         self.init(insets: .zero)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func drawText(in rect: CGRect) {
         let textRect = rect.inset(by: insets)
         super.drawText(in: textRect)
     }
-    
+
     override var intrinsicContentSize: CGSize {
         var contentSize = super.intrinsicContentSize
         contentSize.width += insets.left + insets.right
@@ -32,7 +32,7 @@ final class PaddedLabel: UILabel {
 
 extension PaddedLabel {
     private static let insets = UIEdgeInsets(top: 5, left: 10, bottom: 4, right: 10)
-    
+
     static func createDarkRounded() -> PaddedLabel {
         let label = PaddedLabel(insets: insets)
         label.translatesAutoresizingMaskIntoConstraints = false
