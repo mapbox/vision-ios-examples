@@ -1,7 +1,7 @@
-// swiftlint:disable cyclomatic_complexity file_length
-
 import Foundation
 import MapboxVision
+
+// swiftlint:disable cyclomatic_complexity file_length
 
 extension Sign {
     func icon(over: Bool, country: Country) -> ImageAsset? {
