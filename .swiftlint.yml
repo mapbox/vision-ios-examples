@@ -110,7 +110,6 @@ whitelist_rules:
  - vertical_whitespace_closing_braces # Don't include vertical whitespace (empty line) before closing braces.
  - vertical_whitespace_opening_braces # Don't include vertical whitespace (empty line) after opening braces.
  - void_return # Prefer -> Void over -> ().
- - weak_computed_property # Adding weak to a computed property has no effect.
  - xct_specific_matcher # Prefer specific XCTest matchers over XCTAssertEqual and XCTAssertNotEqual
  - xctfail_message # An XCTFail call should include a description of the assertion.
  
