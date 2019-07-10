@@ -7,6 +7,7 @@
 - Added support for UK(EU) signs
 - Changed welcome message and links to Terms of Service and Privacy Policy
 - Added MapboxNavigation and MapboxDirections dependencies
+- Updated assets for Chinese signs
 
 ## 1.0-21
 

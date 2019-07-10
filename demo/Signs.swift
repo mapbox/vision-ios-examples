@@ -710,50 +710,50 @@ extension Sign {
                 switch number {
                 case 5:
                     return Asset.Signs.massCN5
-                case 15:
-                    return Asset.Signs.massCN15
-                case 25:
-                    return Asset.Signs.massCN25
-                case 35:
-                    return Asset.Signs.massCN35
-                case 45:
-                    return Asset.Signs.massCN45
-                case 55:
-                    return Asset.Signs.massCN55
-                case 65:
-                    return Asset.Signs.massCN65
-                case 75:
-                    return Asset.Signs.massCN75
-                case 85:
-                    return Asset.Signs.massCN85
-                case 95:
-                    return Asset.Signs.massCN95
-                case 105:
-                    return Asset.Signs.massCN105
-                case 115:
-                    return Asset.Signs.massCN115
                 case 10:
                     return Asset.Signs.massCN10
+                case 15:
+                    return Asset.Signs.massCN15
                 case 20:
                     return Asset.Signs.massCN20
+                case 25:
+                    return Asset.Signs.massCN25
                 case 30:
                     return Asset.Signs.massCN30
+                case 35:
+                    return Asset.Signs.massCN35
                 case 40:
                     return Asset.Signs.massCN40
+                case 45:
+                    return Asset.Signs.massCN45
                 case 50:
                     return Asset.Signs.massCN50
+                case 55:
+                    return Asset.Signs.massCN55
                 case 60:
                     return Asset.Signs.massCN60
+                case 65:
+                    return Asset.Signs.massCN65
                 case 70:
                     return Asset.Signs.massCN70
+                case 75:
+                    return Asset.Signs.massCN75
                 case 80:
                     return Asset.Signs.massCN80
+                case 85:
+                    return Asset.Signs.massCN85
                 case 90:
                     return Asset.Signs.massCN90
+                case 95:
+                    return Asset.Signs.massCN95
                 case 100:
                     return Asset.Signs.massCN100
+                case 105:
+                    return Asset.Signs.massCN105
                 case 110:
                     return Asset.Signs.massCN110
+                case 115:
+                    return Asset.Signs.massCN115
                 case 120:
                     return Asset.Signs.massCN120
                 default: return nil
@@ -762,50 +762,50 @@ extension Sign {
                 switch number {
                 case 5:
                     return over ? Asset.Signs.speedLimitCN5Over : Asset.Signs.speedLimitCN5
-                case 15:
-                    return over ? Asset.Signs.speedLimitCN15Over : Asset.Signs.speedLimitCN15
-                case 25:
-                    return over ? Asset.Signs.speedLimitCN25Over : Asset.Signs.speedLimitCN25
-                case 35:
-                    return over ? Asset.Signs.speedLimitCN35Over : Asset.Signs.speedLimitCN35
-                case 45:
-                    return over ? Asset.Signs.speedLimitCN45Over : Asset.Signs.speedLimitCN45
-                case 55:
-                    return over ? Asset.Signs.speedLimitCN55Over : Asset.Signs.speedLimitCN55
-                case 65:
-                    return over ? Asset.Signs.speedLimitCN65Over : Asset.Signs.speedLimitCN65
-                case 75:
-                    return over ? Asset.Signs.speedLimitCN75Over : Asset.Signs.speedLimitCN75
-                case 85:
-                    return over ? Asset.Signs.speedLimitCN85Over : Asset.Signs.speedLimitCN85
-                case 95:
-                    return over ? Asset.Signs.speedLimitCN95Over : Asset.Signs.speedLimitCN95
-                case 105:
-                    return over ? Asset.Signs.speedLimitCN105Over : Asset.Signs.speedLimitCN105
-                case 115:
-                    return over ? Asset.Signs.speedLimitCN115Over : Asset.Signs.speedLimitCN115
                 case 10:
                     return over ? Asset.Signs.speedLimitCN10Over : Asset.Signs.speedLimitCN10
+                case 15:
+                    return over ? Asset.Signs.speedLimitCN15Over : Asset.Signs.speedLimitCN15
                 case 20:
                     return over ? Asset.Signs.speedLimitCN20Over : Asset.Signs.speedLimitCN20
+                case 25:
+                    return over ? Asset.Signs.speedLimitCN25Over : Asset.Signs.speedLimitCN25
                 case 30:
                     return over ? Asset.Signs.speedLimitCN30Over : Asset.Signs.speedLimitCN30
+                case 35:
+                    return over ? Asset.Signs.speedLimitCN35Over : Asset.Signs.speedLimitCN35
                 case 40:
                     return over ? Asset.Signs.speedLimitCN40Over : Asset.Signs.speedLimitCN40
+                case 45:
+                    return over ? Asset.Signs.speedLimitCN45Over : Asset.Signs.speedLimitCN45
                 case 50:
                     return over ? Asset.Signs.speedLimitCN50Over : Asset.Signs.speedLimitCN50
+                case 55:
+                    return over ? Asset.Signs.speedLimitCN55Over : Asset.Signs.speedLimitCN55
                 case 60:
                     return over ? Asset.Signs.speedLimitCN60Over : Asset.Signs.speedLimitCN60
+                case 65:
+                    return over ? Asset.Signs.speedLimitCN65Over : Asset.Signs.speedLimitCN65
                 case 70:
                     return over ? Asset.Signs.speedLimitCN70Over : Asset.Signs.speedLimitCN70
+                case 75:
+                    return over ? Asset.Signs.speedLimitCN75Over : Asset.Signs.speedLimitCN75
                 case 80:
                     return over ? Asset.Signs.speedLimitCN80Over : Asset.Signs.speedLimitCN80
+                case 85:
+                    return over ? Asset.Signs.speedLimitCN85Over : Asset.Signs.speedLimitCN85
                 case 90:
                     return over ? Asset.Signs.speedLimitCN90Over : Asset.Signs.speedLimitCN90
+                case 95:
+                    return over ? Asset.Signs.speedLimitCN95Over : Asset.Signs.speedLimitCN95
                 case 100:
                     return over ? Asset.Signs.speedLimitCN100Over : Asset.Signs.speedLimitCN100
+                case 105:
+                    return over ? Asset.Signs.speedLimitCN105Over : Asset.Signs.speedLimitCN105
                 case 110:
                     return over ? Asset.Signs.speedLimitCN110Over : Asset.Signs.speedLimitCN110
+                case 115:
+                    return over ? Asset.Signs.speedLimitCN115Over : Asset.Signs.speedLimitCN115
                 case 120:
                     return over ? Asset.Signs.speedLimitCN120Over : Asset.Signs.speedLimitCN120
                 default: return nil
@@ -814,50 +814,50 @@ extension Sign {
                 switch number {
                 case 5:
                     return Asset.Signs.speedLimitEndCN5
-                case 15:
-                    return Asset.Signs.speedLimitEndCN15
-                case 25:
-                    return Asset.Signs.speedLimitEndCN25
-                case 35:
-                    return Asset.Signs.speedLimitEndCN35
-                case 45:
-                    return Asset.Signs.speedLimitEndCN45
-                case 55:
-                    return Asset.Signs.speedLimitEndCN55
-                case 65:
-                    return Asset.Signs.speedLimitEndCN65
-                case 75:
-                    return Asset.Signs.speedLimitEndCN75
-                case 85:
-                    return Asset.Signs.speedLimitEndCN85
-                case 95:
-                    return Asset.Signs.speedLimitEndCN95
-                case 105:
-                    return Asset.Signs.speedLimitEndCN105
-                case 115:
-                    return Asset.Signs.speedLimitEndCN115
                 case 10:
                     return Asset.Signs.speedLimitEndCN10
+                case 15:
+                    return Asset.Signs.speedLimitEndCN15
                 case 20:
                     return Asset.Signs.speedLimitEndCN20
+                case 25:
+                    return Asset.Signs.speedLimitEndCN25
                 case 30:
                     return Asset.Signs.speedLimitEndCN30
+                case 35:
+                    return Asset.Signs.speedLimitEndCN35
                 case 40:
                     return Asset.Signs.speedLimitEndCN40
+                case 45:
+                    return Asset.Signs.speedLimitEndCN45
                 case 50:
                     return Asset.Signs.speedLimitEndCN50
+                case 55:
+                    return Asset.Signs.speedLimitEndCN55
                 case 60:
                     return Asset.Signs.speedLimitEndCN60
+                case 65:
+                    return Asset.Signs.speedLimitEndCN65
                 case 70:
                     return Asset.Signs.speedLimitEndCN70
+                case 75:
+                    return Asset.Signs.speedLimitEndCN75
                 case 80:
                     return Asset.Signs.speedLimitEndCN80
+                case 85:
+                    return Asset.Signs.speedLimitEndCN85
                 case 90:
                     return Asset.Signs.speedLimitEndCN90
+                case 95:
+                    return Asset.Signs.speedLimitEndCN95
                 case 100:
                     return Asset.Signs.speedLimitEndCN100
+                case 105:
+                    return Asset.Signs.speedLimitEndCN105
                 case 110:
                     return Asset.Signs.speedLimitEndCN110
+                case 115:
+                    return Asset.Signs.speedLimitEndCN115
                 case 120:
                     return Asset.Signs.speedLimitEndCN120
                 default: return nil
@@ -921,61 +921,61 @@ extension Sign {
             case .speedLimitRamp:
                 return nil
             case .warningTurnLeft:
-                return Asset.Signs.warningTurnLeftUS
+                return nil
             case .warningTurnRight:
-                return Asset.Signs.warningTurnRightUS
+                return nil
             case .warningHairpinCurveLeft:
-                return Asset.Signs.warningHairpinCurveLeftUS
+                return nil
             case .warningRoundabout:
-                return Asset.Signs.warningRoundaboutUS
+                return Asset.Signs.warningRoundaboutCN
             case .warningSpeedBump:
-                return Asset.Signs.warningSpeedBumpUS
+                return nil
             case .warningWindingRoad:
                 return Asset.Signs.warningWindingRoadCN
             case .informationBikeRoute:
-                return Asset.Signs.informationBikeRouteUS
+                return nil
             case .informationParking:
-                return Asset.Signs.informationParkingUS
+                return Asset.Signs.informationParkingCN
             case .regulatoryAllDirectionsPermitted:
-                return Asset.Signs.regulatoryAllDirectionsPermittedUS
+                return nil
             case .regulatoryBicyclesOnly:
-                return Asset.Signs.regulatoryBicyclesOnlyUS
+                return Asset.Signs.regulatoryBicyclesOnlyCN
             case .regulatoryDoNotPass:
-                return Asset.Signs.regulatoryDoNotPassUS
+                return nil
             case .regulatoryDoNotDriveOnShoulder:
-                return Asset.Signs.regulatoryDoNotDriveOnShoulderUS
+                return nil
             case .regulatoryDualLanesAllDirectionsOnRight:
-                return Asset.Signs.regulatoryDualLanesAllDirectionsOnRightUS
+                return nil
             case .regulatoryDualLanesGoLeftOrRight:
-                return Asset.Signs.regulatoryDualLanesGoLeftOrRightUS
+                return nil
             case .regulatoryDualLanesGoStraightOnLeft:
-                return Asset.Signs.regulatoryDualLanesGoStraightOnLeftUS
+                return nil
             case .regulatoryDualLanesGoStraightOnRight:
-                return Asset.Signs.regulatoryDualLanesGoStraightOnRightUS
+                return nil
             case .regulatoryDualLanesTurnLeft:
-                return Asset.Signs.regulatoryDualLanesTurnLeftUS
+                return nil
             case .regulatoryDualLanesTurnLeftOrStraight:
-                return Asset.Signs.regulatoryDualLanesTurnLeftOrStraightUS
+                return Asset.Signs.regulatoryDualLanesTurnLeftOrStraightCN
             case .regulatoryDualLanesTurnRightOrStraight:
-                return Asset.Signs.regulatoryDualLanesTurnRightOrStraightUS
+                return Asset.Signs.regulatoryDualLanesTurnRightOrStraightCN
             case .regulatoryEndOfSchoolZone:
-                return Asset.Signs.regulatoryEndOfSchoolZoneUS
+                return nil
             case .regulatoryGoStraight:
                 return Asset.Signs.regulatoryGoStraightCN
             case .regulatoryGoStraightOrTurnLeft:
-                return Asset.Signs.regulatoryGoStraightOrTurnLeftUS
+                return nil
             case .regulatoryGoStraightOrTurnRight:
-                return Asset.Signs.regulatoryGoStraightOrTurnRightUS
+                return nil
             case .regulatoryHeightLimit:
                 return Asset.Signs.regulatoryHeightLimitCN
             case .regulatoryLeftTurnYieldOnGreen:
-                return Asset.Signs.regulatoryLeftTurnYieldOnGreenUS
+                return nil
             case .regulatoryNoBicycles:
-                return Asset.Signs.regulatoryNoBicyclesUS
+                return Asset.Signs.regulatoryNoBicyclesCN
             case .regulatoryNoEntry:
                 return Asset.Signs.regulatoryNoEntryCN
             case .regulatoryNoLeftOrUTurn:
-                return Asset.Signs.regulatoryNoLeftOrUTurnUS
+                return nil
             case .regulatoryNoLeftTurn:
                 return Asset.Signs.regulatoryNoLeftTurnCN
             case .regulatoryNoMotorVehicles:
@@ -983,35 +983,35 @@ extension Sign {
             case .regulatoryNoParking:
                 return Asset.Signs.regulatoryNoParkingCN
             case .regulatoryNoParkingOrNoStopping:
-                return Asset.Signs.regulatoryNoParkingOrNoStoppingUS
+                return Asset.Signs.regulatoryNoParkingOrNoStoppingCN
             case .regulatoryNoPedestrians:
                 return Asset.Signs.regulatoryNoPedestriansCN
             case .regulatoryNoRightTurn:
                 return Asset.Signs.regulatoryNoRightTurnCN
             case .regulatoryNoStopping:
-                return Asset.Signs.regulatoryNoStoppingUS
+                return nil
             case .regulatoryNoStraightThrough:
                 return Asset.Signs.regulatoryNoStraightThroughCN
             case .regulatoryNoUTurn:
                 return Asset.Signs.regulatoryNoUTurnCN
             case .regulatoryOneWayStraight:
-                return Asset.Signs.regulatoryOneWayStraightUS
+                return nil
             case .regulatoryReversibleLanes:
-                return Asset.Signs.regulatoryReversibleLanesUS
+                return nil
             case .regulatoryRoadClosedToVehicles:
                 return Asset.Signs.regulatoryRoadClosedToVehiclesCN
             case .regulatoryStop:
                 return Asset.Signs.regulatoryStopCN
             case .regulatoryTrafficSignalPhotoEnforced:
-                return Asset.Signs.regulatoryTrafficSignalPhotoEnforcedUS
+                return nil
             case .regulatoryTripleLanesGoStraightCenterLane:
-                return Asset.Signs.regulatoryTripleLanesGoStraightCenterLaneUS
+                return nil
             case .warningBicyclesCrossing:
-                return Asset.Signs.warningBicyclesCrossingUS
+                return nil
             case .warningHeightRestriction:
-                return Asset.Signs.warningHeightRestrictionUS
+                return nil
             case .warningPassLeftOrRight:
-                return Asset.Signs.warningPassLeftOrRightUS
+                return nil
             case .warningPedestriansCrossing:
                 return Asset.Signs.warningPedestriansCrossingCN
             case .warningRoadNarrowsLeft:
@@ -1021,119 +1021,121 @@ extension Sign {
             case .warningSchoolZone:
                 return Asset.Signs.warningSchoolZoneCN
             case .warningStopAhead:
-                return Asset.Signs.warningStopAheadUS
+                return nil
             case .warningTrafficSignals:
-                return Asset.Signs.warningTrafficSignalsUS
+                return Asset.Signs.warningTrafficSignalsCN
             case .warningTwoWayTraffic:
-                return Asset.Signs.warningTwoWayTrafficUS
+                return Asset.Signs.warningTwoWayTrafficCN
             case .warningYieldAhead:
-                return Asset.Signs.warningYieldAheadUS
+                return nil
             case .informationHighway:
-                return Asset.Signs.informationHighwayUS
+                return nil
             case .regulatoryDoNotBlockIntersection:
-                return Asset.Signs.regulatoryDoNotBlockIntersectionUS
+                return nil
             case .regulatoryKeepRightPicture:
-                return Asset.Signs.regulatoryKeepRightPictureUS
+                return nil
             case .regulatoryKeepRightText:
-                return Asset.Signs.regulatoryKeepRightTextUS
+                return nil
             case .regulatoryNoHeavyGoodsVehiclesPicture:
                 return Asset.Signs.regulatoryNoHeavyGoodsVehiclesPictureCN
             case .regulatoryNoLeftTurnText:
-                return Asset.Signs.regulatoryNoLeftTurnTextUS
+                return nil
             case .regulatoryOneWayLeftArrow:
-                return Asset.Signs.regulatoryOneWayLeftArrowUS
+                return Asset.Signs.regulatoryOneWayLeftArrowCN
             case .regulatoryOneWayLeftArrowText:
-                return Asset.Signs.regulatoryOneWayLeftArrowTextUS
+                return nil
             case .regulatoryOneWayLeftText:
-                return Asset.Signs.regulatoryOneWayLeftTextUS
+                return nil
             case .regulatoryOneWayRightArrow:
-                return Asset.Signs.regulatoryOneWayRightArrowUS
+                return Asset.Signs.regulatoryOneWayRightArrowCN
             case .regulatoryOneWayRightArrowText:
-                return Asset.Signs.regulatoryOneWayRightArrowTextUS
+                return nil
             case .regulatoryOneWayRightText:
-                return Asset.Signs.regulatoryOneWayRightTextUS
+                return nil
             case .regulatoryTurnLeftAhead:
-                return Asset.Signs.regulatoryTurnLeftAheadUS
+                return nil
             case .regulatoryTurnLeft:
                 return Asset.Signs.regulatoryTurnLeftCN
             case .regulatoryTurnLeftOrRight:
-                return Asset.Signs.regulatoryTurnLeftOrTurnRightCN
+                return Asset.Signs.regulatoryTurnLeftOrRightCN
             case .regulatoryTurnRightAhead:
-                return Asset.Signs.regulatoryTurnRightAheadUS
+                return nil
             case .regulatoryYield:
                 return Asset.Signs.regulatoryYieldCN
             case .warningRailwayCrossing:
-                return Asset.Signs.warningRailwayCrossingUS
+                return Asset.Signs.warningRailwayCrossingCN
             case .warningHairpinCurveRight:
-                return Asset.Signs.warningHairpinCurveRightUS
+                return nil
             case .complementaryOneDirectionLeft:
-                return Asset.Signs.complementaryOneDirectionLeftUS
+                return nil
             case .complementaryOneDirectionRight:
-                return Asset.Signs.complementaryOneDirectionRightUS
+                return nil
             case .warningCurveLeft:
                 return Asset.Signs.warningCurveLeftCN
             case .warningCurveRight:
                 return Asset.Signs.warningCurveRightCN
             case .warningHorizontalAlignmentLeft:
-                return Asset.Signs.warningHorizontalAlignmentLeftUS
+                return nil
             case .warningHorizontalAlignmentRight:
-                return Asset.Signs.warningHorizontalAlignmentRightUS
+                return nil
             case .regulatoryTurnRight:
                 return Asset.Signs.regulatoryTurnRightCN
             case .whiteTablesText:
-                return Asset.Signs.whiteTablesTextUS
+                return nil
             case .lanes:
-                return Asset.Signs.lanesUS
+                return nil
             case .greenPlates:
-                return Asset.Signs.greenPlatesUS
+                return nil
             case .warningText:
-                return Asset.Signs.warningTextUS
+                return nil
             case .warningCrossroads:
-                return Asset.Signs.warningCrossroadsUS
+                return nil
             case .warningPicture:
-                return Asset.Signs.warningPictureUS
+                return nil
             case .complementaryKeepLeft:
-                return Asset.Signs.complementaryKeepLeftUS
+                return Asset.Signs.complementaryKeepLeftCN
             case .complementaryKeepRight:
                 return Asset.Signs.complementaryKeepRightCN
             case .regulatoryExceptBicycle:
-                return Asset.Signs.regulatoryExceptBicycleUS
+                return nil
             case .warningAddedLaneRight:
-                return Asset.Signs.warningAddedLaneRightUS
+                return nil
             case .warningDeadEndText:
-                return Asset.Signs.warningDeadEndTextUS
+                return nil
             case .warningDipText:
-                return Asset.Signs.warningDipTextUS
+                return nil
             case .warningEmergencyVehicles:
-                return Asset.Signs.warningEmergencyVehiclesUS
+                return nil
             case .warningEndText:
-                return Asset.Signs.warningEndTextUS
+                return nil
             case .warningFallingRocksOrDebrisRight:
-                return Asset.Signs.warningFallingRocksOrDebrisRightUS
+                return Asset.Signs.warningFallingRocksOrDebrisRightCN
             case .warningLowGroundClearance:
-                return Asset.Signs.warningLowGroundClearanceUS
+                return nil
             case .warningObstructionMarker:
-                return Asset.Signs.warningObstructionMarkerUS
+                return nil
             case .warningPlayground:
-                return Asset.Signs.warningPlaygroundUS
+                return nil
             case .warningSecondRoadRight:
                 return Asset.Signs.warningSecondRoadRightCN
             case .warningTurnLeftOnlyArrow:
-                return Asset.Signs.warningTurnLeftOnlyArrowUS
+                return nil
             case .warningTurnLeftOrRightOnlyArrow:
-                return Asset.Signs.warningTurnLeftOrRightOnlyArrowUS
+                return nil
             case .warningTramsCrossing:
-                return Asset.Signs.warningTramsCrossingUS
+                return nil
             case .warningUnevenRoad:
-                return Asset.Signs.warningUnevenRoadUS
+                return Asset.Signs.warningUnevenRoadCN
             case .warningWildAnimals:
-                return Asset.Signs.warningWildAnimalsUS
+                return nil
             case .regulatoryParkingRestrictions:
-                return Asset.Signs.regulatoryParkingRestrictionsUS
+                return nil
             case .regulatoryYieldOrStopForPedestrians:
-                return Asset.Signs.regulatoryYieldOrStopForPedestriansUS
+                return nil
             case .regulatoryNoBuses:
                 return Asset.Signs.regulatoryNoBusesCN
+            case .regulatoryNoSmallPassengerCar:
+                return nil
             case .regulatoryNoMotorcyclesOrMopeds:
                 return Asset.Signs.regulatoryNoMotorcyclesOrMopedsCN
             case .regulatoryNoTurnLeftOrTurnRight:
@@ -1158,8 +1160,6 @@ extension Sign {
                 return Asset.Signs.regulatoryMotorVehiclesCN
             case .regulatoryUTurn:
                 return Asset.Signs.regulatoryUTurnCN
-            case .regulatoryNoSmallPassengerCar:
-                return Asset.Signs.regulatoryNoSmallPassengerCarCN
             case .warningSteepAscent:
                 return Asset.Signs.warningSteepAscentCN
             case .warningSteepDescent:
@@ -1183,55 +1183,55 @@ extension Sign {
             case .warningLoop270Degree:
                 return nil
             case .warningRoadNarrows:
-                return nil
+                return Asset.Signs.warningRoadNarrowsCN
             case .warningSlipperyRoadSurface:
-                return nil
+                return Asset.Signs.warningSlipperyRoadSurfaceCN
             case .regulatoryBusLane:
-                return nil
+                return Asset.Signs.regulatoryBusLaneCN
             case .regulatoryEndNoOvertaking:
-                return nil
+                return Asset.Signs.regulatoryEndNoOvertakingCN
             case .regulatoryNoHumanCargoTricycleEntry:
-                return nil
+                return Asset.Signs.regulatoryNoHumanCargoTricycleEntryCN
             case .regulatoryNoHumanPassengerTricycleEntry:
-                return nil
+                return Asset.Signs.regulatoryNoHumanPassengerTricycleEntryCN
             case .regulatoryNoRickshaws:
-                return nil
+                return Asset.Signs.regulatoryNoRickshawsCN
             case .regulatoryNoStraightThroughOrTurnLeft:
-                return nil
+                return Asset.Signs.regulatoryNoStraightThroughOrTurnLeftCN
             case .regulatoryNoStraightThroughOrTurnRight:
-                return nil
+                return Asset.Signs.regulatoryNoStraightThroughOrTurnRightCN
             case .regulatoryNoTractors:
-                return nil
+                return Asset.Signs.regulatoryNoTractorsCN
             case .regulatoryNoTricycles:
-                return nil
+                return Asset.Signs.regulatoryNoTricyclesCN
             case .regulatoryUTurnOrTurnLeft:
-                return nil
+                return Asset.Signs.regulatoryUTurnOrTurnLeftCN
             case .regulatoryWalk:
-                return nil
+                return Asset.Signs.regulatoryWalkCN
             case .warningDangerousMountainRoadLeft:
-                return nil
+                return Asset.Signs.warningDangerousMountainRoadLeftCN
             case .warningDangerousMountainRoadRight:
-                return nil
+                return Asset.Signs.warningDangerousMountainRoadRightCN
             case .warningDomesticAnimals:
-                return nil
+                return Asset.Signs.warningDomesticAnimalsCN
             case .warningFallingRocksOrDebrisLeft:
-                return nil
+                return Asset.Signs.warningFallingRocksOrDebrisLeftCN
             case .warningHazardLane:
                 return nil
             case .warningRailroadCrossingWithoutBarriers:
-                return nil
+                return Asset.Signs.warningRailroadCrossingWithoutBarriersCN
             case .warningReverseCurveLeft:
-                return nil
+                return Asset.Signs.warningReverseCurveLeftCN
             case .warningReverseCurveRight:
-                return nil
+                return Asset.Signs.warningReverseCurveRightCN
             case .warningSoftShoulderLeft:
-                return nil
+                return Asset.Signs.warningSoftShoulderLeftCN
             case .warningSoftShoulderRight:
-                return nil
+                return Asset.Signs.warningSoftShoulderRightCN
             case .warningTunnel:
-                return nil
+                return Asset.Signs.warningTunnelCN
             case .warningWaterPavement:
-                return nil
+                return Asset.Signs.warningWaterPavementCN
             case .speedLimitAdvMax:
                 return nil
             case .speedLimitEndAdv:
