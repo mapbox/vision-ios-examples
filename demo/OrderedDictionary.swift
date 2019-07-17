@@ -1,6 +1,6 @@
-// swiftformat:disable blankLinesAroundMark
-
 import Foundation
+
+// swiftformat:disable blankLinesAroundMark
 
 /// A generic collection for storing key-value pairs in an ordered manner.
 ///
