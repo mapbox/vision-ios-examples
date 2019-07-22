@@ -1,7 +1,7 @@
 # Changelog
 
 
-## Unreleased
+## 1.0-22
 
 - Changed handling of `NavigationService` with its rerouting, etc. events, it's moved out of `MapboxVisionAR` module, now it is in `ARContainerViewController`
 - Added support for UK(EU) signs
