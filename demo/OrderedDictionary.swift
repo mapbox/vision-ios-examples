@@ -1,37 +1,38 @@
 import Foundation
 
+// swiftformat:disable blankLinesAroundMark
+
 /// A generic collection for storing key-value pairs in an ordered manner.
 ///
 /// Same as in a dictionary all keys in the collection are unique and have an associated value.
 /// Same as in an array, all key-value pairs (elements) are kept sorted and accessible by
 /// a zero-based integer index.
 struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
-    
     // ======================================================= //
     // MARK: - Type Aliases
     // ======================================================= //
-    
+
     /// The type of the key-value pair stored in the ordered dictionary.
     typealias Element = (key: Key, value: Value)
-    
+
     /// The type of the index.
     typealias Index = Int
-    
+
     /// The type of the indices collection.
     typealias Indices = CountableRange<Int>
-    
+
     /// The type of the contiguous subrange of the ordered dictionary's elements.
     ///
     /// - SeeAlso: OrderedDictionarySlice
     typealias SubSequence = OrderedDictionarySlice<Key, Value>
-    
+
     // ======================================================= //
     // MARK: - Initialization
     // ======================================================= //
-    
+
     /// Creates an empty ordered dictionary.
     init() {}
-    
+
     /// Creates an ordered dictionary from a sequence of values keyed by a key which gets extracted
     /// from the value in the provided closure.
     ///
@@ -41,7 +42,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     init<Values: Sequence>(values: Values, keyedBy getKey: (Value) -> Key) where Values.Element == Value {
         self.init(values.map { (getKey($0), $0) })
     }
-    
+
     /// Creates an ordered dictionary from a sequence of values keyed by a key loaded from the value
     /// at the given key path.
     ///
@@ -50,20 +51,20 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     init(values: [Value], keyedBy keyPath: KeyPath<Value, Key>) {
         self.init(values.map { ($0[keyPath: keyPath], $0) })
     }
-    
+
     /// Creates an ordered dictionary from a regular unsorted dictionary by sorting it using the
     /// the given sort function.
     ///
     /// - Parameter unsorted: The unsorted dictionary.
     /// - Parameter areInIncreasingOrder: The sort function which compares the key-value pairs.
-    init(unsorted: Dictionary<Key, Value>, areInIncreasingOrder: (Element, Element) -> Bool) {
+    init(unsorted: [Key: Value], areInIncreasingOrder: (Element, Element) -> Bool) {
         let elements = unsorted
-                .map { (key: $0.key, value: $0.value) }
-                .sorted(by: areInIncreasingOrder)
-        
+            .map { (key: $0.key, value: $0.value) }
+            .sorted(by: areInIncreasingOrder)
+
         self.init(elements)
     }
-    
+
     /// Creates an ordered dictionary from a sequence of key-value pairs.
     ///
     /// - Parameter elements: The key-value pairs that will make up the new ordered dictionary.
@@ -74,34 +75,34 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
             self[key] = value
         }
     }
-    
+
     // ======================================================= //
     // MARK: - Ordered Keys & Values
     // ======================================================= //
-    
+
     /// A collection containing just the keys of the ordered dictionary in the correct order.
     var orderedKeys: OrderedDictionaryKeys<Key, Value> {
         return self.lazy.map { $0.key }
     }
-    
+
     /// A collection containing just the values of the ordered dictionary in the correct order.
     var orderedValues: OrderedDictionaryValues<Key, Value> {
         return self.lazy.map { $0.value }
     }
-    
+
     // ======================================================= //
     // MARK: - Dictionary
     // ======================================================= //
-    
+
     /// Converts itself to a common unsorted dictionary.
-    var unorderedDictionary: Dictionary<Key, Value> {
+    var unorderedDictionary: [Key: Value] {
         return _keysToValues
     }
-    
+
     // ======================================================= //
     // MARK: - Key-based Access
     // ======================================================= //
-    
+
     /// Accesses the value associated with the given key for reading and writing.
     ///
     /// This key-based subscript returns the value for the given key if the key is found in the
@@ -130,7 +131,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
             }
         }
     }
-    
+
     /// Returns a Boolean value indicating whether the ordered dictionary contains the given key.
     ///
     /// - Parameter key: The key to be looked up.
@@ -138,7 +139,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func containsKey(_ key: Key) -> Bool {
         return _orderedKeys.contains(key)
     }
-    
+
     /// Returns the value associated with the given key if the key is found in the ordered
     /// dictionary, or `nil` if the key is not found.
     ///
@@ -148,7 +149,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func value(forKey key: Key) -> Value? {
         return _keysToValues[key]
     }
-    
+
     /// Updates the value stored in the ordered dictionary for the given key, or appends a new
     /// key-value pair if the key does not exist.
     ///
@@ -161,18 +162,18 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     mutating func updateValue(_ value: Value, forKey key: Key) -> Value? {
         if _orderedKeys.contains(key) {
             let currentValue = _unsafeValue(forKey: key)
-            
+
             _keysToValues[key] = value
-            
+
             return currentValue
         } else {
             _orderedKeys.append(key)
             _keysToValues[key] = value
-            
+
             return nil
         }
     }
-    
+
     /// Removes the given key and its associated value from the ordered dictionary.
     ///
     /// If the key is found in the ordered dictionary, this method returns the key's associated
@@ -187,15 +188,15 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     @discardableResult
     mutating func removeValue(forKey key: Key) -> Value? {
         guard let index = index(forKey: key) else { return nil }
-        
+
         let currentValue = self[index].value
-        
+
         _orderedKeys.remove(at: index)
         _keysToValues[key] = nil
-        
+
         return currentValue
     }
-    
+
     /// Removes all key-value pairs from the ordered dictionary and invalidates all indices.
     ///
     /// - Parameter keepCapacity: Whether the ordered dictionary should keep its underlying storage.
@@ -205,17 +206,17 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
         _orderedKeys.removeAll(keepingCapacity: keepCapacity)
         _keysToValues.removeAll(keepingCapacity: keepCapacity)
     }
-    
+
     private func _unsafeValue(forKey key: Key) -> Value {
         let value = _keysToValues[key]
         precondition(value != nil, "Inconsistency error occurred in OrderedDictionary")
         return value!
     }
-    
+
     // ======================================================= //
     // MARK: - Index-based Access
     // ======================================================= //
-    
+
     /// Accesses the key-value pair at the specified position.
     ///
     /// The specified position has to be a valid index of the ordered dictionary. The index-base
@@ -228,13 +229,13 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     /// - SeeAlso: update(:at:)
     subscript(position: Index) -> Element {
         precondition(indices.contains(position), "OrderedDictionary index is out of range")
-        
+
         let key = _orderedKeys[position]
         let value = _unsafeValue(forKey: key)
-        
+
         return (key, value)
     }
-    
+
     /// Returns the index for the given key.
     ///
     /// - Parameter key: The key to find in the ordered dictionary.
@@ -243,7 +244,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func index(forKey key: Key) -> Index? {
         return _orderedKeys.index(of: key)
     }
-    
+
     /// Returns the key-value pair at the specified index, or `nil` if there is no key-value pair
     /// at that index.
     ///
@@ -254,7 +255,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func elementAt(_ index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
-    
+
     /// Checks whether the given key-value pair can be inserted into to ordered dictionary by
     /// validating the presence of the key.
     ///
@@ -267,7 +268,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func canInsert(_ newElement: Element) -> Bool {
         return canInsert(key: newElement.key)
     }
-    
+
     /// Checks whether a key-value pair with the given key can be inserted into the ordered
     /// dictionary by validating its presence.
     ///
@@ -278,7 +279,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func canInsert(key: Key) -> Bool {
         return !containsKey(key)
     }
-    
+
     /// Checks whether a new key-value pair can be inserted into the ordered dictionary at the
     /// given index.
     ///
@@ -290,7 +291,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func canInsert(at index: Index) -> Bool {
         return index >= startIndex && index <= endIndex
     }
-    
+
     /// Inserts a new key-value pair at the specified position.
     ///
     /// If the key of the inserted pair already exists in the ordered dictionary, a runtime error
@@ -308,13 +309,13 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     mutating func insert(_ newElement: Element, at index: Index) {
         precondition(canInsert(key: newElement.key), "Cannot insert duplicate key in OrderedDictionary")
         precondition(canInsert(at: index), "Cannot insert at invalid index in OrderedDictionary")
-        
+
         let (key, value) = newElement
-        
+
         _orderedKeys.insert(key, at: index)
         _keysToValues[key] = value
     }
-    
+
     /// Checks whether the key-value pair at the given index can be updated with the given key-value
     /// pair. This is not the case if the key of the updated element is already present in the
     /// ordered dictionary and located at another index than the updated one.
@@ -328,7 +329,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
         var keyPresentAtIndex = false
         return _canUpdate(newElement, at: index, keyPresentAtIndex: &keyPresentAtIndex)
     }
-    
+
     /// Updates the key-value pair located at the specified position.
     ///
     /// If the key of the updated pair already exists in the ordered dictionary *and* is located at
@@ -346,30 +347,30 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
         // Store the flag indicating whether the key of the inserted element
         // is present at the updated index
         var keyPresentAtIndex = false
-        
+
         precondition(
-                _canUpdate(newElement, at: index, keyPresentAtIndex: &keyPresentAtIndex),
-                "OrderedDictionary update duplicates key"
+            _canUpdate(newElement, at: index, keyPresentAtIndex: &keyPresentAtIndex),
+            "OrderedDictionary update duplicates key"
         )
-        
+
         // Decompose the element
         let (key, value) = newElement
-        
+
         // Load the current element at the index
         let replacedElement = self[index]
-        
+
         // If its key differs, remove its associated value
-        if (!keyPresentAtIndex) {
+        if !keyPresentAtIndex {
             _keysToValues.removeValue(forKey: replacedElement.key)
         }
-        
+
         // Store the new position of the key and the new value associated with the key
         _orderedKeys[index] = key
         _keysToValues[key] = value
-        
+
         return replacedElement
     }
-    
+
     /// Removes and returns the key-value pair at the specified position if there is any key-value
     /// pair, or `nil` if there is none.
     ///
@@ -380,28 +381,28 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     @discardableResult
     mutating func remove(at index: Index) -> Element? {
         guard let element = elementAt(index) else { return nil }
-        
+
         _orderedKeys.remove(at: index)
         _keysToValues.removeValue(forKey: element.key)
-        
+
         return element
     }
-    
+
     private func _canUpdate(_ newElement: Element, at index: Index, keyPresentAtIndex: inout Bool) -> Bool {
         precondition(indices.contains(index), "OrderedDictionary index is out of range")
-        
+
         let currentIndexOfKey = self.index(forKey: newElement.key)
-        
+
         let keyNotPresent = currentIndexOfKey == nil
         keyPresentAtIndex = currentIndexOfKey == index
-        
+
         return keyNotPresent || keyPresentAtIndex
     }
-    
+
     // ======================================================= //
     // MARK: - Moving Elements
     // ======================================================= //
-    
+
     /// Moves an existing key-value pair specified by the given key to the new index by removing it
     /// from its original index first and inserting it at the new index. If the movement is
     /// actually performed, the previous index of the key-value pair is returned. Otherwise, `nil`
@@ -414,27 +415,27 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     mutating func moveElement(forKey key: Key, to newIndex: Index) -> Index? {
         // Load the previous index and return nil if the index is not found.
         guard let previousIndex = index(forKey: key) else { return nil }
-        
+
         // If the previous and new indices match, threat it as if the movement was already
         // performed.
         guard previousIndex != newIndex else { return previousIndex }
-        
+
         // Remove the value for the key at its original index.
         let value = removeValue(forKey: key)!
-        
+
         // Validate the new index.
         precondition(canInsert(at: newIndex), "Cannot move to invalid index in OrderedDictionary")
-        
+
         // Insert the element at the new index.
         insert((key: key, value: value), at: newIndex)
-        
+
         return previousIndex
     }
-    
+
     // ======================================================= //
     // MARK: - Sorting Elements
     // ======================================================= //
-    
+
     /// Sorts the ordered dictionary in place, using the given predicate as the comparison between
     /// elements.
     ///
@@ -447,7 +448,7 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     mutating func sort(by areInIncreasingOrder: (Element, Element) -> Bool) {
         _orderedKeys = _sortedElements(by: areInIncreasingOrder).map { $0.key }
     }
-    
+
     /// Returns a new ordered dictionary, sorted using the given predicate as the comparison between
     /// elements.
     ///
@@ -462,15 +463,15 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     func sorted(by areInIncreasingOrder: (Element, Element) -> Bool) -> OrderedDictionary<Key, Value> {
         return OrderedDictionary(_sortedElements(by: areInIncreasingOrder))
     }
-    
+
     private func _sortedElements(by areInIncreasingOrder: (Element, Element) -> Bool) -> [Element] {
         return sorted(by: areInIncreasingOrder)
     }
-    
+
     // ======================================================= //
     // MARK: - Slices
     // ======================================================= //
-    
+
     /// Accesses a contiguous subrange of the ordered dictionary.
     ///
     /// - Parameter bounds: A range of the ordered dictionary's indices. The bounds of the range
@@ -479,47 +480,46 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
     subscript(bounds: Range<Index>) -> SubSequence {
         return OrderedDictionarySlice(base: self, bounds: bounds)
     }
-    
+
     // ======================================================= //
     // MARK: - Indices
     // ======================================================= //
-    
+
     /// The indices that are valid for subscripting the ordered dictionary.
     var indices: Indices {
         return _orderedKeys.indices
     }
-    
+
     /// The position of the first key-value pair in a non-empty ordered dictionary.
     var startIndex: Index {
         return _orderedKeys.startIndex
     }
-    
+
     /// The position which is one greater than the position of the last valid key-value pair in the
     /// ordered dictionary.
     var endIndex: Index {
         return _orderedKeys.endIndex
     }
-    
+
     /// Returns the position immediately after the given index.
-    func index(after i: Index) -> Index {
-        return _orderedKeys.index(after: i)
+    func index(after index: Index) -> Index {
+        return _orderedKeys.index(after: index)
     }
-    
+
     /// Returns the position immediately before the given index.
-    func index(before i: Index) -> Index {
-        return _orderedKeys.index(before: i)
+    func index(before index: Index) -> Index {
+        return _orderedKeys.index(before: index)
     }
-    
+
     // ======================================================= //
     // MARK: - Internal Storage
     // ======================================================= //
-    
+
     /// The backing storage for the ordered keys.
     fileprivate var _orderedKeys = [Key]()
-    
+
     /// The backing storage for the mapping of keys to values.
     fileprivate var _keysToValues = [Key: Value]()
-    
 }
 
 // ======================================================= //
@@ -528,39 +528,39 @@ struct OrderedDictionary<Key: Hashable, Value>: BidirectionalCollection {
 
 #if swift(>=4.1)
 
-/// A view into an ordered dictionary whose indices are a subrange of the indices of the ordered
-/// dictionary.
-typealias OrderedDictionarySlice<Key: Hashable, Value> = Slice<OrderedDictionary<Key, Value>>
+    /// A view into an ordered dictionary whose indices are a subrange of the indices of the ordered
+    /// dictionary.
+    typealias OrderedDictionarySlice<Key: Hashable, Value> = Slice<OrderedDictionary<Key, Value>>
 
-/// A collection containing the keys of the ordered dictionary.
-///
-/// Under the hood this is a lazily evaluated bidirectional collection deriving the keys from
-/// the base ordered dictionary on-the-fly.
-typealias OrderedDictionaryKeys<Key: Hashable, Value> = LazyMapCollection<OrderedDictionary<Key, Value>, Key>
+    /// A collection containing the keys of the ordered dictionary.
+    ///
+    /// Under the hood this is a lazily evaluated bidirectional collection deriving the keys from
+    /// the base ordered dictionary on-the-fly.
+    typealias OrderedDictionaryKeys<Key: Hashable, Value> = LazyMapCollection<OrderedDictionary<Key, Value>, Key>
 
-/// A collection containing the values of the ordered dictionary.
-///
-/// Under the hood this is a lazily evaluated bidirectional collection deriving the values from
-/// the base ordered dictionary on-the-fly.
-typealias OrderedDictionaryValues<Key: Hashable, Value> = LazyMapCollection<OrderedDictionary<Key, Value>, Value>
+    /// A collection containing the values of the ordered dictionary.
+    ///
+    /// Under the hood this is a lazily evaluated bidirectional collection deriving the values from
+    /// the base ordered dictionary on-the-fly.
+    typealias OrderedDictionaryValues<Key: Hashable, Value> = LazyMapCollection<OrderedDictionary<Key, Value>, Value>
 
 #else
 
-/// A view into an ordered dictionary whose indices are a subrange of the indices of the ordered
-/// dictionary.
-typealias OrderedDictionarySlice<Key: Hashable, Value> = BidirectionalSlice<OrderedDictionary<Key, Value>>
+    /// A view into an ordered dictionary whose indices are a subrange of the indices of the ordered
+    /// dictionary.
+    typealias OrderedDictionarySlice<Key: Hashable, Value> = BidirectionalSlice<OrderedDictionary<Key, Value>>
 
-/// A collection containing the keys of the ordered dictionary.
-///
-/// Under the hood this is a lazily evaluated bidirectional collection deriving the keys from
-/// the base ordered dictionary on-the-fly.
-typealias OrderedDictionaryKeys<Key: Hashable, Value> = LazyMapBidirectionalCollection<OrderedDictionary<Key, Value>, Key>
+    /// A collection containing the keys of the ordered dictionary.
+    ///
+    /// Under the hood this is a lazily evaluated bidirectional collection deriving the keys from
+    /// the base ordered dictionary on-the-fly.
+    typealias OrderedDictionaryKeys<Key: Hashable, Value> = LazyMapBidirectionalCollection<OrderedDictionary<Key, Value>, Key>
 
-/// A collection containing the values of the ordered dictionary.
-///
-/// Under the hood this is a lazily evaluated bidirectional collection deriving the values from
-/// the base ordered dictionary on-the-fly.
-typealias OrderedDictionaryValues<Key: Hashable, Value> = LazyMapBidirectionalCollection<OrderedDictionary<Key, Value>, Value>
+    /// A collection containing the values of the ordered dictionary.
+    ///
+    /// Under the hood this is a lazily evaluated bidirectional collection deriving the values from
+    /// the base ordered dictionary on-the-fly.
+    typealias OrderedDictionaryValues<Key: Hashable, Value> = LazyMapBidirectionalCollection<OrderedDictionary<Key, Value>, Value>
 
 #endif
 
@@ -569,17 +569,14 @@ typealias OrderedDictionaryValues<Key: Hashable, Value> = LazyMapBidirectionalCo
 // ======================================================= //
 
 extension OrderedDictionary: ExpressibleByArrayLiteral {
-    
     /// Creates an ordered dictionary initialized from an array literal containing a list of
     /// key-value pairs.
     init(arrayLiteral elements: Element...) {
         self.init(elements)
     }
-    
 }
 
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
-    
     /// Creates an ordered dictionary initialized from a dictionary literal.
     init(dictionaryLiteral elements: (Key, Value)...) {
         self.init(elements.map { element in
@@ -587,7 +584,6 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
             return (key: key, value: value)
         })
     }
-    
 }
 
 // ======================================================= //
@@ -596,17 +592,15 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
 #if swift(>=4.1)
 
-extension OrderedDictionary: Equatable where Value: Equatable {}
+    extension OrderedDictionary: Equatable where Value: Equatable {}
 
 #endif
 
 extension OrderedDictionary where Value: Equatable {
-    
     /// Returns a Boolean value that indicates whether the two given ordered dictionaries with
     /// equatable values are equal.
     static func == (lhs: OrderedDictionary, rhs: OrderedDictionary) -> Bool {
         return lhs._orderedKeys == rhs._orderedKeys
-                && lhs._keysToValues == rhs._keysToValues
+            && lhs._keysToValues == rhs._keysToValues
     }
-    
 }

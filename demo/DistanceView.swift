@@ -1,19 +1,10 @@
-//
-//  DistanceView.swift
-//  cv-assist-ios
-//
-//  Created by Maksim Vaniukevich on 2/27/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import Foundation
-import UIKit
 import MapboxVision
+import UIKit
 
 final class DistanceView: UIView {
-    
     private static let height: CGFloat = 15
-    
+
     func update(_ left: CGPoint, _ right: CGPoint) {
         frame = CGRect(x: left.x, y: left.y, width: right.x - left.x + DistanceView.height, height: DistanceView.height)
         setNeedsDisplay()

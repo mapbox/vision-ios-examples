@@ -1,11 +1,3 @@
-//
-//  ImageSwitchingView.swift
-//  demo
-//
-//  Created by Alexander Pristavko on 11/21/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import UIKit
 
 private let translationDuration: TimeInterval = 0.5
@@ -14,7 +6,6 @@ private let timing = UICubicTimingParameters(controlPoint1: CGPoint(x: 0.25, y: 
                                              controlPoint2: CGPoint(x: 0.25, y: 1))
 
 final class ImageSwitchingView: UIView {
-    
     var image: UIImage? {
         get {
             return (stack.arrangedSubviews.first as? UIImageView)?.image
@@ -32,24 +23,24 @@ final class ImageSwitchingView: UIView {
             stack.spacing = newValue
         }
     }
-    
+
     private let stack: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         return view
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+
     private func commonInit() {
         addSubview(stack)
         NSLayoutConstraint.activate([
@@ -59,18 +50,18 @@ final class ImageSwitchingView: UIView {
             widthAnchor.constraint(equalTo: stack.widthAnchor),
         ])
     }
-    
+
     func `switch`(to image: UIImage) {
         let newView = UIImageView(image: image)
         let oldView = stack.arrangedSubviews.last
-        
+
         stack.insertArrangedSubview(newView, at: 0)
-        
+
         let diff = newView.frame.height + stack.spacing
         stack.transform = CGAffineTransform(translationX: 0, y: -diff)
-        
+
         let group = DispatchGroup()
-        
+
         group.enter()
         let transformAnimation = {
             self.stack.transform = .identity
@@ -82,7 +73,7 @@ final class ImageSwitchingView: UIView {
             completion: group.leave
         )
         transformAnimator.startAnimation()
-        
+
         if let oldView = oldView {
             group.enter()
             let fadeAnimation = {
@@ -97,12 +88,12 @@ final class ImageSwitchingView: UIView {
             )
             fadeAnimator.startAnimation()
         }
-        
+
         group.notify(queue: .main) {
             self.stack.arrangedSubviews.suffix(from: 1).forEach { $0.removeFromSuperview() }
         }
     }
-    
+
     func reset() {
         stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }

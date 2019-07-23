@@ -1,22 +1,13 @@
-//
-//  SafetyState.swift
-//  demo
-//
-//  Created by Maksim on 11/2/18.
-//  Copyright © 2018 Mapbox. All rights reserved.
-//
-
 import Foundation
 import MapboxVisionSafety
 
 enum SafetyState: Equatable {
-    
-    public static let bonnetAdjustment = 1.25
-    
+    static let bonnetAdjustment = 1.25
+
     enum ObjectType {
         case car
         case person
-        
+
         init?(_ type: DetectionClass) {
             switch type {
             case .trafficLight, .trafficSign, .bicycle:
@@ -28,9 +19,8 @@ enum SafetyState: Equatable {
             }
         }
     }
-    
-    struct Collision: Equatable {
 
+    struct Collision: Equatable {
         enum State {
             case warning
             case critical
@@ -57,9 +47,7 @@ enum SafetyState: Equatable {
     case collisions([Collision])
 
     init(_ collisionObjects: [CollisionObject]) {
-
         let collisions = collisionObjects.compactMap { collision -> Collision? in
-
             let type = collision.object.detectionClass
             let level = collision.dangerLevel
 
@@ -76,7 +64,7 @@ enum SafetyState: Equatable {
                              imageSize: imageSize)
         }
 
-        if collisions.count > 0 {
+        if !collisions.isEmpty {
             self = .collisions(collisions)
         } else {
             self = .none
