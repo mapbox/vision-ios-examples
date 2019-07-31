@@ -15,3 +15,4 @@ $(SRCROOT)/Carthage/Build/iOS/Solar.framework
 $(SRCROOT)/Carthage/Build/iOS/ZIPFoundation.framework
 $(SRCROOT)/Carthage/Build/iOS/Turf.framework
 $(SRCROOT)/Carthage/Build/iOS/Polyline.framework
+$(SRCROOT)/Carthage/Build/iOS/MapboxAccounts.framework
