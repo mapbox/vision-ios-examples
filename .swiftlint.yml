@@ -209,7 +209,7 @@ type_body_length:
 excluded: # paths to ignore during linting. Takes precedence over `included`.
  - MapboxVision/Services/Reachability/Reachability.swift
  - build
- - Carthage* # covers all backup Carthage builds
+ - Carthage* # covers Carthage and its manually created temporary backups
 
 # Custom regex-based rules
 custom_rules:
