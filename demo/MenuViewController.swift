@@ -297,7 +297,13 @@ final class MenuViewController: UIViewController {
 
     @objc
     private func infoTapped() {
-        let alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
+        let alert: UIAlertController
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
+        }
 
         alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default) { _ in
             guard let url = URL(string: GlobalConstants.tosLink) else { return }
