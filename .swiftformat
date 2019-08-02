@@ -8,3 +8,4 @@
 # andOperator,braces,consecutiveBlankLines,consecutiveSpaces,hoistPatternLet,linebreaks,numberFormatting,redundantExtensionACL,redundantSelf,specifiers,unusedArguments
 
 --exclude Generated
+--exclude Carthage

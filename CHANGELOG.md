@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0-23
+
+- `MapboxVision` v0.6.0
+- Fixed crash on showing info
+- Removed portrait mode for iPad
 
 ## 1.0-22
 

@@ -34,8 +34,9 @@ Pods/
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Pattern covers Carthage and its manually created temporary backups
 
-Carthage
+Carthage*
 
 # fastlane
 #
