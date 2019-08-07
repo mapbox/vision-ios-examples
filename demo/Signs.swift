@@ -3,6 +3,20 @@ import MapboxVision
 
 // swiftlint:disable cyclomatic_complexity file_length
 
+extension Asset.Signs {
+    static func loadAssetDynamically(assetName: String) -> ImageAsset? {
+        let mirror = Mirror(reflecting: self)
+
+        guard let enumCase = mirror.children.first(where: { $0.label == assetName }) else {
+            assertionFailure("ERROR: oh god!")
+            return nil
+        }
+
+        return enumCase.value as? ImageAsset
+
+    }
+}
+
 extension Sign {
     func icon(over: Bool, country: Country) -> ImageAsset? {
         let asset = getIcon(over, country)
@@ -21,324 +35,84 @@ extension Sign {
                 return nil
             case .speedLimit:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.speedLimitUS5Over : Asset.Signs.speedLimitUS5
-                case 15:
-                    return over ? Asset.Signs.speedLimitUS15Over : Asset.Signs.speedLimitUS15
-                case 25:
-                    return over ? Asset.Signs.speedLimitUS25Over : Asset.Signs.speedLimitUS25
-                case 35:
-                    return over ? Asset.Signs.speedLimitUS35Over : Asset.Signs.speedLimitUS35
-                case 45:
-                    return over ? Asset.Signs.speedLimitUS45Over : Asset.Signs.speedLimitUS45
-                case 55:
-                    return over ? Asset.Signs.speedLimitUS55Over : Asset.Signs.speedLimitUS55
-                case 65:
-                    return over ? Asset.Signs.speedLimitUS65Over : Asset.Signs.speedLimitUS65
-                case 75:
-                    return over ? Asset.Signs.speedLimitUS75Over : Asset.Signs.speedLimitUS75
-                case 10:
-                    return over ? Asset.Signs.speedLimitUS10Over : Asset.Signs.speedLimitUS10
-                case 20:
-                    return over ? Asset.Signs.speedLimitUS20Over : Asset.Signs.speedLimitUS20
-                case 30:
-                    return over ? Asset.Signs.speedLimitUS30Over : Asset.Signs.speedLimitUS30
-                case 40:
-                    return over ? Asset.Signs.speedLimitUS40Over : Asset.Signs.speedLimitUS40
-                case 50:
-                    return over ? Asset.Signs.speedLimitUS50Over : Asset.Signs.speedLimitUS50
-                case 60:
-                    return over ? Asset.Signs.speedLimitUS60Over : Asset.Signs.speedLimitUS60
-                case 70:
-                    return over ? Asset.Signs.speedLimitUS70Over : Asset.Signs.speedLimitUS70
-                case 80:
-                    return over ? Asset.Signs.speedLimitUS80Over : Asset.Signs.speedLimitUS80
-                case 85:
-                    return over ? Asset.Signs.speedLimitUS85Over : Asset.Signs.speedLimitUS85
-                case 90:
-                    return over ? Asset.Signs.speedLimitUS90Over : Asset.Signs.speedLimitUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(type)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitEnd:
                 switch number {
-                case 5:
-                    return Asset.Signs.speedLimitEndUS5
-                case 15:
-                    return Asset.Signs.speedLimitEndUS15
-                case 25:
-                    return Asset.Signs.speedLimitEndUS25
-                case 35:
-                    return Asset.Signs.speedLimitEndUS35
-                case 45:
-                    return Asset.Signs.speedLimitEndUS45
-                case 55:
-                    return Asset.Signs.speedLimitEndUS55
-                case 65:
-                    return Asset.Signs.speedLimitEndUS65
-                case 75:
-                    return Asset.Signs.speedLimitEndUS75
-                case 10:
-                    return Asset.Signs.speedLimitEndUS10
-                case 20:
-                    return Asset.Signs.speedLimitEndUS20
-                case 30:
-                    return Asset.Signs.speedLimitEndUS30
-                case 40:
-                    return Asset.Signs.speedLimitEndUS40
-                case 50:
-                    return Asset.Signs.speedLimitEndUS50
-                case 60:
-                    return Asset.Signs.speedLimitEndUS60
-                case 70:
-                    return Asset.Signs.speedLimitEndUS70
-                case 80:
-                    return Asset.Signs.speedLimitEndUS80
-                case 85:
-                    return Asset.Signs.speedLimitEndUS85
-                case 90:
-                    return Asset.Signs.speedLimitEndUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let usCountry = "US"
+                    let assetFinalName = "Asset.Signs." + "\(type)" + "\(usCountry)" + "\(number)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitMin:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.speedLimitMinUS5Over : Asset.Signs.speedLimitMinUS5
-                case 15:
-                    return over ? Asset.Signs.speedLimitMinUS15Over : Asset.Signs.speedLimitMinUS15
-                case 25:
-                    return over ? Asset.Signs.speedLimitMinUS25Over : Asset.Signs.speedLimitMinUS25
-                case 35:
-                    return over ? Asset.Signs.speedLimitMinUS35Over : Asset.Signs.speedLimitMinUS35
-                case 45:
-                    return over ? Asset.Signs.speedLimitMinUS45Over : Asset.Signs.speedLimitMinUS45
-                case 55:
-                    return over ? Asset.Signs.speedLimitMinUS55Over : Asset.Signs.speedLimitMinUS55
-                case 65:
-                    return over ? Asset.Signs.speedLimitMinUS65Over : Asset.Signs.speedLimitMinUS65
-                case 75:
-                    return over ? Asset.Signs.speedLimitMinUS75Over : Asset.Signs.speedLimitMinUS75
-                case 10:
-                    return over ? Asset.Signs.speedLimitMinUS10Over : Asset.Signs.speedLimitMinUS10
-                case 20:
-                    return over ? Asset.Signs.speedLimitMinUS20Over : Asset.Signs.speedLimitMinUS20
-                case 30:
-                    return over ? Asset.Signs.speedLimitMinUS30Over : Asset.Signs.speedLimitMinUS30
-                case 40:
-                    return over ? Asset.Signs.speedLimitMinUS40Over : Asset.Signs.speedLimitMinUS40
-                case 50:
-                    return over ? Asset.Signs.speedLimitMinUS50Over : Asset.Signs.speedLimitMinUS50
-                case 60:
-                    return over ? Asset.Signs.speedLimitMinUS60Over : Asset.Signs.speedLimitMinUS60
-                case 70:
-                    return over ? Asset.Signs.speedLimitMinUS70Over : Asset.Signs.speedLimitMinUS70
-                case 80:
-                    return over ? Asset.Signs.speedLimitMinUS80Over : Asset.Signs.speedLimitMinUS80
-                case 85:
-                    return over ? Asset.Signs.speedLimitMinUS85Over : Asset.Signs.speedLimitMinUS85
-                case 90:
-                    return over ? Asset.Signs.speedLimitMinUS90Over : Asset.Signs.speedLimitMinUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(type)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitTrucks:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.speedLimitTrucksUS5Over : Asset.Signs.speedLimitTrucksUS5
-                case 15:
-                    return over ? Asset.Signs.speedLimitTrucksUS15Over : Asset.Signs.speedLimitTrucksUS15
-                case 25:
-                    return over ? Asset.Signs.speedLimitTrucksUS25Over : Asset.Signs.speedLimitTrucksUS25
-                case 35:
-                    return over ? Asset.Signs.speedLimitTrucksUS35Over : Asset.Signs.speedLimitTrucksUS35
-                case 45:
-                    return over ? Asset.Signs.speedLimitTrucksUS45Over : Asset.Signs.speedLimitTrucksUS45
-                case 55:
-                    return over ? Asset.Signs.speedLimitTrucksUS55Over : Asset.Signs.speedLimitTrucksUS55
-                case 65:
-                    return over ? Asset.Signs.speedLimitTrucksUS65Over : Asset.Signs.speedLimitTrucksUS65
-                case 75:
-                    return over ? Asset.Signs.speedLimitTrucksUS75Over : Asset.Signs.speedLimitTrucksUS75
-                case 10:
-                    return over ? Asset.Signs.speedLimitTrucksUS10Over : Asset.Signs.speedLimitTrucksUS10
-                case 20:
-                    return over ? Asset.Signs.speedLimitTrucksUS20Over : Asset.Signs.speedLimitTrucksUS20
-                case 30:
-                    return over ? Asset.Signs.speedLimitTrucksUS30Over : Asset.Signs.speedLimitTrucksUS30
-                case 40:
-                    return over ? Asset.Signs.speedLimitTrucksUS40Over : Asset.Signs.speedLimitTrucksUS40
-                case 50:
-                    return over ? Asset.Signs.speedLimitTrucksUS50Over : Asset.Signs.speedLimitTrucksUS50
-                case 60:
-                    return over ? Asset.Signs.speedLimitTrucksUS60Over : Asset.Signs.speedLimitTrucksUS60
-                case 70:
-                    return over ? Asset.Signs.speedLimitTrucksUS70Over : Asset.Signs.speedLimitTrucksUS70
-                case 80:
-                    return over ? Asset.Signs.speedLimitTrucksUS80Over : Asset.Signs.speedLimitTrucksUS80
-                case 85:
-                    return over ? Asset.Signs.speedLimitTrucksUS85Over : Asset.Signs.speedLimitTrucksUS85
-                case 90:
-                    return over ? Asset.Signs.speedLimitTrucksUS90Over : Asset.Signs.speedLimitTrucksUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(type)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitNight:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.speedLimitNightUS5Over : Asset.Signs.speedLimitNightUS5
-                case 15:
-                    return over ? Asset.Signs.speedLimitNightUS15Over : Asset.Signs.speedLimitNightUS15
-                case 25:
-                    return over ? Asset.Signs.speedLimitNightUS25Over : Asset.Signs.speedLimitNightUS25
-                case 35:
-                    return over ? Asset.Signs.speedLimitNightUS35Over : Asset.Signs.speedLimitNightUS35
-                case 45:
-                    return over ? Asset.Signs.speedLimitNightUS45Over : Asset.Signs.speedLimitNightUS45
-                case 55:
-                    return over ? Asset.Signs.speedLimitNightUS55Over : Asset.Signs.speedLimitNightUS55
-                case 65:
-                    return over ? Asset.Signs.speedLimitNightUS65Over : Asset.Signs.speedLimitNightUS65
-                case 75:
-                    return over ? Asset.Signs.speedLimitNightUS75Over : Asset.Signs.speedLimitNightUS75
-                case 10:
-                    return over ? Asset.Signs.speedLimitNightUS10Over : Asset.Signs.speedLimitNightUS10
-                case 20:
-                    return over ? Asset.Signs.speedLimitNightUS20Over : Asset.Signs.speedLimitNightUS20
-                case 30:
-                    return over ? Asset.Signs.speedLimitNightUS30Over : Asset.Signs.speedLimitNightUS30
-                case 40:
-                    return over ? Asset.Signs.speedLimitNightUS40Over : Asset.Signs.speedLimitNightUS40
-                case 50:
-                    return over ? Asset.Signs.speedLimitNightUS50Over : Asset.Signs.speedLimitNightUS50
-                case 60:
-                    return over ? Asset.Signs.speedLimitNightUS60Over : Asset.Signs.speedLimitNightUS60
-                case 70:
-                    return over ? Asset.Signs.speedLimitNightUS70Over : Asset.Signs.speedLimitNightUS70
-                case 80:
-                    return over ? Asset.Signs.speedLimitNightUS80Over : Asset.Signs.speedLimitNightUS80
-                case 85:
-                    return over ? Asset.Signs.speedLimitNightUS85Over : Asset.Signs.speedLimitNightUS85
-                case 90:
-                    return over ? Asset.Signs.speedLimitNightUS90Over : Asset.Signs.speedLimitNightUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(type)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitComplementary:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.speedLimitCompUS5Over : Asset.Signs.speedLimitCompUS5
-                case 15:
-                    return over ? Asset.Signs.speedLimitCompUS15Over : Asset.Signs.speedLimitCompUS15
-                case 25:
-                    return over ? Asset.Signs.speedLimitCompUS25Over : Asset.Signs.speedLimitCompUS25
-                case 35:
-                    return over ? Asset.Signs.speedLimitCompUS35Over : Asset.Signs.speedLimitCompUS35
-                case 45:
-                    return over ? Asset.Signs.speedLimitCompUS45Over : Asset.Signs.speedLimitCompUS45
-                case 55:
-                    return over ? Asset.Signs.speedLimitCompUS55Over : Asset.Signs.speedLimitCompUS55
-                case 65:
-                    return over ? Asset.Signs.speedLimitCompUS65Over : Asset.Signs.speedLimitCompUS65
-                case 75:
-                    return over ? Asset.Signs.speedLimitCompUS75Over : Asset.Signs.speedLimitCompUS75
-                case 85:
-                    return over ? Asset.Signs.speedLimitCompUS85Over : Asset.Signs.speedLimitCompUS85
-                case 10:
-                    return over ? Asset.Signs.speedLimitCompUS10Over : Asset.Signs.speedLimitCompUS10
-                case 20:
-                    return over ? Asset.Signs.speedLimitCompUS20Over : Asset.Signs.speedLimitCompUS20
-                case 30:
-                    return over ? Asset.Signs.speedLimitCompUS30Over : Asset.Signs.speedLimitCompUS30
-                case 40:
-                    return over ? Asset.Signs.speedLimitCompUS40Over : Asset.Signs.speedLimitCompUS40
-                case 50:
-                    return over ? Asset.Signs.speedLimitCompUS50Over : Asset.Signs.speedLimitCompUS50
-                case 60:
-                    return over ? Asset.Signs.speedLimitCompUS60Over : Asset.Signs.speedLimitCompUS60
-                case 70:
-                    return over ? Asset.Signs.speedLimitCompUS70Over : Asset.Signs.speedLimitCompUS70
-                case 80:
-                    return over ? Asset.Signs.speedLimitCompUS80Over : Asset.Signs.speedLimitCompUS80
-                case 90:
-                    return over ? Asset.Signs.speedLimitCompUS90Over : Asset.Signs.speedLimitCompUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let typeSign = "speedLimitComp"
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(typeSign)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitExit:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.warningExitUS5Over : Asset.Signs.warningExitUS5
-                case 15:
-                    return over ? Asset.Signs.warningExitUS15Over : Asset.Signs.warningExitUS15
-                case 25:
-                    return over ? Asset.Signs.warningExitUS25Over : Asset.Signs.warningExitUS25
-                case 35:
-                    return over ? Asset.Signs.warningExitUS35Over : Asset.Signs.warningExitUS35
-                case 45:
-                    return over ? Asset.Signs.warningExitUS45Over : Asset.Signs.warningExitUS45
-                case 55:
-                    return over ? Asset.Signs.warningExitUS55Over : Asset.Signs.warningExitUS55
-                case 65:
-                    return over ? Asset.Signs.warningExitUS65Over : Asset.Signs.warningExitUS65
-                case 75:
-                    return over ? Asset.Signs.warningExitUS75Over : Asset.Signs.warningExitUS75
-                case 85:
-                    return over ? Asset.Signs.warningExitUS85Over : Asset.Signs.warningExitUS85
-                case 10:
-                    return over ? Asset.Signs.warningExitUS10Over : Asset.Signs.warningExitUS10
-                case 20:
-                    return over ? Asset.Signs.warningExitUS20Over : Asset.Signs.warningExitUS20
-                case 30:
-                    return over ? Asset.Signs.warningExitUS30Over : Asset.Signs.warningExitUS30
-                case 40:
-                    return over ? Asset.Signs.warningExitUS40Over : Asset.Signs.warningExitUS40
-                case 50:
-                    return over ? Asset.Signs.warningExitUS50Over : Asset.Signs.warningExitUS50
-                case 60:
-                    return over ? Asset.Signs.warningExitUS60Over : Asset.Signs.warningExitUS60
-                case 70:
-                    return over ? Asset.Signs.warningExitUS70Over : Asset.Signs.warningExitUS70
-                case 80:
-                    return over ? Asset.Signs.warningExitUS80Over : Asset.Signs.warningExitUS80
-                case 90:
-                    return over ? Asset.Signs.warningExitUS90Over : Asset.Signs.warningExitUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let typeSign = "warningExit"
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(typeSign)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
             case .speedLimitRamp:
                 switch number {
-                case 5:
-                    return over ? Asset.Signs.warningRampUS5Over : Asset.Signs.warningRampUS5
-                case 15:
-                    return over ? Asset.Signs.warningRampUS15Over : Asset.Signs.warningRampUS15
-                case 25:
-                    return over ? Asset.Signs.warningRampUS25Over : Asset.Signs.warningRampUS25
-                case 35:
-                    return over ? Asset.Signs.warningRampUS35Over : Asset.Signs.warningRampUS35
-                case 45:
-                    return over ? Asset.Signs.warningRampUS45Over : Asset.Signs.warningRampUS45
-                case 55:
-                    return over ? Asset.Signs.warningRampUS55Over : Asset.Signs.warningRampUS55
-                case 65:
-                    return over ? Asset.Signs.warningRampUS65Over : Asset.Signs.warningRampUS65
-                case 75:
-                    return over ? Asset.Signs.warningRampUS75Over : Asset.Signs.warningRampUS75
-                case 85:
-                    return over ? Asset.Signs.warningRampUS85Over : Asset.Signs.warningRampUS85
-                case 10:
-                    return over ? Asset.Signs.warningRampUS10Over : Asset.Signs.warningRampUS10
-                case 20:
-                    return over ? Asset.Signs.warningRampUS20Over : Asset.Signs.warningRampUS20
-                case 30:
-                    return over ? Asset.Signs.warningRampUS30Over : Asset.Signs.warningRampUS30
-                case 40:
-                    return over ? Asset.Signs.warningRampUS40Over : Asset.Signs.warningRampUS40
-                case 50:
-                    return over ? Asset.Signs.warningRampUS50Over : Asset.Signs.warningRampUS50
-                case 60:
-                    return over ? Asset.Signs.warningRampUS60Over : Asset.Signs.warningRampUS60
-                case 70:
-                    return over ? Asset.Signs.warningRampUS70Over : Asset.Signs.warningRampUS70
-                case 80:
-                    return over ? Asset.Signs.warningRampUS80Over : Asset.Signs.warningRampUS80
-                case 90:
-                    return over ? Asset.Signs.warningRampUS90Over : Asset.Signs.warningRampUS90
+                case let speed where stride(from: 5, through: 90, by: 5).contains(speed):
+                    let typeSign = "warningRamp"
+                    let usCountry = "US"
+                    let overSuffix = over ? "over" : ""
+                    let assetFinalName = "Asset.Signs." + "\(typeSign)" + "\(usCountry)" + "\(number)" + "\(overSuffix)"
+                    return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
                 default: return nil
                 }
+
+//            case let sign where warningSigns.con
+//            case .warningTurnLeft:
+//                let assetFinalName = "Asset.Signs." + "\(typeSign)" + "\(usCountry)"
+//                return Asset.Signs.loadAssetDynamically(assetName: assetFinalName)
+
             case .warningTurnLeft:
                 return Asset.Signs.warningTurnLeftUS
             case .warningTurnRight:

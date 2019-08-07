@@ -30,6 +30,7 @@
 		2EF52A1421514DBC00F23CCF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A0E21514DBC00F23CCF /* opencv2.framework */; };
 		2EF52A18215152F600F23CCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A16215152F600F23CCF /* Crashlytics.framework */; };
 		2EF52A19215152F600F23CCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF52A17215152F600F23CCF /* Fabric.framework */; };
+		3A1F3A5E22F5683E00B8173F /* Signs+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F3A5D22F5683E00B8173F /* Signs+Extension.swift */; };
 		5A3E42CD22B3D2C80035A010 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E42CC22B3D2C80035A010 /* GlobalConstants.swift */; };
 		5AFC926222C22EEF00A17776 /* ARRoute+DirectionsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFC926122C22EEF00A17776 /* ARRoute+DirectionsRoute.swift */; };
 		9D72A44113D27519A4189D85 /* overspeed_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9D72A05DDD42EEC518F18D23 /* overspeed_warning.wav */; };
@@ -111,6 +112,7 @@
 		2EF52A0E21514DBC00F23CCF /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Carthage/Build/iOS/opencv2.framework; sourceTree = "<group>"; };
 		2EF52A16215152F600F23CCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		2EF52A17215152F600F23CCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
+		3A1F3A5D22F5683E00B8173F /* Signs+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Signs+Extension.swift"; sourceTree = "<group>"; };
 		5A3E42CC22B3D2C80035A010 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		5AFC926122C22EEF00A17776 /* ARRoute+DirectionsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARRoute+DirectionsRoute.swift"; sourceTree = "<group>"; };
 		9D72A05DDD42EEC518F18D23 /* overspeed_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = overspeed_warning.wav; sourceTree = "<group>"; };
@@ -239,6 +241,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A1F3A5C22F5682300B8173F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F3A5D22F5683E00B8173F /* Signs+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B52787C920F0B46A007D1EA7 = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +273,7 @@
 		B52787D420F0B46A007D1EA7 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				3A1F3A5C22F5682300B8173F /* Extensions */,
 				B532EE022170A9AA00B172FA /* ARContainerViewController.swift */,
 				B532EE032170A9AA00B172FA /* ARMapNavigationController.swift */,
 				B532EE042170A9AB00B172FA /* UIButton+BackgroudColor.swift */,
@@ -538,6 +549,7 @@
 				B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */,
 				2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */,
 				2E60335E214295F80050EDB3 /* Locale.swift in Sources */,
+				3A1F3A5E22F5683E00B8173F /* Signs+Extension.swift in Sources */,
 				B5441FFE214909D9007CB69E /* RoadLanesView.swift in Sources */,
 				B532EE072170A9AB00B172FA /* UIButton+BackgroudColor.swift in Sources */,
 				B52787EA20F0B6A3007D1EA7 /* MenuViewController.swift in Sources */,
