@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0-24
+
+- `MapboxVision` v0.7.0
+- Improved lane detection
+
 ## 1.0-23
 
 - `MapboxVision` v0.6.0
