@@ -1,6 +1,6 @@
 binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json" "3.13.4"
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json" "1.10.2"
-binary "https://www.mapbox.com/ios-sdk/Mapbox-iOS-SDK.json" "5.2.0"
+binary "https://www.mapbox.com/ios-sdk/Mapbox-iOS-SDK.json" "5.3.0"
 binary "https://www.mapbox.com/ios-sdk/MapboxAccounts.json" "2.1.0"
 binary "https://www.mapbox.com/ios-sdk/MapboxNavigationNative.json" "6.2.1"
 binary "https://www.mapbox.com/ios-sdk/opencv.json" "2.4.13"

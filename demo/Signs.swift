@@ -590,7 +590,7 @@ extension Sign {
             case .warningDangerousTraffic:
                 return nil
             case .warningRoadworks:
-                return nil
+                return Asset.Signs.warningRoadworksUS
             case .warningSecondRoadLeft:
                 return nil
             case .regulatoryNoTurnOnRedText:
