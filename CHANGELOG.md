@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0-25
+
+- `MapboxVision` v0.8.0
+
 ## 1.0-24
 
 - `MapboxVision` v0.7.0
