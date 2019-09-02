@@ -104,7 +104,10 @@ class ARMapNavigationController: UIViewController {
             self.hintLabel.isHidden = true
             self.mapView.showRoutes([route])
 
-            self.mapView.setVisibleCoordinateBounds(route.polyline.overlayBounds, edgePadding: routeEdgeInsets, animated: true)
+            self.mapView.setVisibleCoordinateBounds(route.polyline.overlayBounds,
+                                                    edgePadding: routeEdgeInsets,
+                                                    animated: true,
+                                                    completionHandler: nil)
 
             self.selectedRoute = route
         }
