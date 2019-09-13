@@ -119,7 +119,7 @@ private extension LaneDirection {
             view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         case .reverse:
             view = UIImageView(image: Asset.Assets.arrowReversed.image)
-        case .unkwnown:
+        case .unknown:
             view = UIImageView()
         }
         return view

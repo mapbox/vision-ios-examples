@@ -701,6 +701,18 @@ extension Sign {
                 return nil
             case .warningTrafficQueues:
                 return nil
+            case .regulatoryKeepLeftPicture:
+                return nil
+            case .regulatoryKeepLeftText:
+                return nil
+            case .aheadSpeedLimit:
+                return nil
+            case .warningSpeedLimit:
+                return nil
+            case .regulatoryNoUTurnRight:
+                return nil
+            case .warningTurnRightOnlyArrow:
+                return nil
             }
         case .china:
             switch type {
@@ -1281,6 +1293,18 @@ extension Sign {
             case .warningRailwayCrossingWithBarriers:
                 return nil
             case .warningTrafficQueues:
+                return nil
+            case .regulatoryKeepLeftPicture:
+                return nil
+            case .regulatoryKeepLeftText:
+                return nil
+            case .aheadSpeedLimit:
+                return nil
+            case .warningSpeedLimit:
+                return nil
+            case .regulatoryNoUTurnRight:
+                return nil
+            case .warningTurnRightOnlyArrow:
                 return nil
             }
         case .UK, .other:
@@ -2054,6 +2078,18 @@ extension Sign {
             case .regulatoryEquestriansOnly:
                 return nil
             case .regulatoryGasStation:
+                return nil
+            case .regulatoryKeepLeftPicture:
+                return nil
+            case .regulatoryKeepLeftText:
+                return nil
+            case .aheadSpeedLimit:
+                return nil
+            case .warningSpeedLimit:
+                return nil
+            case .regulatoryNoUTurnRight:
+                return nil
+            case .warningTurnRightOnlyArrow:
                 return nil
             }
         case .unknown:
