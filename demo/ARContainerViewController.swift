@@ -51,16 +51,20 @@ final class ARContainerViewController: UIViewController {
         navigationService?.start()
     }
 
+    func configureFor(arManager: VisionARManager?) {
+        arViewController.set(arManager: arManager)
+    }
+
     func present(sampleBuffer: CMSampleBuffer) {
-        arViewController.present(sampleBuffer: sampleBuffer)
+//        arViewController.present(sampleBuffer: sampleBuffer)
     }
 
     func present(lane: ARLane?) {
-        arViewController.present(lane: lane)
+//        arViewController.present(lane: lane)
     }
 
     func present(camera: ARCamera) {
-        arViewController.present(camera: camera)
+//        arViewController.present(camera: camera)
     }
 
     private let instructionsLabel: UILabel = {
