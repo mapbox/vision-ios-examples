@@ -164,6 +164,10 @@ final class ContainerViewController: UIViewController {
 }
 
 extension ContainerViewController: ContainerPresenter {
+    func configureFor(arManager: VisionARManager?) {
+        arContainerViewController.configureFor(arManager: arManager)
+    }
+
     private func dismissSafetyStateViews() {
         distanceView.isHidden = true
         distanceLabel.isHidden = true
@@ -237,9 +241,7 @@ extension ContainerViewController: ContainerPresenter {
     }
 
     func present(frame: CMSampleBuffer) {
-        if currentViewController == arContainerViewController {
-            arContainerViewController.present(sampleBuffer: frame)
-        } else {
+        if currentViewController != arContainerViewController {
             visionViewController?.present(sampleBuffer: frame)
         }
     }
@@ -288,14 +290,6 @@ extension ContainerViewController: ContainerPresenter {
         } else {
             speedLimitView.image = speedLimit.image
         }
-    }
-
-    func present(camera: ARCamera) {
-        arContainerViewController.present(camera: camera)
-    }
-
-    func present(lane: ARLane?) {
-        arContainerViewController.present(lane: lane)
     }
 
     func present(screen: Screen) {

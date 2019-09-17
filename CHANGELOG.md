@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0-26
+
+- New AR lane
+- Fixed scaling of video frames in AR Routing mode
+
 ## 1.0-25
 
 - `MapboxVision` v0.8.0

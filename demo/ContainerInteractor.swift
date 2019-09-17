@@ -37,8 +37,7 @@ protocol ContainerPresenter: AnyObject {
     func present(calibrationProgress: CalibrationProgress?)
     func present(speedLimit: ImageAsset?, isNew: Bool)
 
-    func present(camera: ARCamera)
-    func present(lane: ARLane?)
+    func configureFor(arManager: VisionARManager?)
 
     func dismissCurrent()
 }
@@ -124,12 +123,15 @@ final class ContainerInteractor {
         self.camera = camera
         self.visionManager = visionManager
 
-        visionARManager = VisionARManager.create(visionManager: visionManager, delegate: delegateProxy)
-        visionSafetyManager = VisionSafetyManager.create(visionManager: visionManager, delegate: delegateProxy)
+        visionARManager = VisionARManager.create(visionManager: visionManager)
+        visionSafetyManager = VisionSafetyManager.create(visionManager: visionManager)
+        visionSafetyManager?.delegate = delegateProxy
+
+        visionManager.delegate = delegateProxy
+        visionManager.start()
 
         camera.add(observer: self)
-        visionManager.start(delegate: delegateProxy)
-
+        presenter.configureFor(arManager: visionARManager)
         presenter.presentVision()
         present(screen: .menu)
     }
@@ -302,16 +304,6 @@ extension ContainerInteractor: VideoSourceObserver {
         DispatchQueue.main.async { [weak self] in
             self?.presenter.present(frame: videoSample.buffer)
         }
-    }
-}
-
-extension ContainerInteractor: VisionARManagerDelegate {
-    func visionARManager(_ visionARManager: VisionARManager, didUpdateARCamera camera: ARCamera) {
-        presenter.present(camera: camera)
-    }
-
-    func visionARManager(_ visionARManager: VisionARManager, didUpdateARLane lane: ARLane?) {
-        presenter.present(lane: lane)
     }
 }
 
