@@ -55,18 +55,6 @@ final class ARContainerViewController: UIViewController {
         arViewController.set(arManager: arManager)
     }
 
-    func present(sampleBuffer: CMSampleBuffer) {
-//        arViewController.present(sampleBuffer: sampleBuffer)
-    }
-
-    func present(lane: ARLane?) {
-//        arViewController.present(lane: lane)
-    }
-
-    func present(camera: ARCamera) {
-//        arViewController.present(camera: camera)
-    }
-
     private let instructionsLabel: UILabel = {
         let label = PaddedLabel(insets: UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18))
         label.translatesAutoresizingMaskIntoConstraints = false
