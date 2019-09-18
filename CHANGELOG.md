@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0-27
+
+- `MapboxVision` v0.9.0
+- Improved and refined AR navigation experience
+- Fixed video frame scaling issue in AR navigation mode
+
 ## 1.0-25
 
 - `MapboxVision` v0.8.0
