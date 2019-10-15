@@ -51,7 +51,7 @@ final class ARContainerViewController: UIViewController {
         navigationService?.start()
     }
 
-    func configureFor(arManager: VisionARManager?) {
+    func configureFor(arManager: VisionARManager) {
         arViewController.set(arManager: arManager)
     }
 

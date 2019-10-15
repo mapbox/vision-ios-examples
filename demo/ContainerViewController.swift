@@ -164,7 +164,8 @@ final class ContainerViewController: UIViewController {
 }
 
 extension ContainerViewController: ContainerPresenter {
-    func configureFor(arManager: VisionARManager?) {
+    func configureFor(visionManager: VisionManagerProtocol, arManager: VisionARManager) {
+        visionViewController?.set(visionManager: visionManager)
         arContainerViewController.configureFor(arManager: arManager)
     }
 
@@ -240,20 +241,6 @@ extension ContainerViewController: ContainerPresenter {
         }
     }
 
-    func present(frame: CMSampleBuffer) {
-        if currentViewController != arContainerViewController {
-            visionViewController?.present(sampleBuffer: frame)
-        }
-    }
-
-    func present(segmentation: FrameSegmentation) {
-        visionViewController?.present(segmentation: segmentation)
-    }
-
-    func present(detections: FrameDetections) {
-        visionViewController?.present(detections: detections)
-    }
-
     func present(signs: [ImageAsset]) {
         signsStack.subviews.forEach { $0.removeFromSuperview() }
         signsStack.isHidden = signs.isEmpty
@@ -294,12 +281,12 @@ extension ContainerViewController: ContainerPresenter {
 
     func present(screen: Screen) {
         switch screen {
-        case .signsDetection: visionViewController?.frameVisualizationMode = .clear
-        case .segmentation: visionViewController?.frameVisualizationMode = .segmentation
-        case .objectDetection: visionViewController?.frameVisualizationMode = .detection
-        case .distanceToObject: visionViewController?.frameVisualizationMode = .clear
+        case .signsDetection: visionViewController?.visualizationMode = .clear
+        case .segmentation: visionViewController?.visualizationMode = .segmentation
+        case .objectDetection: visionViewController?.visualizationMode = .detection
+        case .distanceToObject: visionViewController?.visualizationMode = .clear
         case .map: presentMap()
-        case .laneDetection: visionViewController?.frameVisualizationMode = .clear
+        case .laneDetection: visionViewController?.visualizationMode = .clear
         case .arRouting: presentARRouting()
         case .menu: presentMenu()
         }
@@ -311,7 +298,7 @@ extension ContainerViewController: ContainerPresenter {
             return
         }
         present(viewController: viewController)
-        visionViewController?.frameVisualizationMode = .clear
+        visionViewController?.visualizationMode = .clear
         currentViewController = menuViewController
     }
 
@@ -322,7 +309,7 @@ extension ContainerViewController: ContainerPresenter {
         }
 
         present(viewController: viewController)
-        viewController.frameVisualizationMode = .clear
+        viewController.visualizationMode = .clear
     }
 
     private func presentMap() {
