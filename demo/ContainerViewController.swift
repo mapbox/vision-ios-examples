@@ -164,9 +164,9 @@ final class ContainerViewController: UIViewController {
 }
 
 extension ContainerViewController: ContainerPresenter {
-    func configureFor(visionManager: VisionManagerProtocol, arManager: VisionARManager) {
+    func inject(visionManager: VisionManagerProtocol, arManager: VisionARManager) {
         visionViewController?.set(visionManager: visionManager)
-        arContainerViewController.configureFor(arManager: arManager)
+        arContainerViewController.inject(arManager: arManager)
     }
 
     private func dismissSafetyStateViews() {

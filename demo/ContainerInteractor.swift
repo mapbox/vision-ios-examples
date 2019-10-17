@@ -33,7 +33,7 @@ protocol ContainerPresenter: AnyObject {
     func present(calibrationProgress: CalibrationProgress?)
     func present(speedLimit: ImageAsset?, isNew: Bool)
 
-    func configureFor(visionManager: VisionManagerProtocol, arManager: VisionARManager)
+    func inject(visionManager: VisionManagerProtocol, arManager: VisionARManager)
 
     func dismissCurrent()
 }
@@ -127,7 +127,7 @@ final class ContainerInteractor {
         visionManager.delegate = delegateProxy
         visionManager.start()
 
-        presenter.configureFor(visionManager: visionManager, arManager: visionARManager)
+        presenter.inject(visionManager: visionManager, arManager: visionARManager)
         presenter.presentVision()
         present(screen: .menu)
     }
