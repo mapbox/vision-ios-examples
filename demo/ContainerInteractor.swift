@@ -27,17 +27,13 @@ protocol ContainerPresenter: AnyObject {
     func present(screen: Screen)
     func presentBackButton(isVisible: Bool)
 
-    func present(frame: CMSampleBuffer)
-    func present(segmentation: FrameSegmentation)
-    func present(detections: FrameDetections)
-
     func present(signs: [ImageAsset])
     func present(roadDescription: RoadDescription?)
     func present(safetyState: SafetyState)
     func present(calibrationProgress: CalibrationProgress?)
     func present(speedLimit: ImageAsset?, isNew: Bool)
 
-    func configureFor(arManager: VisionARManager?)
+    func inject(visionManager: VisionManagerProtocol, arManager: VisionARManager)
 
     func dismissCurrent()
 }
@@ -123,15 +119,15 @@ final class ContainerInteractor {
         self.camera = camera
         self.visionManager = visionManager
 
-        visionARManager = VisionARManager.create(visionManager: visionManager)
+        let visionARManager = VisionARManager.create(visionManager: visionManager)
+        self.visionARManager = visionARManager
         visionSafetyManager = VisionSafetyManager.create(visionManager: visionManager)
         visionSafetyManager?.delegate = delegateProxy
 
         visionManager.delegate = delegateProxy
         visionManager.start()
 
-        camera.add(observer: self)
-        presenter.configureFor(arManager: visionARManager)
+        presenter.inject(visionManager: visionManager, arManager: visionARManager)
         presenter.presentVision()
         present(screen: .menu)
     }
@@ -224,10 +220,6 @@ final class ContainerInteractor {
     private func getIcon(for sign: Sign, over: Bool) -> ImageAsset? {
         return sign.icon(over: over, country: currentCountry)
     }
-
-    deinit {
-        camera.remove(observer: self)
-    }
 }
 
 extension ContainerInteractor: ContainerDelegate {
@@ -258,16 +250,6 @@ extension ContainerInteractor: MenuDelegate {
 }
 
 extension ContainerInteractor: VisionManagerDelegate {
-    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSegmentation frameSegmentation: FrameSegmentation) {
-        guard case .segmentation = currentScreen else { return }
-        presenter.present(segmentation: frameSegmentation)
-    }
-
-    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameDetections frameDetections: FrameDetections) {
-        guard case .objectDetection = currentScreen else { return }
-        presenter.present(detections: frameDetections)
-    }
-
     func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) {
         guard case .signsDetection = currentScreen else { return }
         let items = frameSignClassifications.signs.map { $0.sign }
@@ -296,14 +278,6 @@ extension ContainerInteractor: VisionManagerDelegate {
 
     func visionManagerDidCompleteUpdate(_ visionManager: VisionManagerProtocol) {
         updateSpeedLimits()
-    }
-}
-
-extension ContainerInteractor: VideoSourceObserver {
-    func videoSource(_ videoSource: VideoSource, didOutput videoSample: VideoSample) {
-        DispatchQueue.main.async { [weak self] in
-            self?.presenter.present(frame: videoSample.buffer)
-        }
     }
 }
 
