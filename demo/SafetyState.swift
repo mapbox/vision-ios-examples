@@ -10,7 +10,7 @@ enum SafetyState: Equatable {
 
         init?(_ type: DetectionClass) {
             switch type {
-            case .trafficLight, .trafficSign, .bicycle:
+            case .trafficLight, .trafficSign, .bicycle, .constructionCone:
                 return nil
             case .car:
                 self = .car
