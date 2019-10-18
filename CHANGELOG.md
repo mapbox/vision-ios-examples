@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0-28
+
+- `MapboxVision` v0.10.0
+- Added detection of construction cones
+- General bugfixes
+- Improved quality of detection/segmentation, especially at night
+- Improved segmentation, now it's more focused on road specific elements. New segmentation model recognizes the following classes: Crosswalk, Hood, MarkupDashed, MarkupDouble, MarkupOther, MarkupSolid, Other, Road, RoadEdge, Sidewalk
+
 ## 1.0-27
 
 - `MapboxVision` v0.9.0
