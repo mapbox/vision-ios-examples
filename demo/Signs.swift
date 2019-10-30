@@ -1355,7 +1355,7 @@ extension Sign {
             case .speedLimitEndZone:
                 return nil
             }
-        case .UK, .other:
+        case .UK, .germany, .other:
             switch type {
             case .unknown:
                 return nil
@@ -2142,7 +2142,11 @@ extension Sign {
             case .informationCarWashing:
                 return nil
             case .informationBusStop:
-                return nil
+                if country == .germany {
+                    return nil
+                } else {
+                    return nil
+                }
             case .regulatoryPedestriansCrossingUp:
                 return nil
             case .regulatoryPedestriansCrossingDown:
