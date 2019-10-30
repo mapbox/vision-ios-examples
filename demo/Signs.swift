@@ -713,6 +713,30 @@ extension Sign {
                 return nil
             case .warningTurnRightOnlyArrow:
                 return nil
+            case .informationCarWashing:
+                return nil
+            case .informationBusStop:
+                return nil
+            case .regulatoryPedestriansCrossingUp:
+                return nil
+            case .regulatoryPedestriansCrossingDown:
+                return nil
+            case .informationAutoService:
+                return nil
+            case .informationFood:
+                return nil
+            case .informationTown:
+                return nil
+            case .informationTownEnd:
+                return nil
+            case .regulatoryControl:
+                return nil
+            case .regulatoryDoubleUTurn:
+                return nil
+            case .speedLimitZone:
+                return nil
+            case .speedLimitEndZone:
+                return nil
             }
         case .china:
             switch type {
@@ -1305,6 +1329,30 @@ extension Sign {
             case .regulatoryNoUTurnRight:
                 return nil
             case .warningTurnRightOnlyArrow:
+                return nil
+            case .informationCarWashing:
+                return nil
+            case .informationBusStop:
+                return nil
+            case .regulatoryPedestriansCrossingUp:
+                return nil
+            case .regulatoryPedestriansCrossingDown:
+                return nil
+            case .informationAutoService:
+                return nil
+            case .informationFood:
+                return nil
+            case .informationTown:
+                return nil
+            case .informationTownEnd:
+                return nil
+            case .regulatoryControl:
+                return nil
+            case .regulatoryDoubleUTurn:
+                return nil
+            case .speedLimitZone:
+                return nil
+            case .speedLimitEndZone:
                 return nil
             }
         case .UK, .other:
@@ -2090,6 +2138,30 @@ extension Sign {
             case .regulatoryNoUTurnRight:
                 return nil
             case .warningTurnRightOnlyArrow:
+                return nil
+            case .informationCarWashing:
+                return nil
+            case .informationBusStop:
+                return nil
+            case .regulatoryPedestriansCrossingUp:
+                return nil
+            case .regulatoryPedestriansCrossingDown:
+                return nil
+            case .informationAutoService:
+                return nil
+            case .informationFood:
+                return nil
+            case .informationTown:
+                return nil
+            case .informationTownEnd:
+                return nil
+            case .regulatoryControl:
+                return nil
+            case .regulatoryDoubleUTurn:
+                return nil
+            case .speedLimitZone:
+                return nil
+            case .speedLimitEndZone:
                 return nil
             }
         case .unknown:
