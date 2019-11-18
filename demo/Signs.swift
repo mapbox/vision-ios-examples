@@ -2140,33 +2140,133 @@ extension Sign {
             case .warningTurnRightOnlyArrow:
                 return nil
             case .informationCarWashing:
-                return nil
+                return Asset.Signs.informationCarWashingEU
             case .informationBusStop:
                 if country == .germany {
-                    return nil
+                    return Asset.Signs.informationBusStopDE
                 } else {
-                    return nil
+                    return Asset.Signs.informationBusStopEU
                 }
             case .regulatoryPedestriansCrossingUp:
-                return nil
+                return Asset.Signs.regulatoryPedestriansCrossingUpEU
             case .regulatoryPedestriansCrossingDown:
-                return nil
+                return Asset.Signs.regulatoryPedestriansCrossingDownEU
             case .informationAutoService:
-                return nil
+                return Asset.Signs.informationAutoServiceEU
             case .informationFood:
-                return nil
+                return Asset.Signs.informationFoodEU
             case .informationTown:
-                return nil
+                return Asset.Signs.informationTownEU
             case .informationTownEnd:
-                return nil
+                return Asset.Signs.informationTownEndEU
             case .regulatoryControl:
-                return nil
+                return Asset.Signs.regulatoryControlEU
             case .regulatoryDoubleUTurn:
-                return nil
+                return Asset.Signs.regulatoryDoubleUTurnEU
             case .speedLimitZone:
-                return nil
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitZoneEU5
+                case 10:
+                    return Asset.Signs.speedLimitZoneEU10
+                case 15:
+                    return Asset.Signs.speedLimitZoneEU15
+                case 20:
+                    return Asset.Signs.speedLimitZoneEU20
+                case 25:
+                    return Asset.Signs.speedLimitZoneEU25
+                case 30:
+                    return Asset.Signs.speedLimitZoneEU30
+                case 35:
+                    return Asset.Signs.speedLimitZoneEU35
+                case 40:
+                    return Asset.Signs.speedLimitZoneEU40
+                case 45:
+                    return Asset.Signs.speedLimitZoneEU45
+                case 50:
+                    return Asset.Signs.speedLimitZoneEU50
+                case 55:
+                    return Asset.Signs.speedLimitZoneEU55
+                case 60:
+                    return Asset.Signs.speedLimitZoneEU60
+                case 65:
+                    return Asset.Signs.speedLimitZoneEU65
+                case 70:
+                    return Asset.Signs.speedLimitZoneEU70
+                case 75:
+                    return Asset.Signs.speedLimitZoneEU75
+                case 80:
+                    return Asset.Signs.speedLimitZoneEU80
+                case 85:
+                    return Asset.Signs.speedLimitZoneEU85
+                case 90:
+                    return Asset.Signs.speedLimitZoneEU90
+                case 95:
+                    return Asset.Signs.speedLimitZoneEU95
+                case 100:
+                    return Asset.Signs.speedLimitZoneEU100
+                case 105:
+                    return Asset.Signs.speedLimitZoneEU105
+                case 110:
+                    return Asset.Signs.speedLimitZoneEU110
+                case 115:
+                    return Asset.Signs.speedLimitZoneEU115
+                case 120:
+                    return Asset.Signs.speedLimitZoneEU120
+                default: return nil
+                }
             case .speedLimitEndZone:
-                return nil
+                switch number {
+                case 5:
+                    return Asset.Signs.speedLimitEndZoneEU5
+                case 10:
+                    return Asset.Signs.speedLimitEndZoneEU10
+                case 15:
+                    return Asset.Signs.speedLimitEndZoneEU15
+                case 20:
+                    return Asset.Signs.speedLimitEndZoneEU20
+                case 25:
+                    return Asset.Signs.speedLimitEndZoneEU25
+                case 30:
+                    return Asset.Signs.speedLimitEndZoneEU30
+                case 35:
+                    return Asset.Signs.speedLimitEndZoneEU35
+                case 40:
+                    return Asset.Signs.speedLimitEndZoneEU40
+                case 45:
+                    return Asset.Signs.speedLimitEndZoneEU45
+                case 50:
+                    return Asset.Signs.speedLimitEndZoneEU50
+                case 55:
+                    return Asset.Signs.speedLimitEndZoneEU55
+                case 60:
+                    return Asset.Signs.speedLimitEndZoneEU60
+                case 65:
+                    return Asset.Signs.speedLimitEndZoneEU65
+                case 70:
+                    return Asset.Signs.speedLimitEndZoneEU70
+                case 75:
+                    return Asset.Signs.speedLimitEndZoneEU75
+                case 80:
+                    return Asset.Signs.speedLimitEndZoneEU80
+                case 85:
+                    return Asset.Signs.speedLimitEndZoneEU85
+                case 90:
+                    return Asset.Signs.speedLimitEndZoneEU90
+                case 95:
+                    return Asset.Signs.speedLimitEndZoneEU95
+                case 100:
+                    return Asset.Signs.speedLimitEndZoneEU100
+                case 105:
+                    return Asset.Signs.speedLimitEndZoneEU105
+                case 110:
+                    return Asset.Signs.speedLimitEndZoneEU110
+                case 115:
+                    return Asset.Signs.speedLimitEndZoneEU115
+                case 120:
+                    return Asset.Signs.speedLimitEndZoneEU120
+                default: return nil
+                }
             }
         case .unknown:
             return nil
