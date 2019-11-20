@@ -1628,10 +1628,8 @@ extension Sign {
             case .informationLivingStreet:
                 if country == .UK {
                     return Asset.Signs.informationLivingStreetUK
-                } else if country == .other {
-                    return Asset.Signs.informationLivingStreetEU
                 } else {
-                    return nil
+                    return Asset.Signs.informationLivingStreetEU
                 }
             case .informationParking:
                 return Asset.Signs.informationParkingEU
@@ -1650,28 +1648,22 @@ extension Sign {
             case .regulatoryEndMotorway:
                 if country == .UK {
                     return Asset.Signs.regulatoryEndMotorwayUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryEndMotorwayEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryEndMotorwayEU
                 }
             case .regulatoryEndPriorityRoad:
                 return Asset.Signs.regulatoryEndPriorityRoadEU
             case .regulatoryEndProhibition:
                 if country == .UK {
                     return Asset.Signs.regulatoryEndProhibitionUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryEndProhibitionEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryEndProhibitionEU
                 }
             case .regulatoryGiveWayToOncomingTraffic:
                 if country == .UK {
                     return Asset.Signs.regulatoryGiveWayToOncomingTrafficUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryGiveWayToOncomingTrafficEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryGiveWayToOncomingTrafficEU
                 }
             case .regulatoryGoStraight:
                 return Asset.Signs.regulatoryGoStraightEU
@@ -1684,10 +1676,8 @@ extension Sign {
             case .regulatoryMotorway:
                 if country == .UK {
                     return Asset.Signs.regulatoryMotorwayUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryMotorwayEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryMotorwayEU
                 }
             case .regulatoryNoBicycles:
                 return Asset.Signs.regulatoryNoBicyclesEU
@@ -1696,10 +1686,8 @@ extension Sign {
             case .regulatoryNoDangerGoods:
                 if country == .UK {
                     return Asset.Signs.regulatoryNoDangerGoodsUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryNoDangerGoodsEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryNoDangerGoodsEU
                 }
             case .regulatoryNoEntry:
                 return Asset.Signs.regulatoryNoEntryEU
@@ -1716,20 +1704,16 @@ extension Sign {
             case .regulatoryNoOvertaking:
                 if country == .UK {
                     return Asset.Signs.regulatoryNoOvertakingUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryNoOvertakingEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryNoOvertakingEU
                 }
             case .regulatoryNoParking:
                 return Asset.Signs.regulatoryNoParkingEU
             case .regulatoryNoPedestrians:
                 if country == .UK {
                     return Asset.Signs.regulatoryNoPedestriansUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryNoPedestriansEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryNoPedestriansEU
                 }
             case .regulatoryNoRightTurn:
                 return Asset.Signs.regulatoryNoRightTurnEU
@@ -1748,10 +1732,8 @@ extension Sign {
             case .regulatoryPriorityOverOncomingTraffic:
                 if country == .UK {
                     return Asset.Signs.regulatoryPriorityOverOncomingTrafficUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryPriorityOverOncomingTrafficEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryPriorityOverOncomingTrafficEU
                 }
             case .regulatoryPriorityRoad:
                 return Asset.Signs.regulatoryPriorityRoadEU
@@ -1762,10 +1744,8 @@ extension Sign {
             case .regulatorySharedLaneBicyclesPedestrians:
                 if country == .UK {
                     return Asset.Signs.regulatorySharedLaneBicyclesPedestriansUK
-                } else if country == .other {
-                    return Asset.Signs.regulatorySharedLaneBicyclesPedestriansEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatorySharedLaneBicyclesPedestriansEU
                 }
             case .regulatoryStop:
                 return Asset.Signs.regulatoryStopEU
@@ -1784,10 +1764,8 @@ extension Sign {
             case .regulatoryYield:
                 if country == .UK {
                     return Asset.Signs.regulatoryYieldUK
-                } else if country == .other {
-                    return Asset.Signs.regulatoryYieldEU
                 } else {
-                    return nil
+                    return Asset.Signs.regulatoryYieldEU
                 }
             case .warningBicyclesCrossing:
                 return Asset.Signs.warningBicyclesCrossingEU
@@ -1798,10 +1776,8 @@ extension Sign {
             case .warningDangerousCrosswinds:
                 if country == .UK {
                     return Asset.Signs.warningDangerousCrosswindsUK
-                } else if country == .other {
-                    return Asset.Signs.warningDangerousCrosswindsEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningDangerousCrosswindsEU
                 }
             case .warningDangerousTraffic:
                 return Asset.Signs.warningDangerousTrafficEU
@@ -1810,10 +1786,8 @@ extension Sign {
             case .warningDomesticAnimals:
                 if country == .UK {
                     return Asset.Signs.warningDomesticAnimalsUK
-                } else if country == .other {
-                    return Asset.Signs.warningDomesticAnimalsEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningDomesticAnimalsEU
                 }
             case .warningFallingRocksOrDebrisLeft:
                 return Asset.Signs.warningFallingRocksOrDebrisLeftEU
@@ -1826,10 +1800,8 @@ extension Sign {
             case .warningLowGroundClearance:
                 if country == .UK {
                     return Asset.Signs.warningLowGroundClearanceUK
-                } else if country == .other {
-                    return Asset.Signs.warningLowGroundClearanceEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningLowGroundClearanceEU
                 }
             case .warningOpeningOrSwingBridge:
                 return Asset.Signs.warningOpeningOrSwingBridgeEU
@@ -1838,18 +1810,14 @@ extension Sign {
             case .warningPedestriansCrossing:
                 if country == .UK {
                     return Asset.Signs.warningPedestriansCrossingUK
-                } else if country == .other {
-                    return Asset.Signs.warningPedestriansCrossingEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningPedestriansCrossingEU
                 }
             case .warningRailroadCrossingWithoutBarriers:
                 if country == .UK {
                     return Asset.Signs.warningRailroadCrossingWithoutBarriersUK
-                } else if country == .other {
-                    return Asset.Signs.warningRailroadCrossingWithoutBarriersEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningRailroadCrossingWithoutBarriersEU
                 }
             case .warningRailwayCrossing:
                 return Asset.Signs.warningRailwayCrossingEU
@@ -1864,26 +1832,20 @@ extension Sign {
             case .warningRoadworks:
                 if country == .UK {
                     return Asset.Signs.warningRoadworksUK
-                } else if country == .other {
-                    return Asset.Signs.warningRoadworksEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningRoadworksEU
                 }
             case .warningRoundabout:
                 if country == .UK {
                     return Asset.Signs.warningRoundAboutUK
-                } else if country == .other {
-                    return Asset.Signs.warningRoundAboutEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningRoundAboutEU
                 }
             case .warningSchoolZone:
                 if country == .UK {
                     return Asset.Signs.warningSchoolZoneUK
-                } else if country == .other {
-                    return Asset.Signs.warningSchoolZoneEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningSchoolZoneEU
                 }
             case .warningSlipperyRoadSurface:
                 return Asset.Signs.warningSlipperyRoadSurfaceEU
@@ -1900,10 +1862,8 @@ extension Sign {
             case .warningTrafficQueues:
                 if country == .UK {
                     return Asset.Signs.warningTrafficQueuesUK
-                } else if country == .other {
-                    return Asset.Signs.warningTrafficQueuesEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningTrafficQueuesEU
                 }
             case .warningTrafficSignals:
                 return Asset.Signs.warningTrafficSignalsEU
@@ -1912,28 +1872,22 @@ extension Sign {
             case .warningTwoWayTraffic:
                 if country == .UK {
                     return Asset.Signs.warningTwoWayTrafficUK
-                } else if country == .other {
-                    return Asset.Signs.warningTwoWayTrafficEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningTwoWayTrafficEU
                 }
             case .warningUnevenRoad:
                 return Asset.Signs.warningUnevenRoadEU
             case .warningWildAnimals:
                 if country == .UK {
                     return Asset.Signs.warningWildAnimalsUK
-                } else if country == .other {
-                    return Asset.Signs.warningWildAnimalsEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningWildAnimalsEU
                 }
             case .warningWindingRoad:
                 if country == .UK {
                     return Asset.Signs.warningWindingRoadUK
-                } else if country == .other {
-                    return Asset.Signs.warningWindingRoadEU
                 } else {
-                    return nil
+                    return Asset.Signs.warningWindingRoadEU
                 }
             case .speedLimitNight:
                 return nil
