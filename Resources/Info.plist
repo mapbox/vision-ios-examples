@@ -42,16 +42,8 @@
 	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Frames from the camera are passed to ML models to get semantic segmentation, object detection and extract other features</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location and heading information is used for position estimation, localization and AR-related tasks</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location and heading information is used for position estimation, localization and AR-related tasks</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location and heading information is used for position estimation, localization and AR-related tasks</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

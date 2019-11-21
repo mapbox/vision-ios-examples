@@ -1,5 +1,9 @@
 # Changelog
 
+## - Unreleased
+
+- Removed location update in background
+
 ## 1.0-28
 
 - `MapboxVision` v0.10.0
