@@ -6,18 +6,54 @@ import UIKit
 
 private let inset: CGFloat = 18.0
 
+private enum ARFeature {
+    case lane
+    case fence
+    case laneAndFence
+
+    var next: ARFeature {
+        switch self {
+        case .lane:
+            return .fence
+        case .fence:
+            return .laneAndFence
+        case .laneAndFence:
+            return .lane
+        }
+    }
+
+    var isLane: Bool {
+        return self == .lane || self == .laneAndFence
+    }
+
+    var isFence: Bool {
+        return self == .fence || self == .laneAndFence
+    }
+}
+
 final class ARContainerViewController: UIViewController {
     private lazy var mapViewController = ARMapNavigationController()
     private lazy var arViewController = VisionARViewController()
 
     weak var navigationDelegate: NavigationDelegate?
     private var navigationService: NavigationService?
+    private var activeARFeature: ARFeature = .lane {
+        didSet {
+            arViewController.isLaneVisible = activeARFeature.isLane
+            arViewController.isFenceVisible = activeARFeature.isFence
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         mapViewController.completion = present
 
         presentMap()
+
+        let featuresSwitchButton = UIButton(frame: CGRect(x: 0, y: 0, width: arViewController.view.frame.size.width, height: arViewController.view.frame.size.height))
+        featuresSwitchButton.setTitle("", for: .normal)
+        arViewController.view.addSubview(featuresSwitchButton)
+        featuresSwitchButton.addTarget(self, action: #selector(ARContainerViewController.switchARFeature(_:)), for: .primaryActionTriggered)
 
         arViewController.view.addSubview(endButton)
         NSLayoutConstraint.activate([
@@ -33,6 +69,11 @@ final class ARContainerViewController: UIViewController {
             instructionsLabel.topAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.topAnchor, constant: inset),
             instructionsLabel.heightAnchor.constraint(equalToConstant: 44),
         ])
+    }
+
+    @objc
+    func switchARFeature(_ sender: Any) {
+        activeARFeature = activeARFeature.next
     }
 
     @objc
