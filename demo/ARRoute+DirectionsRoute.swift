@@ -16,7 +16,7 @@ extension MapboxVisionARNative.Route {
 
                 guard let coords = step.coordinates else { return }
                 let routePoints = coords.map {
-                    RoutePoint(position: GeoCoordinate(lon: $0.longitude, lat: $0.latitude))
+                    RoutePoint(position: GeoCoordinate(lon: $0.longitude, lat: $0.latitude), maneuverType: step.maneuverType.toVisionManeuverType())
                 }
                 points.append(contentsOf: routePoints)
             }
@@ -26,5 +26,50 @@ extension MapboxVisionARNative.Route {
                   eta: Float(route.expectedTravelTime),
                   sourceStreetName: route.legs.first?.source.name ?? "",
                   destinationStreetName: route.legs.last?.destination.name ?? "")
+    }
+}
+
+private extension MapboxDirections.ManeuverType {
+    func toVisionManeuverType() -> MapboxVisionARNative.ManeuverType {
+        switch self {
+        case .none:
+            return .none
+        case .depart:
+            return .depart
+        case .turn:
+            return .turn
+        case .continue:
+            return .continue
+        case .passNameChange:
+            return .newName
+        case .merge:
+            return .merge
+        case .takeOnRamp:
+            return .onRamp
+        case .takeOffRamp:
+            return .offRamp
+        case .reachFork:
+            return .fork
+        case .reachEnd:
+            return .endOfRoad
+        case .useLane:
+            return .none
+        case .takeRoundabout:
+            return .roundabout
+        case .takeRotary:
+            return .rotary
+        case .turnAtRoundabout:
+            return .roundaboutTurn
+        case .exitRoundabout:
+            return .roundaboutExit
+        case .exitRotary:
+            return .rotaryExit
+        case .heedWarning:
+            return .notification
+        case .arrive:
+            return .arrive
+        case .passWaypoint:
+            return .none
+        }
     }
 }
