@@ -22,11 +22,11 @@ private enum ARFeature {
         }
     }
 
-    var isLane: Bool {
+    var containsLane: Bool {
         return self == .lane || self == .laneAndFence
     }
 
-    var isFence: Bool {
+    var containsFence: Bool {
         return self == .fence || self == .laneAndFence
     }
 }
@@ -39,8 +39,8 @@ final class ARContainerViewController: UIViewController {
     private var navigationService: NavigationService?
     private var activeARFeature: ARFeature = .lane {
         didSet {
-            arViewController.isLaneVisible = activeARFeature.isLane
-            arViewController.isFenceVisible = activeARFeature.isFence
+            arViewController.isLaneVisible = activeARFeature.containsLane
+            arViewController.isFenceVisible = activeARFeature.containsFence
         }
     }
 
@@ -50,10 +50,17 @@ final class ARContainerViewController: UIViewController {
 
         presentMap()
 
-        let featuresSwitchButton = UIButton(frame: CGRect(x: 0, y: 0, width: arViewController.view.frame.size.width, height: arViewController.view.frame.size.height))
-        featuresSwitchButton.setTitle("", for: .normal)
-        arViewController.view.addSubview(featuresSwitchButton)
-        featuresSwitchButton.addTarget(self, action: #selector(ARContainerViewController.switchARFeature(_:)), for: .primaryActionTriggered)
+        let featureSwitchButton = UIButton()
+        featureSwitchButton.translatesAutoresizingMaskIntoConstraints = false
+        featureSwitchButton.setTitle("", for: .normal)
+        arViewController.view.addSubview(featureSwitchButton)
+        featureSwitchButton.addTarget(self, action: #selector(switchARFeature), for: .primaryActionTriggered)
+        NSLayoutConstraint.activate([
+            featureSwitchButton.centerXAnchor.constraint(equalTo: arViewController.view.centerXAnchor),
+            featureSwitchButton.centerYAnchor.constraint(equalTo: arViewController.view.centerYAnchor),
+            featureSwitchButton.heightAnchor.constraint(equalTo: arViewController.view.heightAnchor),
+            featureSwitchButton.widthAnchor.constraint(equalTo: arViewController.view.widthAnchor),
+        ])
 
         arViewController.view.addSubview(endButton)
         NSLayoutConstraint.activate([
@@ -72,7 +79,7 @@ final class ARContainerViewController: UIViewController {
     }
 
     @objc
-    func switchARFeature(_ sender: Any) {
+    func switchARFeature() {
         activeARFeature = activeARFeature.next
     }
 
