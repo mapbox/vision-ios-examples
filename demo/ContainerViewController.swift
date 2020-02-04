@@ -9,6 +9,9 @@ private let roadLanesHeight: CGFloat = 64
 private let smallRelativeInset: CGFloat = 16
 private let buttonHeight: CGFloat = 36
 
+/// Shows metainfo like roadLanes, signs, distance
+/// Also shows as child view controllers modes+-
+
 final class ContainerViewController: UIViewController {
     weak var delegate: ContainerDelegate? {
         willSet {
@@ -371,4 +374,8 @@ extension ContainerViewController: NavigationDelegate {
     func navigationDidArriveAtDestination() {
         delegate?.didNavigationRouteUpdated(route: nil)
     }
+}
+
+protocol VisionMode {
+
 }
