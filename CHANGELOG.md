@@ -6,6 +6,7 @@ The latest version of the Vision Teaser includes numerous improvements to the AR
 
 - `MapboxVision` v0.11.0
 - Removed location update in background
+- Removed Object Mapping screen
 
 ## 1.0-28
 
