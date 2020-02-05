@@ -6,18 +6,61 @@ import UIKit
 
 private let inset: CGFloat = 18.0
 
+private enum ARFeature {
+    case lane
+    case fence
+    case laneAndFence
+
+    var next: ARFeature {
+        switch self {
+        case .lane:
+            return .fence
+        case .fence:
+            return .laneAndFence
+        case .laneAndFence:
+            return .lane
+        }
+    }
+
+    var containsLane: Bool {
+        return self == .lane || self == .laneAndFence
+    }
+
+    var containsFence: Bool {
+        return self == .fence || self == .laneAndFence
+    }
+}
+
 final class ARContainerViewController: UIViewController {
     private lazy var mapViewController = ARMapNavigationController()
     private lazy var arViewController = VisionARViewController()
 
     weak var navigationDelegate: NavigationDelegate?
     private var navigationService: NavigationService?
+    private var activeARFeature: ARFeature = .lane {
+        didSet {
+            arViewController.isLaneVisible = activeARFeature.containsLane
+            arViewController.isFenceVisible = activeARFeature.containsFence
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         mapViewController.completion = present
 
         presentMap()
+
+        let featureSwitchButton = UIButton()
+        featureSwitchButton.translatesAutoresizingMaskIntoConstraints = false
+        featureSwitchButton.setTitle("", for: .normal)
+        arViewController.view.addSubview(featureSwitchButton)
+        featureSwitchButton.addTarget(self, action: #selector(switchARFeature), for: .primaryActionTriggered)
+        NSLayoutConstraint.activate([
+            featureSwitchButton.centerXAnchor.constraint(equalTo: arViewController.view.centerXAnchor),
+            featureSwitchButton.centerYAnchor.constraint(equalTo: arViewController.view.centerYAnchor),
+            featureSwitchButton.heightAnchor.constraint(equalTo: arViewController.view.heightAnchor),
+            featureSwitchButton.widthAnchor.constraint(equalTo: arViewController.view.widthAnchor),
+        ])
 
         arViewController.view.addSubview(endButton)
         NSLayoutConstraint.activate([
@@ -33,6 +76,11 @@ final class ARContainerViewController: UIViewController {
             instructionsLabel.topAnchor.constraint(equalTo: arViewController.view.safeAreaLayoutGuide.topAnchor, constant: inset),
             instructionsLabel.heightAnchor.constraint(equalToConstant: 44),
         ])
+    }
+
+    @objc
+    func switchARFeature() {
+        activeARFeature = activeARFeature.next
     }
 
     @objc
