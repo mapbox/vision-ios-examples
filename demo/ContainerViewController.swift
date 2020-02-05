@@ -285,7 +285,6 @@ extension ContainerViewController: ContainerPresenter {
         case .segmentation: visionViewController?.visualizationMode = .segmentation
         case .objectDetection: visionViewController?.visualizationMode = .detection
         case .distanceToObject: visionViewController?.visualizationMode = .clear
-        case .map: presentMap()
         case .laneDetection: visionViewController?.visualizationMode = .clear
         case .arRouting: presentARRouting()
         case .menu: presentMenu()
@@ -310,12 +309,6 @@ extension ContainerViewController: ContainerPresenter {
 
         present(viewController: viewController)
         viewController.visualizationMode = .clear
-    }
-
-    private func presentMap() {
-        let viewController = MapViewController()
-        present(viewController: viewController)
-        currentViewController = viewController
     }
 
     private func presentARRouting() {

@@ -1,0 +1,11 @@
+# The docs are available on https://docs.fastlane.tools/actions/match
+
+app_identifier("com.mapbox.visionsdk.demo")
+
+storage_mode("git")
+git_url("git@github.com:mapbox/apple-certificates.git")
+shallow_clone(true)
+
+# Possible values: appstore, development
+type("appstore")
+readonly(true)

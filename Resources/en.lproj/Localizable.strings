@@ -15,7 +15,6 @@
 "Menu_CollisionDetection_Button" = "Safety mode";
 "Menu_SignDetection_Button" = "Sign Detection";
 "Menu_ObjectDetection_Button" = "Object Detection";
-"Menu_ObjectMapping_Button" = "Object Mapping";
 "Menu_AR_Button" = "AR Routing";
 
 "Menu_Title" = "Mapbox Vision Teaser";

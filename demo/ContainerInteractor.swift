@@ -10,7 +10,6 @@ enum Screen {
     case segmentation
     case objectDetection
     case distanceToObject
-    case map
     case laneDetection
     case arRouting
 }
@@ -156,7 +155,7 @@ final class ContainerInteractor {
                              detectionPerformance: ModelPerformance(mode: .fixed, rate: .low))
         case .distanceToObject, .laneDetection:
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
-        case .map, .menu, .arRouting:
+        case .menu, .arRouting:
             return .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
         }
     }

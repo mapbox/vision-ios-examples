@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E197730211DF34C00311B95 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19772F211DF34C00311B95 /* MapViewController.swift */; };
 		2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */; };
 		2E4FEDF4215E5EA600DCB496 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF2215E5EA600DCB496 /* LicenseViewController.swift */; };
 		2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */; };
@@ -87,7 +86,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2E19772F211DF34C00311B95 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2E48C19421A5A9C50029B2A9 /* ImageSwitchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSwitchingView.swift; sourceTree = "<group>"; };
 		2E4FEDF2215E5EA600DCB496 /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		2E4FEDF3215E5EA600DCB496 /* LicenseChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseChecker.swift; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 				B52787D520F0B46A007D1EA7 /* AppDelegate.swift */,
 				B52787E920F0B6A3007D1EA7 /* MenuViewController.swift */,
 				B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */,
-				2E19772F211DF34C00311B95 /* MapViewController.swift */,
 				2E603366214299110050EDB3 /* OrderedDictionary.swift */,
 				2E9BF8FF21665318000A6A39 /* AlertPlayer.swift */,
 				B5045858217A077300BA5133 /* CollisionObjectView.swift */,
@@ -557,7 +554,6 @@
 				B532EE052170A9AB00B172FA /* ARContainerViewController.swift in Sources */,
 				2E4FEE08215E647400DCB496 /* Strings.swift in Sources */,
 				B5314422218C7DA7001B6DEB /* SafetyState.swift in Sources */,
-				2E197730211DF34C00311B95 /* MapViewController.swift in Sources */,
 				2E60335C214295CD0050EDB3 /* DistanceFormatter.swift in Sources */,
 				B544200221496793007CB69E /* DistanceView.swift in Sources */,
 				2E603367214299120050EDB3 /* OrderedDictionary.swift in Sources */,
