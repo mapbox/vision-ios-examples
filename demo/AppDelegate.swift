@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         containerController.delegate = interactor
         menuViewController.delegate = interactor
 
+        let _ = ReplaySessionManager()
+
         return containerController
     }
 
