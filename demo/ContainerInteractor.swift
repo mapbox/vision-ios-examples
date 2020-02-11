@@ -146,17 +146,14 @@ final class ContainerInteractor {
         signTracker.reset()
     }
 
-    private func modelPerformanceConfig(for screen: Screen) -> ModelPerformanceConfig {
+    private func modelPerformance(for screen: Screen) -> ModelPerformance {
         switch screen {
-        case .signsDetection, .objectDetection:
-            return .merged(performance: ModelPerformance(mode: .fixed, rate: .high))
-        case .segmentation:
-            return .separate(segmentationPerformance: ModelPerformance(mode: .fixed, rate: .high),
-                             detectionPerformance: ModelPerformance(mode: .fixed, rate: .low))
+        case .signsDetection, .segmentation, .objectDetection:
+            return ModelPerformance(mode: .fixed, rate: .high)
         case .distanceToObject, .laneDetection:
-            return .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
+            return ModelPerformance(mode: .fixed, rate: .medium)
         case .menu, .arRouting:
-            return .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
+            return ModelPerformance(mode: .fixed, rate: .low)
         }
     }
 
@@ -172,7 +169,7 @@ final class ContainerInteractor {
 
     private func present(screen: Screen) {
         presenter.dismissCurrent()
-        visionManager.modelPerformanceConfig = modelPerformanceConfig(for: screen)
+        visionManager.modelPerformance = modelPerformance(for: screen)
         presenter.present(screen: screen)
         presenter.presentBackButton(isVisible: screen != .menu)
         currentScreen = screen
