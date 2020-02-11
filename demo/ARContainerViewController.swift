@@ -87,11 +87,11 @@ final class ARContainerViewController: UIViewController {
     @objc
     func presentMap() {
         dismiss(viewController: arViewController)
-        present(viewController: mapViewController)
+//        present(viewController: mapViewController)
     }
 
     func present(route: MapboxDirections.Route) {
-        dismiss(viewController: mapViewController)
+//        dismiss(viewController: mapViewController)
 
         navigationService = MapboxNavigationService(route: route)
         navigationService?.delegate = self

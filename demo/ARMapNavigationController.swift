@@ -8,27 +8,28 @@ import UIKit
 private let routeEdgeInsets = UIEdgeInsets(top: 100, left: 200, bottom: 100, right: 200)
 private let inset: CGFloat = 18.0
 
-class ARMapNavigationController: UIViewController {
+class ARMapNavigationController: VisionStackLevel {
     var completion: ((MapboxDirections.Route) -> Void)?
 
-    private var mapView: NavigationMapView {
-        return view as! NavigationMapView
-    }
+    private var mapView: NavigationMapView
 
     private var selectedRoute: MapboxDirections.Route?
 
-    override func loadView() {
+    override init() {
         let view = NavigationMapView(frame: .zero, styleURL: MGLStyle.darkStyleURL)
-        view.delegate = self
         view.showsUserLocation = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        self.view = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+        self.mapView = view
+        super.init()
+        view.delegate = self
         view.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(selectPlace)))
+        addSubview(view)
+        NSLayoutConstraint.activate([
+            view.centerXAnchor.constraint(equalTo: centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: centerYAnchor),
+            view.widthAnchor.constraint(equalTo: widthAnchor),
+            view.heightAnchor.constraint(equalTo: heightAnchor)
+        ])
 
         view.addSubview(goButton)
         NSLayoutConstraint.activate([
@@ -46,8 +47,11 @@ class ARMapNavigationController: UIViewController {
         ])
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func viewWillAppear() {
         mapView.removeRoutes()
         hintLabel.isHidden = false
         goButton.isEnabled = false

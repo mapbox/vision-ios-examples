@@ -7,6 +7,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow(frame: UIScreen.main.bounds)
     private var interactor: ContainerInteractor?
+    var teaserApp: TeaserApp?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         _ = MTLCreateSystemDefaultDevice()
@@ -14,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isIdleTimerDisabled = true
 
         Fabric.with([Crashlytics.self])
-
-        window.rootViewController = makeRootViewController()
+        let teaserApp = TeaserApp()
+        window.rootViewController = teaserApp.vc//makeRootViewController()
         window.makeKeyAndVisible()
-
+        self.teaserApp = teaserApp
         return true
     }
 
@@ -34,17 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         containerController.visionViewController = VisionPresentationViewController()
 
-        let menuViewController = MenuViewController()
-        containerController.menuViewController = menuViewController
-
-        let alertPlayer = AlertSoundPlayer()
-
-        interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
-            alertPlayer: alertPlayer,
-            presenter: containerController
-        ))
-        containerController.delegate = interactor
-        menuViewController.delegate = interactor
+//        let menuViewController = MenuViewController()
+//        containerController.menuViewController = menuViewController
+//
+//        let alertPlayer = AlertSoundPlayer()
+//
+//        interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
+//            alertPlayer: alertPlayer,
+//            presenter: containerController
+//        ))
+//        containerController.delegate = interactor
+//        menuViewController.delegate = interactor
 
         let _ = ReplaySessionManager()
 

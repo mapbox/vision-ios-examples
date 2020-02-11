@@ -1,6 +1,6 @@
 import UIKit
 
-final class MenuViewController: UIViewController {
+final class MenuLevel: VisionStackLevel {
     private static let infoButtonPadding: CGFloat = 20
 
     // MARK: Properties
@@ -17,24 +17,35 @@ final class MenuViewController: UIViewController {
         button.tintColor = UIColor(white: 0.5, alpha: 0.5)
         return button
     }()
+    let menuItems: [TeaserMenuItem]
+    private var didChoose: ((TeaserMenuItem) -> Void)?
+
+    func didChoose(_ didChooseCallback: @escaping (TeaserMenuItem) -> Void) {
+        didChoose = didChooseCallback
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: Lifecycle
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init(with menuItems: [TeaserMenuItem]) {
+        self.menuItems = menuItems
+        super.init()
 
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        backgroundColor = UIColor.black.withAlphaComponent(0.75)
 
-        let select: (Screen) -> Void = { [weak self] screen in
-            self?.delegate?.selected(screen: screen)
+        let select: (TeaserMenuItem) -> Void = { [weak self] menuItem in
+            self?.didChoose?(menuItem)
         }
 
-        let segmentationButton = MenuItemButton(for: .segmentation, action: select)
-        let laneDetectionButton = MenuItemButton(for: .laneDetection, action: select)
-        let distanceToObjectButton = MenuItemButton(for: .distanceToObject, action: select)
-        let signsDetectionButton = MenuItemButton(for: .signsDetection, action: select)
-        let objectDetectorButton = MenuItemButton(for: .objectDetection, action: select)
-        let arRoutingButton = MenuItemButton(for: .arRouting, action: select)
+        let segmentationButton = MenuItemButton(for: menuItems[1], action: select)
+        let laneDetectionButton = MenuItemButton(for: menuItems[6], action: select)
+        let distanceToObjectButton = MenuItemButton(for: menuItems[4], action: select)
+        let signsDetectionButton = MenuItemButton(for: menuItems[0], action: select)
+        let objectDetectorButton = MenuItemButton(for: menuItems[2], action: select)
+        let arRoutingButton = MenuItemButton(for: menuItems[5], action: select)
 
         let titleView = UIImageView(image: Asset.Assets.title.image)
         addToView(titleImageView: titleView)
@@ -100,41 +111,41 @@ final class MenuViewController: UIViewController {
 
     private func addToView(titleImageView: UIImageView) {
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(titleImageView)
+        addSubview(titleImageView)
         NSLayoutConstraint.activate([
-            titleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
+            titleImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleImageView.topAnchor.constraint(equalTo: topAnchor, constant: 28),
         ])
     }
 
     private func addToView(centerLineImageView: UIImageView) {
         centerLineImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(centerLineImageView)
+        addSubview(centerLineImageView)
         NSLayoutConstraint.activate([
-            centerLineImageView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-            centerLineImageView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor, constant: 18),
-            centerLineImageView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
+            centerLineImageView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            centerLineImageView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: 18),
+            centerLineImageView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
         ])
     }
 
     private func addToView(leftLineImageView: UIImageView, withDependencyOn centerLine: UIImageView) {
         leftLineImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(leftLineImageView)
+        addSubview(leftLineImageView)
         NSLayoutConstraint.activate([
             leftLineImageView.centerYAnchor.constraint(equalTo: centerLine.centerYAnchor),
             leftLineImageView.trailingAnchor.constraint(equalTo: centerLine.leadingAnchor),
-            leftLineImageView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
+            leftLineImageView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
         ])
     }
 
     private func addToView(rightLineImageView: UIImageView, withDependencyOn centerLine: UIImageView) {
         rightLineImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         rightLineImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(rightLineImageView)
+        addSubview(rightLineImageView)
         NSLayoutConstraint.activate([
             rightLineImageView.centerYAnchor.constraint(equalTo: centerLine.centerYAnchor),
             rightLineImageView.leadingAnchor.constraint(equalTo: centerLine.trailingAnchor),
-            rightLineImageView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
+            rightLineImageView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
         ])
     }
 
@@ -148,34 +159,35 @@ final class MenuViewController: UIViewController {
     }
 
     private func addToViewInfoButton() {
-        view.addSubview(infoButton)
+        addSubview(infoButton)
         NSLayoutConstraint.activate([
-            infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -MenuViewController.infoButtonPadding),
-            infoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: MenuViewController.infoButtonPadding),
+            infoButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -MenuLevel.infoButtonPadding),
+            infoButton.topAnchor.constraint(equalTo: topAnchor, constant: MenuLevel.infoButtonPadding),
         ])
     }
 
     @objc
     private func infoTapped() {
-        let alert: UIAlertController
-
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .alert)
-        } else {
-            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
-        }
-
-        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default) { _ in
-            guard let url = URL(string: GlobalConstants.tosLink) else { return }
-            UIApplication.shared.open(url)
-        })
-        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default) { _ in
-            guard let url = URL(string: GlobalConstants.privacyPolicyLink) else { return }
-            UIApplication.shared.open(url)
-        })
-        alert.addAction(UIAlertAction(title: L10n.generalButtonCancel, style: .cancel, handler: nil))
-
-        self.present(alert, animated: true)
+        // todo: implement
+//        let alert: UIAlertController
+//
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .alert)
+//        } else {
+//            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
+//        }
+//
+//        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default) { _ in
+//            guard let url = URL(string: GlobalConstants.tosLink) else { return }
+//            UIApplication.shared.open(url)
+//        })
+//        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default) { _ in
+//            guard let url = URL(string: GlobalConstants.privacyPolicyLink) else { return }
+//            UIApplication.shared.open(url)
+//        })
+//        alert.addAction(UIAlertAction(title: L10n.generalButtonCancel, style: .cancel, handler: nil))
+//
+//        self.present(alert, animated: true)
     }
 }
 
@@ -225,7 +237,7 @@ private class MenuItemButton: UIView {
 
     private let action: () -> Void
 
-    init(for screen: Screen, action: @escaping (Screen) -> Void) {
+    init(for screen: TeaserMenuItem, action: @escaping (TeaserMenuItem) -> Void) {
         self.action = { action(screen) }
 
         super.init(frame: .zero)
@@ -243,8 +255,8 @@ private class MenuItemButton: UIView {
             heightAnchor.constraint(equalToConstant: MenuItemButton.cellHeight),
         ])
 
-        titleLabel.text = screen.title
-        imageView.image = screen.iconImage
+        titleLabel.text = screen.name
+        imageView.image = screen.icon
 
         let gestureRecogrizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         addGestureRecognizer(gestureRecogrizer)

@@ -1,72 +1,116 @@
 import UIKit
+import MapboxVisionAR
 
 class TeaserApp {
-    let visionBundle: VisionBundle
-    let controlStack: ARControlStack
-
     let vc: UIViewController
+
+    private let visionBundle: VisionBundle
+    private let visionStack: VisionStack
+    private var menuLevel: MenuLevel?
 
     init() {
         visionBundle = VMObserver().observe()
-        controlStack = ARControlStack(with: visionBundle)
+        visionStack = VisionStack(with: visionBundle)
         vc = UINavigationController()
-        vc.addChild(controlStack.viewController)
-
+        vc.addChild(visionStack.viewController)
         let menuItems = [
             TeaserMenuItem(
-                name: "Sign Detection",
-                icon: Asset.Assets.icon1.image,
-                activateBlock: { viewStack in }
-            ),
-            TeaserMenuItem(
-                name: "Sign Detection",
-                icon: Asset.Assets.icon1.image,
-                activateBlock: { viewStack in
-                    viewStack.baseLevel.clear()
-//                    let signs = DetectedSignsLevel(visionBundle)
-//                    viewStack.add(level: signs)
-            }
-            ),
-            TeaserMenuItem(
-                name: "AR Navigation",
-                icon: Asset.Assets.icon2.image,
-                activateBlock: { viewStack in
-                    viewStack.baseLevel.ar()
-                    viewStack.clearLevels()
-                    let mapViewController = MapViewController()
-//                    MapViewController.onChoose { route in
-//                        visionBundle.ar.set(route: route)
-//                    }
+                name: L10n.menuSignDetectionButton,
+                icon: Asset.Assets.icon4.image,
+                activateBlock: { [weak self] visionStack in
+                    visionStack.baseLevel.clear()
+                    visionStack.clear()
+                    guard let self = self else { return }
+                    let signs = DetectedSignsLevel(with: self.visionBundle)
+                    visionStack.add(level: signs)
                 }
             ),
             TeaserMenuItem(
-                name: "Sign Detection",
+                name: L10n.menuSegmentationButton,
                 icon: Asset.Assets.icon1.image,
-                activateBlock: { viewStack in }
+                activateBlock: { visionStack in
+                    visionStack.baseLevel.segmentation()
+                    visionStack.clear()
+                }
             ),
             TeaserMenuItem(
-                name: "Sign Detection",
-                icon: Asset.Assets.icon1.image,
-                activateBlock: { viewStack in }
+                name: L10n.menuObjectDetectionButton,
+                icon: Asset.Assets.icon6.image,
+                activateBlock: { visionStack in
+                    visionStack.baseLevel.detection()
+                    visionStack.clear()
+                }
             ),
             TeaserMenuItem(
-                name: "Sign Detection",
-                icon: Asset.Assets.icon1.image,
-                activateBlock: { viewStack in }
+                name: L10n.menuObjectMappingButton,
+                icon: Asset.Assets.icon5.image,
+                activateBlock: { visionStack in
+                    visionStack.baseLevel.clear()
+                    visionStack.clear()
+                }
             ),
             TeaserMenuItem(
-                name: "Sign Detection",
-                icon: Asset.Assets.icon1.image,
-                activateBlock: { viewStack in }
+                name: L10n.menuCollisionDetectionButton,
+                icon: Asset.Assets.collisionDetection.image,
+                activateBlock: { [weak visionBundle] visionStack in
+                    visionStack.baseLevel.clear()
+                    visionStack.clear()
+                    guard let safetyBundle = visionBundle?.safety else { return }
+                    visionStack.add(level: SafetyLevel(with: safetyBundle))
+                }
+            ),
+            TeaserMenuItem(
+                name: L10n.menuARButton,
+                icon: Asset.Assets.icon7.image,
+                activateBlock: { [weak visionBundle] visionStack in
+                    visionStack.clear()
+                    let map = ARMapNavigationController()
+                    visionStack.add(level: map)
+                    map.completion = { [weak visionBundle, weak visionStack, unowned map] route in
+                        visionStack?.clearLevels()
+                        visionBundle?.ar.arManager.set(route: Route(route: route))
+                        visionStack?.baseLevel.ar()
+                        let navigation = NavigationLevel(with: route)
+                        visionStack?.add(level: navigation)
+                        visionStack?.add(level: EndButtonLevel({ [weak visionStack, map] in
+                            guard let visionStack = visionStack else { return }
+                            visionStack.clearLevels()
+                            visionStack.add(level: map)
+                        }))
+                    }
+                }
+            ),
+            TeaserMenuItem(
+                name: L10n.menuLaneDetectionButton,
+                icon: Asset.Assets.icon2.image,
+                activateBlock: { visionStack in
+                    visionStack.baseLevel.clear()
+                    visionStack.clear()
+                }
             )
         ]
-        let menu = TeaserMenu(with: menuItems)
-        menu.didChoose { [weak controlStack] menuItem in
-            guard let controlStack = controlStack else { return }
+
+        let menuLevel = MenuLevel(with: menuItems)
+        visionStack.add(level: menuLevel)
+        let backButtonLevel = BackButtonLevel(withCallback: { [weak menuLevel, weak visionStack, weak visionBundle] in
+            guard let menuViewController = menuLevel else { return }
+            visionStack?.clear()
+            visionStack?.baseLevel.clear()
+            visionStack?.add(level: menuViewController)
+            DispatchQueue.main.async { [weak visionBundle] in
+                visionBundle?.groomWeak()
+            }
+        })
+        menuLevel.didChoose { [weak visionStack] menuItem in
+            guard let controlStack = visionStack else { return }
             menuItem.activateBlock(controlStack)
+            visionStack?.pin(level: backButtonLevel)
         }
-        controlStack.add(level: menu)
+
+        self.menuLevel = menuLevel
+
+        guard let navigationController = self.vc as? UINavigationController else { return }
+        navigationController.navigationBar.isHidden = true
+        self.visionBundle.start()
     }
-    // observe vm
-    // show control stack
 }

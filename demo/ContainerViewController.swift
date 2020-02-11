@@ -23,7 +23,7 @@ final class ContainerViewController: UIViewController {
     }
 
     var visionViewController: VisionPresentationViewController?
-    var menuViewController: MenuViewController?
+    var menuViewController: UIViewController?
     private lazy var arContainerViewController = ARContainerViewController()
 
     override func viewDidLoad() {
@@ -295,13 +295,13 @@ extension ContainerViewController: ContainerPresenter {
     }
 
     func presentMenu() {
-        guard let viewController = menuViewController else {
-            assertionFailure("Menu should be initialized before presenting")
-            return
-        }
-        present(viewController: viewController)
-        visionViewController?.visualizationMode = .clear
-        currentViewController = menuViewController
+//        guard let viewController = menuViewController else {
+//            assertionFailure("Menu should be initialized before presenting")
+//            return
+//        }
+//        present(viewController: viewController)
+//        visionViewController?.visualizationMode = .clear
+//        currentViewController = menuViewController
     }
 
     func presentVision() {
