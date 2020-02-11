@@ -2,7 +2,7 @@ import UIKit
 import MapboxVisionAR
 
 class TeaserApp {
-    let vc: UIViewController
+    let viewController: UIViewController
 
     private let visionBundle: VisionBundle
     private let visionStack: VisionStack
@@ -11,8 +11,8 @@ class TeaserApp {
     init() {
         visionBundle = VMObserver().observe()
         visionStack = VisionStack(with: visionBundle)
-        vc = UINavigationController()
-        vc.addChild(visionStack.viewController)
+        viewController = UINavigationController()
+        viewController.addChild(visionStack.viewController)
         let menuItems = [
             TeaserMenuItem(
                 name: L10n.menuSignDetectionButton,
@@ -56,7 +56,7 @@ class TeaserApp {
                 icon: Asset.Assets.icon7.image,
                 activateBlock: { [weak visionBundle] visionStack in
                     visionStack.clear()
-                    let map = ARMapNavigationController()
+                    let map = ARMapNavigationLevel()
                     visionStack.add(level: map)
                     map.completion = { [weak visionBundle, weak visionStack, unowned map] route in
                         guard let visionStack = visionStack else { return }
@@ -107,7 +107,7 @@ class TeaserApp {
 
         self.menuLevel = menuLevel
 
-        guard let navigationController = self.vc as? UINavigationController else { return }
+        guard let navigationController = self.viewController as? UINavigationController else { return }
         navigationController.navigationBar.isHidden = true
         self.visionBundle.start()
     }

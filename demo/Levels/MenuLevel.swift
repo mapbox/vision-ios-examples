@@ -1,9 +1,6 @@
 import UIKit
 
 final class MenuLevel: VisionStackLevel {
-    // MARK: Properties
-
-    weak var delegate: MenuDelegate?
 
     // MARK: Private properties
 

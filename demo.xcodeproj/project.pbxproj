@@ -53,17 +53,14 @@
 		B5045859217A077300BA5133 /* CollisionObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5045858217A077300BA5133 /* CollisionObjectView.swift */; };
 		B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787D520F0B46A007D1EA7 /* AppDelegate.swift */; };
 		B52787DD20F0B46B007D1EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52787DC20F0B46B007D1EA7 /* Assets.xcassets */; };
-		B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E720F0B625007D1EA7 /* ContainerViewController.swift */; };
 		B52787EA20F0B6A3007D1EA7 /* MenuLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787E920F0B6A3007D1EA7 /* MenuLevel.swift */; };
-		B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */; };
 		B527D2DD2191A1F700C404C9 /* MockContainerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527D2DC2191A1F700C404C9 /* MockContainerPresenter.swift */; };
 		B527D2DF2191A5AC00C404C9 /* MockAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527D2DE2191A5AC00C404C9 /* MockAlertPlayer.swift */; };
 		B52A75852180B53700286AD8 /* collision_alert_critical.wav in Resources */ = {isa = PBXBuildFile; fileRef = B52A75832180B53700286AD8 /* collision_alert_critical.wav */; };
 		B52A75862180B53700286AD8 /* collision_alert_warning.wav in Resources */ = {isa = PBXBuildFile; fileRef = B52A75842180B53700286AD8 /* collision_alert_warning.wav */; };
 		B5314422218C7DA7001B6DEB /* SafetyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5314421218C7DA7001B6DEB /* SafetyState.swift */; };
 		B532EE012170A8D900B172FA /* MapboxVisionAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B532EE002170A8D900B172FA /* MapboxVisionAR.framework */; };
-		B532EE052170A9AB00B172FA /* ARContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532EE022170A9AA00B172FA /* ARContainerViewController.swift */; };
-		B532EE062170A9AB00B172FA /* ARMapNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532EE032170A9AA00B172FA /* ARMapNavigationController.swift */; };
+		B532EE062170A9AB00B172FA /* ARMapNavigationLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532EE032170A9AA00B172FA /* ARMapNavigationLevel.swift */; };
 		B532EE072170A9AB00B172FA /* UIButton+BackgroudColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532EE042170A9AB00B172FA /* UIButton+BackgroudColor.swift */; };
 		B532EE0B2170B9B300B172FA /* MapboxCoreNavigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B532EE0A2170B9B200B172FA /* MapboxCoreNavigation.framework */; };
 		B532EE0D2170B9E900B172FA /* MapboxDirections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B532EE0C2170B9E800B172FA /* MapboxDirections.framework */; };
@@ -153,17 +150,14 @@
 		B52787D520F0B46A007D1EA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B52787DC20F0B46B007D1EA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B52787E120F0B46B007D1EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B52787E720F0B625007D1EA7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B52787E920F0B6A3007D1EA7 /* MenuLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLevel.swift; sourceTree = "<group>"; };
-		B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerInteractor.swift; sourceTree = "<group>"; };
 		B527D2DC2191A1F700C404C9 /* MockContainerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContainerPresenter.swift; sourceTree = "<group>"; };
 		B527D2DE2191A5AC00C404C9 /* MockAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlertPlayer.swift; sourceTree = "<group>"; };
 		B52A75832180B53700286AD8 /* collision_alert_critical.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collision_alert_critical.wav; sourceTree = "<group>"; };
 		B52A75842180B53700286AD8 /* collision_alert_warning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collision_alert_warning.wav; sourceTree = "<group>"; };
 		B5314421218C7DA7001B6DEB /* SafetyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyState.swift; sourceTree = "<group>"; };
 		B532EE002170A8D900B172FA /* MapboxVisionAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MapboxVisionAR.framework; path = Carthage/Build/iOS/MapboxVisionAR.framework; sourceTree = "<group>"; };
-		B532EE022170A9AA00B172FA /* ARContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARContainerViewController.swift; sourceTree = "<group>"; };
-		B532EE032170A9AA00B172FA /* ARMapNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMapNavigationController.swift; sourceTree = "<group>"; };
+		B532EE032170A9AA00B172FA /* ARMapNavigationLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMapNavigationLevel.swift; sourceTree = "<group>"; };
 		B532EE042170A9AB00B172FA /* UIButton+BackgroudColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroudColor.swift"; sourceTree = "<group>"; };
 		B532EE0A2170B9B200B172FA /* MapboxCoreNavigation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxCoreNavigation.framework; path = Carthage/Build/iOS/MapboxCoreNavigation.framework; sourceTree = "<group>"; };
 		B532EE0C2170B9E800B172FA /* MapboxDirections.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxDirections.framework; path = Carthage/Build/iOS/MapboxDirections.framework; sourceTree = "<group>"; };
@@ -295,6 +289,7 @@
 				5A29880F23F2F9D5006F863B /* InfoButtonLevel.swift */,
 				5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */,
 				5A29881323F3015C006F863B /* ARModeSwitcherLevel.swift */,
+				B532EE032170A9AA00B172FA /* ARMapNavigationLevel.swift */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -354,15 +349,11 @@
 				5A3905D023E9D82500CD5245 /* HelperViews */,
 				5A19454123E48DAD009CE251 /* Replay */,
 				2E4FEDF1215E5EA600DCB496 /* License */,
-				B532EE022170A9AA00B172FA /* ARContainerViewController.swift */,
-				B532EE032170A9AA00B172FA /* ARMapNavigationController.swift */,
 				B532EE042170A9AB00B172FA /* UIButton+BackgroudColor.swift */,
 				2E60335D214295F80050EDB3 /* Locale.swift */,
 				2E60335B214295CD0050EDB3 /* DistanceFormatter.swift */,
 				2E603359214295B20050EDB3 /* Signs.swift */,
 				2E603355214294A00050EDB3 /* Tracker.swift */,
-				B52787E720F0B625007D1EA7 /* ContainerViewController.swift */,
-				B52787EB20F0CE94007D1EA7 /* ContainerInteractor.swift */,
 				B52787D520F0B46A007D1EA7 /* AppDelegate.swift */,
 				2E603366214299110050EDB3 /* OrderedDictionary.swift */,
 				B5314421218C7DA7001B6DEB /* SafetyState.swift */,
@@ -623,7 +614,6 @@
 				5A29880023F19D7B006F863B /* VisionBundle.swift in Sources */,
 				5A29881223F2FF3F006F863B /* LaneDetectionsLevel.swift in Sources */,
 				5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */,
-				B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */,
 				2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */,
 				2E60335E214295F80050EDB3 /* Locale.swift in Sources */,
 				5A29880623F1A544006F863B /* SafetyLevel.swift in Sources */,
@@ -638,19 +628,17 @@
 				5A2987FE23F17346006F863B /* BackButtonLevel.swift in Sources */,
 				5A29880C23F2D244006F863B /* NavigationLevel.swift in Sources */,
 				2E603356214294A00050EDB3 /* Tracker.swift in Sources */,
-				B532EE062170A9AB00B172FA /* ARMapNavigationController.swift in Sources */,
+				B532EE062170A9AB00B172FA /* ARMapNavigationLevel.swift in Sources */,
 				2E4FEDF4215E5EA600DCB496 /* LicenseViewController.swift in Sources */,
 				5A29880E23F2DBBB006F863B /* EndButtonLevel.swift in Sources */,
 				2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */,
 				5A29881423F3015C006F863B /* ARModeSwitcherLevel.swift in Sources */,
 				B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */,
-				B52787EC20F0CE94007D1EA7 /* ContainerInteractor.swift in Sources */,
 				2E6033652142982D0050EDB3 /* Images.swift in Sources */,
 				B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */,
 				5A3905D223EB0F5400CD5245 /* VMObserver.swift in Sources */,
 				5A3E42CD22B3D2C80035A010 /* GlobalConstants.swift in Sources */,
 				5AFC926222C22EEF00A17776 /* ARRoute+DirectionsRoute.swift in Sources */,
-				B532EE052170A9AB00B172FA /* ARContainerViewController.swift in Sources */,
 				5A3905D723EC256A00CD5245 /* VisionStack.swift in Sources */,
 				2E4FEE08215E647400DCB496 /* Strings.swift in Sources */,
 				B5314422218C7DA7001B6DEB /* SafetyState.swift in Sources */,

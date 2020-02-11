@@ -6,7 +6,6 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow(frame: UIScreen.main.bounds)
-    private var interactor: ContainerInteractor?
     var teaserApp: TeaserApp?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -15,10 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isIdleTimerDisabled = true
 
         Fabric.with([Crashlytics.self])
-        let teaserApp = TeaserApp()
-        window.rootViewController = teaserApp.vc//makeRootViewController()
+
+        window.rootViewController = makeRootViewController()
         window.makeKeyAndVisible()
-        self.teaserApp = teaserApp
         return true
     }
 
@@ -31,25 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func launchVision() -> UIViewController {
-        let containerController = ContainerViewController()
-
-        containerController.visionViewController = VisionPresentationViewController()
-
-//        let menuViewController = MenuViewController()
-//        containerController.menuViewController = menuViewController
-//
-//        let alertPlayer = AlertSoundPlayer()
-//
-//        interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
-//            alertPlayer: alertPlayer,
-//            presenter: containerController
-//        ))
-//        containerController.delegate = interactor
-//        menuViewController.delegate = interactor
-
-        let _ = ReplaySessionManager()
-
-        return containerController
+        let teaserApp = TeaserApp()
+        self.teaserApp = teaserApp
+        return teaserApp.viewController
     }
 
     private func launchLicense() -> UIViewController {

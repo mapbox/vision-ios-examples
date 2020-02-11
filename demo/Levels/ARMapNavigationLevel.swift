@@ -8,7 +8,7 @@ import UIKit
 private let routeEdgeInsets = UIEdgeInsets(top: 100, left: 200, bottom: 100, right: 200)
 private let inset: CGFloat = 18.0
 
-class ARMapNavigationController: VisionStackLevel {
+class ARMapNavigationLevel: VisionStackLevel {
     var completion: ((MapboxDirections.Route) -> Void)?
 
     private var mapView: NavigationMapView
@@ -126,7 +126,7 @@ class ARMapNavigationController: VisionStackLevel {
     private var isLocationSet = false
 }
 
-extension ARMapNavigationController: MGLMapViewDelegate {
+extension ARMapNavigationLevel: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
         guard !isLocationSet, let location = userLocation else { return }
 
