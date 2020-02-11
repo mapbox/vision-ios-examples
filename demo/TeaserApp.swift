@@ -75,9 +75,11 @@ class TeaserApp {
             TeaserMenuItem(
                 name: L10n.menuLaneDetectionButton,
                 icon: Asset.Assets.icon2.image,
-                activateBlock: { visionStack in
+                activateBlock: { [weak visionBundle] visionStack in
                     visionStack.baseLevel.clear()
                     visionStack.clear()
+                    guard let visionBundle = visionBundle else { return }
+                    visionStack.add(level: LaneDetectionsLevel(with: visionBundle))
                 }
             )
         ]

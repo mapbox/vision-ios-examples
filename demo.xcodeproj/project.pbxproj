@@ -40,6 +40,7 @@
 		5A29880C23F2D244006F863B /* NavigationLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29880B23F2D244006F863B /* NavigationLevel.swift */; };
 		5A29880E23F2DBBB006F863B /* EndButtonLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29880D23F2DBBB006F863B /* EndButtonLevel.swift */; };
 		5A29881023F2F9D5006F863B /* InfoButtonLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29880F23F2F9D5006F863B /* InfoButtonLevel.swift */; };
+		5A29881223F2FF3F006F863B /* LaneDetectionsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */; };
 		5A3175F823F162A900A56B62 /* DetectedSignsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3175F723F162A900A56B62 /* DetectedSignsLevel.swift */; };
 		5A3905D223EB0F5400CD5245 /* VMObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D123EB0F5400CD5245 /* VMObserver.swift */; };
 		5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D423EC24DA00CD5245 /* TeaserApp.swift */; };
@@ -136,6 +137,7 @@
 		5A29880B23F2D244006F863B /* NavigationLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLevel.swift; sourceTree = "<group>"; };
 		5A29880D23F2DBBB006F863B /* EndButtonLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndButtonLevel.swift; sourceTree = "<group>"; };
 		5A29880F23F2F9D5006F863B /* InfoButtonLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButtonLevel.swift; sourceTree = "<group>"; };
+		5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneDetectionsLevel.swift; sourceTree = "<group>"; };
 		5A3175F723F162A900A56B62 /* DetectedSignsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedSignsLevel.swift; sourceTree = "<group>"; };
 		5A3905D123EB0F5400CD5245 /* VMObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMObserver.swift; sourceTree = "<group>"; };
 		5A3905D423EC24DA00CD5245 /* TeaserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaserApp.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				5A29880B23F2D244006F863B /* NavigationLevel.swift */,
 				5A29880D23F2DBBB006F863B /* EndButtonLevel.swift */,
 				5A29880F23F2F9D5006F863B /* InfoButtonLevel.swift */,
+				5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				5A19454523E48DDE009CE251 /* Session.swift in Sources */,
 				5A19454323E48DC2009CE251 /* ReplaySessionManager.swift in Sources */,
 				5A29880023F19D7B006F863B /* VisionBundle.swift in Sources */,
+				5A29881223F2FF3F006F863B /* LaneDetectionsLevel.swift in Sources */,
 				5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */,
 				B52787E820F0B625007D1EA7 /* ContainerViewController.swift in Sources */,
 				2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */,

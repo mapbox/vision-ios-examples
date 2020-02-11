@@ -147,46 +147,6 @@ final class MenuLevel: VisionStackLevel {
     }
 }
 
-extension Screen {
-    var title: String {
-        switch self {
-        case .segmentation:
-            return L10n.menuSegmentationButton
-        case .laneDetection:
-            return L10n.menuLaneDetectionButton
-        case .distanceToObject:
-            return L10n.menuCollisionDetectionButton
-        case .signsDetection:
-            return L10n.menuSignDetectionButton
-        case .objectDetection:
-            return L10n.menuObjectDetectionButton
-        case .arRouting:
-            return L10n.menuARButton
-        case .menu:
-            return L10n.menuTitle
-        }
-    }
-
-    var iconImage: UIImage {
-        switch self {
-        case .segmentation:
-            return Asset.Assets.icon1.image
-        case .laneDetection:
-            return Asset.Assets.icon2.image
-        case .distanceToObject:
-            return Asset.Assets.collisionDetection.image
-        case .signsDetection:
-            return Asset.Assets.icon4.image
-        case .objectDetection:
-            return Asset.Assets.icon6.image
-        case .arRouting:
-            return Asset.Assets.icon7.image
-        case .menu:
-            return UIImage()
-        }
-    }
-}
-
 private class MenuItemButton: UIView {
     private static let padding: CGFloat = 8
     private static let cellHeight: CGFloat = 147.0
