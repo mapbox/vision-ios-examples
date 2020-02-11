@@ -59,12 +59,14 @@ class TeaserApp {
                     let map = ARMapNavigationController()
                     visionStack.add(level: map)
                     map.completion = { [weak visionBundle, weak visionStack, unowned map] route in
-                        visionStack?.clearLevels()
+                        guard let visionStack = visionStack else { return }
+                        visionStack.clearLevels()
                         visionBundle?.ar.arManager.set(route: Route(route: route))
-                        visionStack?.baseLevel.ar()
+                        visionStack.baseLevel.ar()
+                        visionStack.add(level: ARModeSwitcherLevel(with: visionStack))
                         let navigation = NavigationLevel(with: route)
-                        visionStack?.add(level: navigation)
-                        visionStack?.add(level: EndButtonLevel({ [weak visionStack, map] in
+                        visionStack.add(level: navigation)
+                        visionStack.add(level: EndButtonLevel({ [weak visionStack, map] in
                             guard let visionStack = visionStack else { return }
                             visionStack.clearLevels()
                             visionStack.add(level: map)

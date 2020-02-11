@@ -34,7 +34,6 @@ class NavigationLevel: VisionStackLevel {
         navigationService = MapboxNavigationService(route: route)
         navigationService?.delegate = self
         navigationService?.start()
-        navigationService?.simulationMode = .always
     }
 
     required init?(coder: NSCoder) {

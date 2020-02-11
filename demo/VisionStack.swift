@@ -134,9 +134,12 @@ class BaseLevel {
         visionViewController.visualizationMode = .clear
     }
 
-    func ar() {
+    func ar(laneVisualParams: LaneVisualParams = LaneVisualParams(), fenceVisualParams: FenceVisualParams = FenceVisualParams(), isLaneVisible: Bool = true, isFenceVisible: Bool = false) {
         configureAR()
-        // todo: implement
+        arViewController?.isLaneVisible = isLaneVisible
+        arViewController?.isFenceVisible = isFenceVisible
+        arViewController?.set(laneVisualParams: laneVisualParams)
+        arViewController?.set(fenceVisualParams: fenceVisualParams)
     }
 
     func detection() {

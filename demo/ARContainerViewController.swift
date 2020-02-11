@@ -39,9 +39,8 @@ final class ARContainerViewController: UIViewController {
     private var navigationService: NavigationService?
     private var activeARFeature: ARFeature = .lane {
         didSet {
-//            arViewController.la
-//            arViewController.isLaneVisible = activeARFeature.containsLane
-//            arViewController.isFenceVisible = activeARFeature.containsFence
+            arViewController.isLaneVisible = activeARFeature.containsLane
+            arViewController.isFenceVisible = activeARFeature.containsFence
         }
     }
 
