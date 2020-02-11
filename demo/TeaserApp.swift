@@ -84,11 +84,13 @@ class TeaserApp {
 
         let menuLevel = MenuLevel(with: menuItems)
         visionStack.add(level: menuLevel)
+        visionStack.add(level: InfoButtonLevel(with: visionStack))
         let backButtonLevel = BackButtonLevel(withCallback: { [weak menuLevel, weak visionStack, weak visionBundle] in
-            guard let menuViewController = menuLevel else { return }
-            visionStack?.clear()
-            visionStack?.baseLevel.clear()
-            visionStack?.add(level: menuViewController)
+            guard let menuLevel = menuLevel, let visionStack = visionStack else { return }
+            visionStack.clear()
+            visionStack.baseLevel.clear()
+            visionStack.add(level: menuLevel)
+            visionStack.add(level: InfoButtonLevel(with: visionStack))
             DispatchQueue.main.async { [weak visionBundle] in
                 visionBundle?.groomWeak()
             }

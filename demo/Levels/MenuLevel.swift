@@ -1,22 +1,12 @@
 import UIKit
 
 final class MenuLevel: VisionStackLevel {
-    private static let infoButtonPadding: CGFloat = 20
-
     // MARK: Properties
 
     weak var delegate: MenuDelegate?
 
     // MARK: Private properties
 
-    private let infoButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(Asset.Assets.info.image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
-        button.tintColor = UIColor(white: 0.5, alpha: 0.5)
-        return button
-    }()
     let menuItems: [TeaserMenuItem]
     private var didChoose: ((TeaserMenuItem) -> Void)?
 
@@ -69,8 +59,6 @@ final class MenuLevel: VisionStackLevel {
                                       separator: verticalBottomLine)
 
         layout(topStack: topStack, bottomStack: bottomStack, withDependencyOn: centerLine)
-
-        addToViewInfoButton()
     }
 
     // MARK: Private functions
@@ -156,38 +144,6 @@ final class MenuLevel: VisionStackLevel {
             bottomStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             bottomStack.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
         ])
-    }
-
-    private func addToViewInfoButton() {
-        addSubview(infoButton)
-        NSLayoutConstraint.activate([
-            infoButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -MenuLevel.infoButtonPadding),
-            infoButton.topAnchor.constraint(equalTo: topAnchor, constant: MenuLevel.infoButtonPadding),
-        ])
-    }
-
-    @objc
-    private func infoTapped() {
-        // todo: implement
-//        let alert: UIAlertController
-//
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .alert)
-//        } else {
-//            alert = UIAlertController(title: L10n.infoTitle, message: nil, preferredStyle: .actionSheet)
-//        }
-//
-//        alert.addAction(UIAlertAction(title: L10n.generalTermsOfService, style: .default) { _ in
-//            guard let url = URL(string: GlobalConstants.tosLink) else { return }
-//            UIApplication.shared.open(url)
-//        })
-//        alert.addAction(UIAlertAction(title: L10n.generalPrivacyPolicy, style: .default) { _ in
-//            guard let url = URL(string: GlobalConstants.privacyPolicyLink) else { return }
-//            UIApplication.shared.open(url)
-//        })
-//        alert.addAction(UIAlertAction(title: L10n.generalButtonCancel, style: .cancel, handler: nil))
-//
-//        self.present(alert, animated: true)
     }
 }
 
