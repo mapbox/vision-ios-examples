@@ -41,11 +41,11 @@ final class MenuLevel: VisionStackLevel {
         }
 
         let segmentationButton = MenuItemButton(for: menuItems[1], action: select)
-        let laneDetectionButton = MenuItemButton(for: menuItems[6], action: select)
-        let distanceToObjectButton = MenuItemButton(for: menuItems[4], action: select)
+        let laneDetectionButton = MenuItemButton(for: menuItems[5], action: select)
+        let distanceToObjectButton = MenuItemButton(for: menuItems[3], action: select)
         let signsDetectionButton = MenuItemButton(for: menuItems[0], action: select)
         let objectDetectorButton = MenuItemButton(for: menuItems[2], action: select)
-        let arRoutingButton = MenuItemButton(for: menuItems[5], action: select)
+        let arRoutingButton = MenuItemButton(for: menuItems[4], action: select)
 
         let titleView = UIImageView(image: Asset.Assets.title.image)
         addToView(titleImageView: titleView)
@@ -86,11 +86,11 @@ final class MenuLevel: VisionStackLevel {
         stack.distribution = .equalCentering
         stack.alignment = alignment
 
-        view.addSubview(stack)
+        addSubview(stack)
 
         for subview in subviews {
             stack.addArrangedSubview(subview)
-            subview.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25).isActive = true
+            subview.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.25).isActive = true
 
             if subview != subviews.last {
                 stack.addArrangedSubview(separator())
@@ -151,9 +151,9 @@ final class MenuLevel: VisionStackLevel {
 
     private func layout(topStack: UIStackView, bottomStack: UIStackView, withDependencyOn centerLine: UIImageView) {
         NSLayoutConstraint.activate([
-            topStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             topStack.bottomAnchor.constraint(equalTo: centerLine.topAnchor),
-            bottomStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bottomStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             bottomStack.topAnchor.constraint(equalTo: centerLine.bottomAnchor),
         ])
     }

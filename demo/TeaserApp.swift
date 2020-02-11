@@ -42,14 +42,6 @@ class TeaserApp {
                 }
             ),
             TeaserMenuItem(
-                name: L10n.menuObjectMappingButton,
-                icon: Asset.Assets.icon5.image,
-                activateBlock: { visionStack in
-                    visionStack.baseLevel.clear()
-                    visionStack.clear()
-                }
-            ),
-            TeaserMenuItem(
                 name: L10n.menuCollisionDetectionButton,
                 icon: Asset.Assets.collisionDetection.image,
                 activateBlock: { [weak visionBundle] visionStack in
