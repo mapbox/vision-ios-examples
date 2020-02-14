@@ -89,7 +89,7 @@ class VisionStack {
 
 class BaseLevel {
     let viewController: UIViewController
-    private var visionViewController: VisionPresentationViewController?
+    var visionViewController: VisionPresentationViewController?
     private var arViewController: VisionARViewController?
     private weak var visionBundle: VisionBundle?
 

@@ -2,8 +2,8 @@ import Foundation
 import MapboxVision
 
 class VisionBundle {
-    let videoSource: VideoSource
-    let visionManager: BaseVisionManager
+    var videoSource: VideoSource!
+    var visionManager: BaseVisionManager!
 
     private(set) var country: Country = .unknown
 
@@ -13,13 +13,16 @@ class VisionBundle {
         }
         return privateAR!
     }
+
     private var privateAR: VisionARBundle?
+
     var safety: VisionSafetyBundle {
          if privateSafety == nil {
              privateSafety = VisionSafetyBundle(self)
          }
          return privateSafety!
     }
+
     private var privateSafety: VisionSafetyBundle?
 
     private var delegates: [WeakVisionManagerDegelate] = []
@@ -64,6 +67,37 @@ class VisionBundle {
     func groomWeak() {
         delegates = delegates.filter { delegate in
             delegate.ref != nil
+        }
+    }
+
+    func set(session: ReplaySession?) {
+        privateAR = nil
+        privateSafety = nil
+        if let visionManager = visionManager as? VisionManager {
+            visionManager.stop()
+            visionManager.destroy()
+        }
+        if let replayManager = visionManager as? VisionReplayManager {
+            replayManager.stop()
+            replayManager.destroy()
+        }
+        visionManager = nil
+        if let camera = videoSource as? CameraVideoSource {
+            camera.stop()
+        }
+        videoSource = nil
+
+        if let session = session {
+            let replayManager = try! VisionReplayManager.create(recordPath: session.path.path)
+            visionManager = replayManager
+            videoSource = replayManager.videoSource
+            replayManager.delegate = self
+        } else {
+            let camera = CameraVideoSource()
+            let visionManager = VisionManager.create(videoSource: camera)
+            self.visionManager = visionManager
+            videoSource = camera
+            visionManager.delegate = self
         }
     }
 }

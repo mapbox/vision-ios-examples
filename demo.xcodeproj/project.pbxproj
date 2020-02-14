@@ -42,6 +42,7 @@
 		5A29881023F2F9D5006F863B /* InfoButtonLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29880F23F2F9D5006F863B /* InfoButtonLevel.swift */; };
 		5A29881223F2FF3F006F863B /* LaneDetectionsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */; };
 		5A29881423F3015C006F863B /* ARModeSwitcherLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881323F3015C006F863B /* ARModeSwitcherLevel.swift */; };
+		5A29881623F3F86E006F863B /* SessionsListLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881523F3F86E006F863B /* SessionsListLevel.swift */; };
 		5A3175F823F162A900A56B62 /* DetectedSignsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3175F723F162A900A56B62 /* DetectedSignsLevel.swift */; };
 		5A3905D223EB0F5400CD5245 /* VMObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D123EB0F5400CD5245 /* VMObserver.swift */; };
 		5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D423EC24DA00CD5245 /* TeaserApp.swift */; };
@@ -137,6 +138,7 @@
 		5A29880F23F2F9D5006F863B /* InfoButtonLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButtonLevel.swift; sourceTree = "<group>"; };
 		5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneDetectionsLevel.swift; sourceTree = "<group>"; };
 		5A29881323F3015C006F863B /* ARModeSwitcherLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModeSwitcherLevel.swift; sourceTree = "<group>"; };
+		5A29881523F3F86E006F863B /* SessionsListLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListLevel.swift; sourceTree = "<group>"; };
 		5A3175F723F162A900A56B62 /* DetectedSignsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedSignsLevel.swift; sourceTree = "<group>"; };
 		5A3905D123EB0F5400CD5245 /* VMObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMObserver.swift; sourceTree = "<group>"; };
 		5A3905D423EC24DA00CD5245 /* TeaserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaserApp.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				5A29881123F2FF3F006F863B /* LaneDetectionsLevel.swift */,
 				5A29881323F3015C006F863B /* ARModeSwitcherLevel.swift */,
 				B532EE032170A9AA00B172FA /* ARMapNavigationLevel.swift */,
+				5A29881523F3F86E006F863B /* SessionsListLevel.swift */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				5AFC926222C22EEF00A17776 /* ARRoute+DirectionsRoute.swift in Sources */,
 				5A3905D723EC256A00CD5245 /* VisionStack.swift in Sources */,
 				2E4FEE08215E647400DCB496 /* Strings.swift in Sources */,
+				5A29881623F3F86E006F863B /* SessionsListLevel.swift in Sources */,
 				B5314422218C7DA7001B6DEB /* SafetyState.swift in Sources */,
 				5A29880423F19DF5006F863B /* VisionSafetyBundle.swift in Sources */,
 				2E60335C214295CD0050EDB3 /* DistanceFormatter.swift in Sources */,

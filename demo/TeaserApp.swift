@@ -16,7 +16,7 @@ class TeaserApp {
         let menuItems = [
             TeaserMenuItem(
                 name: L10n.menuSignDetectionButton,
-                icon: Asset.Assets.icon4.image,
+                icon: Asset.Assets.iconSignDetection.image,
                 activateBlock: { [weak self] visionStack in
                     visionStack.baseLevel.clear()
                     visionStack.clear()
@@ -27,7 +27,7 @@ class TeaserApp {
             ),
             TeaserMenuItem(
                 name: L10n.menuSegmentationButton,
-                icon: Asset.Assets.icon1.image,
+                icon: Asset.Assets.iconSegmentation.image,
                 activateBlock: { visionStack in
                     visionStack.baseLevel.segmentation()
                     visionStack.clear()
@@ -35,7 +35,7 @@ class TeaserApp {
             ),
             TeaserMenuItem(
                 name: L10n.menuObjectDetectionButton,
-                icon: Asset.Assets.icon6.image,
+                icon: Asset.Assets.iconObjectDetection.image,
                 activateBlock: { visionStack in
                     visionStack.baseLevel.detection()
                     visionStack.clear()
@@ -53,7 +53,7 @@ class TeaserApp {
             ),
             TeaserMenuItem(
                 name: L10n.menuARButton,
-                icon: Asset.Assets.icon7.image,
+                icon: Asset.Assets.iconArRouting.image,
                 activateBlock: { [weak visionBundle] visionStack in
                     visionStack.clear()
                     let map = ARMapNavigationLevel()
@@ -76,12 +76,27 @@ class TeaserApp {
             ),
             TeaserMenuItem(
                 name: L10n.menuLaneDetectionButton,
-                icon: Asset.Assets.icon2.image,
+                icon: Asset.Assets.iconLaneDetection.image,
                 activateBlock: { [weak visionBundle] visionStack in
                     visionStack.baseLevel.clear()
                     visionStack.clear()
                     guard let visionBundle = visionBundle else { return }
                     visionStack.add(level: LaneDetectionsLevel(with: visionBundle))
+                }
+            ),
+            TeaserMenuItem(
+                name: "RePlay Mode",
+                icon: Asset.Assets.iconReplay.image,
+                activateBlock: { [weak visionBundle] visionStack in
+                    visionStack.baseLevel.clear()
+                    visionStack.clear()
+                    let sessionsList = SessionsListLevel(with: ReplaySessionManager())
+                    visionStack.add(level: sessionsList)
+                    sessionsList.callback = { session in
+                        visionBundle?.set(session: session)
+                        visionBundle?.start()
+                        visionStack.baseLevel.visionViewController?.set(visionManager: visionBundle!.visionManager)
+                    }
                 }
             )
         ]

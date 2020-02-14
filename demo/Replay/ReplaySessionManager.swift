@@ -13,7 +13,7 @@ class ReplaySessionManager {
             let fileURLs = try fileManager.contentsOfDirectory(atPath: documentsURL.path)
             var sessions = [ReplaySession]()
             fileURLs.forEach { fileURL in
-                guard let url = URL(string: fileURL) else { return }
+                let url = documentsURL.appendingPathComponent(fileURL)
                 sessions.append(ReplaySession(name: url.lastPathComponent, path: url))
             }
             self.sessions = sessions

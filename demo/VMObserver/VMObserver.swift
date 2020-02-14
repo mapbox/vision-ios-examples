@@ -9,7 +9,7 @@ class VMObserver {
     }
 
     func observe() -> VisionBundle {
-//        let sessionsManager = ReplaySessionManager()
+        let sessionsManager = ReplaySessionManager()
 
 //        if let session = sessionsManager.sessions.first,
 //            let replayManager = try? VisionReplayManager.create(recordPath: session.path.path)
