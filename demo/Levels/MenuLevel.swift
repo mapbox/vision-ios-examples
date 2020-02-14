@@ -27,13 +27,6 @@ final class MenuLevel: VisionStackLevel {
             self?.didChoose?(menuItem)
         }
 
-        let segmentationButton = MenuItemButton(for: menuItems[1], action: select)
-        let laneDetectionButton = MenuItemButton(for: menuItems[5], action: select)
-        let distanceToObjectButton = MenuItemButton(for: menuItems[3], action: select)
-        let signsDetectionButton = MenuItemButton(for: menuItems[0], action: select)
-        let objectDetectorButton = MenuItemButton(for: menuItems[2], action: select)
-        let arRoutingButton = MenuItemButton(for: menuItems[4], action: select)
-
         let titleView = UIImageView(image: Asset.Assets.title.image)
         addToView(titleImageView: titleView)
 
@@ -48,10 +41,13 @@ final class MenuLevel: VisionStackLevel {
         let rightLine = UIImageView(image: lineLeftRightImage)
         addToView(rightLineImageView: rightLine, withDependencyOn: centerLine)
 
-        let topStack = createStack(subviews: [signsDetectionButton, segmentationButton, objectDetectorButton],
+        let topLineCellsNumber = menuItems.count / 2 + menuItems.count % 2
+        let bottomLineCellNumber = menuItems.count / 2
+
+        let topStack = createStack(subviews: menuItems.prefix(topLineCellsNumber).map { MenuItemButton(for: $0, action: select) },
                                    alignment: .bottom,
                                    separator: verticalTopLine)
-        let bottomStack = createStack(subviews: [distanceToObjectButton, arRoutingButton, laneDetectionButton],
+        let bottomStack = createStack(subviews: menuItems.suffix(bottomLineCellNumber).map { MenuItemButton(for: $0, action: select) },
                                       alignment: .top,
                                       separator: verticalBottomLine)
 
