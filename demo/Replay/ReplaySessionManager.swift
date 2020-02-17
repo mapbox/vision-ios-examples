@@ -4,7 +4,7 @@ class ReplaySessionManager {
     enum Constants {
         static let replaySessionFolder = "ReplaySessions"
     }
-    let sessions: [ReplaySession]
+    private(set) var sessions: [ReplaySession]
 
     init() {
         let fileManager = FileManager.default
@@ -24,6 +24,13 @@ class ReplaySessionManager {
     }
 
     func delete(session: ReplaySession) {
-
+        do {
+            try FileManager.default.removeItem(at: session.path)
+            sessions = sessions.filter {
+                $0.path != session.path
+            }
+        } catch {
+            print("Failed to remove item at \(session.path.path)")
+        }
     }
 }

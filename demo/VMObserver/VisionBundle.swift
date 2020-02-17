@@ -70,7 +70,26 @@ class VisionBundle {
         }
     }
 
-    func set(session: ReplaySession?) {
+    func enable(sessionWith url: URL) {
+        reset()
+
+        let replayManager = try! VisionReplayManager.create(recordPath: url.path)
+        visionManager = replayManager
+        videoSource = replayManager.videoSource
+        replayManager.delegate = self
+    }
+
+    func enableCamera() {
+        reset()
+
+        let camera = CameraVideoSource()
+        let visionManager = VisionManager.create(videoSource: camera)
+        self.visionManager = visionManager
+        videoSource = camera
+        visionManager.delegate = self
+    }
+
+    private func reset() {
         privateAR = nil
         privateSafety = nil
         if let visionManager = visionManager as? VisionManager {
@@ -86,19 +105,6 @@ class VisionBundle {
             camera.stop()
         }
         videoSource = nil
-
-        if let session = session {
-            let replayManager = try! VisionReplayManager.create(recordPath: session.path.path)
-            visionManager = replayManager
-            videoSource = replayManager.videoSource
-            replayManager.delegate = self
-        } else {
-            let camera = CameraVideoSource()
-            let visionManager = VisionManager.create(videoSource: camera)
-            self.visionManager = visionManager
-            videoSource = camera
-            visionManager.delegate = self
-        }
     }
 }
 

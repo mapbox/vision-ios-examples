@@ -13,7 +13,9 @@ class TeaserApp {
         visionStack = VisionStack(with: visionBundle)
         viewController = UINavigationController()
         viewController.addChild(visionStack.viewController)
-        let menuItems = [
+        let replaySessionManager = ReplaySessionManager()
+
+        var menuItems = [
             TeaserMenuItem(
                 name: L10n.menuSignDetectionButton,
                 icon: Asset.Assets.iconSignDetection.image,
@@ -83,23 +85,32 @@ class TeaserApp {
                     guard let visionBundle = visionBundle else { return }
                     visionStack.add(level: LaneDetectionsLevel(with: visionBundle))
                 }
-            ),
-            TeaserMenuItem(
-                name: "RePlay Mode",
-                icon: Asset.Assets.iconReplay.image,
-                activateBlock: { [weak visionBundle] visionStack in
-                    visionStack.baseLevel.clear()
-                    visionStack.clear()
-                    let sessionsList = SessionsListLevel(with: ReplaySessionManager())
-                    visionStack.add(level: sessionsList)
-                    sessionsList.callback = { session in
-                        visionBundle?.set(session: session)
-                        visionBundle?.start()
-                        visionStack.baseLevel.visionViewController?.set(visionManager: visionBundle!.visionManager)
-                    }
-                }
             )
         ]
+
+        if replaySessionManager.sessions.count > 0 {
+            menuItems.append(
+                TeaserMenuItem(
+                    name: L10n.menuReplay,
+                    icon: Asset.Assets.iconReplay.image,
+                    activateBlock: { [weak visionBundle] visionStack in
+                        visionStack.baseLevel.clear()
+                        visionStack.clear()
+                        let sessionsList = SessionsListLevel(with: replaySessionManager)
+                        visionStack.add(level: sessionsList)
+                        sessionsList.callback = { session in
+                            if let session = session {
+                                visionBundle?.enable(sessionWith: session.path)
+                            } else {
+                                visionBundle?.enableCamera()
+                            }
+                            visionBundle?.start()
+                            visionStack.baseLevel.visionViewController?.set(visionManager: visionBundle!.visionManager)
+                        }
+                    }
+                )
+            )
+        }
 
         let menuLevel = MenuLevel(with: menuItems)
         visionStack.add(level: menuLevel)
