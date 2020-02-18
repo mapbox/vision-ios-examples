@@ -41,7 +41,7 @@ final class AlertSoundPlayer: AlertPlayer {
         let repeated: Bool
 
         var description: String {
-            return "Item(sound: \(sound), repeated: \(repeated))"
+            "Item(sound: \(sound), repeated: \(repeated))"
         }
     }
 

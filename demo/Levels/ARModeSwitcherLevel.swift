@@ -17,11 +17,11 @@ private enum ARFeature {
     }
 
     var containsLane: Bool {
-        return self == .lane || self == .laneAndFence
+        self == .lane || self == .laneAndFence
     }
 
     var containsFence: Bool {
-        return self == .fence || self == .laneAndFence
+        self == .fence || self == .laneAndFence
     }
 }
 

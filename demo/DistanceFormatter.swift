@@ -6,32 +6,32 @@ extension CLLocationDistance {
 
     // Returns the distance converted to miles
     var miles: Double {
-        return self / .metersPerMile
+        self / .metersPerMile
     }
 
     // Returns the distance converted to feet
     var feet: Double {
-        return self * .feetPerMeter
+        self * .feetPerMeter
     }
 
     // Returns the distance converted to yards
     var yards: Double {
-        return feet / 3
+        feet / 3
     }
 
     // Returns the distance converted to kilometers
     var kilometers: Double {
-        return self / 1000
+        self / 1000
     }
 
     // Returns the distance in meters converted from miles
     func inMiles() -> Double {
-        return self * .metersPerMile
+        self * .metersPerMile
     }
 
     // Returns the distance in meters converted from yards
     func inYards() -> Double {
-        return self * .feetPerMeter / 3
+        self * .feetPerMeter / 3
     }
 
     func converted(to unit: LengthFormatter.Unit) -> Double {
@@ -284,7 +284,7 @@ final class DistanceFormatter: LengthFormatter {
 
     @objc
     override func string(fromMeters numberInMeters: Double) -> String {
-        return self.string(from: numberInMeters)
+        self.string(from: numberInMeters)
     }
 
     func formattedDistance(_ distance: CLLocationDistance) -> String {

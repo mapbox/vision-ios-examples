@@ -7,14 +7,14 @@ class VisionBundle {
 
     private(set) var country: Country = .unknown
 
-    var ar: VisionARBundle {
+    var arBundle: VisionARBundle {
         if privateAR == nil {
             privateAR = VisionARBundle(self)
         }
         return privateAR!
     }
     private var privateAR: VisionARBundle?
-    var safety: VisionSafetyBundle {
+    var safetyBundle: VisionSafetyBundle {
          if privateSafety == nil {
              privateSafety = VisionSafetyBundle(self)
          }
@@ -152,7 +152,7 @@ extension VisionBundle: VisionManagerDelegate {
 }
 
 private class WeakVisionManagerDegelate {
-    weak private(set) var ref: VisionManagerDelegate?
+    private(set) weak var ref: VisionManagerDelegate?
 
     init(_ visionDelegate: VisionManagerDelegate) {
         ref = visionDelegate

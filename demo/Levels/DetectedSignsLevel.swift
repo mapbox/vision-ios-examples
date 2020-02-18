@@ -1,5 +1,5 @@
-import UIKit
 import MapboxVision
+import UIKit
 
 class DetectedSignsLevel: VisionStackLevel, VisionManagerDelegate {
     private weak var visionBundle: VisionBundle?
@@ -36,7 +36,7 @@ class DetectedSignsLevel: VisionStackLevel, VisionManagerDelegate {
     deinit {
         stopSignTrackerUpdates()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

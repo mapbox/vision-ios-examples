@@ -4,6 +4,7 @@ class ReplaySessionManager {
     enum Constants {
         static let replaySessionFolder = "ReplaySessions"
     }
+
     let sessions: [ReplaySession]
 
     init() {
@@ -24,6 +25,5 @@ class ReplaySessionManager {
     }
 
     func delete(session: ReplaySession) {
-
     }
 }

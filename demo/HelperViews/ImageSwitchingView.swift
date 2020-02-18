@@ -8,7 +8,7 @@ private let timing = UICubicTimingParameters(controlPoint1: CGPoint(x: 0.25, y: 
 final class ImageSwitchingView: UIView {
     var image: UIImage? {
         get {
-            return (stack.arrangedSubviews.first as? UIImageView)?.image
+            (stack.arrangedSubviews.first as? UIImageView)?.image
         }
         set {
             (stack.arrangedSubviews.first as? UIImageView)?.image = newValue
@@ -17,7 +17,7 @@ final class ImageSwitchingView: UIView {
 
     var spacing: CGFloat {
         get {
-            return stack.spacing
+            stack.spacing
         }
         set {
             stack.spacing = newValue

@@ -39,7 +39,7 @@ extension VisionSafetyBundle: VisionSafetyManagerDelegate {
 }
 
 private class WeakVisionManagerDegelate {
-    weak private(set) var ref: VisionSafetyManagerDelegate?
+    private(set) weak var ref: VisionSafetyManagerDelegate?
 
     init(_ visionDelegate: VisionSafetyManagerDelegate) {
         ref = visionDelegate

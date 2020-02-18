@@ -1,7 +1,6 @@
 import UIKit
 
 final class MenuLevel: VisionStackLevel {
-
     // MARK: Private properties
 
     let menuItems: [TeaserMenuItem]
@@ -81,7 +80,7 @@ final class MenuLevel: VisionStackLevel {
     }
 
     private func verticalTopLine() -> UIImageView {
-        return UIImageView(image: Asset.Assets.lineTopBottom.image)
+        UIImageView(image: Asset.Assets.lineTopBottom.image)
     }
 
     private func verticalBottomLine() -> UIImageView {

@@ -5,7 +5,7 @@ class VMObserver {
     private let sessionsManager = ReplaySessionManager()
 
     func isReplayAvailable() -> Bool {
-        return sessionsManager.sessions.count > 0
+        !sessionsManager.sessions.isEmpty
     }
 
     func observe() -> VisionBundle {

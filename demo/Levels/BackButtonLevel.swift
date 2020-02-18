@@ -30,7 +30,8 @@ class BackButtonLevel: VisionStackLevel {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func didTap() {
+    @objc
+    func didTap() {
         callback()
     }
 }

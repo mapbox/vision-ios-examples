@@ -30,6 +30,7 @@ extension MapboxVisionARNative.Route {
 }
 
 private extension MapboxDirections.ManeuverType {
+    // swiftlint:disable:next cyclomatic_complexity
     func toVisionManeuverType() -> MapboxVisionARNative.ManeuverType {
         switch self {
         case .none:

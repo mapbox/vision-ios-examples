@@ -32,7 +32,6 @@ class InfoButtonLevel: VisionStackLevel {
 
     @objc
     private func infoTapped() {
-        // todo: implement
         guard let viewController = viewController else { return }
         let alert: UIAlertController
 

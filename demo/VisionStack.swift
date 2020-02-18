@@ -1,10 +1,10 @@
-import UIKit
 import MapboxVision
 import MapboxVisionAR
+import UIKit
 
 class VisionStack {
     var viewController: UIViewController {
-        return baseLevel.viewController
+        baseLevel.viewController
     }
     let baseLevel: BaseLevel
     private var levels: [VisionStackLevel] = []
@@ -121,7 +121,7 @@ class BaseLevel {
         guard arViewController == nil else { return }
         guard let visionBundle = visionBundle else { return }
         let arViewController = VisionARViewController()
-        arViewController.set(arManager: visionBundle.ar.arManager)
+        arViewController.set(arManager: visionBundle.arBundle.arManager)
         viewController.view.insertSubview(arViewController.view, at: 1)
         viewController.addChild(arViewController)
         arViewController.didMove(toParent: viewController)

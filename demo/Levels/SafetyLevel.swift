@@ -1,5 +1,5 @@
-import UIKit
 import MapboxVisionSafety
+import UIKit
 
 class SafetyLevel: VisionStackLevel {
     private enum Constants {
@@ -8,6 +8,7 @@ class SafetyLevel: VisionStackLevel {
         static let buttonHeight: CGFloat = 36
         static let collisionAlertDelay: TimeInterval = 3
     }
+
     private let distanceView: DistanceView = {
         let view = DistanceView(frame: .zero)
         view.backgroundColor = .clear
@@ -130,7 +131,6 @@ class SafetyLevel: VisionStackLevel {
     }
 
     func present(safetyState: SafetyState) {
-
         switch safetyState {
         case .none:
             break

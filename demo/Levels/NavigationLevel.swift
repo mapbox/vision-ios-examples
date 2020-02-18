@@ -1,5 +1,5 @@
-import MapboxDirections
 import MapboxCoreNavigation
+import MapboxDirections
 import UIKit
 
 class NavigationLevel: VisionStackLevel {

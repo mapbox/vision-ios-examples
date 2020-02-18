@@ -40,7 +40,8 @@ class EndButtonLevel: VisionStackLevel {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func didTriggerPrimaryAction() {
+    @objc
+    func didTriggerPrimaryAction() {
         completion?()
     }
 }

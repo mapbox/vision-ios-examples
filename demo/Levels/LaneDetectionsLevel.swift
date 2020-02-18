@@ -1,5 +1,5 @@
-import UIKit
 import MapboxVision
+import UIKit
 
 class LaneDetectionsLevel: VisionStackLevel {
     private enum Constants {
