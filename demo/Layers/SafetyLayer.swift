@@ -1,7 +1,7 @@
 import MapboxVisionSafety
 import UIKit
 
-class SafetyLevel: VisionStackLevel {
+class SafetyLayer: VisionStackLayer {
     private enum Constants {
         static let bannerInset: CGFloat = 18
         static let smallRelativeInset: CGFloat = 16
@@ -140,7 +140,7 @@ class SafetyLevel: VisionStackLevel {
     }
 }
 
-extension SafetyLevel: VisionSafetyManagerDelegate {
+extension SafetyLayer: VisionSafetyManagerDelegate {
     func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didUpdateCollisions collisions: [CollisionObject]) {
         let state = SafetyState(collisions)
 

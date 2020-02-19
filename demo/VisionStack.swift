@@ -7,83 +7,27 @@ class VisionStack {
         baseLevel.viewController
     }
     let baseLevel: BaseLevel
-    private var levels: [VisionStackLevel] = []
-    private var pinnedLevels: [VisionStackLevel] = []
-    private let viewsStack: UIView
-    private let pinnedViewsStack: VisionStackLevel
+    let content: VisionStackLayer
+    let top: VisionStackLayer
 
     init(with visionBundle: VisionBundle) {
         baseLevel = BaseLevel(with: visionBundle)
-        viewsStack = UIView(frame: baseLevel.viewController.view.bounds)
-        viewsStack.translatesAutoresizingMaskIntoConstraints = true
-        baseLevel.viewController.view.addSubview(viewsStack)
-        pinnedViewsStack = VisionStackLevel()
-        viewsStack.addSubview(pinnedViewsStack)
+        content = VisionStackLayer()
+        top = VisionStackLayer()
+        viewController.view.addSubview(content)
         NSLayoutConstraint.activate([
-            viewsStack.centerXAnchor.constraint(equalTo: pinnedViewsStack.centerXAnchor),
-            viewsStack.centerYAnchor.constraint(equalTo: pinnedViewsStack.centerYAnchor),
-            viewsStack.heightAnchor.constraint(equalTo: pinnedViewsStack.heightAnchor),
-            viewsStack.widthAnchor.constraint(equalTo: pinnedViewsStack.widthAnchor)
+            viewController.view.centerXAnchor.constraint(equalTo: content.centerXAnchor),
+            viewController.view.centerYAnchor.constraint(equalTo: content.centerYAnchor),
+            viewController.view.heightAnchor.constraint(equalTo: content.heightAnchor),
+            viewController.view.widthAnchor.constraint(equalTo: content.widthAnchor)
         ])
-    }
-
-    func add(level: VisionStackLevel) {
-        levels.append(level)
-        level.translatesAutoresizingMaskIntoConstraints = false
-        viewsStack.insertSubview(level, belowSubview: pinnedViewsStack)
+        viewController.view.addSubview(top)
         NSLayoutConstraint.activate([
-            viewsStack.centerXAnchor.constraint(equalTo: level.centerXAnchor),
-            viewsStack.centerYAnchor.constraint(equalTo: level.centerYAnchor),
-            viewsStack.heightAnchor.constraint(equalTo: level.heightAnchor),
-            viewsStack.widthAnchor.constraint(equalTo: level.widthAnchor)
+            viewController.view.centerXAnchor.constraint(equalTo: top.centerXAnchor),
+            viewController.view.centerYAnchor.constraint(equalTo: top.centerYAnchor),
+            viewController.view.heightAnchor.constraint(equalTo: top.heightAnchor),
+            viewController.view.widthAnchor.constraint(equalTo: top.widthAnchor)
         ])
-    }
-
-    func pin(level: VisionStackLevel) {
-        pinnedLevels.append(level)
-        level.translatesAutoresizingMaskIntoConstraints = false
-        pinnedViewsStack.addSubview(level)
-        NSLayoutConstraint.activate([
-            pinnedViewsStack.centerXAnchor.constraint(equalTo: level.centerXAnchor),
-            pinnedViewsStack.centerYAnchor.constraint(equalTo: level.centerYAnchor),
-            pinnedViewsStack.heightAnchor.constraint(equalTo: level.heightAnchor),
-            pinnedViewsStack.widthAnchor.constraint(equalTo: level.widthAnchor)
-        ])
-    }
-
-    func remove(level: VisionStackLevel) {
-        levels = levels.filter { subview in
-            if subview === level {
-                level.removeFromSuperview()
-                return false
-            }
-            return true
-        }
-    }
-
-    func unpin(level: VisionStackLevel) {
-        pinnedLevels = pinnedLevels.filter { subview in
-            if subview === level {
-                level.removeFromSuperview()
-                return false
-            }
-            return true
-        }
-    }
-
-    func clearLevels() {
-        levels.forEach { level in
-            level.removeFromSuperview()
-        }
-        levels = []
-    }
-
-    func clear() {
-        clearLevels()
-        pinnedLevels.forEach { level in
-            level.removeFromSuperview()
-        }
-        pinnedLevels = []
     }
 }
 

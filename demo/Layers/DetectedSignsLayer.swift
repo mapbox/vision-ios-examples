@@ -1,7 +1,7 @@
 import MapboxVision
 import UIKit
 
-class DetectedSignsLevel: VisionStackLevel, VisionManagerDelegate {
+class DetectedSignsLayer: VisionStackLayer, VisionManagerDelegate {
     private weak var visionBundle: VisionBundle?
     private enum Constants {
         static let smallRelativeInset: CGFloat = 16

@@ -1,6 +1,6 @@
 import UIKit
 
-class EndButtonLevel: VisionStackLevel {
+class EndButtonLayer: VisionStackLayer {
     private enum Constants {
         static let inset: CGFloat = 18.0
         static let height: CGFloat = 44.0

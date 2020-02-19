@@ -2,7 +2,7 @@ import MapboxCoreNavigation
 import MapboxDirections
 import UIKit
 
-class NavigationLevel: VisionStackLevel {
+class NavigationLayer: VisionStackLayer {
     private enum Constants {
         static let inset: CGFloat = 18.0
     }
@@ -41,7 +41,7 @@ class NavigationLevel: VisionStackLevel {
     }
 }
 
-extension NavigationLevel: NavigationServiceDelegate {
+extension NavigationLayer: NavigationServiceDelegate {
     func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
         instructionsLabel.isHidden = false
         instructionsLabel.text = progress.currentLegProgress.currentStep.instructions

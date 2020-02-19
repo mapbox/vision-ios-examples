@@ -1,6 +1,6 @@
 import UIKit
 
-final class MenuLevel: VisionStackLevel {
+final class MenuLayer: VisionStackLayer {
     // MARK: Private properties
 
     let menuItems: [TeaserMenuItem]

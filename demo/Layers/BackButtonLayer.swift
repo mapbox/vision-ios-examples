@@ -1,6 +1,6 @@
 import UIKit
 
-class BackButtonLevel: VisionStackLevel {
+class BackButtonLayer: VisionStackLayer {
     private let backButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +23,7 @@ class BackButtonLevel: VisionStackLevel {
             backButton.widthAnchor.constraint(lessThanOrEqualToConstant: 44),
             backButton.heightAnchor.constraint(lessThanOrEqualToConstant: 44),
         ])
-        backButton.addTarget(self, action: #selector(BackButtonLevel.didTap), for: .primaryActionTriggered)
+        backButton.addTarget(self, action: #selector(BackButtonLayer.didTap), for: .primaryActionTriggered)
     }
 
     required init?(coder: NSCoder) {

@@ -1,6 +1,6 @@
 import UIKit
 
-class InfoButtonLevel: VisionStackLevel {
+class InfoButtonLayer: VisionStackLayer {
     private enum Constants {
         static let infoButtonPadding: CGFloat = 20
     }

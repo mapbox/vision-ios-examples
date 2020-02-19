@@ -25,7 +25,7 @@ private enum ARFeature {
     }
 }
 
-class ARModeSwitcherLevel: VisionStackLevel {
+class ARModeSwitcherLayer: VisionStackLayer {
     private weak var visionStack: VisionStack?
     private var activeARFeature: ARFeature = .lane {
         didSet {

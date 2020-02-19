@@ -1,7 +1,7 @@
 import MapboxVision
 import UIKit
 
-class LaneDetectionsLevel: VisionStackLevel {
+class LaneDetectionsLayer: VisionStackLayer {
     private enum Constants {
         static let bannerInset: CGFloat = 18
         static let roadLanesHeight: CGFloat = 64
@@ -43,7 +43,7 @@ class LaneDetectionsLevel: VisionStackLevel {
     }
 }
 
-extension LaneDetectionsLevel: VisionManagerDelegate {
+extension LaneDetectionsLayer: VisionManagerDelegate {
     func visionManager(_ visionManager: VisionManagerProtocol, didUpdateRoadDescription roadDescription: RoadDescription) {
         present(roadDescription: roadDescription)
     }
