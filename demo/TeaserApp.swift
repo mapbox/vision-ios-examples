@@ -1,27 +1,48 @@
-import MapboxVisionAR
 import UIKit
 
 class TeaserApp {
     let viewController: UIViewController
 
-    private let visionBundle: VisionBundle
+    private var visionBundle: VisionBundle
     private let visionStack: VisionStack
     private var menuLayer: MenuLayer?
+    private var arScreen: ARScreen?
 
-    init() {
-        visionBundle = VMObserver().observe()
-        visionStack = VisionStack(with: visionBundle)
+    static func createDefault() -> TeaserApp {
+        let visionBundle = VisionBundle.createDefault()
+        let visionStack = VisionStack.createDefault(with: visionBundle)
+        let teaser = TeaserApp(visionBundle: visionBundle, visionStack: visionStack)
+        teaser.visionBundle.start()
+        return teaser
+    }
+
+    init(visionBundle: VisionBundle, visionStack: VisionStack) {
+        self.visionBundle = visionBundle
+        self.visionStack = visionStack
         viewController = UINavigationController()
         viewController.addChild(visionStack.viewController)
+        resetViews()
+    }
+
+    func resetViews() {
+        if let arScreen = arScreen {
+            arScreen.resetViews()
+            return
+        }
+        visionStack.content.clear()
+        visionStack.baseLevel.clear()
+        let subcontent = VisionStackLayer()
+        let top = VisionStackLayer()
+
         let menuItems = [
             TeaserMenuItem(
                 name: L10n.menuSignDetectionButton,
                 icon: Asset.Assets.icon4.image
-            ) { [weak self] visionStack in
+            ) { [weak visionBundle] visionStack in
                 visionStack.baseLevel.clear()
                 visionStack.content.clear()
-                guard let self = self else { return }
-                let signs = DetectedSignsLayer(with: self.visionBundle)
+                guard let visionBundle = visionBundle else { return }
+                let signs = DetectedSignsLayer(with: visionBundle)
                 visionStack.content.add(layer: signs)
             },
             TeaserMenuItem(
@@ -50,24 +71,9 @@ class TeaserApp {
             TeaserMenuItem(
                 name: L10n.menuARButton,
                 icon: Asset.Assets.icon7.image
-            ) { [weak visionBundle] visionStack in
-                visionStack.content.clear()
-                let map = ARMapNavigationLayer()
-                visionStack.content.add(layer: map)
-                map.completion = { [weak visionBundle, weak visionStack, unowned map] route in
-                    guard let visionStack = visionStack else { return }
-                    visionStack.content.clear()
-                    visionBundle?.arBundle.arManager.set(route: Route(route: route))
-                    visionStack.baseLevel.ar()
-                    visionStack.content.add(layer: ARModeSwitcherLayer(with: visionStack))
-                    let navigation = NavigationLayer(with: route)
-                    visionStack.content.add(layer: navigation)
-                    visionStack.content.add(layer: EndButtonLayer { [weak visionStack, map] in
-                        guard let visionStack = visionStack else { return }
-                        visionStack.content.clear()
-                        visionStack.content.add(layer: map)
-                    })
-                }
+            ) { [weak visionBundle, weak self] visionStack in
+                guard let visionBundle = visionBundle, let self = self else { return }
+                self.arScreen = ARScreen(visionBundle: visionBundle, visionStack: visionStack)
             },
             TeaserMenuItem(
                 name: L10n.menuLaneDetectionButton,
@@ -83,26 +89,23 @@ class TeaserApp {
         let menuLayer = MenuLayer(with: menuItems)
         visionStack.content.add(layer: menuLayer)
         visionStack.content.add(layer: InfoButtonLayer(with: visionStack))
-        let backButtonLevel = BackButtonLayer { [weak menuLayer, weak visionStack, weak visionBundle] in
-            guard let menuLayer = menuLayer, let visionStack = visionStack else { return }
-            visionStack.content.clear()
-            visionStack.baseLevel.clear()
-            visionStack.content.add(layer: menuLayer)
-            visionStack.content.add(layer: InfoButtonLayer(with: visionStack))
-            DispatchQueue.main.async { [weak visionBundle] in
-                visionBundle?.groomWeak()
-            }
+        let backButtonLevel = BackButtonLayer { [weak self] in
+            self?.arScreen = nil
+            self?.resetViews()
         }
         menuLayer.didChoose { [weak visionStack] menuItem in
-            guard let controlStack = visionStack else { return }
-            menuItem.activateBlock(controlStack)
-            visionStack?.top.add(layer: backButtonLevel)
+            guard let visionStack = visionStack else { return }
+            visionStack.content.clear()
+            subcontent.clear()
+            top.clear()
+            visionStack.content.add(layer: subcontent)
+            menuItem.activateBlock(VisionStack(baseLevel: visionStack.baseLevel, content: subcontent))
+            visionStack.content.add(layer: backButtonLevel)
         }
 
         self.menuLayer = menuLayer
 
         guard let navigationController = self.viewController as? UINavigationController else { return }
         navigationController.navigationBar.isHidden = true
-        self.visionBundle.start()
     }
 }

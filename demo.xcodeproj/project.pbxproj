@@ -42,8 +42,9 @@
 		5A29881223F2FF3F006F863B /* LaneDetectionsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881123F2FF3F006F863B /* LaneDetectionsLayer.swift */; };
 		5A29881423F3015C006F863B /* ARModeSwitcherLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881323F3015C006F863B /* ARModeSwitcherLayer.swift */; };
 		5A2DCA7823FC40E400FCF169 /* VisionStackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7723FC40E400FCF169 /* VisionStackLayer.swift */; };
+		5A2DCA7A23FD4FD500FCF169 /* ARLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7923FD4FD500FCF169 /* ARLayer.swift */; };
+		5A2DCA7C23FECC3B00FCF169 /* BaseLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7B23FECC3B00FCF169 /* BaseLevel.swift */; };
 		5A3175F823F162A900A56B62 /* DetectedSignsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3175F723F162A900A56B62 /* DetectedSignsLayer.swift */; };
-		5A3905D223EB0F5400CD5245 /* VMObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D123EB0F5400CD5245 /* VMObserver.swift */; };
 		5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D423EC24DA00CD5245 /* TeaserApp.swift */; };
 		5A3905D723EC256A00CD5245 /* VisionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D623EC256A00CD5245 /* VisionStack.swift */; };
 		5A3905D923EC3A5400CD5245 /* TeaserMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D823EC3A5400CD5245 /* TeaserMenuItem.swift */; };
@@ -137,8 +138,9 @@
 		5A29881123F2FF3F006F863B /* LaneDetectionsLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneDetectionsLayer.swift; sourceTree = "<group>"; };
 		5A29881323F3015C006F863B /* ARModeSwitcherLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModeSwitcherLayer.swift; sourceTree = "<group>"; };
 		5A2DCA7723FC40E400FCF169 /* VisionStackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionStackLayer.swift; sourceTree = "<group>"; };
+		5A2DCA7923FD4FD500FCF169 /* ARLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLayer.swift; sourceTree = "<group>"; };
+		5A2DCA7B23FECC3B00FCF169 /* BaseLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLevel.swift; sourceTree = "<group>"; };
 		5A3175F723F162A900A56B62 /* DetectedSignsLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedSignsLayer.swift; sourceTree = "<group>"; };
-		5A3905D123EB0F5400CD5245 /* VMObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMObserver.swift; sourceTree = "<group>"; };
 		5A3905D423EC24DA00CD5245 /* TeaserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaserApp.swift; sourceTree = "<group>"; };
 		5A3905D623EC256A00CD5245 /* VisionStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionStack.swift; sourceTree = "<group>"; };
 		5A3905D823EC3A5400CD5245 /* TeaserMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaserMenuItem.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				5A29881123F2FF3F006F863B /* LaneDetectionsLayer.swift */,
 				5A29881323F3015C006F863B /* ARModeSwitcherLayer.swift */,
 				B532EE032170A9AA00B172FA /* ARMapNavigationLayer.swift */,
+				5A2DCA7923FD4FD500FCF169 /* ARLayer.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -309,7 +312,6 @@
 		5A3905D323EC24B400CD5245 /* VMObserver */ = {
 			isa = PBXGroup;
 			children = (
-				5A3905D123EB0F5400CD5245 /* VMObserver.swift */,
 				5A2987FF23F19D7B006F863B /* VisionBundle.swift */,
 				5A29880123F19DE5006F863B /* VisionARBundle.swift */,
 				5A29880323F19DF5006F863B /* VisionSafetyBundle.swift */,
@@ -345,6 +347,7 @@
 				5A3905D423EC24DA00CD5245 /* TeaserApp.swift */,
 				5A3905D823EC3A5400CD5245 /* TeaserMenuItem.swift */,
 				5A3905D623EC256A00CD5245 /* VisionStack.swift */,
+				5A2DCA7B23FECC3B00FCF169 /* BaseLevel.swift */,
 				5A3905D323EC24B400CD5245 /* VMObserver */,
 				5A3905D023E9D82500CD5245 /* HelperViews */,
 				5A19454123E48DAD009CE251 /* Replay */,
@@ -613,6 +616,7 @@
 				5A19454323E48DC2009CE251 /* ReplaySessionManager.swift in Sources */,
 				5A29880023F19D7B006F863B /* VisionBundle.swift in Sources */,
 				5A29881223F2FF3F006F863B /* LaneDetectionsLayer.swift in Sources */,
+				5A2DCA7C23FECC3B00FCF169 /* BaseLevel.swift in Sources */,
 				5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */,
 				2E48C19521A5A9C50029B2A9 /* ImageSwitchingView.swift in Sources */,
 				2E60335E214295F80050EDB3 /* Locale.swift in Sources */,
@@ -634,10 +638,10 @@
 				2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */,
 				5A29881423F3015C006F863B /* ARModeSwitcherLayer.swift in Sources */,
 				B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */,
+				5A2DCA7A23FD4FD500FCF169 /* ARLayer.swift in Sources */,
 				5A2DCA7823FC40E400FCF169 /* VisionStackLayer.swift in Sources */,
 				2E6033652142982D0050EDB3 /* Images.swift in Sources */,
 				B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */,
-				5A3905D223EB0F5400CD5245 /* VMObserver.swift in Sources */,
 				5A3E42CD22B3D2C80035A010 /* GlobalConstants.swift in Sources */,
 				5AFC926222C22EEF00A17776 /* ARRoute+DirectionsRoute.swift in Sources */,
 				5A3905D723EC256A00CD5245 /* VisionStack.swift in Sources */,

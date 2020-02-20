@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func launchVision() -> UIViewController {
-        let teaserApp = TeaserApp()
+        let teaserApp = TeaserApp.createDefault()
         self.teaserApp = teaserApp
         return teaserApp.viewController
     }

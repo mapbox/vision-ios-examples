@@ -18,9 +18,9 @@ class VisionStackLayer: UIView {
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        for subview in subviews {
-            if subview.frame.contains(point) {
-                return subview.hitTest(convert(point, to: subview), with: event)
+        for subview in subviews.reversed() {
+            if subview.frame.contains(point), let result = subview.hitTest(convert(point, to: subview), with: event) {
+                return result
             }
         }
         return nil

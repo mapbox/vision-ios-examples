@@ -24,6 +24,12 @@ class VisionBundle {
 
     private var delegates: [WeakVisionManagerDegelate] = []
 
+    static func createDefault() -> VisionBundle {
+        let camera = CameraVideoSource()
+        let visionManager = VisionManager.create(videoSource: camera)
+        return VisionBundle(videoSource: camera, visionManager: visionManager)
+    }
+
     init(videoSource: VideoSource, visionManager: BaseVisionManager) {
         self.videoSource = videoSource
         self.visionManager = visionManager
