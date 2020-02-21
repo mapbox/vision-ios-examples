@@ -1,7 +1,7 @@
 import Foundation
 import MapboxVisionAR
 
-class ARScreen {
+class ARController {
     private let visionBundle: VisionBundle
     private let visionStack: VisionStack
 
@@ -12,6 +12,7 @@ class ARScreen {
     }
 
     func resetViews() {
+        visionBundle.set(performance: .low)
         visionStack.content.clear()
         let map = ARMapNavigationLayer()
         visionStack.content.add(layer: map)

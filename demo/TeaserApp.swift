@@ -6,7 +6,7 @@ class TeaserApp {
     private var visionBundle: VisionBundle
     private let visionStack: VisionStack
     private var menuLayer: MenuLayer?
-    private var arScreen: ARScreen?
+    private var arScreen: ARController?
 
     static func createDefault() -> TeaserApp {
         let visionBundle = VisionBundle.createDefault()
@@ -29,10 +29,10 @@ class TeaserApp {
             arScreen.resetViews()
             return
         }
+        visionBundle.set(performance: .low)
         visionStack.content.clear()
         visionStack.baseLevel.clear()
         let subcontent = VisionStackLayer()
-        let top = VisionStackLayer()
 
         let menuItems = [
             TeaserMenuItem(
@@ -42,20 +42,23 @@ class TeaserApp {
                 visionStack.baseLevel.clear()
                 visionStack.content.clear()
                 guard let visionBundle = visionBundle else { return }
+                visionBundle.set(performance: .high)
                 let signs = DetectedSignsLayer(with: visionBundle)
                 visionStack.content.add(layer: signs)
             },
             TeaserMenuItem(
                 name: L10n.menuSegmentationButton,
                 icon: Asset.Assets.icon1.image
-            ) { visionStack in
+            ) { [weak visionBundle] visionStack in
+                visionBundle?.set(performance: .high)
                 visionStack.baseLevel.segmentation()
                 visionStack.content.clear()
             },
             TeaserMenuItem(
                 name: L10n.menuObjectDetectionButton,
                 icon: Asset.Assets.icon6.image
-            ) { visionStack in
+            ) { [weak visionBundle] visionStack in
+                visionBundle?.set(performance: .high)
                 visionStack.baseLevel.detection()
                 visionStack.content.clear()
             },
@@ -65,6 +68,7 @@ class TeaserApp {
             ) { [weak visionBundle] visionStack in
                 visionStack.baseLevel.clear()
                 visionStack.content.clear()
+                visionBundle?.set(performance: .medium)
                 guard let safetyBundle = visionBundle?.safetyBundle else { return }
                 visionStack.content.add(layer: SafetyLayer(with: safetyBundle))
             },
@@ -73,7 +77,7 @@ class TeaserApp {
                 icon: Asset.Assets.icon7.image
             ) { [weak visionBundle, weak self] visionStack in
                 guard let visionBundle = visionBundle, let self = self else { return }
-                self.arScreen = ARScreen(visionBundle: visionBundle, visionStack: visionStack)
+                self.arScreen = ARController(visionBundle: visionBundle, visionStack: visionStack)
             },
             TeaserMenuItem(
                 name: L10n.menuLaneDetectionButton,
@@ -81,6 +85,7 @@ class TeaserApp {
             ) { [weak visionBundle] visionStack in
                 visionStack.baseLevel.clear()
                 visionStack.content.clear()
+                visionBundle?.set(performance: .medium)
                 guard let visionBundle = visionBundle else { return }
                 visionStack.content.add(layer: LaneDetectionsLayer(with: visionBundle))
             }
@@ -97,7 +102,6 @@ class TeaserApp {
             guard let visionStack = visionStack else { return }
             visionStack.content.clear()
             subcontent.clear()
-            top.clear()
             visionStack.content.add(layer: subcontent)
             menuItem.activateBlock(VisionStack(baseLevel: visionStack.baseLevel, content: subcontent))
             visionStack.content.add(layer: backButtonLevel)

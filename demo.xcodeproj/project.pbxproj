@@ -42,7 +42,7 @@
 		5A29881223F2FF3F006F863B /* LaneDetectionsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881123F2FF3F006F863B /* LaneDetectionsLayer.swift */; };
 		5A29881423F3015C006F863B /* ARModeSwitcherLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29881323F3015C006F863B /* ARModeSwitcherLayer.swift */; };
 		5A2DCA7823FC40E400FCF169 /* VisionStackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7723FC40E400FCF169 /* VisionStackLayer.swift */; };
-		5A2DCA7A23FD4FD500FCF169 /* ARLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7923FD4FD500FCF169 /* ARLayer.swift */; };
+		5A2DCA7A23FD4FD500FCF169 /* ARController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7923FD4FD500FCF169 /* ARController.swift */; };
 		5A2DCA7C23FECC3B00FCF169 /* BaseLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCA7B23FECC3B00FCF169 /* BaseLevel.swift */; };
 		5A3175F823F162A900A56B62 /* DetectedSignsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3175F723F162A900A56B62 /* DetectedSignsLayer.swift */; };
 		5A3905D523EC24DA00CD5245 /* TeaserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3905D423EC24DA00CD5245 /* TeaserApp.swift */; };
@@ -138,7 +138,7 @@
 		5A29881123F2FF3F006F863B /* LaneDetectionsLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneDetectionsLayer.swift; sourceTree = "<group>"; };
 		5A29881323F3015C006F863B /* ARModeSwitcherLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModeSwitcherLayer.swift; sourceTree = "<group>"; };
 		5A2DCA7723FC40E400FCF169 /* VisionStackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionStackLayer.swift; sourceTree = "<group>"; };
-		5A2DCA7923FD4FD500FCF169 /* ARLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLayer.swift; sourceTree = "<group>"; };
+		5A2DCA7923FD4FD500FCF169 /* ARController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARController.swift; sourceTree = "<group>"; };
 		5A2DCA7B23FECC3B00FCF169 /* BaseLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLevel.swift; sourceTree = "<group>"; };
 		5A3175F723F162A900A56B62 /* DetectedSignsLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedSignsLayer.swift; sourceTree = "<group>"; };
 		5A3905D423EC24DA00CD5245 /* TeaserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaserApp.swift; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 				5A29881123F2FF3F006F863B /* LaneDetectionsLayer.swift */,
 				5A29881323F3015C006F863B /* ARModeSwitcherLayer.swift */,
 				B532EE032170A9AA00B172FA /* ARMapNavigationLayer.swift */,
-				5A2DCA7923FD4FD500FCF169 /* ARLayer.swift */,
+				5A2DCA7923FD4FD500FCF169 /* ARController.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 				2E4FEDF5215E5EA600DCB496 /* LicenseChecker.swift in Sources */,
 				5A29881423F3015C006F863B /* ARModeSwitcherLayer.swift in Sources */,
 				B5442004214A615D007CB69E /* PaddedLabel.swift in Sources */,
-				5A2DCA7A23FD4FD500FCF169 /* ARLayer.swift in Sources */,
+				5A2DCA7A23FD4FD500FCF169 /* ARController.swift in Sources */,
 				5A2DCA7823FC40E400FCF169 /* VisionStackLayer.swift in Sources */,
 				2E6033652142982D0050EDB3 /* Images.swift in Sources */,
 				B52787D620F0B46A007D1EA7 /* AppDelegate.swift in Sources */,

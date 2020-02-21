@@ -1,6 +1,12 @@
 import Foundation
 import MapboxVision
 
+enum VisionPerformance {
+    case high
+    case medium
+    case low
+}
+
 class VisionBundle {
     let videoSource: VideoSource
     let visionManager: BaseVisionManager
@@ -70,6 +76,17 @@ class VisionBundle {
     func groomWeak() {
         delegates = delegates.filter { delegate in
             delegate.ref != nil
+        }
+    }
+
+    func set(performance: VisionPerformance) {
+        switch performance {
+        case .high:
+            visionManager.modelPerformanceConfig = .merged(performance: ModelPerformance(mode: .fixed, rate: .high))
+        case .medium:
+            visionManager.modelPerformanceConfig = .merged(performance: ModelPerformance(mode: .fixed, rate: .medium))
+        case .low:
+            visionManager.modelPerformanceConfig = .merged(performance: ModelPerformance(mode: .fixed, rate: .low))
         }
     }
 }
