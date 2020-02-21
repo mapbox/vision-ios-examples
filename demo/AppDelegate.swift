@@ -6,7 +6,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow(frame: UIScreen.main.bounds)
-    private var interactor: ContainerInteractor?
+    var teaserApp: TeaserApp?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         _ = MTLCreateSystemDefaultDevice()
@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window.rootViewController = makeRootViewController()
         window.makeKeyAndVisible()
-
         return true
     }
 
@@ -30,23 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func launchVision() -> UIViewController {
-        let containerController = ContainerViewController()
-
-        containerController.visionViewController = VisionPresentationViewController()
-
-        let menuViewController = MenuViewController()
-        containerController.menuViewController = menuViewController
-
-        let alertPlayer = AlertSoundPlayer()
-
-        interactor = ContainerInteractor(dependencies: ContainerInteractor.Dependencies(
-            alertPlayer: alertPlayer,
-            presenter: containerController
-        ))
-        containerController.delegate = interactor
-        menuViewController.delegate = interactor
-
-        return containerController
+        let teaserApp = TeaserApp.createDefault()
+        self.teaserApp = teaserApp
+        return teaserApp.viewController
     }
 
     private func launchLicense() -> UIViewController {

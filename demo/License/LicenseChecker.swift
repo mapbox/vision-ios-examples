@@ -7,7 +7,7 @@ struct LicenseController {
     private init() {}
 
     static func checkSubmission() -> Bool {
-        return UserDefaults.standard.bool(forKey: licenseCheckKey)
+        UserDefaults.standard.bool(forKey: licenseCheckKey)
     }
 
     static func submit() {

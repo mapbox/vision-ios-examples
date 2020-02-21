@@ -5,11 +5,11 @@ final class CollisionObjectView: UIView {
     let exclamationMarkView = UIImageView(image: Asset.Assets.alert.image)
 
     private var gradientLayer: CAGradientLayer? {
-        return layer as? CAGradientLayer
+        layer as? CAGradientLayer
     }
 
     override class var layerClass: AnyClass {
-        return CAGradientLayer.self
+        CAGradientLayer.self
     }
 
     override init(frame: CGRect) {
