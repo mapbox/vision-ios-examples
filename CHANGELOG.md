@@ -2,7 +2,7 @@
 
 ## 1.0-32
 
-- Add japanese traffic signs
+- Added japanese traffic signs
 
 ## 1.0-31
 
