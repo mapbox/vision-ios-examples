@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0-32
+
+- Added japanese traffic signs
+
 ## 1.0-31
 
 The latest version of the Vision Teaser includes numerous improvements to the AR Navigation experience, including improved detection of the vehicle’s current lane (ego lane), improved rendering of vehicle path based on real-time lane segmentation, and faster camera calibration. Vertical “fence-style” AR rendering has been improved, as well as overall performance on the iPhone 11. Finally, various iOS-specific crashes have been fixed.
