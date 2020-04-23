@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0-32
+
+The latest version of the Vision Teaser includes improvements in algorithm performance, camera calibration process, and lane detection accuracy. The new version contains new improved ML-models for CV tasks like detection, segmentation, and classification. The full list of changes:
+
+- `MapboxVision` v0.12.0
+- Added detection of Japanese traffic signs
+- Improved lanes detection algorithm
+- Improved camera calibration algorithm
+- Utilized new ML models that reduce resource consumption
+
 ## 1.0-31
 
 The latest version of the Vision Teaser includes numerous improvements to the AR Navigation experience, including improved detection of the vehicle’s current lane (ego lane), improved rendering of vehicle path based on real-time lane segmentation, and faster camera calibration. Vertical “fence-style” AR rendering has been improved, as well as overall performance on the iPhone 11. Finally, various iOS-specific crashes have been fixed.
