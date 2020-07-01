@@ -76,12 +76,6 @@ extension DelegateProxy: VisionManagerDelegate where Delegate: VisionManagerDele
 }
 
 extension DelegateProxy: VisionARManagerDelegate where Delegate: VisionARManagerDelegate {
-    func visionARManager(_ visionARManager: VisionARManager, didUpdateARCamera camera: ARCamera) {
-        queue.async { [unowned self] in
-            self.delegate?.visionARManager(visionARManager, didUpdateARCamera: camera)
-        }
-    }
-
     func visionARManager(_ visionARManager: VisionARManager, didUpdateARLane lane: ARLane?) {
         queue.async { [unowned self] in
             self.delegate?.visionARManager(visionARManager, didUpdateARLane: lane)

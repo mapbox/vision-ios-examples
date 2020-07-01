@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0-35
+
+The latest version of the Vision Teaser brings automatic camera recalibration and improvements in lane detection. The full list of changes:
+
+- `MapboxVision` v0.13.0
+- Improve lane detection
+- Stop sending some inaccurate events until the camera is calibrated
+- Introduce automatic camera recalibration
+- Expand Japan region to include Okinawa
+- Fix bug with speed estimation when a vehicle is stopped
+- Fix bug that prevented new China users authorization
+
 ## 1.0-32
 
 The latest version of the Vision Teaser includes improvements in algorithm performance, camera calibration process, and lane detection accuracy. The new version contains new improved ML-models for CV tasks like detection, segmentation, and classification. The full list of changes:
