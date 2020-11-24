@@ -14,7 +14,7 @@ extension MapboxVisionARNative.Route {
                 let maneuver = RoutePoint(coordinate: GeoCoordinate(lon: step.maneuverLocation.longitude, lat: step.maneuverLocation.latitude))
                 points.append(maneuver)
 
-                guard let coords = step.coordinates else { return }
+                guard let coords = step.shape?.coordinates else { return }
                 let routePoints = coords.map {
                     RoutePoint(coordinate: GeoCoordinate(lon: $0.longitude, lat: $0.latitude), maneuverType: step.maneuverType.toVisionManeuverType())
                 }
@@ -24,16 +24,14 @@ extension MapboxVisionARNative.Route {
 
         self.init(points: points,
                   eta: Float(route.expectedTravelTime),
-                  sourceStreetName: route.legs.first?.source.name ?? "",
-                  destinationStreetName: route.legs.last?.destination.name ?? "")
+                  sourceStreetName: route.legs.first?.source?.name ?? "",
+                  destinationStreetName: route.legs.last?.destination?.name ?? "")
     }
 }
 
 private extension MapboxDirections.ManeuverType {
     func toVisionManeuverType() -> MapboxVisionARNative.ManeuverType {
         switch self {
-        case .none:
-            return .none
         case .depart:
             return .depart
         case .turn:
@@ -68,8 +66,6 @@ private extension MapboxDirections.ManeuverType {
             return .notification
         case .arrive:
             return .arrive
-        case .passWaypoint:
-            return .none
         }
     }
 }
