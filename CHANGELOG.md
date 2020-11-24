@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0-37
+
+- `MapboxVision` v0.13.2
+- `MapboxNavigation` v0.40.0
+
 ## 1.0-36
 
 - `MapboxVision` v0.13.1
