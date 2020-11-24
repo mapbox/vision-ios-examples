@@ -359,7 +359,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Mapbox;
 				TargetAttributes = {
 					B52787D120F0B46A007D1EA7 = {
@@ -522,7 +522,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xml=\"$(plutil -extract MGLMapboxAccessToken xml1 -o - $TARGET_BUILD_DIR/$INFOPLIST_PATH)\"\ntoken=\"$(sed -n \"s/.*<string>\\(.*\\)<\\/string>.*/\\1/p\" <<< $xml)\"\nif [ -z \"$token\" ]; then\n    token_file=~/.mapbox\n    token=\"$(cat $token_file 2>/dev/null)\"\n    if [ \"$token\" ]; then\n        plutil -replace MGLMapboxAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n    else\n        echo 'warning: Missing Mapbox access token'\n        open 'https://www.mapbox.com/account/access-tokens/'\n    echo \"warning: Get an access token from <https://www.mapbox.com/account/access-tokens/>, then create a new file at $token_file that contains the access token.\"\n    fi\nfi\n";
+			shellScript = "xml=\"$(plutil -extract MGLMapboxAccessToken xml1 -o - $TARGET_BUILD_DIR/$INFOPLIST_PATH)\"\ntoken=\"$(sed -n \"s/.*<string>\\(.*\\)<\\/string>.*/\\1/p\" <<< $xml)\"\nif [ -z \"$token\" ]; then\n    token_file=~/.mapbox\n    token=\"$(cat $token_file 2>/dev/null)\"\n    if [ \"$token\" ]; then\n        echo \"Using token from ~/.mapbox\"\n        plutil -replace MGLMapboxAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n    else\n        echo 'warning: Missing Mapbox access token'\n        open 'https://www.mapbox.com/account/access-tokens/'\n        echo \"warning: Get an access token from <https://www.mapbox.com/account/access-tokens/>, then create a new file at $token_file that contains the access token.\"\n    fi\nelse\n    echo \"Using token from MGLMapboxAccessToken\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -626,6 +626,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -704,6 +705,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -764,6 +766,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
