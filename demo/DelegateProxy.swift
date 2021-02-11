@@ -68,6 +68,12 @@ extension DelegateProxy: VisionManagerDelegate where Delegate: VisionManagerDele
         }
     }
 
+    func visionManager(_ visionManager: VisionManagerProtocol, didUpdateCameraCovered isCameraCovered: Bool) {
+        queue.async { [unowned self] in
+            self.delegate?.visionManager(visionManager, didUpdateCameraCovered: isCameraCovered)
+        }
+    }
+
     func visionManagerDidCompleteUpdate(_ visionManager: VisionManagerProtocol) {
         queue.async { [unowned self] in
             self.delegate?.visionManagerDidCompleteUpdate(visionManager)
@@ -93,6 +99,18 @@ extension DelegateProxy: VisionSafetyManagerDelegate where Delegate: VisionSafet
     func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didUpdateCollisions collisions: [CollisionObject]) {
         queue.async { [unowned self] in
             self.delegate?.visionSafetyManager(visionSafetyManager, didUpdateCollisions: collisions)
+        }
+    }
+
+    func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didDetectImpact impactDetection: ImpactDetection) {
+        queue.async { [unowned self] in
+            self.delegate?.visionSafetyManager(visionSafetyManager, didDetectImpact: impactDetection)
+        }
+    }
+
+    func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didUpdateForwardCar forwardCar: CollisionObject?) {
+        queue.async { [unowned self] in
+            self.delegate?.visionSafetyManager(visionSafetyManager, didUpdateForwardCar: forwardCar)
         }
     }
 }
