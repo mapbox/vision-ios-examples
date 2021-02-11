@@ -9,13 +9,14 @@ private let routeEdgeInsets = UIEdgeInsets(top: 100, left: 200, bottom: 100, rig
 private let inset: CGFloat = 18.0
 
 class ARMapNavigationController: UIViewController {
-    var completion: ((MapboxDirections.Route) -> Void)?
+    var completion: ((MapboxDirections.Route, RouteOptions) -> Void)?
 
     private var mapView: NavigationMapView {
         return view as! NavigationMapView
     }
 
     private var selectedRoute: MapboxDirections.Route?
+    private var selectedRouteOptions: RouteOptions?
 
     override func loadView() {
         let view = NavigationMapView(frame: .zero, styleURL: MGLStyle.darkStyleURL)
@@ -83,7 +84,7 @@ class ARMapNavigationController: UIViewController {
         return label
     }()
 
-    private let directions = Directions(accessToken: nil)
+    private let directions = Directions(credentials: DirectionsCredentials())
 
     @objc
     private func selectPlace(sender: UIGestureRecognizer) {
@@ -97,12 +98,12 @@ class ARMapNavigationController: UIViewController {
 
         let options = NavigationRouteOptions(coordinates: [origin, destination], profileIdentifier: .automobile)
 
-        directions.calculate(options) { [weak self] _, routes, error in
-            guard let self = self, error == nil, let route = routes?.first else { return }
+        directions.calculate(options) { [weak self] (_, result) in
+            guard let self = self, let response = try? result.get(), let route = response.routes?.first else { return }
 
             self.goButton.isEnabled = true
             self.hintLabel.isHidden = true
-            self.mapView.showRoutes([route])
+            self.mapView.show([route])
 
             self.mapView.setVisibleCoordinateBounds(route.polyline.overlayBounds,
                                                     edgePadding: routeEdgeInsets,
@@ -110,13 +111,14 @@ class ARMapNavigationController: UIViewController {
                                                     completionHandler: nil)
 
             self.selectedRoute = route
+            self.selectedRouteOptions = options
         }
     }
 
     @objc
     private func goTapped() {
-        guard let route = selectedRoute else { return }
-        completion?(route)
+        guard let route = selectedRoute, let options = selectedRouteOptions else { return }
+        completion?(route, options)
     }
 
     private var isLocationSet = false
@@ -133,7 +135,7 @@ extension ARMapNavigationController: MGLMapViewDelegate {
 
 extension Route {
     var polyline: MGLPolyline {
-        var coordinates = self.coordinates!
+        var coordinates = shape!.coordinates
         return MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
     }
 }

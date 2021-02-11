@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0-37
+
+- `MapboxVision` v0.13.2
+- `MapboxNavigation` v0.40.0
+
+## 1.0-36
+
+- `MapboxVision` v0.13.1
+- Fix crash on devices running iOS 14 beta
+
 ## 1.0-35
 
 The latest version of the Vision Teaser brings automatic camera recalibration and improvements in lane detection. The full list of changes:

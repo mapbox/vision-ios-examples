@@ -89,10 +89,10 @@ final class ARContainerViewController: UIViewController {
         present(viewController: mapViewController)
     }
 
-    func present(route: MapboxDirections.Route) {
+    func present(route: MapboxDirections.Route, options: RouteOptions) {
         dismiss(viewController: mapViewController)
 
-        navigationService = MapboxNavigationService(route: route)
+        navigationService = MapboxNavigationService(route: route, routeOptions: options)
         navigationService?.delegate = self
         navigationDelegate?.navigation(didUpdate: Route(route: route))
         present(viewController: arViewController)

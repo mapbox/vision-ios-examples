@@ -1,7 +1,6 @@
 binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json"
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json"
-github "mapbox/mapbox-navigation-ios" ~> 0.37.0
-github "mapbox/MapboxDirections.swift" ~> 0.30.0
+github "mapbox/mapbox-navigation-ios" ~> 0.40.0
 
-# binary "https://api.mapbox.com/downloads/v1/vision/ios/mapbox-vision-native-all.carthage?access_token=<ADD-TOKEN-HERE>" ~> 0.13.0
-# github "mapbox/mapbox-vision-ios" ~> 0.13.0
+# binary "https://api.mapbox.com/downloads/v1/vision/ios/mapbox-vision-native-all.carthage?access_token=<ADD-TOKEN-HERE>" ~> 0.13.1
+# github "mapbox/mapbox-vision-ios" ~> 0.13.2
