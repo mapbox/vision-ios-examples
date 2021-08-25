@@ -277,7 +277,14 @@ extension ContainerInteractor: VisionManagerDelegate {
     }
 }
 
+import AVFoundation
+
 extension ContainerInteractor: VisionSafetyManagerDelegate {
+    func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didDetectImpact: ImpactDetection) {
+        print("Impact detected")
+        AudioServicesPlaySystemSound(SystemSoundID(1016))
+    }
+
     func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didUpdateRoadRestrictions roadRestrictions: RoadRestrictions) {
         speedLimits = roadRestrictions.speedLimits
     }

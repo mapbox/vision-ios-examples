@@ -95,4 +95,10 @@ extension DelegateProxy: VisionSafetyManagerDelegate where Delegate: VisionSafet
             self.delegate?.visionSafetyManager(visionSafetyManager, didUpdateCollisions: collisions)
         }
     }
+
+    func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager, didDetectImpact: ImpactDetection) {
+        queue.async { [unowned self] in
+            self.delegate?.visionSafetyManager(visionSafetyManager, didDetectImpact: didDetectImpact)
+        }
+    }
 }
