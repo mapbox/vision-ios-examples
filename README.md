@@ -6,7 +6,7 @@ Example application showing usage of [Mapbox Vision SDK](https://vision.mapbox.c
 
 ## Dependencies
 1. `brew install SwiftGen` (6.0 or later)
-1. `brew install carthage` (0.36.0 or later)
+1. `brew install carthage` (0.36.0 to 0.37.0) 0.38 fails to fetch dependency due to [this](https://github.com/mapbox/vision-ios-examples/issues/154#issuecomment-908155396)
 
 ## Tokens
 In order to fetch and use Vision SDK, you will need to obtain two tokens at [tokens page in your Mapbox account](https://account.mapbox.com/access-tokens/create/):
@@ -31,7 +31,7 @@ You'll also need your secret token while editing `Cartfile` during installation.
 	- `binary "https://api.mapbox.com/downloads/...`
 	- `github "mapbox/mapbox-vision-ios"...`
 1. Put your *secret* token instead of `<ADD-TOKEN-HERE>` in `Cartfile`
-1. `carthage update --platform ios --use-netrc`
+1. `carthage update --platform ios --use-netrc` (Due to a known issue, you may want to use [a wrapped Carthage command](https://github.com/mapbox/vision-ios-examples/issues/154#issuecomment-732024527))
 1. `open demo.xcodeproj`
 1. Put your *public* token into the value of the `MGLMapboxAccessToken` key within the `Info.plist` file
 1. Run the application
